@@ -11,22 +11,22 @@ final class POIRegistry {
         return [
             POILocation(
                 id: "informacion_inicial",
-                coordinate: CLLocationCoordinate2D(latitude: 14.63131332, longitude: -90.54845428),
+                coordinate: CLLocationCoordinate2D(latitude: 14.5940381, longitude: -90.6387711),
                 name: "Kaminal Juyú",
-                modelPath: "models/informacion/Oval_Loc_OBJ_Format.obj",
-                texturePath: "models/textures/Oval_Loc_Red.png",
+                modelPath: "Monticulo3.obj",
+                texturePath: "ColoBase.jpeg",
                 baseScale: 0.2,
                 baseAltitudeMeters: -1.0,
                 description: "Kaminal Juyú es uno de los sitios arqueológicos mayas más importantes de las tierras altas de Guatemala.",
                 images: ["inicio"]
             ),
 
-            POILocation(
+            /*POILocation(
                 id: "monticulo_6",
                 coordinate: CLLocationCoordinate2D(latitude: 14.631895407440561, longitude: -90.54859084940932),
                 name: "Montículo C-II-6",
-                modelPath: "models/informacion/Oval_Loc_OBJ_Format.obj",
-                texturePath: "models/textures/Oval_Loc_Red.png",
+                modelPath: "Assets/Models/Monticulo7.obj",
+                texturePath: "Assets/Textures/ColoBase.jpeg",
                 baseScale: 0.2,
                 baseAltitudeMeters: -1.0,
                 description: "Estructura del Preclásico Tardío-Terminal al Clásico Tardío.",
@@ -37,8 +37,8 @@ final class POIRegistry {
                 id: "acropolis",
                 coordinate: CLLocationCoordinate2D(latitude: 14.632549261303337, longitude: -90.54889359532447),
                 name: "Acrópolis",
-                modelPath: "models/informacion/Oval_Loc_OBJ_Format.obj",
-                texturePath: "models/textures/Oval_Loc_Red.png",
+                modelPath: "Assets/Models/Monticulo12.obj",
+                texturePath: "Assets/Textures/ColoBase.jpeg",
                 baseScale: 0.2,
                 baseAltitudeMeters: -1.0,
                 description: "Complejo palaciego del período Clásico con múltiples etapas constructivas.",
@@ -50,22 +50,10 @@ final class POIRegistry {
                 id: "monticulo_3",
                 coordinate: CLLocationCoordinate2D(latitude: 14.633263117257021, longitude: -90.54812859260066),
                 name: "Montículo C-II-3",
+                modelPath: "Assets/Models/Monticulo13.obj",
+                texturePath: "Assets/Textures/ColoBase.jpeg",
                 baseScale: 0.2,
                 baseAltitudeMeters: -3.0,
-                parts: [
-                    ModelPart(modelPath: "models/monticulo-3/monticulo-3-techo.obj",
-                              texturePath: "models/textures/reed_roof_03_diff_4k.jpg", baseScale: 0.8),
-                    ModelPart(modelPath: "models/monticulo-3/monticulo-3-rancho.obj",
-                              texturePath: "models/textures/114009464-textura-de-palo.jpg", baseScale: 0.8),
-                    ModelPart(modelPath: "models/monticulo-3/monticulo-3-puerta.obj",
-                              texturePath: "models/textures/fondo-textura-madera.png", baseScale: 0.8),
-                    ModelPart(modelPath: "models/monticulo-3/monticulo-3-plane003.obj",
-                              texturePath: "models/textures/clay_plaster_diff_4k.jpg", baseScale: 0.8),
-                    ModelPart(modelPath: "models/monticulo-3/monticulo-3-plane001.obj",
-                              texturePath: "models/textures/clay_plaster_diff_4k.jpg", baseScale: 0.8),
-                    ModelPart(modelPath: "models/monticulo-3/monticulo-3-plane.obj",
-                              texturePath: "models/textures/clay_plaster_diff_4k.jpg", baseScale: 0.8)
-                ],
                 description: "Estructura con rancho de caña reconstructivo.",
                 constructionPeriod: "Preclásico Tardío - Clásico Tardío"
             ),
@@ -74,8 +62,8 @@ final class POIRegistry {
                 id: "monticulo_5",
                 coordinate: CLLocationCoordinate2D(latitude: 14.632555675181031, longitude: -90.54807733211727),
                 name: "Montículo C-II-5",
-                modelPath: "models/informacion/Oval_Loc_OBJ_Format.obj",
-                texturePath: "models/textures/Oval_Loc_Red.png",
+                modelPath: "Assets/Models/Monticulo14.obj",
+                texturePath: "Assets/Textures/ColoBase.jpeg",
                 baseScale: 0.2,
                 baseAltitudeMeters: -1.0,
                 description: "Plataforma del Preclásico Tardío al Clásico Tardío.",
@@ -215,7 +203,7 @@ final class POIRegistry {
                 description: "Estructura con gradas reconstructivas.",
                 constructionPeriod: "Preclásico Tardío-Terminal - Clásico Tardío",
                 images: ["c_ii_13", "c_ii_13_2", "c_ii_13_3"]
-            )
+            )*/
         ]
     }()
 

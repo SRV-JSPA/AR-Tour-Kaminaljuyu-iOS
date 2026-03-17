@@ -344,11 +344,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6JUTBK79C4;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArTourKaminaljuyu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "rivacy - Location When In Use Usage Description";
+				INFOPLIST_KEY_NSCameraUsageDescription = "ArTourKaminaljuyú usa la cámara para mostrar los modelos 3D de los montículos arqueológicos mediante Realidad Aumentada.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para detectar cúando te acercas a cada punto de interés durante el recorrido.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para guiarte por el recorrido del parque arqueológico Kaminaljuyú.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -381,11 +383,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6JUTBK79C4;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArTourKaminaljuyu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "rivacy - Location When In Use Usage Description";
+				INFOPLIST_KEY_NSCameraUsageDescription = "ArTourKaminaljuyú usa la cámara para mostrar los modelos 3D de los montículos arqueológicos mediante Realidad Aumentada.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para detectar cúando te acercas a cada punto de interés durante el recorrido.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para guiarte por el recorrido del parque arqueológico Kaminaljuyú.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

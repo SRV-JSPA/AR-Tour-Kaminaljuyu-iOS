@@ -1,18 +1,25 @@
-//
-//  ContentView.swift
-//  ArTourKaminaljuyu
-//
-//  Created by Jose Pereira on 2/9/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TestMapView()
+        TabView {
+            TestMapView()
+                .tabItem {
+                    Label("Mapa", systemImage: "map")
+                }
+
+            ARViewControllerWrapper()
+                .ignoresSafeArea()
+                .tabItem {
+                    Label("AR", systemImage: "camera")
+                }
+        }
     }
 }
 
-#Preview {
-    ContentView()
+struct ARViewControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> ARViewController {
+        ARViewController()
+    }
+    func updateUIViewController(_ uiViewController: ARViewController, context: Context) {}
 }
