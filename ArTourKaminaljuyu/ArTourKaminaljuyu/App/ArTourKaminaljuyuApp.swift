@@ -1,10 +1,3 @@
-//
-//  ArTourKaminaljuyuApp.swift
-//  ArTourKaminaljuyu
-//
-//  Created by Jose Pereira on 2/9/26.
-//
-
 import SwiftUI
 import GoogleMaps
 
