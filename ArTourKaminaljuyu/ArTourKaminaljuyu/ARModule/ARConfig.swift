@@ -19,5 +19,5 @@ enum ARConfig {
 
     // MARK: - Global scale multiplier applied on top of poi.baseScale
 
-    static let globalScaleMultiplier: Float = 0.000000000001
+    static let globalScaleMultiplier: Float = 1
 }
