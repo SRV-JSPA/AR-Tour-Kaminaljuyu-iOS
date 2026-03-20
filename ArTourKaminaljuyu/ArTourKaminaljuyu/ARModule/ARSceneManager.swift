@@ -22,7 +22,7 @@ final class ARSceneManager: NSObject {
         self.sceneView = sceneView
         super.init()
         sceneView.delegate = self
-        print(" [ARSceneManager] init OK")
+        print("[ARSceneManager] init OK")
     }
 
     // MARK: - Preload
@@ -70,7 +70,7 @@ final class ARSceneManager: NSObject {
         rootNode.enumerateHierarchy { n, _ in if n.geometry != nil { geos += 1 } }
         let expectedScale = poi.baseScale * ARConfig.globalScaleMultiplier
         print("   parts:\(partsLoaded)  geos:\(geos)  expectedFinalScale:\(expectedScale)")
-        if geos == 0 { print(" NO GEOMETRIES — model won't be visible") }
+        if geos == 0 { print("NO GEOMETRIES — model won't be visible") }
     }
 
     // MARK: - Colocar modelo usando posición GPS relativa
@@ -97,23 +97,20 @@ final class ARSceneManager: NSObject {
             n.enumerateHierarchy { c, _ in if c.geometry != nil { g += 1 } }
             print("   node preloaded — geos:\(g)  hidden:\(n.isHidden)")
         } else {
-            print(" NODE NOT PRELOADED")
+            print("NODE NOT PRELOADED")
         }
 
-        // ── 1. Distancia y bearing GPS real al POI ───────────────────────
         let distanceMeters  = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
         let bearingToPoiDeg = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
 
         print("   distancia GPS: \(String(format: "%.1f", distanceMeters))m")
         print("   bearing al POI: \(String(format: "%.1f", bearingToPoiDeg))°")
 
-        // ── 2. Ángulo relativo respecto al heading del usuario ────────────
         let bearingRelativeDeg = bearingToPoiDeg - userHeading
         let bearingRelativeRad = Float(bearingRelativeDeg * .pi / 180.0)
 
         print("   bearingRelativo: \(String(format: "%.1f", bearingRelativeDeg))°")
 
-        // ── 3. Offset en el espacio AR ────────────────────────────────────
         let dx = Float(distanceMeters) * sin(bearingRelativeRad)
         let dz = -Float(distanceMeters) * cos(bearingRelativeRad)
         let dy = poi.baseAltitudeMeters - Float(ARConfig.cameraEyeHeightMeters)
@@ -134,7 +131,7 @@ final class ARSceneManager: NSObject {
         let anchor = ARAnchor(name: poi.id, transform: anchorTransform)
         session.add(anchor: anchor)
         activeAnchors[poi.id] = anchor
-        print(" [placeModel] ARAnchor fijo añadido para '\(poi.id)'")
+        print("[placeModel] ARAnchor fijo añadido para '\(poi.id)'")
     }
 
     func forceReplaceModel(
@@ -144,11 +141,10 @@ final class ARSceneManager: NSObject {
         cameraTransform: simd_float4x4,
         in session: ARSession
     ) {
-        // Eliminar anchor existente para forzar nueva colocación
         if let old = activeAnchors[poi.id] {
             session.remove(anchor: old)
             activeAnchors.removeValue(forKey: poi.id)
-            print(" [forceReplace] anchor anterior eliminado para '\(poi.id)'")
+            print("[forceReplace] anchor anterior eliminado para '\(poi.id)'")
         }
         placeModel(
             for: poi,
@@ -158,6 +154,7 @@ final class ARSceneManager: NSObject {
             in: session
         )
     }
+
     // MARK: - Visibilidad
 
     func showModel(for poiId: String) {
@@ -169,7 +166,7 @@ final class ARSceneManager: NSObject {
             node.isHidden = false
             print("   isHidden→false  inScene:\(node.parent != nil)")
         } else {
-            print(" no node for '\(poiId)'")
+            print("no node for '\(poiId)'")
         }
         visibleNodeID = poiId
     }
@@ -228,10 +225,14 @@ final class ARSceneManager: NSObject {
             if let r = Bundle.main.url(forResource: base, withExtension: ext) {
                 modelURL = r
             } else {
-                print(" modelo no encontrado: '\(modelPath)'")
+                print("modelo no encontrado: '\(modelPath)'")
                 return nil
             }
         }
+
+        // Give SceneKit multiple directories to search for textures at load time
+        let texturesURL = bundleURL.appendingPathComponent("Textures")
+        let modelFolderURL = modelURL.deletingLastPathComponent()
 
         let scene: SCNScene
         do {
@@ -240,7 +241,9 @@ final class ARSceneManager: NSObject {
                 .convertToYUp: true,
                 .convertUnitsToMeters: true,
                 .assetDirectoryURLs: [
-                    Bundle.main.bundleURL  // buscar texturas en la raíz del bundle
+                    bundleURL,
+                    texturesURL,
+                    modelFolderURL
                 ]
             ])
         } catch {
@@ -251,25 +254,35 @@ final class ARSceneManager: NSObject {
         let modelNode = SCNNode()
         scene.rootNode.childNodes.forEach { modelNode.addChildNode($0.clone()) }
 
+        // Fix up all material texture slots
         modelNode.enumerateChildNodes { node, _ in
             guard let geometry = node.geometry else { return }
 
             for material in geometry.materials {
-                // Reparar diffuse (map_Kd)
-                if let contents = material.diffuse.contents as? String {
-                    if let fixedURL = findTexture(named: contents, in: bundleURL) {
-                        material.diffuse.contents = fixedURL
-                        print("   diffuse fixed: '\(contents)'")
-                    } else {
-                        print("   diffuse not found: '\(contents)'")
-                    }
-                }
+                fixMaterialSlot(material.diffuse,            bundleURL: bundleURL)
+                fixMaterialSlot(material.specular,           bundleURL: bundleURL)
+                fixMaterialSlot(material.normal,             bundleURL: bundleURL)
+                fixMaterialSlot(material.ambientOcclusion,   bundleURL: bundleURL)
+                fixMaterialSlot(material.emission,           bundleURL: bundleURL)
+
                 material.isDoubleSided = true
                 material.lightingModel = .phong
+
+                // Keep ambient at full brightness so model isn't dark
+                material.ambient.contents = UIColor(white: 1.0, alpha: 1.0)
             }
         }
 
-        // Fallback: si texturePath fue dado y el modelo quedó blanco
+        // Debug: log what each material's diffuse resolved to
+        modelNode.enumerateChildNodes { node, _ in
+            guard let geo = node.geometry else { return }
+            for mat in geo.materials {
+                let diffuse = mat.diffuse.contents
+                print("   MAT '\(mat.name ?? "?")' diffuse → type:\(type(of: diffuse)) value:\(String(describing: diffuse))")
+            }
+        }
+
+        // Fallback: if texturePath provided and no material resolved a URL, apply it globally
         if !texturePath.isEmpty {
             var anyTextured = false
             modelNode.enumerateChildNodes { n, _ in
@@ -280,17 +293,19 @@ final class ARSceneManager: NSObject {
             }
 
             if !anyTextured {
-                print("   modelo blanco — aplicando textura fallback: '\(texturePath)'")
+                print("   modelo sin texturas resueltas — aplicando fallback: '\(texturePath)'")
                 if let tURL = findTexture(named: texturePath, in: bundleURL) {
                     let mat = SCNMaterial()
                     mat.diffuse.contents  = tURL
                     mat.isDoubleSided     = true
                     mat.lightingModel     = .phong
-                    mat.ambient.contents  = UIColor(white: CGFloat(ARConfig.lightAmbient), alpha: 1)
+                    mat.ambient.contents  = UIColor(white: 1.0, alpha: 1.0)
                     modelNode.enumerateChildNodes { n, _ in
                         if n.geometry != nil { n.geometry?.materials = [mat] }
                     }
-                    print("  fallback texture applied")
+                    print("   fallback texture applied")
+                } else {
+                    print("   fallback texture NOT found: '\(texturePath)'")
                 }
             }
         }
@@ -298,37 +313,78 @@ final class ARSceneManager: NSObject {
         return modelNode
     }
 
+    // MARK: - Fix a single SCNMaterialProperty slot
+
+    private func fixMaterialSlot(
+        _ slot: SCNMaterialProperty,
+        bundleURL: URL
+    ) {
+        // Case 1: already a valid URL → nothing to do
+        if let url = slot.contents as? URL {
+            if FileManager.default.fileExists(atPath: url.path) { return }
+            // URL exists but file is missing → try to recover by filename only
+            let filename = url.lastPathComponent
+            if let fixed = findTexture(named: filename, in: bundleURL) {
+                slot.contents = fixed
+                print("   slot re-resolved from broken URL: '\(filename)'")
+            } else {
+                print("   slot broken URL, texture NOT found: '\(filename)'")
+            }
+            return
+        }
+
+        // Case 2: string path — happens when SceneKit can't resolve at load time
+        if let contents = slot.contents as? String {
+            // Strip Windows absolute paths or any relative prefix — keep only filename
+            let filename = URL(fileURLWithPath: contents).lastPathComponent
+            if let fixed = findTexture(named: filename, in: bundleURL) {
+                slot.contents = fixed
+                print("   slot resolved '\(contents)' → '\(filename)'")
+            } else {
+                print("   slot NOT resolved: '\(contents)' (filename: '\(filename)')")
+            }
+        }
+    }
+
+    // MARK: - Texture search
+
     private func findTexture(named name: String, in bundleURL: URL) -> URL? {
-        // Intentar nombre exacto en raíz del bundle
+        // 1. Exact path from bundle root
         let direct = bundleURL.appendingPathComponent(name)
         if FileManager.default.fileExists(atPath: direct.path) { return direct }
 
-        // Intentar solo el nombre de archivo (sin ruta)
+        // 2. Just the filename at bundle root
         let fileName = URL(fileURLWithPath: name).lastPathComponent
-
         let directFileName = bundleURL.appendingPathComponent(fileName)
         if FileManager.default.fileExists(atPath: directFileName.path) { return directFileName }
 
-        // Buscar en Bundle.main por nombre y extensión
+        // 3. In Textures subfolder
+        let inTextures = bundleURL.appendingPathComponent("Textures/\(fileName)")
+        if FileManager.default.fileExists(atPath: inTextures.path) { return inTextures }
+
+        // 4. Bundle.main resource lookup by name + extension
         let base = (fileName as NSString).deletingPathExtension
         let ext  = (fileName as NSString).pathExtension
-
         if let found = Bundle.main.url(forResource: base, withExtension: ext) {
             return found
         }
 
-        // Buscar recursivamente en el bundle
+        // 5. Recursive search through entire bundle
+        print("\n=== BUNDLE CONTENTS ===")
         if let enumerator = FileManager.default.enumerator(atPath: bundleURL.path) {
             for case let path as String in enumerator {
-                if URL(fileURLWithPath: path).lastPathComponent == fileName {
-                    return bundleURL.appendingPathComponent(path)
+                if path.contains("oloBase") || path.contains("reed") ||
+                   path.contains("plaster") || path.contains("madera") ||
+                   path.contains("clay") || path.contains("Color") {
+                    print("   BUNDLE: \(path)")
                 }
             }
         }
+        print("=== END BUNDLE ===\n")
 
         return nil
     }
-    
+
     // MARK: - Privado: transforms del usuario
 
     private func applyUserTransforms() {
