@@ -59,15 +59,35 @@ final class ARViewController: UIViewController {
 
     private func setupSceneView() {
         sceneView = ARSCNView(frame: view.bounds)
-        sceneView.autoresizingMask             = [.flexibleWidth, .flexibleHeight]
-        sceneView.automaticallyUpdatesLighting = true
-        view.addSubview(sceneView)
+        sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // Turn OFF automatic lighting — we'll add our own
+        sceneView.automaticallyUpdatesLighting = false
+        
+        // Add strong ambient light so textures are always visible
+        let ambientLight = SCNLight()
+        ambientLight.type = .ambient
+        ambientLight.intensity = 1000
+        ambientLight.color = UIColor.white
+        let ambientNode = SCNNode()
+        ambientNode.light = ambientLight
+        sceneView.scene.rootNode.addChildNode(ambientNode)
 
+        // Add directional light to show depth
+        let directionalLight = SCNLight()
+        directionalLight.type = .directional
+        directionalLight.intensity = 800
+        directionalLight.color = UIColor.white
+        let directionalNode = SCNNode()
+        directionalNode.light = directionalLight
+        directionalNode.eulerAngles = SCNVector3(-Float.pi / 3, 0, 0)
+        sceneView.scene.rootNode.addChildNode(directionalNode)
+
+        view.addSubview(sceneView)
         sceneManager = ARSceneManager(sceneView: sceneView)
         sceneView.session.delegate = self
         print("✅ [ARViewController] ARSCNView configurado")
     }
-
     // MARK: - Setup: Gestos
 
     private func setupGestures() {
@@ -234,17 +254,18 @@ final class ARViewController: UIViewController {
 
     // MARK: - Pre-carga de modelos
 
+    // MARK: - Pre-carga de modelos
     private func preloadModels() {
         let pois = GPSModuleInterface.shared.allPOIs
         print("✅ [AR] pre-cargando \(pois.count) modelos...")
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            pois.forEach { self?.sceneManager.preloadAssets(for: $0) }
+            guard let self else { return }
+            pois.forEach { self.sceneManager.preloadAssets(for: $0) }
             print("✅ [AR] pre-carga completada (\(pois.count) POIs)")
         }
     }
 
     // MARK: - Activar modelo
-
     private func activateModel(for poi: POILocation) {
         guard activePOI?.id != poi.id else {
             print("   ↳ '\(poi.id)' ya activo — skip")
@@ -255,12 +276,15 @@ final class ARViewController: UIViewController {
         activePOI = poi
         sceneManager.resetUserTransforms()
 
-        // Asegurarse de que el asset esté cargado
-        sceneManager.preloadAssets(for: poi)
-
-        waitForTrackingThenPlace(poi: poi, retries: 12)
+        // Preload THEN place — always in this order
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self else { return }
+            self.sceneManager.preloadAssets(for: poi)
+            DispatchQueue.main.async {
+                self.waitForTrackingThenPlace(poi: poi, retries: 12)
+            }
+        }
     }
-
     // MARK: - Esperar tracking normal
 
     private func waitForTrackingThenPlace(poi: POILocation, retries: Int) {
