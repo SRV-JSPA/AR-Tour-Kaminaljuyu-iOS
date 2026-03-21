@@ -148,7 +148,6 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
                 material.diffuse.intensity   = 1.0
                 material.ambient.intensity   = 1.0
 
-                print("  [force] ✅ '\(matName)' → \(fname) \(Int(image.size.width))×\(Int(image.size.height))")
             }
         }
     }
@@ -278,7 +277,6 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
             for mat in geo.materials {
                 let ok = mat.diffuse.contents is UIImage || mat.diffuse.contents is URL
                 if ok { texturedCount += 1 }
-                print("  [mat] '\(mat.name ?? "?")' → \(ok ? "✅" : "❌") \(type(of: mat.diffuse.contents))")
             }
         }
         print("  [buildNode] \(texturedCount) textured materials")

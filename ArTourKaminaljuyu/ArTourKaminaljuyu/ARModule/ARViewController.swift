@@ -249,7 +249,6 @@ final class ARViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        print("✅ [ARViewController] suscripciones GPS configuradas")
     }
 
     // MARK: - Pre-carga de modelos
@@ -257,11 +256,11 @@ final class ARViewController: UIViewController {
     // MARK: - Pre-carga de modelos
     private func preloadModels() {
         let pois = GPSModuleInterface.shared.allPOIs
-        print("✅ [AR] pre-cargando \(pois.count) modelos...")
+
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }
             pois.forEach { self.sceneManager.preloadAssets(for: $0) }
-            print("✅ [AR] pre-carga completada (\(pois.count) POIs)")
+
         }
     }
 
@@ -272,7 +271,6 @@ final class ARViewController: UIViewController {
             return
         }
 
-        print("\n🎯 [AR] activateModel('\(poi.id)')")
         activePOI = poi
         sceneManager.resetUserTransforms()
 
@@ -289,7 +287,7 @@ final class ARViewController: UIViewController {
 
     private func waitForTrackingThenPlace(poi: POILocation, retries: Int) {
         guard retries > 0 else {
-            print("⚠️ Timeout esperando tracking — colocando igualmente")
+
             placeModelNow(poi: poi)
             return
         }
@@ -305,7 +303,7 @@ final class ARViewController: UIViewController {
         case .normal:
             placeModelNow(poi: poi)
         default:
-            print("⏳ tracking no normal — reintentando (\(retries) restantes)")
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 self?.waitForTrackingThenPlace(poi: poi, retries: retries - 1)
             }
@@ -316,17 +314,16 @@ final class ARViewController: UIViewController {
 
     private func placeModelNow(poi: POILocation) {
         guard let frame = sceneView.session.currentFrame else {
-            print("❌ Sin currentFrame")
+        
             return
         }
 
         guard let userLocation = lastUserLocation ?? GPSModuleInterface.shared.userLocation else {
-            print("❌ Sin ubicación GPS — usando fallback frente a cámara")
+       
             placeFallbackInFrontOfCamera(poi: poi, frame: frame)
             return
         }
 
-        print("✅ [placeModelNow] '\(poi.id)'")
         print("   userLocation: \(userLocation.latitude), \(userLocation.longitude)")
         print("   heading: \(String(format: "%.1f", lastHeading))°")
 
@@ -350,17 +347,17 @@ final class ARViewController: UIViewController {
         let anchor = ARAnchor(name: poi.id, transform: anchorTransform)
         sceneView.session.add(anchor: anchor)
         sceneManager.showModel(for: poi.id)
-        print("⚠️ [fallback] modelo colocado 5m frente a la cámara")
+
     }
 
     // MARK: - Test button
 
     @objc private func testARModel() {
         guard let poi = GPSModuleInterface.shared.allPOIs.first else {
-            print("❌ No hay POIs")
+        
             return
         }
-        print("🧪 [test] forzando render de '\(poi.name)'")
+
         activePOI = nil // forzar reactivación
         activateModel(for: poi)
     }
