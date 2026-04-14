@@ -11,8 +11,11 @@ enum AppConfig {
     static let visibilityRadiusMeters: Double = 100.0
 
     // MARK: - Coordenada de inicio del tour
-    static let tourStartLatitude: Double  = 14.5940092
-    static let tourStartLongitude: Double = -90.6388234
+    static let tourStartLatitude: Double  = 14.6047511
+    static let tourStartLongitude: Double = -90.4900959
+    
+
+
 
     // MARK: - Calidad del GPS
     static let accuracyGoodMeters: Double = 5.0
