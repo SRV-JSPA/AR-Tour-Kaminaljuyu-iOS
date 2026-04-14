@@ -4,7 +4,7 @@ import Foundation
 enum ARConfig {
 
     // MARK: - Model scale limits (for pinch gesture)
-    static let minScale: Float = 0.001
+    static let minScale: Float = 0.1
     static let maxScale: Float = 5.0
 
     // MARK: - Eye height

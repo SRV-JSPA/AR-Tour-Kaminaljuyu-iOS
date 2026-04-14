@@ -11,12 +11,12 @@ final class ARViewController: UIViewController {
     private var sceneManager: ARSceneManager!
 
     // MARK: - GPS
-    private var cancellables        = Set<AnyCancellable>()
+    private var cancellables:       Set<AnyCancellable>          = []
     private var activePOI:          POILocation?
-    private var lastHeading:        Double = 0
+    private var lastHeading:        Double                       = 0
     private var lastUserLocation:   CLLocationCoordinate2D?
 
-    // MARK: - Gestos
+    // MARK: - Gestures
     private var panGesture:   UIPanGestureRecognizer!
     private var pinchGesture: UIPinchGestureRecognizer!
 
@@ -27,7 +27,7 @@ final class ARViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\n✅ [ARViewController] viewDidLoad")
+        print("\n [ARViewController] viewDidLoad")
         setupSceneView()
         setupGestures()
         setupTestButton()
@@ -39,10 +39,10 @@ final class ARViewController: UIViewController {
         super.viewWillAppear(animated)
         startARSession()
 
-        // Si ya hay un POI cercano al entrar a la pestaña AR, activarlo
+        // If we're already near a POI when the AR tab appears, activate it
         if let proximity = GPSModuleInterface.shared.nearestPOI,
            proximity.level == .arrived {
-            print("📍 [AR] POI ya cercano al aparecer: '\(proximity.poi.id)'")
+            print(" [AR] POI already nearby on appear: '\(proximity.poi.id)'")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 self?.activateModel(for: proximity.poi)
             }
@@ -52,7 +52,7 @@ final class ARViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
-        print("⏸ [ARViewController] sesión AR pausada")
+        print("⏸ [ARViewController] AR session paused")
     }
 
     // MARK: - Setup: SceneView
@@ -60,63 +60,65 @@ final class ARViewController: UIViewController {
     private func setupSceneView() {
         sceneView = ARSCNView(frame: view.bounds)
         sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        // Turn OFF automatic lighting — we'll add our own
+
+        // Manual lighting — gives consistent texture brightness regardless of environment
         sceneView.automaticallyUpdatesLighting = false
-        
-        // Add strong ambient light so textures are always visible
-        let ambientLight = SCNLight()
-        ambientLight.type = .ambient
+
+        let ambientLight       = SCNLight()
+        ambientLight.type      = .ambient
         ambientLight.intensity = 1000
-        ambientLight.color = UIColor.white
-        let ambientNode = SCNNode()
-        ambientNode.light = ambientLight
+        ambientLight.color     = UIColor.white
+        let ambientNode        = SCNNode()
+        ambientNode.light      = ambientLight
         sceneView.scene.rootNode.addChildNode(ambientNode)
 
-        // Add directional light to show depth
-        let directionalLight = SCNLight()
-        directionalLight.type = .directional
+        let directionalLight       = SCNLight()
+        directionalLight.type      = .directional
         directionalLight.intensity = 800
-        directionalLight.color = UIColor.white
-        let directionalNode = SCNNode()
-        directionalNode.light = directionalLight
+        directionalLight.color     = UIColor.white
+        let directionalNode        = SCNNode()
+        directionalNode.light      = directionalLight
         directionalNode.eulerAngles = SCNVector3(-Float.pi / 3, 0, 0)
         sceneView.scene.rootNode.addChildNode(directionalNode)
 
         view.addSubview(sceneView)
         sceneManager = ARSceneManager(sceneView: sceneView)
         sceneView.session.delegate = self
-        print("✅ [ARViewController] ARSCNView configurado")
+        print(" [ARViewController] ARSCNView configured")
     }
-    // MARK: - Setup: Gestos
+
+    // MARK: - Setup: Gestures
 
     private func setupGestures() {
+        // Pan → rotate model around Y axis
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         panGesture.cancelsTouchesInView = false
         sceneView.addGestureRecognizer(panGesture)
 
-        // Pinch deshabilitado por ahora
+        // Pinch → scale model
         pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        pinchGesture.isEnabled = false
         sceneView.addGestureRecognizer(pinchGesture)
+
+        // Allow both gestures to fire simultaneously
+        panGesture.delegate   = self
+        pinchGesture.delegate = self
     }
 
     // MARK: - Setup: Test Button
 
     private func setupTestButton() {
         testButton = UIButton(type: .system)
-        testButton.setTitle("🧪 Test AR", for: .normal)
-        testButton.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.85)
+        testButton.setTitle(" Test AR", for: .normal)
+        testButton.backgroundColor     = UIColor.systemBlue.withAlphaComponent(0.85)
         testButton.setTitleColor(.white, for: .normal)
-        testButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        testButton.layer.cornerRadius = 10
+        testButton.titleLabel?.font    = .boldSystemFont(ofSize: 15)
+        testButton.layer.cornerRadius  = 10
         testButton.translatesAutoresizingMaskIntoConstraints = false
         testButton.addTarget(self, action: #selector(testARModel), for: .touchUpInside)
         view.addSubview(testButton)
 
         NSLayoutConstraint.activate([
-            testButton.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            testButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             testButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             testButton.widthAnchor.constraint(equalToConstant: 160),
             testButton.heightAnchor.constraint(equalToConstant: 44)
@@ -130,92 +132,32 @@ final class ARViewController: UIViewController {
         config.planeDetection = []
         config.worldAlignment = .gravityAndHeading
         sceneView.session.run(config, options: [.removeExistingAnchors, .resetTracking])
-        print("✅ [AR] ARWorldTracking con gravityAndHeading iniciado")
+        print(" [AR] ARWorldTracking with gravityAndHeading started")
     }
 
     // MARK: - GPS Subscriptions
 
     private func subscribeToGPS() {
-        print("📡 [ARViewController] configurando suscripciones GPS...")
+        print(" [ARViewController] setting up GPS subscriptions...")
 
-        // ── Guardar ubicación del usuario ────────────────────────────────
+        // ── Cache user location ──────────────────────────────────────────
         GPSModuleInterface.shared.$userLocation
             .receive(on: DispatchQueue.main)
             .compactMap { $0 }
-            .sink { [weak self] newLocation in
-                guard let self else { return }
-                self.lastUserLocation = newLocation
+            .sink { [weak self] location in
+                self?.lastUserLocation = location
             }
             .store(in: &cancellables)
 
-        // ── Guardar heading del usuario ──────────────────────────────────
+        // ── Cache heading ────────────────────────────────────────────────
         GPSModuleInterface.shared.$userHeading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] heading in
-                guard let self else { return }
-                self.lastHeading = heading
+                self?.lastHeading = heading
             }
             .store(in: &cancellables)
 
-        // ── Re-colocar modelo cuando GPS cambia más de 1 metro ───────────
-        GPSModuleInterface.shared.$userLocation
-            .receive(on: DispatchQueue.main)
-            .compactMap { $0 }
-            .removeDuplicates { a, b in
-                GeoUtils.distanceInMeters(from: a, to: b) < 1.0
-            }
-            .sink { [weak self] newLocation in
-                guard let self,
-                      let poi = self.activePOI,
-                      let frame = self.sceneView.session.currentFrame else { return }
-
-                guard case .normal = frame.camera.trackingState else {
-                    print("⚠️ [GPS update] tracking no normal — skip re-place")
-                    return
-                }
-
-                print("📍 [GPS update] re-colocando '\(poi.id)' dist movida >1m")
-
-                self.sceneManager.placeModel(
-                    for:             poi,
-                    userLocation:    newLocation,
-                    userHeading:     self.lastHeading,
-                    cameraTransform: frame.camera.transform,
-                    in:              self.sceneView.session
-                )
-                self.sceneManager.showModel(for: poi.id)
-            }
-            .store(in: &cancellables)
-
-        // ── Re-colocar modelo cuando heading cambia más de 10° ───────────
-        GPSModuleInterface.shared.$userHeading
-            .receive(on: DispatchQueue.main)
-            .removeDuplicates { abs($0 - $1) < 10.0 }
-            .sink { [weak self] newHeading in
-                guard let self,
-                      let poi = self.activePOI,
-                      let frame = self.sceneView.session.currentFrame,
-                      let userLocation = self.lastUserLocation else { return }
-
-                guard case .normal = frame.camera.trackingState else {
-                    print("⚠️ [Heading update] tracking no normal — skip re-place")
-                    return
-                }
-
-                print("🧭 [Heading update] re-colocando '\(poi.id)' heading:\(String(format: "%.1f", newHeading))°")
-
-                self.sceneManager.placeModel(
-                    for:             poi,
-                    userLocation:    userLocation,
-                    userHeading:     newHeading,
-                    cameraTransform: frame.camera.transform,
-                    in:              self.sceneView.session
-                )
-                self.sceneManager.showModel(for: poi.id)
-            }
-            .store(in: &cancellables)
-
-        // ── Proximidad: disparado al llegar a <= arrivalThresholdMeters ──
+        // ── Proximity arrived ────────────────────────────────────────────
         GPSModuleInterface.shared.proximityArrivedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] poi in
@@ -224,7 +166,7 @@ final class ARViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        // ── Tour manager también puede disparar llegada ──────────────────
+        // ── Tour manager arrived ─────────────────────────────────────────
         GPSModuleInterface.shared.poiArrivedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] poi in
@@ -233,7 +175,7 @@ final class ARViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        // ── Estado del tour ──────────────────────────────────────────────
+        // ── Tour state ───────────────────────────────────────────────────
         GPSModuleInterface.shared.$tourState
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
@@ -242,39 +184,36 @@ final class ARViewController: UIViewController {
                 case .returning, .completed:
                     self.sceneManager.hideAllModels()
                     self.activePOI = nil
-                    print("🔙 [Tour] ocultando modelos")
+                    print(" [Tour] hiding models")
                 default:
                     break
                 }
             }
             .store(in: &cancellables)
-
     }
 
-    // MARK: - Pre-carga de modelos
+    // MARK: - Preload
 
-    // MARK: - Pre-carga de modelos
     private func preloadModels() {
         let pois = GPSModuleInterface.shared.allPOIs
-
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }
             pois.forEach { self.sceneManager.preloadAssets(for: $0) }
-
         }
     }
 
-    // MARK: - Activar modelo
+    // MARK: - Activate model
+
     private func activateModel(for poi: POILocation) {
         guard activePOI?.id != poi.id else {
-            print("   ↳ '\(poi.id)' ya activo — skip")
+            print("   ↳ '\(poi.id)' already active — skip")
             return
         }
 
         activePOI = poi
+        // Reset gesture state so each new POI starts at default size/rotation
         sceneManager.resetUserTransforms()
 
-        // Preload THEN place — always in this order
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }
             self.sceneManager.preloadAssets(for: poi)
@@ -283,11 +222,12 @@ final class ARViewController: UIViewController {
             }
         }
     }
-    // MARK: - Esperar tracking normal
+
+    // MARK: - Wait for .normal tracking, then place
 
     private func waitForTrackingThenPlace(poi: POILocation, retries: Int) {
         guard retries > 0 else {
-
+            print(" [AR] tracking timeout — placing anyway")
             placeModelNow(poi: poi)
             return
         }
@@ -303,23 +243,22 @@ final class ARViewController: UIViewController {
         case .normal:
             placeModelNow(poi: poi)
         default:
-
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 self?.waitForTrackingThenPlace(poi: poi, retries: retries - 1)
             }
         }
     }
 
-    // MARK: - Colocar modelo ahora
+    // MARK: - Place model now
 
     private func placeModelNow(poi: POILocation) {
         guard let frame = sceneView.session.currentFrame else {
-        
+            print(" [place] no current AR frame")
             return
         }
 
         guard let userLocation = lastUserLocation ?? GPSModuleInterface.shared.userLocation else {
-       
+            print(" [place] no GPS — using camera fallback")
             placeFallbackInFrontOfCamera(poi: poi, frame: frame)
             return
         }
@@ -334,11 +273,10 @@ final class ARViewController: UIViewController {
             cameraTransform: frame.camera.transform,
             in:              sceneView.session
         )
-
         sceneManager.showModel(for: poi.id)
     }
 
-    // MARK: - Fallback: frente a la cámara si no hay GPS
+    // MARK: - Fallback: place 5 m in front of camera when GPS is unavailable
 
     private func placeFallbackInFrontOfCamera(poi: POILocation, frame: ARFrame) {
         var t = matrix_identity_float4x4
@@ -347,34 +285,53 @@ final class ARViewController: UIViewController {
         let anchor = ARAnchor(name: poi.id, transform: anchorTransform)
         sceneView.session.add(anchor: anchor)
         sceneManager.showModel(for: poi.id)
-
     }
 
-    // MARK: - Test button
+    // MARK: - Test button action
 
     @objc private func testARModel() {
         guard let poi = GPSModuleInterface.shared.allPOIs.first else {
-        
+            print(" [test] no POIs available")
             return
         }
-
-        activePOI = nil // forzar reactivación
+        activePOI = nil   // force re-activation even for the same POI
         activateModel(for: poi)
     }
 
-    // MARK: - Gestos
+    // MARK: - Gesture handlers
 
     @objc private func handlePan(_ g: UIPanGestureRecognizer) {
-        guard activePOI != nil else { return }
-        let d = g.translation(in: sceneView)
-        sceneManager.applyRotation(delta: Float(d.x) * 0.3)
+        // Only rotate/translate while a POI is active and the gesture is moving
+        guard activePOI != nil, g.state == .changed else { return }
+        let translation = g.translation(in: sceneView)
+        // Horizontal → rotate around Y axis
+        sceneManager.applyRotation(delta: Float(translation.x) * 0.1)
+        // Vertical → move model up/down, clamped to ±1 m
+        sceneManager.applyVerticalTranslation(delta: Float(-translation.y) * 0.0005)
         g.setTranslation(.zero, in: sceneView)
     }
 
     @objc private func handlePinch(_ g: UIPinchGestureRecognizer) {
-        // Deshabilitado por ahora
-        return
+        guard activePOI != nil else { return }
+
+        if g.state == .changed {
+            // g.scale is relative to the last reset, so pass it as a delta factor
+            let dampened = 1.0 + (Float(g.scale) - 1.0) * 0.3
+            sceneManager.applyScale(factor: dampened)
+            // Reset so the next event gives a fresh delta, not a cumulative one
+            g.scale = 1.0
+        }
     }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension ARViewController: UIGestureRecognizerDelegate {
+    /// Allow pan and pinch to fire at the same time (e.g. rotate while scaling)
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool { true }
 }
 
 // MARK: - ARSessionDelegate
@@ -390,17 +347,18 @@ extension ARViewController: ARSessionDelegate {
     }
 
     func sessionWasInterrupted(_ session: ARSession) {
-        print("[ARSession] interrumpida")
+        print("[ARSession] interrupted")
         sceneManager.hideAllModels()
     }
 
     func sessionInterruptionEnded(_ session: ARSession) {
-        print(" [ARSession] reanudada")
+        print("[ARSession] resumed")
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = []
         config.worldAlignment = .gravityAndHeading
         session.run(config, options: [.resetTracking])
 
+        // Re-activate the last POI after a short stabilisation delay
         if let poi = activePOI {
             activePOI = nil
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
@@ -410,20 +368,20 @@ extension ARViewController: ARSessionDelegate {
     }
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        // Log de tracking cada 5 segundos
+        // Log tracking state every ~5 seconds (cheap modulo check)
         let t = frame.timestamp
-        if Int(t) % 5 == 0 && t.truncatingRemainder(dividingBy: 1) < 0.05 {
-            let ts: String
-            switch frame.camera.trackingState {
-            case .normal:                         ts = "normal"
-            case .notAvailable:                   ts = "notAvailable"
-            case .limited(.initializing):         ts = "limited(initializing)"
-            case .limited(.relocalizing):         ts = "limited(relocalizing)"
-            case .limited(.excessiveMotion):      ts = "limited(excessiveMotion)"
-            case .limited(.insufficientFeatures): ts = "limited(insufficientFeatures)"
-            default:                              ts = "unknown"
-            }
-            print("[ARSession] tracking:\(ts)  anchors:\(frame.anchors.count)")
+        guard Int(t) % 5 == 0, t.truncatingRemainder(dividingBy: 1) < 0.05 else { return }
+
+        let ts: String
+        switch frame.camera.trackingState {
+        case .normal:                         ts = "normal"
+        case .notAvailable:                   ts = "notAvailable"
+        case .limited(.initializing):         ts = "limited(initializing)"
+        case .limited(.relocalizing):         ts = "limited(relocalizing)"
+        case .limited(.excessiveMotion):      ts = "limited(excessiveMotion)"
+        case .limited(.insufficientFeatures): ts = "limited(insufficientFeatures)"
+        default:                              ts = "unknown"
         }
+        print("[ARSession] tracking:\(ts)  anchors:\(frame.anchors.count)")
     }
 }
