@@ -1,7 +1,7 @@
 enum AppConfig {
 
     // MARK: - Umbrales de proximidad
-    static let guidedArrivalMeters: Double = 10.0
+    static let guidedArrivalMeters: Double = 25.0
 
     static let connectorArrivalMeters: Double = 2.0
 
@@ -11,8 +11,11 @@ enum AppConfig {
     static let visibilityRadiusMeters: Double = 100.0
 
     // MARK: - Coordenada de inicio del tour
-    static let tourStartLatitude: Double  = 14.63128471
-    static let tourStartLongitude: Double = -90.54847717
+    static let tourStartLatitude: Double  = 14.6047511
+    static let tourStartLongitude: Double = -90.4900959
+    
+
+
 
     // MARK: - Calidad del GPS
     static let accuracyGoodMeters: Double = 5.0

@@ -190,11 +190,11 @@ struct TestMapView: View {
         case .navigatingToPOI(let i):
             return "Navegando → \(testPois[i].name)"
         case .atPOI(let i):
-            return "📍 En \(testPois[i].name) — Pulsa 'Siguiente' para continuar."
+            return " En \(testPois[i].name) — Pulsa 'Siguiente' para continuar."
         case .returning:
-            return "🔙 Regresando al punto de inicio..."
+            return " Regresando al punto de inicio..."
         case .completed:
-            return "🏁 ¡Recorrido completado!"
+            return " ¡Recorrido completado!"
         }
     }
     
