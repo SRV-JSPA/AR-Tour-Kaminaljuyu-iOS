@@ -312,8 +312,9 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
         let bear = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
         let rel  = Float((bear - userHeading) * .pi / 180)
-        let dx   =  Float(dist) * sin(rel)
-        let dz   = -Float(dist) * cos(rel)
+        let adjustedDist = Float(dist) + 5.0  // push it 5m further away
+        let dx   =  adjustedDist * sin(rel)
+        let dz   = -adjustedDist * cos(rel)
         let dy   = poi.baseAltitudeMeters - Float(ARConfig.cameraEyeHeightMeters)
 
         var t = matrix_identity_float4x4
@@ -340,6 +341,9 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
             session.remove(anchor: old)
             activeAnchors.removeValue(forKey: poi.id)
         }
+        // Detach from scene so SceneKit can re-attach it cleanly to the new anchor
+        loadedNodes[poi.id]?.removeFromParentNode()
+
         placeModel(
             for: poi,
             userLocation: userLocation,
@@ -347,7 +351,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
             cameraTransform: cameraTransform,
             in: session
         )
-    }
+    } 
 
     // MARK: - Visibility
 
@@ -431,18 +435,18 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
               let pivot = loadedNodes[id],
               let poi   = nodePOIs[id] else { return }
 
-        // Full scale formula — single source of truth
         let s = poi.baseScale * ARConfig.globalScaleMultiplier * modelScale
         pivot.scale = SCNVector3(s, s, s)
 
-        // Combine base yaw + user rotation as a single quaternion
         let totalYRad = (poi.baseYawDeg + modelRotationY) * (.pi / 180)
         pivot.simdOrientation = simd_quatf(angle: totalYRad, axis: SIMD3<Float>(0, 1, 0))
 
-        // Vertical offset — moves the pivot up/down in world space, clamped to ±1 m
-        pivot.simdPosition.y += modelOffsetY
-
-        print("[transforms] '\(id)' scale:\(String(format:"%.4f",s)) rotY:\(String(format:"%.1f",modelRotationY))° offsetY:\(String(format:"%.2f",modelOffsetY))m")
+        // FIX: Set absolute Y, don't accumulate with +=
+        pivot.simdPosition = SIMD3<Float>(
+            pivot.simdPosition.x,
+            modelOffsetY,   // absolute, not +=
+            pivot.simdPosition.z
+        )
     }
 
     // MARK: - ARSCNViewDelegate
@@ -453,23 +457,25 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         guard let name  = anchor.name,
               let pivot = loadedNodes[name],
               let poi   = nodePOIs[name] else {
-            print("[nodeFor] no node for '\(anchor.name ?? "?")'")
             return SCNNode()
         }
 
-        // Apply transforms so the node is correct from the very first frame
+        // Clone so each anchor owns its own node instance
+        let clone = pivot.clone()
+
         let s = poi.baseScale * ARConfig.globalScaleMultiplier * modelScale
-        pivot.scale           = SCNVector3(s, s, s)
-        pivot.simdOrientation = simd_quatf(
+        clone.scale           = SCNVector3(s, s, s)
+        clone.simdOrientation = simd_quatf(
             angle: (poi.baseYawDeg + modelRotationY) * (.pi / 180),
             axis:  SIMD3<Float>(0, 1, 0)
         )
+        clone.simdPosition = SIMD3<Float>(0, modelOffsetY, 0)
+        clone.isHidden = pivot.isHidden
 
-        var geoCount = 0
-        pivot.enumerateHierarchy { n, _ in if n.geometry != nil { geoCount += 1 } }
-        print("[nodeFor] '\(name)' geos:\(geoCount) scale:\(String(format:"%.4f",s))")
+        // Replace the tracked node with the clone so gestures affect the right instance
+        loadedNodes[name] = clone
 
-        return pivot
+        return clone
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
