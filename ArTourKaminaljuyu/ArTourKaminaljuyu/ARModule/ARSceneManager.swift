@@ -9,24 +9,19 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     private weak var sceneView: ARSCNView?
 
     // MARK: - Internal state
-    // pivotNode owns ALL transforms (scale + Y rotation).
-    // It is what SceneKit attaches to the ARAnchor.
-    // Child nodes only ever hold part-proportion scale, set once at preload.
-    private var loadedNodes:   [String: SCNNode]     = [:]   // poiId → pivotNode
-    private var activeAnchors: [String: ARAnchor]    = [:]   // poiId → anchor
-    private var nodePOIs:      [String: POILocation] = [:]   // poiId → poi
-    private var visibleNodeID: String?
+    private var loadedNode:   SCNNode?
+    private var activeAnchor: ARAnchor?
+    private var activePOI:    POILocation?
 
-    // User gesture accumulators — reset whenever a new POI activates
-    var modelRotationY: Float = 0.0   // degrees
-    var modelScale:     Float = 1.0   // multiplier on top of poi.baseScale
-    var modelOffsetY:   Float = 0.0   // metres, clamped to -1…+1
+    // User gesture accumulators
+    var modelRotationY: Float = 0.0
+    var modelScale:     Float = 1.0
+    var modelOffsetY:   Float = 0.0
 
-    // MARK: - Texture map: filename → full bundle URL
+    // MARK: - Texture map
     private var bundleTextureMap: [String: URL] = [:]
 
     // MARK: - Init
-
     init(sceneView: ARSCNView) {
         self.sceneView = sceneView
         super.init()
@@ -36,12 +31,10 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     }
 
     // MARK: - Bundle texture index
-
     private func buildBundleTextureMap() {
         let bundleURL = Bundle.main.bundleURL
         let imageExts: Set<String> = ["jpg", "jpeg", "png", "tga", "bmp", "tiff", "gif"]
         guard let enumerator = FileManager.default.enumerator(atPath: bundleURL.path) else { return }
-
         for case let path as String in enumerator {
             let ext = (path as NSString).pathExtension.lowercased()
             guard imageExts.contains(ext) else { continue }
@@ -64,7 +57,6 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     }
 
     // MARK: - MTL parser
-
     private func parseMTL(forOBJ objURL: URL) -> [String: String] {
         let name   = objURL.deletingPathExtension().lastPathComponent
         var mtlURL = objURL.deletingLastPathComponent()
@@ -75,70 +67,43 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
             if let enumerator = FileManager.default.enumerator(atPath: bundleURL.path) {
                 for case let path as String in enumerator
                 where URL(fileURLWithPath: path).lastPathComponent == "\(name).mtl" {
-                    mtlURL = bundleURL.appendingPathComponent(path)
-                    break
+                    mtlURL = bundleURL.appendingPathComponent(path); break
                 }
             }
         }
 
         guard FileManager.default.fileExists(atPath: mtlURL.path),
               let content = try? String(contentsOf: mtlURL, encoding: .utf8) else {
-            print("  [parseMTL] not found for '\(name)'")
-            return [:]
+            print("  [parseMTL] not found for '\(name)'"); return [:]
         }
 
-        print("  [parseMTL] reading '\(mtlURL.lastPathComponent)'")
-
-        var result:     [String: String] = [:]
+        var result: [String: String] = [:]
         var currentMat: String?
-
         for rawLine in content.components(separatedBy: .newlines) {
             let line = rawLine.trimmingCharacters(in: .whitespaces)
             if line.lowercased().hasPrefix("newmtl ") {
-                currentMat = String(line.dropFirst("newmtl ".count))
-                                .trimmingCharacters(in: .whitespaces)
+                currentMat = String(line.dropFirst("newmtl ".count)).trimmingCharacters(in: .whitespaces)
             } else if line.lowercased().hasPrefix("map_kd "), let mat = currentMat {
-                let rawPath  = String(line.dropFirst("map_kd ".count))
-                                .trimmingCharacters(in: .whitespaces)
-                let filename = URL(fileURLWithPath: rawPath).lastPathComponent
-                result[mat]  = filename
-                print("  [parseMTL] '\(mat)' → '\(filename)'")
+                let rawPath = String(line.dropFirst("map_kd ".count)).trimmingCharacters(in: .whitespaces)
+                result[mat] = URL(fileURLWithPath: rawPath).lastPathComponent
             }
         }
-        print("  [parseMTL] \(result.count) mappings found")
         return result
     }
 
-    // MARK: - Force-apply textures (single pass, nothing runs after this)
-
+    // MARK: - Force-apply textures
     private func forceApplyTextures(to modelNode: SCNNode, mtlMap: [String: String]) {
         modelNode.enumerateChildNodes { node, _ in
             guard let geometry = node.geometry else { return }
             for material in geometry.materials {
                 let matName = material.name ?? ""
-
                 var filename: String?
-                if let mapped = mtlMap[matName] {
-                    filename = mapped
-                } else if let url = material.diffuse.contents as? URL {
-                    filename = url.lastPathComponent
-                } else if let str = material.diffuse.contents as? String {
-                    filename = URL(fileURLWithPath: str).lastPathComponent
-                }
-
-                guard let fname = filename, !fname.isEmpty else {
-                    print("  [force] '\(matName)' — no mapping")
-                    continue
-                }
-                guard let texURL = resolveTexture(fname) else {
-                    print("  [force] '\(matName)' — '\(fname)' NOT in bundle")
-                    continue
-                }
-                guard let image = UIImage(contentsOfFile: texURL.path) else {
-                    print("  [force] '\(matName)' — UIImage FAILED")
-                    continue
-                }
-
+                if let mapped = mtlMap[matName] { filename = mapped }
+                else if let url = material.diffuse.contents as? URL { filename = url.lastPathComponent }
+                else if let str = material.diffuse.contents as? String { filename = URL(fileURLWithPath: str).lastPathComponent }
+                guard let fname = filename, !fname.isEmpty else { continue }
+                guard let texURL = resolveTexture(fname) else { continue }
+                guard let image = UIImage(contentsOfFile: texURL.path) else { continue }
                 material.diffuse.contents  = image
                 material.specular.contents = UIColor.black
                 material.emission.contents = UIColor.black
@@ -152,85 +117,56 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     }
 
     // MARK: - Preload
-    //
-    // Architecture:
-    //   pivotNode  ← attached to ARAnchor by SceneKit
-    //     └─ childNode(s)  ← geometry only; scale = part.baseScale (proportion only)
-    //
-    // globalScaleMultiplier is applied ONCE to pivotNode here.
-    // It is NEVER re-applied in applyUserTransforms — that would double-multiply.
-
     func preloadAssets(for poi: POILocation) {
-        guard loadedNodes[poi.id] == nil else {
+        guard activePOI?.id != poi.id || loadedNode == nil else {
             print("[preload] '\(poi.id)' already loaded — skip")
             return
         }
 
-        print("\n[preload] '\(poi.id)' model:'\(poi.modelPath)'")
-
+        print("\n[preload] '\(poi.id)'")
         let pivotNode = SCNNode()
 
         if poi.parts.isEmpty {
-            guard !poi.modelPath.isEmpty else {
-                print("   no modelPath and no parts — abort")
-                return
-            }
+            guard !poi.modelPath.isEmpty else { return }
             if let n = buildNode(modelPath: poi.modelPath, texturePath: poi.texturePath) {
-                // Child has no extra scale; pivot owns it entirely
                 pivotNode.addChildNode(n)
-            } else {
-                print("   buildNode FAILED for '\(poi.modelPath)'")
             }
         } else {
-            for (i, part) in poi.parts.enumerated() {
+            for part in poi.parts {
                 if let n = buildNode(modelPath: part.modelPath, texturePath: part.texturePath) {
-                    // Only bake the inter-part proportion, NOT globalScaleMultiplier
                     let s = part.baseScale
                     n.scale = SCNVector3(s, s, s)
                     pivotNode.addChildNode(n)
-                    print("   part[\(i)] loaded — partScale:\(s)")
-                } else {
-                    print("   part[\(i)] FAILED: '\(part.modelPath)'")
                 }
             }
         }
 
-        // Initial pivot scale = baseScale × globalScaleMultiplier (applied once, here)
-        let initialScale = poi.baseScale * ARConfig.globalScaleMultiplier
-        pivotNode.scale = SCNVector3(initialScale, initialScale, initialScale)
-
-        // Initial yaw via quaternion — no euler angles on pivotNode
+        let s = poi.baseScale * ARConfig.globalScaleMultiplier
+        pivotNode.scale = SCNVector3(s, s, s)
         pivotNode.simdOrientation = simd_quatf(
             angle: poi.baseYawDeg * (.pi / 180),
             axis:  SIMD3<Float>(0, 1, 0)
         )
         pivotNode.isHidden = true
 
-        loadedNodes[poi.id] = pivotNode
-        nodePOIs[poi.id]    = poi
+        loadedNode = pivotNode
+        activePOI  = poi
 
         var geos = 0
         pivotNode.enumerateHierarchy { n, _ in if n.geometry != nil { geos += 1 } }
-        print("[preload] '\(poi.id)' done — geos:\(geos) initialScale:\(initialScale)")
-        if geos == 0 { print(" WARNING: NO GEOMETRIES for '\(poi.id)'") }
+        print("[preload] '\(poi.id)' done — geos:\(geos) scale:\(s)")
     }
 
-    // MARK: - Build node from OBJ file
-
+    // MARK: - Build node
     private func buildNode(modelPath: String, texturePath: String) -> SCNNode? {
         let bundleURL = Bundle.main.bundleURL
-        print("  [buildNode] '\(modelPath)'")
-
-        // 1. Locate OBJ — try several strategies
         var modelURL: URL?
 
         for candidate in [
             bundleURL.appendingPathComponent(modelPath),
             bundleURL.appendingPathComponent(URL(fileURLWithPath: modelPath).lastPathComponent)
         ] {
-            if FileManager.default.fileExists(atPath: candidate.path) {
-                modelURL = candidate; break
-            }
+            if FileManager.default.fileExists(atPath: candidate.path) { modelURL = candidate; break }
         }
 
         if modelURL == nil {
@@ -249,16 +185,9 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
             }
         }
 
-        guard let objURL = modelURL else {
-            print("  [buildNode] NOT FOUND: '\(modelPath)'")
-            return nil
-        }
-        print("  [buildNode] found: \(objURL.path)")
+        guard let objURL = modelURL else { return nil }
 
-        // 2. Parse MTL before loading scene
         let mtlMap = parseMTL(forOBJ: objURL)
-
-        // 3. Load SCNScene
         let scene: SCNScene
         do {
             scene = try SCNScene(url: objURL, options: [
@@ -272,31 +201,15 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
                     bundleURL.appendingPathComponent("Assets")
                 ]
             ])
-        } catch {
-            print("  [buildNode] SCNScene error: \(error)")
-            return nil
-        }
+        } catch { return nil }
 
-        // 4. Collect geometry into a single node
         let modelNode = SCNNode()
         scene.rootNode.childNodes.forEach { modelNode.addChildNode($0) }
-
-        // 5. Single texture pass — nothing modifies materials after this
         forceApplyTextures(to: modelNode, mtlMap: mtlMap)
-
-        // 6. Debug count
-        var texturedCount = 0
-        modelNode.enumerateChildNodes { node, _ in
-            guard let geo = node.geometry else { return }
-            for mat in geo.materials where mat.diffuse.contents is UIImage { texturedCount += 1 }
-        }
-        print("  [buildNode] \(texturedCount) textured materials")
-
         return modelNode
     }
 
-    // MARK: - Place model (one-shot — anchor position never changes)
-
+    // MARK: - Place model
     func placeModel(
         for poi: POILocation,
         userLocation: CLLocationCoordinate2D,
@@ -304,18 +217,20 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         cameraTransform: simd_float4x4,
         in session: ARSession
     ) {
-        guard activeAnchors[poi.id] == nil else {
-            print("[place] '\(poi.id)' already anchored — skip")
-            return
-        }
+        clearPlacement(session: session)
 
         let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
         let bear = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
-        let rel  = Float((bear - userHeading) * .pi / 180)
-        let adjustedDist = Float(dist) + 5.0  // push it 5m further away
-        let dx   =  adjustedDist * sin(rel)
-        let dz   = -adjustedDist * cos(rel)
-        let dy   = poi.baseAltitudeMeters - Float(ARConfig.cameraEyeHeightMeters)
+
+        var relDeg = bear - userHeading
+        while relDeg >  180 { relDeg -= 360 }
+        while relDeg < -180 { relDeg += 360 }
+        let rel = Float(relDeg * .pi / 180)
+
+        let clampedDist = min(Float(dist), 15.0) + 5.0
+        let dx =  clampedDist * sin(rel)
+        let dz = -clampedDist * cos(rel)
+        let dy:  Float = poi.baseAltitudeMeters
 
         var t = matrix_identity_float4x4
         t.columns.3.x = cameraTransform.columns.3.x + dx
@@ -323,60 +238,74 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         t.columns.3.z = cameraTransform.columns.3.z + dz
         t.columns.3.w = 1
 
+        print("[place] dist:\(String(format:"%.1f",dist))m bear:\(String(format:"%.1f",bear))° relDeg:\(String(format:"%.1f",relDeg))°")
+        print("[place] dx:\(String(format:"%.2f",dx)) dy:\(String(format:"%.2f",dy)) dz:\(String(format:"%.2f",dz))")
+        print("[place] anchor pos: \(t.columns.3)")
+
         let anchor = ARAnchor(name: poi.id, transform: t)
         session.add(anchor: anchor)
-        activeAnchors[poi.id] = anchor
-        print("[place] '\(poi.id)' anchored — dx:\(String(format:"%.2f",dx)) dy:\(String(format:"%.2f",dy)) dz:\(String(format:"%.2f",dz))")
+        activeAnchor = anchor
     }
 
-    /// Remove the existing anchor and place a new one at the current position.
-    func forceReplaceModel(
+    // MARK: - Force re-place
+    func forcePlaceModel(
         for poi: POILocation,
         userLocation: CLLocationCoordinate2D,
         userHeading: Double,
         cameraTransform: simd_float4x4,
         in session: ARSession
     ) {
-        if let old = activeAnchors[poi.id] {
-            session.remove(anchor: old)
-            activeAnchors.removeValue(forKey: poi.id)
-        }
-        // Detach from scene so SceneKit can re-attach it cleanly to the new anchor
-        loadedNodes[poi.id]?.removeFromParentNode()
-
-        placeModel(
-            for: poi,
-            userLocation: userLocation,
-            userHeading: userHeading,
-            cameraTransform: cameraTransform,
-            in: session
-        )
-    } 
-
-    // MARK: - Visibility
-
-    func showModel(for poiId: String) {
-        if let prev = visibleNodeID, prev != poiId {
-            loadedNodes[prev]?.isHidden = true
-        }
-        if let node = loadedNodes[poiId] {
-            node.isHidden = false
-            print("[show] '\(poiId)' inScene:\(node.parent != nil)")
-        } else {
-            print("[show] no node for '\(poiId)'")
-        }
-        visibleNodeID = poiId
+        print("[forcePlace] re-placing '\(poi.id)'")
+        placeModel(for: poi, userLocation: userLocation, userHeading: userHeading,
+                   cameraTransform: cameraTransform, in: session)
     }
 
-    func hideAllModels() {
-        loadedNodes.values.forEach { $0.isHidden = true }
-        visibleNodeID = nil
+    // MARK: - Switch POI (clears current, loads and places new)
+    func switchToPOI(
+        _ poi: POILocation,
+        userLocation: CLLocationCoordinate2D,
+        userHeading: Double,
+        cameraTransform: simd_float4x4,
+        in session: ARSession
+    ) {
+        print("[switch] clearing current, loading '\(poi.id)'")
+        clear(session: session)
+        preloadAssets(for: poi)
+        placeModel(for: poi, userLocation: userLocation, userHeading: userHeading,
+                   cameraTransform: cameraTransform, in: session)
     }
 
-    // MARK: - Gesture interface
+    // MARK: - Show / Hide
+    func showModel() {
+        guard let node = loadedNode else { return }
+        node.isHidden = false
+        print("[show] inScene:\(node.parent != nil)")
+    }
 
-    /// Pan delta (pre-scaled by caller, e.g. × 0.1).
-    /// Internally clamped to ±5° per call to survive fast swipes.
+    func hideModel() {
+        loadedNode?.isHidden = true
+    }
+
+    // MARK: - Clear placement only
+    private func clearPlacement(session: ARSession) {
+        if let anchor = activeAnchor {
+            session.remove(anchor: anchor)
+            activeAnchor = nil
+        }
+        loadedNode?.removeFromParentNode()
+    }
+
+    // MARK: - Full clear
+    func clear(session: ARSession) {
+        clearPlacement(session: session)
+        loadedNode = nil
+        activePOI  = nil
+        modelScale     = 1.0
+        modelRotationY = 0.0
+        modelOffsetY   = 0.0
+    }
+
+    // MARK: - Gestures
     func applyRotation(delta: Float) {
         let clamped = max(-5.0, min(5.0, delta))
         guard abs(clamped) > 0.001 else { return }
@@ -384,19 +313,16 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         applyUserTransforms()
     }
 
-    /// Vertical pan delta in metres (negative = down, positive = up). Clamped to ±1 m.
     func applyVerticalTranslation(delta: Float) {
-        modelOffsetY = max(-0.1, min(0.1, modelOffsetY + delta))
+        modelOffsetY = max(-1.0, min(1.0, modelOffsetY + delta))
         applyUserTransforms()
     }
 
-    /// Pinch factor is a delta (caller resets g.scale = 1.0 each event).
     func applyScale(factor: Float) {
         modelScale = max(ARConfig.minScale, min(ARConfig.maxScale, modelScale * factor))
         applyUserTransforms()
     }
 
-    /// Called when a new POI becomes active.
     func resetUserTransforms() {
         modelScale     = 1.0
         modelRotationY = 0.0
@@ -404,78 +330,36 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         applyUserTransforms()
     }
 
-    // MARK: - Clear
-
-    func clear(session: ARSession) {
-        activeAnchors.values.forEach { session.remove(anchor: $0) }
-        activeAnchors.removeAll()
-        loadedNodes.values.forEach { $0.removeFromParentNode() }
-        loadedNodes.removeAll()
-        nodePOIs.removeAll()
-        visibleNodeID = nil
-    }
-
-    // MARK: - Apply transforms (private)
-    //
-    // Rules:
-    //   • Only pivotNode is touched — never children.
-    //   • Scale formula: poi.baseScale × globalScaleMultiplier × modelScale
-    //     (globalScaleMultiplier appears once; it was NOT baked into initial pivot scale,
-    //      so it belongs here to keep the formula consistent with preload.)
-    //
-    //   Wait — actually globalScaleMultiplier IS baked at preload time so the formula
-    //   here is: poi.baseScale × globalScaleMultiplier × modelScale.
-    //   Both preload and applyUserTransforms must agree, so we always compute
-    //   the full formula here and let the pivot override whatever preload set.
-    //
-    //   • Rotation: quaternion around world Y — no gimbal lock, no X/Z bleed.
-
+    // MARK: - Apply transforms
     private func applyUserTransforms() {
-        guard let id    = visibleNodeID,
-              let pivot = loadedNodes[id],
-              let poi   = nodePOIs[id] else { return }
-
+        guard let pivot = loadedNode, let poi = activePOI else { return }
         let s = poi.baseScale * ARConfig.globalScaleMultiplier * modelScale
         pivot.scale = SCNVector3(s, s, s)
-
         let totalYRad = (poi.baseYawDeg + modelRotationY) * (.pi / 180)
         pivot.simdOrientation = simd_quatf(angle: totalYRad, axis: SIMD3<Float>(0, 1, 0))
-
-        // FIX: Set absolute Y, don't accumulate with +=
-        pivot.simdPosition = SIMD3<Float>(
-            pivot.simdPosition.x,
-            modelOffsetY,   // absolute, not +=
-            pivot.simdPosition.z
-        )
+        pivot.simdPosition = SIMD3<Float>(pivot.simdPosition.x, modelOffsetY, pivot.simdPosition.z)
     }
 
     // MARK: - ARSCNViewDelegate
-
-    /// SceneKit calls this to get the node for a newly added anchor.
-    /// We return the already-loaded pivotNode with its current transforms.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        guard let name  = anchor.name,
-              let pivot = loadedNodes[name],
-              let poi   = nodePOIs[name] else {
+        guard let name = anchor.name,
+              name == activePOI?.id,
+              let pivot = loadedNode,
+              let poi = activePOI else {
             return SCNNode()
         }
 
-        // Clone so each anchor owns its own node instance
-        let clone = pivot.clone()
-
         let s = poi.baseScale * ARConfig.globalScaleMultiplier * modelScale
-        clone.scale           = SCNVector3(s, s, s)
-        clone.simdOrientation = simd_quatf(
+        pivot.scale = SCNVector3(s, s, s)
+        pivot.simdOrientation = simd_quatf(
             angle: (poi.baseYawDeg + modelRotationY) * (.pi / 180),
             axis:  SIMD3<Float>(0, 1, 0)
         )
-        clone.simdPosition = SIMD3<Float>(0, modelOffsetY, 0)
-        clone.isHidden = pivot.isHidden
+        pivot.simdPosition = SIMD3<Float>(0, modelOffsetY, 0)
+        pivot.isHidden = false
 
-        // Replace the tracked node with the clone so gestures affect the right instance
-        loadedNodes[name] = clone
-
-        return clone
+        print("[nodeFor] '\(name)' attached, scale:\(s)")
+        return pivot
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
