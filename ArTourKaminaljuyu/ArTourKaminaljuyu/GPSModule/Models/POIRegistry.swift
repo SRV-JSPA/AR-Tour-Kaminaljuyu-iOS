@@ -11,13 +11,12 @@ final class POIRegistry {
         return [
             POILocation(
                 id: "informacion_inicial",
-                coordinate: CLLocationCoordinate2D(latitude: 14.591613809927345, longitude: -90.49165868123134),
-                
+                coordinate: CLLocationCoordinate2D(latitude: 14.604981067673345, longitude: -90.48975788426475),
                 
                 name: "KaminalJuyú",
                 modelPath: "Monticulo3.obj",
                 baseScale: 1.0,
-                baseAltitudeMeters: -2.0,
+                baseAltitudeMeters: 0.0,
                 description: "Kaminal Juyú es uno de los sitios arqueológicos mayas más importantes de las tierras altas de Guatemala.",
                 images: ["inicio"]
             ),
