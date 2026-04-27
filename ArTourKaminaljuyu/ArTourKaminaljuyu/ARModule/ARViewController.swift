@@ -12,7 +12,6 @@ final class ARViewController: UIViewController {
 
     // MARK: - State
     private var cancellables:     Set<AnyCancellable> = []
-    private var activePOI:        POILocation?
     private var lastHeading:      Double              = 0
     private var lastUserLocation: CLLocationCoordinate2D?
     private var hasPlacedModel:   Bool                = false
@@ -24,7 +23,7 @@ final class ARViewController: UIViewController {
 
     // MARK: - Buttons
     private var repositionButton: UIButton!
-    private var siguienteButton:  UIButton!
+    private var nextModelButton:  UIButton!
 
     // MARK: - Lifecycle
 
@@ -34,19 +33,11 @@ final class ARViewController: UIViewController {
         setupGestures()
         setupButtons()
         subscribeToGPS()
-        preloadModels()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startARSession()
-
-        if let proximity = GPSModuleInterface.shared.nearestPOI,
-           proximity.level == .arrived {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-                self?.activateModel(for: proximity.poi)
-            }
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,6 +46,7 @@ final class ARViewController: UIViewController {
     }
 
     // MARK: - Setup: SceneView
+
     private func setupSceneView() {
         sceneView = ARSCNView(frame: view.bounds)
         sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -83,6 +75,7 @@ final class ARViewController: UIViewController {
     }
 
     // MARK: - Setup: Gestures
+
     private func setupGestures() {
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         panGesture.cancelsTouchesInView = false
@@ -96,8 +89,23 @@ final class ARViewController: UIViewController {
     }
 
     // MARK: - Setup: Buttons
+
     private func setupButtons() {
-        // Reposition button — left side
+        // Next Model — top right
+        nextModelButton = UIButton(type: .system)
+        nextModelButton.backgroundColor     = UIColor.systemIndigo.withAlphaComponent(0.90)
+        nextModelButton.setTitleColor(.white, for: .normal)
+        nextModelButton.titleLabel?.font    = .boldSystemFont(ofSize: 15)
+        nextModelButton.layer.cornerRadius  = 10
+        nextModelButton.layer.shadowColor   = UIColor.black.cgColor
+        nextModelButton.layer.shadowOpacity = 0.25
+        nextModelButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
+        nextModelButton.layer.shadowRadius  = 4
+        nextModelButton.translatesAutoresizingMaskIntoConstraints = false
+        nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
+        view.addSubview(nextModelButton)
+
+        // Reposition — bottom left
         repositionButton = UIButton(type: .system)
         repositionButton.setTitle("⟳ Reposicionar", for: .normal)
         repositionButton.backgroundColor    = UIColor.systemBlue.withAlphaComponent(0.85)
@@ -105,36 +113,27 @@ final class ARViewController: UIViewController {
         repositionButton.titleLabel?.font   = .boldSystemFont(ofSize: 15)
         repositionButton.layer.cornerRadius = 10
         repositionButton.translatesAutoresizingMaskIntoConstraints = false
-        repositionButton.addTarget(self, action: #selector(repositionModel), for: .touchUpInside)
+        repositionButton.addTarget(self, action: #selector(repositionTapped), for: .touchUpInside)
         repositionButton.isHidden = true
         view.addSubview(repositionButton)
 
-        // Siguiente button — right side
-        siguienteButton = UIButton(type: .system)
-        siguienteButton.setTitle("Siguiente ›", for: .normal)
-        siguienteButton.backgroundColor    = UIColor.systemGreen.withAlphaComponent(0.85)
-        siguienteButton.setTitleColor(.white, for: .normal)
-        siguienteButton.titleLabel?.font   = .boldSystemFont(ofSize: 15)
-        siguienteButton.layer.cornerRadius = 10
-        siguienteButton.translatesAutoresizingMaskIntoConstraints = false
-        siguienteButton.addTarget(self, action: #selector(goToNextPOI), for: .touchUpInside)
-        siguienteButton.isHidden = true
-        view.addSubview(siguienteButton)
-
         NSLayoutConstraint.activate([
+            nextModelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            nextModelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            nextModelButton.widthAnchor.constraint(equalToConstant: 130),
+            nextModelButton.heightAnchor.constraint(equalToConstant: 44),
+
             repositionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             repositionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             repositionButton.widthAnchor.constraint(equalToConstant: 160),
             repositionButton.heightAnchor.constraint(equalToConstant: 44),
-
-            siguienteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            siguienteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            siguienteButton.widthAnchor.constraint(equalToConstant: 130),
-            siguienteButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+
+        updateNextModelButton()
     }
 
     // MARK: - AR Session
+
     private func startARSession() {
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = []
@@ -142,7 +141,8 @@ final class ARViewController: UIViewController {
         sceneView.session.run(config, options: [.removeExistingAnchors, .resetTracking])
     }
 
-    // MARK: - GPS
+    // MARK: - GPS (location + heading only, zero auto-placement)
+
     private func subscribeToGPS() {
         GPSModuleInterface.shared.$userLocation
             .receive(on: DispatchQueue.main)
@@ -159,106 +159,50 @@ final class ARViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        GPSModuleInterface.shared.proximityArrivedPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] poi in
-                self?.activateModel(for: poi)
-            }
-            .store(in: &cancellables)
-
-        GPSModuleInterface.shared.poiArrivedPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] poi in
-                self?.activateModel(for: poi)
-            }
-            .store(in: &cancellables)
-
+        // Only clear model if tour ends
         GPSModuleInterface.shared.$tourState
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
+                guard let self else { return }
                 switch state {
                 case .returning, .completed:
-                    self?.sceneManager.hideModel()
-                    self?.activePOI = nil
-                    self?.hasPlacedModel = false
-                    self?.currentPOIIndex = 0
-                    self?.repositionButton.isHidden = true
-                    self?.siguienteButton.isHidden  = true
-                default: break
+                    self.sceneManager.clearAll(session: self.sceneView.session)
+                    self.hasPlacedModel  = false
+                    self.currentPOIIndex = 0
+                    self.repositionButton.isHidden = true
+                    self.updateNextModelButton()
+                default:
+                    break
                 }
             }
             .store(in: &cancellables)
     }
 
-    // MARK: - Preload
-    private func preloadModels() {
+    // MARK: - Next Model
+
+    @objc private func nextModelTapped() {
         let pois = GPSModuleInterface.shared.allPOIs
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self else { return }
-            if let first = pois.first {
-                self.sceneManager.preloadAssets(for: first)
-            }
-        }
-    }
+        guard !pois.isEmpty else { return }
 
-    // MARK: - Activate model
-    private func activateModel(for poi: POILocation) {
-        if activePOI?.id == poi.id && hasPlacedModel {
-            print("[AR] '\(poi.id)' already placed — skip")
-            return
-        }
-
-        let pois = GPSModuleInterface.shared.allPOIs
-        if let index = pois.firstIndex(where: { $0.id == poi.id }) {
-            currentPOIIndex = index
-        }
-
-        activePOI = poi
-        hasPlacedModel = false
-        sceneManager.preloadAssets(for: poi)
-        waitForTrackingThenPlace(poi: poi, retries: 12)
-    }
-
-    // MARK: - Wait for tracking
-    private func waitForTrackingThenPlace(poi: POILocation, retries: Int) {
-        guard retries > 0 else {
-            placeModelNow(poi: poi)
-            return
-        }
-
-        guard let frame = sceneView.session.currentFrame else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                self?.waitForTrackingThenPlace(poi: poi, retries: retries - 1)
-            }
-            return
-        }
-
-        switch frame.camera.trackingState {
-        case .normal:
-            let origin = frame.camera.transform.columns.3
-            guard origin.x != 0 || origin.y != 0 || origin.z != 0 else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                    self?.waitForTrackingThenPlace(poi: poi, retries: retries - 1)
-                }
-                return
-            }
-            placeModelNow(poi: poi)
-        default:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                self?.waitForTrackingThenPlace(poi: poi, retries: retries - 1)
-            }
-        }
-    }
-
-    // MARK: - Place once
-    private func placeModelNow(poi: POILocation) {
-        guard !hasPlacedModel else { return }
-        guard let frame = sceneView.session.currentFrame else { return }
         guard let userLocation = lastUserLocation ?? GPSModuleInterface.shared.userLocation else {
-            print("[place] no GPS")
-            return
+            print("[AR] no GPS location yet"); return
+        }
+        guard let frame = sceneView.session.currentFrame else {
+            print("[AR] no AR frame yet"); return
         }
 
+        // Advance to next POI only after first model is placed
+        if hasPlacedModel {
+            let next = currentPOIIndex + 1
+            guard next < pois.count else {
+                print("[AR] already at last POI"); return
+            }
+            currentPOIIndex = next
+        }
+
+        let poi = pois[currentPOIIndex]
+
+        // clearAll + fresh node + new anchor — one call does it all
         sceneManager.placeModel(
             for:             poi,
             userLocation:    userLocation,
@@ -267,65 +211,40 @@ final class ARViewController: UIViewController {
             in:              sceneView.session
         )
 
-        hasPlacedModel = true
-        sceneManager.resetUserTransforms()
-
-        let pois = GPSModuleInterface.shared.allPOIs
+        hasPlacedModel            = true
         repositionButton.isHidden = false
-        siguienteButton.isHidden  = currentPOIIndex >= pois.count - 1
+        updateNextModelButton()
+
+        print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
     }
 
-    // MARK: - Siguiente
-    @objc private func goToNextPOI() {
+    // MARK: - Reposition = reset gestures only
+
+    @objc private func repositionTapped() {
+        sceneManager.resetGestures()
+        print("[AR] gestures reset")
+    }
+
+    // MARK: - Button title/color
+
+    private func updateNextModelButton() {
         let pois = GPSModuleInterface.shared.allPOIs
-        let nextIndex = currentPOIIndex + 1
-        guard nextIndex < pois.count else {
-            siguienteButton.isHidden = true
-            return
+        if !hasPlacedModel {
+            nextModelButton.setTitle("▶ Ver Modelo", for: .normal)
+            nextModelButton.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.90)
+        } else if currentPOIIndex < pois.count - 1 {
+            nextModelButton.setTitle("Siguiente ›", for: .normal)
+            nextModelButton.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.85)
+        } else {
+            nextModelButton.setTitle("✓ Último", for: .normal)
+            nextModelButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.75)
         }
-        guard let frame = sceneView.session.currentFrame,
-              let userLocation = lastUserLocation else { return }
-
-        let nextPOI = pois[nextIndex]
-        currentPOIIndex = nextIndex
-        activePOI = nextPOI
-        hasPlacedModel = false
-
-        sceneManager.switchToPOI(
-            nextPOI,
-            userLocation:    userLocation,
-            userHeading:     lastHeading,
-            cameraTransform: frame.camera.transform,
-            in:              sceneView.session
-        )
-
-        hasPlacedModel = true
-        sceneManager.resetUserTransforms()
-        siguienteButton.isHidden = nextIndex >= pois.count - 1
-        print("[AR] switched to POI[\(nextIndex)] '\(nextPOI.id)'")
-    }
-
-    // MARK: - Reposition
-    @objc private func repositionModel() {
-        guard let poi = activePOI,
-              let frame = sceneView.session.currentFrame,
-              let userLocation = lastUserLocation else { return }
-
-        hasPlacedModel = false
-        sceneManager.resetUserTransforms()
-        sceneManager.forcePlaceModel(
-            for:             poi,
-            userLocation:    userLocation,
-            userHeading:     lastHeading,
-            cameraTransform: frame.camera.transform,
-            in:              sceneView.session
-        )
-        hasPlacedModel = true
     }
 
     // MARK: - Gesture handlers
+
     @objc private func handlePan(_ g: UIPanGestureRecognizer) {
-        guard activePOI != nil, g.state == .changed else { return }
+        guard hasPlacedModel, g.state == .changed else { return }
         let t = g.translation(in: sceneView)
         sceneManager.applyRotation(delta: Float(t.x) * 0.1)
         sceneManager.applyVerticalTranslation(delta: Float(-t.y) * 0.0005)
@@ -333,7 +252,7 @@ final class ARViewController: UIViewController {
     }
 
     @objc private func handlePinch(_ g: UIPinchGestureRecognizer) {
-        guard activePOI != nil, g.state == .changed else { return }
+        guard hasPlacedModel, g.state == .changed else { return }
         let dampened = 1.0 + (Float(g.scale) - 1.0) * 0.3
         sceneManager.applyScale(factor: dampened)
         g.scale = 1.0
@@ -341,12 +260,14 @@ final class ARViewController: UIViewController {
 }
 
 // MARK: - UIGestureRecognizerDelegate
+
 extension ARViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ g: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer) -> Bool { true }
 }
 
 // MARK: - ARSessionDelegate
+
 extension ARViewController: ARSessionDelegate {
 
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -356,22 +277,13 @@ extension ARViewController: ARSessionDelegate {
         session.run(config, options: [.removeExistingAnchors, .resetTracking])
     }
 
-    func sessionWasInterrupted(_ session: ARSession) {
-        sceneManager.hideModel()
-    }
+    func sessionWasInterrupted(_ session: ARSession) {}
 
     func sessionInterruptionEnded(_ session: ARSession) {
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = []
         config.worldAlignment = .gravityAndHeading
         session.run(config, options: [.resetTracking])
-
-        if let poi = activePOI {
-            hasPlacedModel = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                self?.waitForTrackingThenPlace(poi: poi, retries: 12)
-            }
-        }
     }
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {

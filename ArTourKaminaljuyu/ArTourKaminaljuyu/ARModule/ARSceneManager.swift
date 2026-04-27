@@ -8,12 +8,12 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     // MARK: - Dependencies
     private weak var sceneView: ARSCNView?
 
-    // MARK: - Internal state
-    private var loadedNode:   SCNNode?
+    // MARK: - Single model state
+    private var pivotNode:    SCNNode?
     private var activeAnchor: ARAnchor?
     private var activePOI:    POILocation?
 
-    // User gesture accumulators
+    // MARK: - User gesture accumulators
     var modelRotationY: Float = 0.0
     var modelScale:     Float = 1.0
     var modelOffsetY:   Float = 0.0
@@ -31,6 +31,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     }
 
     // MARK: - Bundle texture index
+
     private func buildBundleTextureMap() {
         let bundleURL = Bundle.main.bundleURL
         let imageExts: Set<String> = ["jpg", "jpeg", "png", "tga", "bmp", "tiff", "gif"]
@@ -57,6 +58,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     }
 
     // MARK: - MTL parser
+
     private func parseMTL(forOBJ objURL: URL) -> [String: String] {
         let name   = objURL.deletingPathExtension().lastPathComponent
         var mtlURL = objURL.deletingLastPathComponent()
@@ -92,6 +94,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     }
 
     // MARK: - Force-apply textures
+
     private func forceApplyTextures(to modelNode: SCNNode, mtlMap: [String: String]) {
         modelNode.enumerateChildNodes { node, _ in
             guard let geometry = node.geometry else { return }
@@ -116,19 +119,14 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         }
     }
 
-    // MARK: - Preload
-    func preloadAssets(for poi: POILocation) {
-        guard activePOI?.id != poi.id || loadedNode == nil else {
-            print("[preload] '\(poi.id)' already loaded — skip")
-            return
-        }
+    // MARK: - Build node from POI
 
-        print("\n[preload] '\(poi.id)'")
+    private func buildPivotNode(for poi: POILocation) -> SCNNode {
         let pivotNode = SCNNode()
 
         if poi.parts.isEmpty {
-            guard !poi.modelPath.isEmpty else { return }
-            if let n = buildNode(modelPath: poi.modelPath, texturePath: poi.texturePath) {
+            if !poi.modelPath.isEmpty,
+               let n = buildNode(modelPath: poi.modelPath, texturePath: poi.texturePath) {
                 pivotNode.addChildNode(n)
             }
         } else {
@@ -147,17 +145,13 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
             angle: poi.baseYawDeg * (.pi / 180),
             axis:  SIMD3<Float>(0, 1, 0)
         )
-        pivotNode.isHidden = true
-
-        loadedNode = pivotNode
-        activePOI  = poi
 
         var geos = 0
         pivotNode.enumerateHierarchy { n, _ in if n.geometry != nil { geos += 1 } }
-        print("[preload] '\(poi.id)' done — geos:\(geos) scale:\(s)")
+        print("[buildPivot] '\(poi.id)' geos:\(geos) scale:\(s)")
+        return pivotNode
     }
 
-    // MARK: - Build node
     private func buildNode(modelPath: String, texturePath: String) -> SCNNode? {
         let bundleURL = Bundle.main.bundleURL
         var modelURL: URL?
@@ -209,7 +203,8 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         return modelNode
     }
 
-    // MARK: - Place model
+    // MARK: - Place model (called once per POI, builds node fresh)
+
     func placeModel(
         for poi: POILocation,
         userLocation: CLLocationCoordinate2D,
@@ -217,95 +212,74 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         cameraTransform: simd_float4x4,
         in session: ARSession
     ) {
-        clearPlacement(session: session)
+        // 1. Fully clear any existing model/anchor first
+        clearAll(session: session)
 
+        // 2. Build the node fresh
+        let pivot = buildPivotNode(for: poi)
+        pivot.isHidden = false
+
+        // 3. Compute world position from real GPS distance (no clamping)
         let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
         let bear = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
 
-        var relDeg = bear - userHeading
+        var relDeg = userHeading - bear
         while relDeg >  180 { relDeg -= 360 }
         while relDeg < -180 { relDeg += 360 }
-        let rel = Float(relDeg * .pi / 180)
+        let rel = Float(bear * .pi / 180)
+        
+        let dx = Float(dist) * sin(rel)
+        let dz = Float(dist) * -cos(rel)
+        let dy = poi.baseAltitudeMeters
 
-        let clampedDist = min(Float(dist), 15.0) + 5.0
-        let dx =  clampedDist * sin(rel)
-        let dz = -clampedDist * cos(rel)
-        let dy:  Float = poi.baseAltitudeMeters
+        var transform = matrix_identity_float4x4
+        transform.columns.3.x = cameraTransform.columns.3.x + dx
+        transform.columns.3.y = cameraTransform.columns.3.y + dy
+        transform.columns.3.z = cameraTransform.columns.3.z + dz
+        transform.columns.3.w = 1
 
-        var t = matrix_identity_float4x4
-        t.columns.3.x = cameraTransform.columns.3.x + dx
-        t.columns.3.y = cameraTransform.columns.3.y + dy
-        t.columns.3.z = cameraTransform.columns.3.z + dz
-        t.columns.3.w = 1
-
-        print("[place] dist:\(String(format:"%.1f",dist))m bear:\(String(format:"%.1f",bear))° relDeg:\(String(format:"%.1f",relDeg))°")
+        print("[place] '\(poi.id)' dist:\(String(format:"%.1f",dist))m bear:\(String(format:"%.1f",bear))° rel:\(String(format:"%.1f",relDeg))°")
         print("[place] dx:\(String(format:"%.2f",dx)) dy:\(String(format:"%.2f",dy)) dz:\(String(format:"%.2f",dz))")
-        print("[place] anchor pos: \(t.columns.3)")
 
-        let anchor = ARAnchor(name: poi.id, transform: t)
-        session.add(anchor: anchor)
-        activeAnchor = anchor
+        // 4. Store node before adding anchor (delegate will retrieve it)
+        pivotNode    = pivot
+        activePOI    = poi
+        activeAnchor = ARAnchor(name: poi.id, transform: transform)
+        session.add(anchor: activeAnchor!)
+        
+        applyUserTransforms()
+        
+        print("[siguiente] dist:\(dist) dx:\(dx) dz:\(dz) userHeading:\(userHeading) bear:\(bear) rel:\(relDeg)")
     }
 
-    // MARK: - Force re-place
-    func forcePlaceModel(
-        for poi: POILocation,
-        userLocation: CLLocationCoordinate2D,
-        userHeading: Double,
-        cameraTransform: simd_float4x4,
-        in session: ARSession
-    ) {
-        print("[forcePlace] re-placing '\(poi.id)'")
-        placeModel(for: poi, userLocation: userLocation, userHeading: userHeading,
-                   cameraTransform: cameraTransform, in: session)
+    // MARK: - Reset gestures only (reposition = no re-anchor)
+
+    func resetGestures() {
+        modelScale     = 1.0
+        modelRotationY = 0.0
+        modelOffsetY   = 0.0
+        applyUserTransforms()
+        print("[ARSceneManager] gestures reset")
     }
 
-    // MARK: - Switch POI (clears current, loads and places new)
-    func switchToPOI(
-        _ poi: POILocation,
-        userLocation: CLLocationCoordinate2D,
-        userHeading: Double,
-        cameraTransform: simd_float4x4,
-        in session: ARSession
-    ) {
-        print("[switch] clearing current, loading '\(poi.id)'")
-        clear(session: session)
-        preloadAssets(for: poi)
-        placeModel(for: poi, userLocation: userLocation, userHeading: userHeading,
-                   cameraTransform: cameraTransform, in: session)
-    }
+    // MARK: - Clear everything
 
-    // MARK: - Show / Hide
-    func showModel() {
-        guard let node = loadedNode else { return }
-        node.isHidden = false
-        print("[show] inScene:\(node.parent != nil)")
-    }
-
-    func hideModel() {
-        loadedNode?.isHidden = true
-    }
-
-    // MARK: - Clear placement only
-    private func clearPlacement(session: ARSession) {
+    func clearAll(session: ARSession) {
         if let anchor = activeAnchor {
             session.remove(anchor: anchor)
             activeAnchor = nil
         }
-        loadedNode?.removeFromParentNode()
-    }
-
-    // MARK: - Full clear
-    func clear(session: ARSession) {
-        clearPlacement(session: session)
-        loadedNode = nil
+        pivotNode?.removeFromParentNode()
+        pivotNode  = nil
         activePOI  = nil
         modelScale     = 1.0
         modelRotationY = 0.0
         modelOffsetY   = 0.0
+        print("[ARSceneManager] cleared")
     }
 
-    // MARK: - Gestures
+    // MARK: - Gesture application
+
     func applyRotation(delta: Float) {
         let clamped = max(-5.0, min(5.0, delta))
         guard abs(clamped) > 0.001 else { return }
@@ -323,47 +297,38 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         applyUserTransforms()
     }
 
-    func resetUserTransforms() {
-        modelScale     = 1.0
-        modelRotationY = 0.0
-        modelOffsetY   = 0.0
-        applyUserTransforms()
-    }
-
-    // MARK: - Apply transforms
     private func applyUserTransforms() {
-        guard let pivot = loadedNode, let poi = activePOI else { return }
+        guard let pivot = pivotNode, let poi = activePOI else { return }
         let s = poi.baseScale * ARConfig.globalScaleMultiplier * modelScale
         pivot.scale = SCNVector3(s, s, s)
         let totalYRad = (poi.baseYawDeg + modelRotationY) * (.pi / 180)
         pivot.simdOrientation = simd_quatf(angle: totalYRad, axis: SIMD3<Float>(0, 1, 0))
         pivot.simdPosition = SIMD3<Float>(pivot.simdPosition.x, modelOffsetY, pivot.simdPosition.z)
+        print("[gesture] scale:\(modelScale) rotY:\(modelRotationY) offsetY:\(modelOffsetY)")
     }
 
     // MARK: - ARSCNViewDelegate
+
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        guard let name = anchor.name,
-              name == activePOI?.id,
-              let pivot = loadedNode,
-              let poi = activePOI else {
-            return SCNNode()
-        }
+        // Return empty node — we attach pivotNode manually in didAdd
+        guard anchor.name == activePOI?.id else { return SCNNode() }
+        return SCNNode()
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard anchor.name == activePOI?.id,
+              let pivot = pivotNode,
+              let poi = activePOI else { return }
 
         let s = poi.baseScale * ARConfig.globalScaleMultiplier * modelScale
         pivot.scale = SCNVector3(s, s, s)
         pivot.simdOrientation = simd_quatf(
             angle: (poi.baseYawDeg + modelRotationY) * (.pi / 180),
-            axis:  SIMD3<Float>(0, 1, 0)
+            axis: SIMD3<Float>(0, 1, 0)
         )
         pivot.simdPosition = SIMD3<Float>(0, modelOffsetY, 0)
-        pivot.isHidden = false
 
-        print("[nodeFor] '\(name)' attached, scale:\(s)")
-        return pivot
-    }
-
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        let p = anchor.transform.columns.3
-        print("[didAdd] '\(anchor.name ?? "?")'  x:\(String(format:"%.2f",p.x))  y:\(String(format:"%.2f",p.y))  z:\(String(format:"%.2f",p.z))")
-    }
+        node.addChildNode(pivot)
+        print("[didAdd] '\(anchor.name ?? "?")' pivot attached to anchor node")
+    }   
 }
