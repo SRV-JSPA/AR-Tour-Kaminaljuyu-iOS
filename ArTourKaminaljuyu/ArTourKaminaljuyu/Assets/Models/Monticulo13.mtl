@@ -1,7 +1,7 @@
-# Blender 4.5.0 MTL File: 'None'
+# Blender 3.5.1 MTL File: 'None'
 # www.blender.org
 
-newmtl Material.001
+newmtl Material.039
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.500000 0.500000 0.500000
@@ -11,7 +11,27 @@ d 1.000000
 illum 2
 map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/ColoBase.jpeg
 
-newmtl Material.017
+newmtl Material.040
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/ColoBase.jpeg
+
+newmtl Material.041
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/ColoBase.jpeg
+
+newmtl Material.042
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -21,7 +41,7 @@ d 1.000000
 illum 1
 map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/reed_roof_03_diff_4k.jpg
 
-newmtl Material.018
+newmtl Material.043
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -31,7 +51,7 @@ d 1.000000
 illum 1
 map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/red_plaster_weathered_diff_4k.jpg
 
-newmtl Material.019
+newmtl Material.044
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
@@ -41,27 +61,7 @@ d 1.000000
 illum 1
 map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/ColoBase.jpeg
 
-newmtl Material.022
-Ns 0.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 1
-map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/ColoBase.jpeg
-
-newmtl Material.023
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
-map_Kd C:/Users/15-4JO/Downloads/Megaproyect/Megaproyect/ColoBase.jpeg
-
-newmtl Material.070
+newmtl Material.045
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
 Ks 0.000000 0.000000 0.000000
