@@ -10,6 +10,9 @@ final class ARViewController: UIViewController {
     private var sceneView:    ARSCNView!
     private var sceneManager: ARSceneManager!
 
+    // MARK: - Guide arrow (3-D flecha.obj, camera-parented)
+    private var guideArrow: ARGuideArrowManager!
+
     // MARK: - State
     private var cancellables:     Set<AnyCancellable> = []
     private var lastHeading:      Double              = 0
@@ -72,6 +75,9 @@ final class ARViewController: UIViewController {
         view.addSubview(sceneView)
         sceneManager = ARSceneManager(sceneView: sceneView)
         sceneView.session.delegate = self
+
+        // Build guide arrow — attachment happens once session gives us a camera node
+        guideArrow = ARGuideArrowManager(sceneView: sceneView)
     }
 
     // MARK: - Setup: Gestures
@@ -141,7 +147,7 @@ final class ARViewController: UIViewController {
         sceneView.session.run(config, options: [.removeExistingAnchors, .resetTracking])
     }
 
-    // MARK: - GPS (location + heading only, zero auto-placement)
+    // MARK: - GPS
 
     private func subscribeToGPS() {
         GPSModuleInterface.shared.$userLocation
@@ -191,7 +197,6 @@ final class ARViewController: UIViewController {
             print("[AR] no AR frame yet"); return
         }
 
-        // Advance to next POI only after first model is placed
         if hasPlacedModel {
             let next = currentPOIIndex + 1
             guard next < pois.count else {
@@ -202,7 +207,6 @@ final class ARViewController: UIViewController {
 
         let poi = pois[currentPOIIndex]
 
-        // clearAll + fresh node + new anchor — one call does it all
         sceneManager.placeModel(
             for:             poi,
             userLocation:    userLocation,
@@ -218,7 +222,7 @@ final class ARViewController: UIViewController {
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
     }
 
-    // MARK: - Reposition = reset gestures only
+    // MARK: - Reposition
 
     @objc private func repositionTapped() {
         sceneManager.resetGestures()
@@ -287,6 +291,16 @@ extension ARViewController: ARSessionDelegate {
     }
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+
+        // ── Attach arrow to camera node once it exists (idempotent) ────
+        guideArrow.attachToCamera()
+
+        // ── Drive the guide arrow using the placed model's AR world position ──
+        // This is exact: we point at where the 3-D model actually is in the scene,
+        // not a GPS coordinate, so there's no compass or bearing math involved.
+        guideArrow.update(modelWorldPosition: sceneManager.activeModelWorldPosition)
+
+        // Periodic tracking state log (unchanged)
         let t = frame.timestamp
         guard Int(t) % 5 == 0, t.truncatingRemainder(dividingBy: 1) < 0.05 else { return }
         switch frame.camera.trackingState {

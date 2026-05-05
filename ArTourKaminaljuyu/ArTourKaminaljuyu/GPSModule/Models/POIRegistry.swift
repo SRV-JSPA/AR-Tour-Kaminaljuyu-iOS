@@ -11,7 +11,7 @@ final class POIRegistry {
         return [
             POILocation(
                 id: "informacion_inicial",
-                coordinate: CLLocationCoordinate2D(latitude: 14.632700209159415, longitude: -90.46272224247303),
+                coordinate: CLLocationCoordinate2D(latitude: 14.60454535775645, longitude: -90.49001614159263),
                 
                 name: "KaminalJuyú",
                 modelPath: "Monticulo3.obj",
@@ -21,9 +21,11 @@ final class POIRegistry {
                 images: ["inicio"]
             ),
 
+
+            
             POILocation(
                 id: "monticulo_6",
-                coordinate: CLLocationCoordinate2D(latitude: 14.632637636459092, longitude: -90.46296039326964),
+                coordinate: CLLocationCoordinate2D(latitude: 14.604640611485054, longitude: -90.49010878558254),
                 name: "Montículo C-II-6",
                 modelPath: "Monticulo7.obj",
                 baseScale: 1.0,
@@ -35,7 +37,7 @@ final class POIRegistry {
 
             POILocation(
                 id: "acropolis",
-                coordinate: CLLocationCoordinate2D(latitude: 14.632756822542214, longitude: -90.46338434278114),
+                coordinate: CLLocationCoordinate2D(latitude: 14.604581217988532, longitude: -90.49005088308884),
                 name: "Acrópolis",
                 modelPath: "Assets/Models/Monticulo12.obj",
                 texturePath: "Assets/Textures/ColoBase.jpeg",

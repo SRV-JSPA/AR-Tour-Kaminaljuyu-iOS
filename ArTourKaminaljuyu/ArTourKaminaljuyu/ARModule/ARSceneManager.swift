@@ -10,7 +10,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
 
     // MARK: - Single model state
     private var pivotNode:    SCNNode?
-    private var activeAnchor: ARAnchor?
+    private(set) var activeAnchor: ARAnchor?
     private var activePOI:    POILocation?
 
     // MARK: - User gesture accumulators
@@ -28,6 +28,19 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         sceneView.delegate = self
         buildBundleTextureMap()
         print("[ARSceneManager] init — \(bundleTextureMap.count) textures indexed")
+    }
+
+    // MARK: - Active model world position (for guide arrow)
+
+    /// World-space position of the currently placed model anchor.
+    /// Returns nil when no model is loaded. Used by ARGuideArrowManager.
+    var activeModelWorldPosition: SIMD3<Float>? {
+        guard let anchor = activeAnchor else { return nil }
+        return SIMD3<Float>(
+            anchor.transform.columns.3.x,
+            anchor.transform.columns.3.y,
+            anchor.transform.columns.3.z
+        )
     }
 
     // MARK: - Bundle texture index
@@ -203,7 +216,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         return modelNode
     }
 
-    // MARK: - Place model (called once per POI, builds node fresh)
+    // MARK: - Place model
 
     func placeModel(
         for poi: POILocation,
@@ -212,14 +225,11 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         cameraTransform: simd_float4x4,
         in session: ARSession
     ) {
-        // 1. Fully clear any existing model/anchor first
         clearAll(session: session)
 
-        // 2. Build the node fresh
         let pivot = buildPivotNode(for: poi)
         pivot.isHidden = false
 
-        // 3. Compute world position from real GPS distance (no clamping)
         let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
         let bear = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
 
@@ -227,7 +237,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         while relDeg >  180 { relDeg -= 360 }
         while relDeg < -180 { relDeg += 360 }
         let rel = Float(bear * .pi / 180)
-        
+
         let dx = Float(dist) * sin(rel)
         let dz = Float(dist) * -cos(rel)
         let dy = poi.baseAltitudeMeters
@@ -238,21 +248,18 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         transform.columns.3.z = cameraTransform.columns.3.z + dz
         transform.columns.3.w = 1
 
-        print("[place] '\(poi.id)' dist:\(String(format:"%.1f",dist))m bear:\(String(format:"%.1f",bear))° rel:\(String(format:"%.1f",relDeg))°")
+        print("[place] '\(poi.id)' dist:\(String(format:"%.1f",dist))m bear:\(String(format:"%.1f",bear))°")
         print("[place] dx:\(String(format:"%.2f",dx)) dy:\(String(format:"%.2f",dy)) dz:\(String(format:"%.2f",dz))")
 
-        // 4. Store node before adding anchor (delegate will retrieve it)
         pivotNode    = pivot
         activePOI    = poi
         activeAnchor = ARAnchor(name: poi.id, transform: transform)
         session.add(anchor: activeAnchor!)
-        
+
         applyUserTransforms()
-        
-        print("[siguiente] dist:\(dist) dx:\(dx) dz:\(dz) userHeading:\(userHeading) bear:\(bear) rel:\(relDeg)")
     }
 
-    // MARK: - Reset gestures only (reposition = no re-anchor)
+    // MARK: - Reset gestures only
 
     func resetGestures() {
         modelScale     = 1.0
@@ -310,7 +317,6 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        // Return empty node — we attach pivotNode manually in didAdd
         guard anchor.name == activePOI?.id else { return SCNNode() }
         return SCNNode()
     }
@@ -330,5 +336,5 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
 
         node.addChildNode(pivot)
         print("[didAdd] '\(anchor.name ?? "?")' pivot attached to anchor node")
-    }   
+    }
 }

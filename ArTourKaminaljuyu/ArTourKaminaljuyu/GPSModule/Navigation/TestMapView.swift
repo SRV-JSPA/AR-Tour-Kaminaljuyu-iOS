@@ -169,7 +169,7 @@ struct TestMapView: View {
             userHeading = heading
         }
         .onReceive(proximityService.arrivalPublisher) { poi in
-            print("📍 ProximityService: cerca de \(poi.name)")
+            print(" ProximityService: cerca de \(poi.name)")
         }
         .onReceive(tourManager.poiArrivedPublisher) { poi in
             print("TourManager: llegaste a \(poi.name)")
