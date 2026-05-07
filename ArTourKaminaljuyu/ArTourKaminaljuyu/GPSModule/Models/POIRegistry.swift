@@ -11,30 +11,33 @@ final class POIRegistry {
         return [
             POILocation(
                 id: "informacion_inicial",
-                coordinate: CLLocationCoordinate2D(latitude: 14.6047511, longitude: -90.4900959),
+                coordinate: CLLocationCoordinate2D(latitude: 14.60454535775645, longitude: -90.49001614159263),
+                
                 name: "KaminalJuyú",
                 modelPath: "Monticulo3.obj",
                 baseScale: 1.0,
-                baseAltitudeMeters: -1.6,
+                baseAltitudeMeters: 0.0,
                 description: "Kaminal Juyú es uno de los sitios arqueológicos mayas más importantes de las tierras altas de Guatemala.",
                 images: ["inicio"]
             ),
 
-            /*POILocation(
+
+            
+            POILocation(
                 id: "monticulo_6",
-                coordinate: CLLocationCoordinate2D(latitude: 14.631895407440561, longitude: -90.54859084940932),
+                coordinate: CLLocationCoordinate2D(latitude: 14.604640611485054, longitude: -90.49010878558254),
                 name: "Montículo C-II-6",
-                modelPath: "Assets/Models/Monticulo7.obj",
-                texturePath: "Assets/Textures/ColoBase.jpeg",
-                baseScale: 0.2,
-                baseAltitudeMeters: -1.0,
+                modelPath: "Monticulo7.obj",
+                baseScale: 1.0,
+                baseAltitudeMeters: -2.0,
                 description: "Estructura del Preclásico Tardío-Terminal al Clásico Tardío.",
-                constructionPeriod: "Preclásico Tardío-Terminal - Clásico Tardío"
+                images: ["inicio"]
             ),
+        
 
             POILocation(
                 id: "acropolis",
-                coordinate: CLLocationCoordinate2D(latitude: 14.632549261303337, longitude: -90.54889359532447),
+                coordinate: CLLocationCoordinate2D(latitude: 14.604581217988532, longitude: -90.49005088308884),
                 name: "Acrópolis",
                 modelPath: "Assets/Models/Monticulo12.obj",
                 texturePath: "Assets/Textures/ColoBase.jpeg",
@@ -44,6 +47,7 @@ final class POIRegistry {
                 constructionPeriod: "Clásico Temprano - Clásico Tardío",
                 images: ["c_ii_4"]
             ),
+            
 
             POILocation(
                 id: "monticulo_3",
@@ -202,7 +206,7 @@ final class POIRegistry {
                 description: "Estructura con gradas reconstructivas.",
                 constructionPeriod: "Preclásico Tardío-Terminal - Clásico Tardío",
                 images: ["c_ii_13", "c_ii_13_2", "c_ii_13_3"]
-            )*/
+            )
         ]
     }()
 
