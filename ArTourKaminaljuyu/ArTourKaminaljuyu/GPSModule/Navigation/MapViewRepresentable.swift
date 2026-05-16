@@ -47,7 +47,7 @@ struct MapViewRepresentable: UIViewRepresentable {
         mapView.settings.tiltGestures = false
         mapView.settings.rotateGestures = false
         
-        mapView.mapType = .hybrid
+        mapView.mapType = .normal
         
         mapView.delegate = context.coordinator
         
