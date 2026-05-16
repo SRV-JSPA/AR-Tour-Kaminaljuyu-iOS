@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		424DC7C09681B0296DA72F33 /* Pods_ArTourKaminaljuyu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410665962BDA754AE08C13A /* Pods_ArTourKaminaljuyu.framework */; };
+		B05B5A822FB8DDA4009AB8E1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05B5A812FB8DDA4009AB8E1 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -15,6 +16,7 @@
 		34D55EEB2F3A80D200655844 /* ArTourKaminaljuyu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArTourKaminaljuyu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8144D7A19209013C5BAC7F53 /* Pods-ArTourKaminaljuyu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArTourKaminaljuyu.debug.xcconfig"; path = "Target Support Files/Pods-ArTourKaminaljuyu/Pods-ArTourKaminaljuyu.debug.xcconfig"; sourceTree = "<group>"; };
 		9410665962BDA754AE08C13A /* Pods_ArTourKaminaljuyu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArTourKaminaljuyu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B05B5A812FB8DDA4009AB8E1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D9056649015DDC5FC5179D53 /* Pods-ArTourKaminaljuyu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArTourKaminaljuyu.release.xcconfig"; path = "Target Support Files/Pods-ArTourKaminaljuyu/Pods-ArTourKaminaljuyu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +56,7 @@
 		34D55EE22F3A80D200655844 = {
 			isa = PBXGroup;
 			children = (
+				B05B5A812FB8DDA4009AB8E1 /* Launch Screen.storyboard */,
 				34A468492F62720400718027 /* Secrets.xcconfig */,
 				34D55EED2F3A80D200655844 /* ArTourKaminaljuyu */,
 				34D55EEC2F3A80D200655844 /* Products */,
@@ -151,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B05B5A822FB8DDA4009AB8E1 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,11 +357,11 @@
 				INFOPLIST_FILE = ArTourKaminaljuyu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "rivacy - Location When In Use Usage Description";
 				INFOPLIST_KEY_NSCameraUsageDescription = "ArTourKaminaljuyú usa la cámara para mostrar los modelos 3D de los montículos arqueológicos mediante Realidad Aumentada.";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para detectar cúando te acercas a cada punto de interés durante el recorrido.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para guiarte por el recorrido del parque arqueológico Kaminaljuyú.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -392,11 +396,11 @@
 				INFOPLIST_FILE = ArTourKaminaljuyu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "rivacy - Location When In Use Usage Description";
 				INFOPLIST_KEY_NSCameraUsageDescription = "ArTourKaminaljuyú usa la cámara para mostrar los modelos 3D de los montículos arqueológicos mediante Realidad Aumentada.";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para detectar cúando te acercas a cada punto de interés durante el recorrido.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para guiarte por el recorrido del parque arqueológico Kaminaljuyú.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

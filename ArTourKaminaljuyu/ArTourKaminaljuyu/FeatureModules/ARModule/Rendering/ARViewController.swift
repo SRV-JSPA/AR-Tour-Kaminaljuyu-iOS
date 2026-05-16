@@ -203,7 +203,7 @@ final class ARViewController: UIViewController {
         )
 
         hasPlacedModel            = true
-        repositionButton.isHidden = false
+        repositionButton.isHidden = true
         updateNextModelButton()
 
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
