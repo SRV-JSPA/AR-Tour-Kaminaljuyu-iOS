@@ -11,7 +11,7 @@ final class POIRegistry {
         return [
             POILocation(
                 id: "informacion_inicial",
-                coordinate: CLLocationCoordinate2D(latitude: 14.60454535775645, longitude: -90.49001614159263),
+                coordinate: CLLocationCoordinate2D(latitude: 14.6749200, longitude: -90.5519745),
                 
                 name: "KaminalJuyú",
                 modelPath: "Monticulo3.obj",

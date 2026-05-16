@@ -150,30 +150,17 @@ final class ARViewController: UIViewController {
     // MARK: - GPS
 
     private func subscribeToGPS() {
-        GPSModuleInterface.shared.$userLocation
+        EventBus.shared.publisher
             .receive(on: DispatchQueue.main)
-            .compactMap { $0 }
-            .sink { [weak self] location in
-                self?.lastUserLocation = location
-            }
-            .store(in: &cancellables)
-
-        GPSModuleInterface.shared.$userHeading
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] heading in
-                self?.lastHeading = heading
-            }
-            .store(in: &cancellables)
-
-        // Only clear model if tour ends
-        GPSModuleInterface.shared.$tourState
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] state in
+            .sink { [weak self] event in
                 guard let self else { return }
-                switch state {
-                case .returning, .completed:
+                switch event {
+                case .locationUpdated(let lat, let lon, let heading):
+                    self.lastUserLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                    self.lastHeading = heading
+                case .tourCompleted:
                     self.sceneManager.clearAll(session: self.sceneView.session)
-                    self.hasPlacedModel  = false
+                    self.hasPlacedModel = false
                     self.currentPOIIndex = 0
                     self.repositionButton.isHidden = true
                     self.updateNextModelButton()

@@ -1,6 +1,11 @@
 import SwiftUI
+import Combine
+import CoreLocation
 
 struct ContentView: View {
+    @StateObject private var appState = AppStateManager.shared
+    @State private var cancellables = Set<AnyCancellable>()
+    
     var body: some View {
         ZStack(alignment: .bottom) {
 
@@ -20,6 +25,29 @@ struct ContentView: View {
                     .padding(.horizontal, 12)
                     .padding(.bottom, 24)
             }
+        }
+        .onAppear {
+            GPSModuleInterface.shared.startTracking()
+            
+            GPSModuleInterface.shared.proximityArrivedPublisher
+                .sink { poi in
+                    print("[EventBus] POI alcanzado: \(poi.id)")
+                    EventBus.shared.publish(.poiReached(poiId: poi.id))
+                    AppStateManager.shared.setActivePOI(poi.id)
+                }
+                .store(in: &cancellables)
+            
+            GPSModuleInterface.shared.$userLocation
+                .compactMap { $0 }
+                .combineLatest(GPSModuleInterface.shared.$userHeading)
+                .sink { location, heading in
+                    EventBus.shared.publish(.locationUpdated(
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                        heading: heading
+                    ))
+                }
+                .store(in: &cancellables)
         }
     }
 }
@@ -189,5 +217,3 @@ struct ARViewControllerWrapper: UIViewControllerRepresentable {
     }
     func updateUIViewController(_ uiViewController: ARViewController, context: Context) {}
 }
-
-
