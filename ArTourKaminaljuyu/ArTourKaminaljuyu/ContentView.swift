@@ -3,15 +3,11 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
-
-            // ── AR ocupa toda la pantalla de fondo ──────────────────────
             ARViewControllerWrapper()
                 .ignoresSafeArea()
 
-            // ── Mapa en la parte inferior (1/4 de pantalla) ─────────────
             VStack(spacing: 0) {
                 Spacer()
-
                 MapOverlayView()
                     .frame(maxWidth: .infinity)
                     .frame(height: UIScreen.main.bounds.height * 0.28)
@@ -21,9 +17,11 @@ struct ContentView: View {
                     .padding(.bottom, 24)
             }
         }
+        .onAppear {
+            GPSModuleInterface.shared.startTracking() // 👈 this was missing
+        }
     }
 }
-
 // MARK: - MapOverlayView
 
 struct MapOverlayView: View {
