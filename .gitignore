@@ -8,3 +8,5 @@ ArTourKaminaljuyu/Pods/
 
 xcuserdata/
 *.xcuserstate
+
+.DS_Store
