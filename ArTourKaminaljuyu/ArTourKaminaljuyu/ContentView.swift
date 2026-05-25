@@ -16,29 +16,50 @@ struct ContentView: View {
                     }
                 }
         } else {
-            NavigationStack {
-                switch router.currentRoute {
-                case .menu:
-                    MainMenuView(
-                        onGuidedTour: { router.navigateTo(.guidedTour) },
-                        onFreeTour: {},
-                        onInstructions: { showInstructions = true },
-                        onTerms: { showTerms = true }
-                    )
-                    .navigationDestination(isPresented: $showInstructions) {
-                        InstructionsView(onBack: { showInstructions = false })
-                    }
-                    .navigationDestination(isPresented: $showTerms) {
-                        TermsView(onBack: { showTerms = false })
-                    }
+            ZStack {
+                // AR siempre cargando en background
+                ARTourView()
+                    .opacity(router.currentRoute == .guidedTour ? 1 : 0)
+                    .allowsHitTesting(router.currentRoute == .guidedTour)
+                    .zIndex(-1)
 
-                case .guidedTour:
-                    ARTourView()
-                        .navigationBarHidden(true)
-                        .toolbar(.hidden, for: .navigationBar)
+                // Navegación encima
+                if router.currentRoute != .guidedTour {
+                    NavigationStack {
+                        switch router.currentRoute {
+                        case .menu:
+                            MainMenuView(
+                                onGuidedTour: { router.navigateTo(.tourControls) },
+                                onFreeTour: {},
+                                onInstructions: { showInstructions = true },
+                                onTerms: { showTerms = true }
+                            )
+                            .navigationDestination(isPresented: $showInstructions) {
+                                InstructionsView(onBack: { showInstructions = false })
+                            }
+                            .navigationDestination(isPresented: $showTerms) {
+                                TermsView(onBack: { showTerms = false })
+                            }
+
+                        case .tourControls:
+                            TourControlsView(
+                                onBack: { router.navigateTo(.menu) },
+                                onStartTour: {
+                                    GPSModuleInterface.shared.startTour()
+                                    router.navigateTo(.guidedTour)
+                                }
+                            )
+                            .navigationBarHidden(true)
+                            .toolbar(.hidden, for: .navigationBar)
+
+                        default:
+                            EmptyView()
+                        }
+                    }
+                    .navigationBarHidden(true)
                 }
             }
-            .navigationBarHidden(true)
         }
     }
 }
+

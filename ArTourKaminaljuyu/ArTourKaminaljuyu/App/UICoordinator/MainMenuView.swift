@@ -140,10 +140,13 @@ struct MainMenuView: View {
                 // Personaje
                 VStack(spacing: 0) {
                     Spacer().frame(height: 0)
-                    Image("maya")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: geo.size.height * 0.33)
+                    if let url = Bundle.main.url(forResource: "Bienvenida", withExtension: "mp4") {
+                        VideoPlayerView(player: AVPlayer(url: url))
+                            .frame(height: geo.size.height * 0.33)
+                            .onAppear {
+                                AVPlayer(url: url).play()
+                            }
+                    }
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)

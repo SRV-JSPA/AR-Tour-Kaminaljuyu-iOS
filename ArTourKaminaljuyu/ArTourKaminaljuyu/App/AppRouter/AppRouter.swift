@@ -10,6 +10,7 @@ import Combine
 
 enum AppRoute {
     case menu
+    case tourControls
     case guidedTour
 }
 

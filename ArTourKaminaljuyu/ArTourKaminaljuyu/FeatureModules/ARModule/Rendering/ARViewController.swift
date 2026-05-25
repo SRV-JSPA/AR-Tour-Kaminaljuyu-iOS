@@ -25,8 +25,8 @@ final class ARViewController: UIViewController {
     private var pinchGesture: UIPinchGestureRecognizer!
 
     // MARK: - Buttons
-    private var repositionButton: UIButton!
-    private var nextModelButton:  UIButton!
+    private var backButton: UIButton!
+    private var playButton: UIButton!
 
     // MARK: - Lifecycle
 
@@ -75,8 +75,6 @@ final class ARViewController: UIViewController {
         view.addSubview(sceneView)
         sceneManager = ARSceneManager(sceneView: sceneView)
         sceneView.session.delegate = self
-
-        // Build guide arrow — attachment happens once session gives us a camera node
         guideArrow = ARGuideArrowManager(sceneView: sceneView)
     }
 
@@ -97,45 +95,41 @@ final class ARViewController: UIViewController {
     // MARK: - Setup: Buttons
 
     private func setupButtons() {
-        // Next Model — top right
-        nextModelButton = UIButton(type: .system)
-        nextModelButton.backgroundColor     = UIColor.systemIndigo.withAlphaComponent(0.90)
-        nextModelButton.setTitleColor(.white, for: .normal)
-        nextModelButton.titleLabel?.font    = .boldSystemFont(ofSize: 15)
-        nextModelButton.layer.cornerRadius  = 10
-        nextModelButton.layer.shadowColor   = UIColor.black.cgColor
-        nextModelButton.layer.shadowOpacity = 0.25
-        nextModelButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
-        nextModelButton.layer.shadowRadius  = 4
-        nextModelButton.translatesAutoresizingMaskIntoConstraints = false
-        nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
-        view.addSubview(nextModelButton)
+        // Back button — top left
+        backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "arrow.uturn.backward"), for: .normal)
+        backButton.tintColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0)
+        backButton.backgroundColor = UIColor(red: 0.96, green: 0.90, blue: 0.83, alpha: 1.0)
+        backButton.layer.cornerRadius = 16
+        backButton.layer.borderWidth = 2
+        backButton.layer.borderColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0).cgColor
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+        view.addSubview(backButton)
 
-        // Reposition — bottom left
-        repositionButton = UIButton(type: .system)
-        repositionButton.setTitle("⟳ Reposicionar", for: .normal)
-        repositionButton.backgroundColor    = UIColor.systemBlue.withAlphaComponent(0.85)
-        repositionButton.setTitleColor(.white, for: .normal)
-        repositionButton.titleLabel?.font   = .boldSystemFont(ofSize: 15)
-        repositionButton.layer.cornerRadius = 10
-        repositionButton.translatesAutoresizingMaskIntoConstraints = false
-        repositionButton.addTarget(self, action: #selector(repositionTapped), for: .touchUpInside)
-        repositionButton.isHidden = true
-        view.addSubview(repositionButton)
+        // Play button — top right
+        playButton = UIButton(type: .system)
+        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.tintColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0)
+        playButton.backgroundColor = UIColor(red: 0.96, green: 0.90, blue: 0.83, alpha: 1.0)
+        playButton.layer.cornerRadius = 16
+        playButton.layer.borderWidth = 2
+        playButton.layer.borderColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0).cgColor
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
+        view.addSubview(playButton)
 
         NSLayoutConstraint.activate([
-            nextModelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            nextModelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            nextModelButton.widthAnchor.constraint(equalToConstant: 130),
-            nextModelButton.heightAnchor.constraint(equalToConstant: 44),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            backButton.widthAnchor.constraint(equalToConstant: 56),
+            backButton.heightAnchor.constraint(equalToConstant: 56),
 
-            repositionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            repositionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            repositionButton.widthAnchor.constraint(equalToConstant: 160),
-            repositionButton.heightAnchor.constraint(equalToConstant: 44),
+            playButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            playButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            playButton.widthAnchor.constraint(equalToConstant: 56),
+            playButton.heightAnchor.constraint(equalToConstant: 56),
         ])
-
-        updateNextModelButton()
     }
 
     // MARK: - AR Session
@@ -150,20 +144,30 @@ final class ARViewController: UIViewController {
     // MARK: - GPS
 
     private func subscribeToGPS() {
-        EventBus.shared.publisher
+        GPSModuleInterface.shared.$userLocation
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] event in
+            .compactMap { $0 }
+            .sink { [weak self] location in
+                self?.lastUserLocation = location
+            }
+            .store(in: &cancellables)
+
+        GPSModuleInterface.shared.$userHeading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] heading in
+                self?.lastHeading = heading
+            }
+            .store(in: &cancellables)
+
+        GPSModuleInterface.shared.$tourState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
                 guard let self else { return }
-                switch event {
-                case .locationUpdated(let lat, let lon, let heading):
-                    self.lastUserLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                    self.lastHeading = heading
-                case .tourCompleted:
+                switch state {
+                case .returning, .completed:
                     self.sceneManager.clearAll(session: self.sceneView.session)
                     self.hasPlacedModel = false
                     self.currentPOIIndex = 0
-                    self.repositionButton.isHidden = true
-                    self.updateNextModelButton()
                 default:
                     break
                 }
@@ -171,9 +175,13 @@ final class ARViewController: UIViewController {
             .store(in: &cancellables)
     }
 
-    // MARK: - Next Model
+    // MARK: - Button actions
 
-    @objc private func nextModelTapped() {
+    @objc private func backTapped() {
+        AppRouter.shared.navigateTo(.menu)
+    }
+
+    @objc private func playTapped() {
         let pois = GPSModuleInterface.shared.allPOIs
         guard !pois.isEmpty else { return }
 
@@ -195,41 +203,15 @@ final class ARViewController: UIViewController {
         let poi = pois[currentPOIIndex]
 
         sceneManager.placeModel(
-            for:             poi,
-            userLocation:    userLocation,
-            userHeading:     lastHeading,
+            for: poi,
+            userLocation: userLocation,
+            userHeading: lastHeading,
             cameraTransform: frame.camera.transform,
-            in:              sceneView.session
+            in: sceneView.session
         )
 
-        hasPlacedModel            = true
-        repositionButton.isHidden = true
-        updateNextModelButton()
-
+        hasPlacedModel = true
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
-    }
-
-    // MARK: - Reposition
-
-    @objc private func repositionTapped() {
-        sceneManager.resetGestures()
-        print("[AR] gestures reset")
-    }
-
-    // MARK: - Button title/color
-
-    private func updateNextModelButton() {
-        let pois = GPSModuleInterface.shared.allPOIs
-        if !hasPlacedModel {
-            nextModelButton.setTitle("▶ Ver Modelo", for: .normal)
-            nextModelButton.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.90)
-        } else if currentPOIIndex < pois.count - 1 {
-            nextModelButton.setTitle("Siguiente ›", for: .normal)
-            nextModelButton.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.85)
-        } else {
-            nextModelButton.setTitle("✓ Último", for: .normal)
-            nextModelButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.75)
-        }
     }
 
     // MARK: - Gesture handlers
@@ -278,16 +260,9 @@ extension ARViewController: ARSessionDelegate {
     }
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-
-        // ── Attach arrow to camera node once it exists (idempotent) ────
         guideArrow.attachToCamera()
-
-        // ── Drive the guide arrow using the placed model's AR world position ──
-        // This is exact: we point at where the 3-D model actually is in the scene,
-        // not a GPS coordinate, so there's no compass or bearing math involved.
         guideArrow.update(modelWorldPosition: sceneManager.activeModelWorldPosition)
 
-        // Periodic tracking state log (unchanged)
         let t = frame.timestamp
         guard Int(t) % 5 == 0, t.truncatingRemainder(dividingBy: 1) < 0.05 else { return }
         switch frame.camera.trackingState {

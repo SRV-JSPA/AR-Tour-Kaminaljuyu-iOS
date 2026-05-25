@@ -55,65 +55,9 @@ struct MapOverlayView: View {
                 pois: gps.allPOIs
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            // Botones de control del tour
-            HStack(spacing: 10) {
-                tourControlButtons
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(Color(.systemBackground).opacity(0.95))
         }
         .background(Color(.systemBackground))
         .cornerRadius(16)
-    }
-
-    // MARK: - Tour buttons
-
-    @ViewBuilder
-    private var tourControlButtons: some View {
-        let tourActive: Bool = {
-            switch gps.tourState {
-            case .idle, .completed: return false
-            default: return true
-            }
-        }()
-
-        Button(tourActive ? "⏹ Detener" : "▶ Iniciar Tour") {
-            if tourActive {
-                gps.stopTour()
-            } else {
-                gps.startTour()
-            }
-        }
-        .buttonStyle(.borderedProminent)
-        .tint(tourActive ? .red : .green)
-        .font(.caption)
-
-        if case .atPOI(let i) = gps.tourState {
-            if i < gps.allPOIs.count - 1 {
-                Button("➡ Siguiente") {
-                    gps.advanceToNextPOI()
-                }
-                .buttonStyle(.bordered)
-                .font(.caption)
-            } else {
-                Button("🔙 Regresar") {
-                    gps.startReturnPhase()
-                }
-                .buttonStyle(.bordered)
-                .tint(.orange)
-                .font(.caption)
-            }
-        }
-
-        Spacer()
-
-        if let nearest = gps.nearestPOI, nearest.level == .arrived {
-            Label("¡Llegaste!", systemImage: "checkmark.circle.fill")
-                .font(.caption2)
-                .foregroundColor(.green)
-        }
     }
 
     // MARK: - Status helpers
