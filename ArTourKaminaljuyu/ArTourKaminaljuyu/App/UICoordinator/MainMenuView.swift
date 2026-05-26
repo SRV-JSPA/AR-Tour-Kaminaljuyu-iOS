@@ -35,34 +35,30 @@ struct MainMenuView: View {
     var onTerms: () -> Void = {}
 
     @State private var player: AVPlayer?
+    @State private var bienvenidaPlayer: AVPlayer?
 
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                // Fondo oscuro
                 LinearGradient(
                     colors: [Color(hex: "#1a1a1a"), Color(hex: "#2d2d2d"), Color(hex: "#0f0f0f")],
                     startPoint: .topTrailing, endPoint: .bottomLeading
                 )
                 .ignoresSafeArea()
 
-                // Video de fondo
                 if let player = player {
-                    VideoPlayerView(player: player)
+                    VideoPlayerView(player: player, gravity: .resizeAspectFill)
                         .ignoresSafeArea()
                         .opacity(0.4)
                         .allowsHitTesting(false)
                 }
 
-                // Panel blanco
                 VStack(spacing: 0) {
                     Spacer().frame(height: geo.size.height * 0.20)
 
                     VStack(alignment: .leading, spacing: 0) {
-                        // Espacio para el personaje
                         Spacer().frame(height: geo.size.height * 0.13)
 
-                        // Textos
                         Text("Bienvenidos al\nParque Arqueológico")
                             .font(.custom("PlusJakartaSans-Bold", size: 22))
                             .foregroundColor(Color(hex: "#2D2D2D"))
@@ -80,7 +76,6 @@ struct MainMenuView: View {
                             .padding(.top, 4)
                             .padding(.bottom, 24)
 
-                        // Tour Guiado
                         MenuCardView(
                             icon: AnyView(GuidedTourIcon(size: 28)),
                             title: "Tour Guiado",
@@ -91,7 +86,6 @@ struct MainMenuView: View {
                         )
                         .padding(.bottom, 10)
 
-                        // Tour Libre
                         MenuCardView(
                             icon: AnyView(FreeTourIcon(size: 28)),
                             title: "Tour Libre",
@@ -102,7 +96,6 @@ struct MainMenuView: View {
                         )
                         .padding(.bottom, 10)
 
-                        // Instrucciones + Términos
                         HStack(spacing: 10) {
                             MenuSquareCardView(
                                 icon: AnyView(InstructionsIcon(size: 28)),
@@ -137,23 +130,25 @@ struct MainMenuView: View {
                     )
                 }
 
-                // Personaje
+
                 VStack(spacing: 0) {
                     Spacer().frame(height: 0)
-                    if let url = Bundle.main.url(forResource: "Bienvenida", withExtension: "mp4") {
-                        VideoPlayerView(player: AVPlayer(url: url))
-                            .frame(height: geo.size.height * 0.33)
-                            .onAppear {
-                                AVPlayer(url: url).play()
-                            }
+                    if let bienvenidaPlayer = bienvenidaPlayer {
+                        VideoPlayerView(player: bienvenidaPlayer, gravity: .resizeAspect, autoPlay: true)
+                            .frame(height: geo.size.height * 0.20)
                     }
                     Spacer()
                 }
-                .frame(maxWidth: .infinity)
-            }
+                .frame(maxWidth: .infinity)            }
         }
-        .onAppear { setupVideo() }
-        .onDisappear { player?.pause() }
+        .onAppear {
+            setupVideo()
+            setupBienvenidaVideo()
+        }
+        .onDisappear {
+            player?.pause()
+            bienvenidaPlayer?.pause()
+        }
     }
 
     private func setupVideo() {
@@ -172,26 +167,64 @@ struct MainMenuView: View {
         avPlayer.play()
         self.player = avPlayer
     }
+
+    private func setupBienvenidaVideo() {
+        guard let url = Bundle.main.url(forResource: "Bienvenida", withExtension: "mov") else {
+            return
+        }
+        let item = AVPlayerItem(url: url)
+        let avPlayer = AVPlayer(playerItem: item)
+        avPlayer.isMuted = false
+        self.bienvenidaPlayer = avPlayer
+    }
 }
 
 struct VideoPlayerView: UIViewRepresentable {
     let player: AVPlayer
-    func makeUIView(context: Context) -> UIView { PlayerUIView(player: player) }
-    func updateUIView(_ uiView: UIView, context: Context) {}
+    var gravity: AVLayerVideoGravity = .resizeAspectFill
+    var autoPlay: Bool = false
+
+    func makeUIView(context: Context) -> PlayerUIView {
+        PlayerUIView(player: player, gravity: gravity, autoPlay: autoPlay)
+    }
+    func updateUIView(_ uiView: PlayerUIView, context: Context) {}
 }
 
 class PlayerUIView: UIView {
     private let playerLayer = AVPlayerLayer()
-    init(player: AVPlayer) {
+    private var statusObserver: NSKeyValueObservation?
+
+    init(player: AVPlayer, gravity: AVLayerVideoGravity, autoPlay: Bool) {
         super.init(frame: .zero)
         playerLayer.player = player
-        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.videoGravity = gravity
+        playerLayer.backgroundColor = UIColor.clear.cgColor
         layer.addSublayer(playerLayer)
+
+        if autoPlay {
+            if player.currentItem?.status == .readyToPlay {
+                player.play()
+            } else {
+                statusObserver = player.currentItem?.observe(\.status, options: [.initial, .new]) { item, _ in
+                    if item.status == .readyToPlay {
+                        DispatchQueue.main.async {
+                            player.play()
+                        }
+                    }
+                }
+            }
+        }
     }
+
     required init?(coder: NSCoder) { fatalError() }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         playerLayer.frame = bounds
+    }
+
+    deinit {
+        statusObserver?.invalidate()
     }
 }
 
