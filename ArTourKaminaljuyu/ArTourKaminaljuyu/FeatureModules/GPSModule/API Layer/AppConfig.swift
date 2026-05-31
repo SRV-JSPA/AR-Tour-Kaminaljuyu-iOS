@@ -12,7 +12,7 @@ enum AppConfig {
 
     // MARK: - Coordenada de inicio del tour
     static let tourStartLatitude: Double  = 14.60454535775645
-    static let tourStartLongitude: Double = -90.49001614159263   
+    static let tourStartLongitude: Double =  -90.49001614159263
     
     
     

@@ -261,7 +261,14 @@ extension ARViewController: ARSessionDelegate {
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guideArrow.attachToCamera()
-        guideArrow.update(modelWorldPosition: sceneManager.activeModelWorldPosition)
+        
+        if !hasPlacedModel,
+           let userLocation = lastUserLocation,
+           let firstPOI = GPSModuleInterface.shared.allPOIs.first {
+            guideArrow.updateWithGPS(userLocation: userLocation, targetLocation: firstPOI.coordinate)
+        } else {
+            guideArrow.update(modelWorldPosition: sceneManager.activeModelWorldPosition)
+        }
 
         let t = frame.timestamp
         guard Int(t) % 5 == 0, t.truncatingRemainder(dividingBy: 1) < 0.05 else { return }
