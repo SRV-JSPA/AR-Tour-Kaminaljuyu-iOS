@@ -121,13 +121,19 @@ struct MainMenuView: View {
                             .aspectRatio(1, contentMode: .fit)
                         }
                         .padding(.bottom, 32)
+
+                        Spacer()
                     }
                     .padding(.horizontal, 20)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .background(
-                        ArchShape()
-                            .fill(Color.white)
-                            .ignoresSafeArea(edges: .bottom)
+                        VStack(spacing: 0) {
+                            ArchShape()
+                                .fill(Color.white)
+                            Rectangle()
+                                .fill(Color.white)
+                        }
+                        .ignoresSafeArea(edges: .bottom)
                     )
                 }
 
@@ -147,8 +153,10 @@ struct MainMenuView: View {
                     HStack {
                         Spacer()
                         HStack(spacing: 8) {
-                            Button(action: { selectedLanguage = "ES"
-                                LanguageService.shared.setLanguage("ES")}) {
+                            Button(action: {
+                                selectedLanguage = "ES"
+                                LanguageService.shared.setLanguage("ES")
+                            }) {
                                 Text("ES")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
                                     .foregroundColor(selectedLanguage == "ES" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
@@ -156,8 +164,10 @@ struct MainMenuView: View {
                             Text("|")
                                 .foregroundColor(Color(hex: "#ECEBC8").opacity(0.3))
                                 .font(.system(size: 18))
-                            Button(action: { selectedLanguage = "EN"
-                                LanguageService.shared.setLanguage("EN")}) {
+                            Button(action: {
+                                selectedLanguage = "EN"
+                                LanguageService.shared.setLanguage("EN")
+                            }) {
                                 Text("EN")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
                                     .foregroundColor(selectedLanguage == "EN" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
