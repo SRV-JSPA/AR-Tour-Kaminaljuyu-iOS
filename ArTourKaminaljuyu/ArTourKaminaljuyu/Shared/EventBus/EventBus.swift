@@ -14,6 +14,7 @@ enum AppEvent {
     case tourCompleted
     case poiChanged(poiId: String?)
     case locationUpdated(latitude: Double, longitude: Double, heading: Double)
+    case languageChanged(language: String)
 }
 
 final class EventBus {

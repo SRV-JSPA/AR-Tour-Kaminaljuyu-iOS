@@ -36,6 +36,7 @@ struct MainMenuView: View {
 
     @State private var player: AVPlayer?
     @State private var bienvenidaPlayer: AVPlayer?
+    @State private var selectedLanguage: String = "ES"
 
     var body: some View {
         GeometryReader { geo in
@@ -130,7 +131,7 @@ struct MainMenuView: View {
                     )
                 }
 
-
+                // Video bienvenida
                 VStack(spacing: 0) {
                     Spacer().frame(height: 0)
                     if let bienvenidaPlayer = bienvenidaPlayer {
@@ -139,7 +140,35 @@ struct MainMenuView: View {
                     }
                     Spacer()
                 }
-                .frame(maxWidth: .infinity)            }
+                .frame(maxWidth: .infinity)
+
+                // Selector de idioma
+                VStack {
+                    HStack {
+                        Spacer()
+                        HStack(spacing: 8) {
+                            Button(action: { selectedLanguage = "ES"
+                                LanguageService.shared.setLanguage("ES")}) {
+                                Text("ES")
+                                    .font(.custom("PlusJakartaSans-Bold", size: 18))
+                                    .foregroundColor(selectedLanguage == "ES" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
+                            }
+                            Text("|")
+                                .foregroundColor(Color(hex: "#ECEBC8").opacity(0.3))
+                                .font(.system(size: 18))
+                            Button(action: { selectedLanguage = "EN"
+                                LanguageService.shared.setLanguage("EN")}) {
+                                Text("EN")
+                                    .font(.custom("PlusJakartaSans-Bold", size: 18))
+                                    .foregroundColor(selectedLanguage == "EN" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
+                            }
+                        }
+                        .padding(.top, 56)
+                        .padding(.trailing, 20)
+                    }
+                    Spacer()
+                }
+            }
         }
         .onAppear {
             setupVideo()
