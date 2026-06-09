@@ -25,7 +25,6 @@ final class ARViewController: UIViewController {
     private var pinchGesture: UIPinchGestureRecognizer!
 
     // MARK: - Buttons
-    private var repositionButton: UIButton!
     private var nextModelButton:  UIButton!
 
     // MARK: - Lifecycle
@@ -111,17 +110,7 @@ final class ARViewController: UIViewController {
         nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
         view.addSubview(nextModelButton)
 
-        // Reposition — bottom left
-        repositionButton = UIButton(type: .system)
-        repositionButton.setTitle("⟳ Reposicionar", for: .normal)
-        repositionButton.backgroundColor    = UIColor.systemBlue.withAlphaComponent(0.85)
-        repositionButton.setTitleColor(.white, for: .normal)
-        repositionButton.titleLabel?.font   = .boldSystemFont(ofSize: 15)
-        repositionButton.layer.cornerRadius = 10
-        repositionButton.translatesAutoresizingMaskIntoConstraints = false
-        repositionButton.addTarget(self, action: #selector(repositionTapped), for: .touchUpInside)
-        repositionButton.isHidden = true
-        view.addSubview(repositionButton)
+    
 
         NSLayoutConstraint.activate([
             nextModelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
@@ -129,10 +118,7 @@ final class ARViewController: UIViewController {
             nextModelButton.widthAnchor.constraint(equalToConstant: 130),
             nextModelButton.heightAnchor.constraint(equalToConstant: 44),
 
-            repositionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            repositionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            repositionButton.widthAnchor.constraint(equalToConstant: 160),
-            repositionButton.heightAnchor.constraint(equalToConstant: 44),
+        
         ])
 
         updateNextModelButton()
@@ -175,7 +161,7 @@ final class ARViewController: UIViewController {
                     self.sceneManager.clearAll(session: self.sceneView.session)
                     self.hasPlacedModel  = false
                     self.currentPOIIndex = 0
-                    self.repositionButton.isHidden = true
+                   
                     self.updateNextModelButton()
                 default:
                     break
@@ -216,7 +202,7 @@ final class ARViewController: UIViewController {
         )
 
         hasPlacedModel            = true
-        repositionButton.isHidden = false
+    
         updateNextModelButton()
 
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
