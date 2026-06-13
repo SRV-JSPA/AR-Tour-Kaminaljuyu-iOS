@@ -1,10 +1,39 @@
 import SwiftUI
 
 struct ContentView: View {
+<<<<<<< HEAD
     @StateObject private var router = AppRouter.shared
     @State private var showInstructions = false
     @State private var showTerms = false
     @State private var isLoading = true
+=======
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            ARViewControllerWrapper()
+                .ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                Spacer()
+                MapOverlayView()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: UIScreen.main.bounds.height * 0.28)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(radius: 8)
+                    .padding(.horizontal, 12)
+                    .padding(.bottom, 24)
+            }
+        }
+        .onAppear {
+            GPSModuleInterface.shared.startTracking() // 👈 this was missing
+        }
+    }
+}
+// MARK: - MapOverlayView
+
+struct MapOverlayView: View {
+
+    @ObservedObject private var gps = GPSModuleInterface.shared
+>>>>>>> Andre
 
     var body: some View {
         if isLoading {

@@ -26,7 +26,11 @@ final class ARViewController: UIViewController {
     private var pinchGesture: UIPinchGestureRecognizer!
 
     // MARK: - Buttons
+<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
     private var nextModelButton: UIButton!
+=======
+    private var nextModelButton:  UIButton!
+>>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
 
     // MARK: - Lifecycle
 
@@ -110,6 +114,7 @@ final class ARViewController: UIViewController {
         nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
         view.addSubview(nextModelButton)
 
+<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
         // Info Button — top left, hidden until a model is placed
         infoButton = UIButton(type: .system)
         infoButton.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
@@ -124,6 +129,9 @@ final class ARViewController: UIViewController {
         infoButton.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
         infoButton.isHidden = true
         view.addSubview(infoButton)
+=======
+    
+>>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
 
         NSLayoutConstraint.activate([
             nextModelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
@@ -131,10 +139,14 @@ final class ARViewController: UIViewController {
             nextModelButton.widthAnchor.constraint(equalToConstant: 130),
             nextModelButton.heightAnchor.constraint(equalToConstant: 44),
 
+<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
             infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             infoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             infoButton.widthAnchor.constraint(equalToConstant: 44),
             infoButton.heightAnchor.constraint(equalToConstant: 44),
+=======
+        
+>>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
         ])
 
         updateNextModelButton()
@@ -176,7 +188,11 @@ final class ARViewController: UIViewController {
                     self.sceneManager.clearAll(session: self.sceneView.session)
                     self.hasPlacedModel  = false
                     self.currentPOIIndex = 0
+<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
                     self.infoButton.isHidden = true
+=======
+                   
+>>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
                     self.updateNextModelButton()
                 default:
                     break
@@ -216,8 +232,13 @@ final class ARViewController: UIViewController {
             in:              sceneView.session
         )
 
+<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
         hasPlacedModel = true
         infoButton.isHidden = false   // ← show info button once model is placed
+=======
+        hasPlacedModel            = true
+    
+>>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
         updateNextModelButton()
 
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
