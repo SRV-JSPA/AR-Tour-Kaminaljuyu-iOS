@@ -9,6 +9,7 @@ final class ARViewController: UIViewController {
     // MARK: - AR
     private var sceneView:    ARSCNView!
     private var sceneManager: ARSceneManager!
+    private var infoButton:   UIButton!
 
     // MARK: - Guide arrow (3-D flecha.obj, camera-parented)
     private var guideArrow: ARGuideArrowManager!
@@ -25,8 +26,7 @@ final class ARViewController: UIViewController {
     private var pinchGesture: UIPinchGestureRecognizer!
 
     // MARK: - Buttons
-    private var backButton: UIButton!
-    private var playButton: UIButton!
+    private var nextModelButton: UIButton!
 
     // MARK: - Lifecycle
 
@@ -75,6 +75,7 @@ final class ARViewController: UIViewController {
         view.addSubview(sceneView)
         sceneManager = ARSceneManager(sceneView: sceneView)
         sceneView.session.delegate = self
+
         guideArrow = ARGuideArrowManager(sceneView: sceneView)
     }
 
@@ -95,41 +96,48 @@ final class ARViewController: UIViewController {
     // MARK: - Setup: Buttons
 
     private func setupButtons() {
-        // Back button — top left
-        backButton = UIButton(type: .system)
-        backButton.setImage(UIImage(systemName: "arrow.uturn.backward"), for: .normal)
-        backButton.tintColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0)
-        backButton.backgroundColor = UIColor(red: 0.96, green: 0.90, blue: 0.83, alpha: 1.0)
-        backButton.layer.cornerRadius = 16
-        backButton.layer.borderWidth = 2
-        backButton.layer.borderColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0).cgColor
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
-        view.addSubview(backButton)
+        // Next Model — top right
+        nextModelButton = UIButton(type: .system)
+        nextModelButton.backgroundColor     = UIColor.systemIndigo.withAlphaComponent(0.90)
+        nextModelButton.setTitleColor(.white, for: .normal)
+        nextModelButton.titleLabel?.font    = .boldSystemFont(ofSize: 15)
+        nextModelButton.layer.cornerRadius  = 10
+        nextModelButton.layer.shadowColor   = UIColor.black.cgColor
+        nextModelButton.layer.shadowOpacity = 0.25
+        nextModelButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
+        nextModelButton.layer.shadowRadius  = 4
+        nextModelButton.translatesAutoresizingMaskIntoConstraints = false
+        nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
+        view.addSubview(nextModelButton)
 
-        // Play button — top right
-        playButton = UIButton(type: .system)
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        playButton.tintColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0)
-        playButton.backgroundColor = UIColor(red: 0.96, green: 0.90, blue: 0.83, alpha: 1.0)
-        playButton.layer.cornerRadius = 16
-        playButton.layer.borderWidth = 2
-        playButton.layer.borderColor = UIColor(red: 0.82, green: 0.36, blue: 0.20, alpha: 1.0).cgColor
-        playButton.translatesAutoresizingMaskIntoConstraints = false
-        playButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
-        view.addSubview(playButton)
+        // Info Button — top left, hidden until a model is placed
+        infoButton = UIButton(type: .system)
+        infoButton.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
+        infoButton.tintColor = .white
+        infoButton.backgroundColor = UIColor.systemOrange.withAlphaComponent(0.85)
+        infoButton.layer.cornerRadius  = 10
+        infoButton.layer.shadowColor   = UIColor.black.cgColor
+        infoButton.layer.shadowOpacity = 0.25
+        infoButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
+        infoButton.layer.shadowRadius  = 4
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        infoButton.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
+        infoButton.isHidden = true
+        view.addSubview(infoButton)
 
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            backButton.widthAnchor.constraint(equalToConstant: 56),
-            backButton.heightAnchor.constraint(equalToConstant: 56),
+            nextModelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            nextModelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            nextModelButton.widthAnchor.constraint(equalToConstant: 130),
+            nextModelButton.heightAnchor.constraint(equalToConstant: 44),
 
-            playButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            playButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            playButton.widthAnchor.constraint(equalToConstant: 56),
-            playButton.heightAnchor.constraint(equalToConstant: 56),
+            infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            infoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            infoButton.widthAnchor.constraint(equalToConstant: 44),
+            infoButton.heightAnchor.constraint(equalToConstant: 44),
         ])
+
+        updateNextModelButton()
     }
 
     // MARK: - AR Session
@@ -166,8 +174,10 @@ final class ARViewController: UIViewController {
                 switch state {
                 case .returning, .completed:
                     self.sceneManager.clearAll(session: self.sceneView.session)
-                    self.hasPlacedModel = false
+                    self.hasPlacedModel  = false
                     self.currentPOIIndex = 0
+                    self.infoButton.isHidden = true
+                    self.updateNextModelButton()
                 default:
                     break
                 }
@@ -175,13 +185,9 @@ final class ARViewController: UIViewController {
             .store(in: &cancellables)
     }
 
-    // MARK: - Button actions
+    // MARK: - Next Model
 
-    @objc private func backTapped() {
-        AppRouter.shared.navigateTo(.menu)
-    }
-
-    @objc private func playTapped() {
+    @objc private func nextModelTapped() {
         let pois = GPSModuleInterface.shared.allPOIs
         guard !pois.isEmpty else { return }
 
@@ -203,15 +209,113 @@ final class ARViewController: UIViewController {
         let poi = pois[currentPOIIndex]
 
         sceneManager.placeModel(
-            for: poi,
-            userLocation: userLocation,
-            userHeading: lastHeading,
+            for:             poi,
+            userLocation:    userLocation,
+            userHeading:     lastHeading,
             cameraTransform: frame.camera.transform,
-            in: sceneView.session
+            in:              sceneView.session
         )
 
         hasPlacedModel = true
+        infoButton.isHidden = false   // ← show info button once model is placed
+        updateNextModelButton()
+
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
+    }
+
+    // MARK: - Info
+
+    @objc private func infoTapped() {
+        let pois = GPSModuleInterface.shared.allPOIs
+        guard currentPOIIndex < pois.count else { return }
+        showPOIInfo(pois[currentPOIIndex])
+    }
+
+    private func showPOIInfo(_ poi: POILocation) {
+        let vc = UIViewController()
+        vc.view.backgroundColor = .systemBackground
+
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        vc.view.addSubview(scroll)
+
+        let stack = UIStackView()
+        stack.axis    = .vertical
+        stack.spacing = 16
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        scroll.addSubview(stack)
+
+        func makeLabel(_ text: String, font: UIFont, color: UIColor = .label) -> UILabel {
+            let l = UILabel()
+            l.text          = text
+            l.font          = font
+            l.textColor     = color
+            l.numberOfLines = 0
+            return l
+        }
+
+        // Title
+        stack.addArrangedSubview(makeLabel(poi.name, font: .boldSystemFont(ofSize: 22)))
+
+        // Description
+        if !poi.description.isEmpty {
+            stack.addArrangedSubview(makeLabel(poi.description,
+                                               font: .systemFont(ofSize: 16),
+                                               color: .secondaryLabel))
+        }
+
+        // Optional extra fields — add only if your POILocation has them
+        // Uncomment whichever fields exist on your model:
+        //
+        // if !poi.constructionPeriod.isEmpty {
+        //     stack.addArrangedSubview(makeLabel("Período: \(poi.constructionPeriod)",
+        //                                        font: .systemFont(ofSize: 15)))
+        // }
+        // if !poi.historicalInfo.isEmpty {
+        //     stack.addArrangedSubview(makeLabel(poi.historicalInfo,
+        //                                        font: .systemFont(ofSize: 15)))
+        // }
+        // if !poi.culturalSignificance.isEmpty {
+        //     stack.addArrangedSubview(makeLabel(poi.culturalSignificance,
+        //                                        font: .systemFont(ofSize: 15)))
+        // }
+
+        NSLayoutConstraint.activate([
+            scroll.topAnchor.constraint(equalTo: vc.view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            scroll.leadingAnchor.constraint(equalTo: vc.view.leadingAnchor, constant: 20),
+            scroll.trailingAnchor.constraint(equalTo: vc.view.trailingAnchor, constant: -20),
+            scroll.bottomAnchor.constraint(equalTo: vc.view.bottomAnchor, constant: -20),
+
+            stack.topAnchor.constraint(equalTo: scroll.topAnchor),
+            stack.leadingAnchor.constraint(equalTo: scroll.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: scroll.trailingAnchor),
+            stack.bottomAnchor.constraint(equalTo: scroll.bottomAnchor),
+            stack.widthAnchor.constraint(equalTo: scroll.widthAnchor),
+        ])
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents            = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 20
+        }
+
+        present(vc, animated: true)
+    }
+
+    // MARK: - Button state
+
+    private func updateNextModelButton() {
+        let pois = GPSModuleInterface.shared.allPOIs
+        if !hasPlacedModel {
+            nextModelButton.setTitle("▶ Ver Modelo", for: .normal)
+            nextModelButton.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.90)
+        } else if currentPOIIndex < pois.count - 1 {
+            nextModelButton.setTitle("Siguiente ›", for: .normal)
+            nextModelButton.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.85)
+        } else {
+            nextModelButton.setTitle("✓ Último", for: .normal)
+            nextModelButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.75)
+        }
     }
 
     // MARK: - Gesture handlers
@@ -261,14 +365,7 @@ extension ARViewController: ARSessionDelegate {
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guideArrow.attachToCamera()
-        
-        if !hasPlacedModel,
-           let userLocation = lastUserLocation,
-           let firstPOI = GPSModuleInterface.shared.allPOIs.first {
-            guideArrow.updateWithGPS(userLocation: userLocation, targetLocation: firstPOI.coordinate)
-        } else {
-            guideArrow.update(modelWorldPosition: sceneManager.activeModelWorldPosition)
-        }
+        guideArrow.update(modelWorldPosition: sceneManager.activeModelWorldPosition)
 
         let t = frame.timestamp
         guard Int(t) % 5 == 0, t.truncatingRemainder(dividingBy: 1) < 0.05 else { return }
