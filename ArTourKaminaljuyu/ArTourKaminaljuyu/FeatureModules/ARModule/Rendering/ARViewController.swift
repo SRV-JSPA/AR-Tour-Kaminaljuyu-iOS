@@ -1,7 +1,7 @@
 import UIKit
 import ARKit
 import SceneKit
-import Combine
+import Combine  
 import CoreLocation
 
 final class ARViewController: UIViewController {
@@ -26,11 +26,7 @@ final class ARViewController: UIViewController {
     private var pinchGesture: UIPinchGestureRecognizer!
 
     // MARK: - Buttons
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
-    private var nextModelButton: UIButton!
-=======
     private var nextModelButton:  UIButton!
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
 
     // MARK: - Lifecycle
 
@@ -84,6 +80,11 @@ final class ARViewController: UIViewController {
     }
 
     // MARK: - Setup: Gestures
+    
+    @objc private func backTapped() {
+        // pop back to menu
+        dismiss(animated: true)
+    }
 
     private func setupGestures() {
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -98,60 +99,87 @@ final class ARViewController: UIViewController {
     }
 
     // MARK: - Setup: Buttons
+    
+    private func makeCard() -> UIView {
+        let v = UIView()
+        v.backgroundColor         = UIColor(red: 0.96, green: 0.92, blue: 0.84, alpha: 0.95) // warm cream
+        v.layer.cornerRadius      = 20
+        v.layer.shadowColor       = UIColor.black.cgColor
+        v.layer.shadowOpacity     = 0.15
+        v.layer.shadowOffset      = CGSize(width: 0, height: 3)
+        v.layer.shadowRadius      = 6
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }
+
+    private func makeCircleButton(icon: String) -> UIButton {
+        let btn = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .medium)
+        btn.setImage(UIImage(systemName: icon, withConfiguration: config), for: .normal)
+        btn.tintColor             = UIColor(red: 0.75, green: 0.38, blue: 0.10, alpha: 1) // warm orange-brown
+        btn.backgroundColor       = UIColor(red: 0.91, green: 0.76, blue: 0.58, alpha: 1) // light tan
+        btn.layer.cornerRadius    = 28
+        btn.layer.borderWidth     = 2.5
+        btn.layer.borderColor     = UIColor(red: 0.75, green: 0.38, blue: 0.10, alpha: 0.6).cgColor
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }
 
     private func setupButtons() {
-        // Next Model — top right
-        nextModelButton = UIButton(type: .system)
-        nextModelButton.backgroundColor     = UIColor.systemIndigo.withAlphaComponent(0.90)
-        nextModelButton.setTitleColor(.white, for: .normal)
-        nextModelButton.titleLabel?.font    = .boldSystemFont(ofSize: 15)
-        nextModelButton.layer.cornerRadius  = 10
-        nextModelButton.layer.shadowColor   = UIColor.black.cgColor
-        nextModelButton.layer.shadowOpacity = 0.25
-        nextModelButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
-        nextModelButton.layer.shadowRadius  = 4
-        nextModelButton.translatesAutoresizingMaskIntoConstraints = false
-        nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
-        view.addSubview(nextModelButton)
-
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
-        // Info Button — top left, hidden until a model is placed
-        infoButton = UIButton(type: .system)
-        infoButton.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
-        infoButton.tintColor = .white
-        infoButton.backgroundColor = UIColor.systemOrange.withAlphaComponent(0.85)
-        infoButton.layer.cornerRadius  = 10
-        infoButton.layer.shadowColor   = UIColor.black.cgColor
-        infoButton.layer.shadowOpacity = 0.25
-        infoButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
-        infoButton.layer.shadowRadius  = 4
-        infoButton.translatesAutoresizingMaskIntoConstraints = false
-        infoButton.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
-        infoButton.isHidden = true
-        view.addSubview(infoButton)
-=======
-    
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
+        // ── Left card: Back button (single) ─────────────────────────
+        let backCard = makeCard()
+        let backBtn  = makeCircleButton(icon: "arrow.uturn.left")
+        backBtn.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+        backCard.addSubview(backBtn)
+        view.addSubview(backCard)
 
         NSLayoutConstraint.activate([
-            nextModelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            nextModelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            nextModelButton.widthAnchor.constraint(equalToConstant: 130),
-            nextModelButton.heightAnchor.constraint(equalToConstant: 44),
+            backBtn.centerXAnchor.constraint(equalTo: backCard.centerXAnchor),
+            backBtn.centerYAnchor.constraint(equalTo: backCard.centerYAnchor),
+            backBtn.widthAnchor.constraint(equalToConstant: 56),
+            backBtn.heightAnchor.constraint(equalToConstant: 56),
 
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
-            infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            infoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            infoButton.widthAnchor.constraint(equalToConstant: 44),
-            infoButton.heightAnchor.constraint(equalToConstant: 44),
-=======
-        
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
+            backCard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            backCard.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            backCard.widthAnchor.constraint(equalToConstant: 80),
+            backCard.heightAnchor.constraint(equalToConstant: 80),
+        ])
+
+        // ── Right card: Info + Next stacked ─────────────────────────
+        let rightCard = makeCard()
+        infoButton    = makeCircleButton(icon: "info")
+        nextModelButton = makeCircleButton(icon: "forward.end.fill")
+        nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
+        infoButton.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
+        infoButton.isHidden = true
+
+        let stack = UIStackView(arrangedSubviews: [infoButton, nextModelButton])
+        stack.axis         = .vertical
+        stack.spacing      = 12
+        stack.alignment    = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        rightCard.addSubview(stack)
+        view.addSubview(rightCard)
+
+        NSLayoutConstraint.activate([
+            infoButton.widthAnchor.constraint(equalToConstant: 56),
+            infoButton.heightAnchor.constraint(equalToConstant: 56),
+            nextModelButton.widthAnchor.constraint(equalToConstant: 56),
+            nextModelButton.heightAnchor.constraint(equalToConstant: 56),
+
+            stack.centerXAnchor.constraint(equalTo: rightCard.centerXAnchor),
+            stack.centerYAnchor.constraint(equalTo: rightCard.centerYAnchor),
+
+            rightCard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            rightCard.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            rightCard.widthAnchor.constraint(equalToConstant: 80),
+            rightCard.heightAnchor.constraint(equalToConstant: 148),
         ])
 
         updateNextModelButton()
     }
-
+    
+    
     // MARK: - AR Session
 
     private func startARSession() {
@@ -188,11 +216,7 @@ final class ARViewController: UIViewController {
                     self.sceneManager.clearAll(session: self.sceneView.session)
                     self.hasPlacedModel  = false
                     self.currentPOIIndex = 0
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
                     self.infoButton.isHidden = true
-=======
-                   
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
                     self.updateNextModelButton()
                 default:
                     break
@@ -232,13 +256,8 @@ final class ARViewController: UIViewController {
             in:              sceneView.session
         )
 
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift
         hasPlacedModel = true
         infoButton.isHidden = false   // ← show info button once model is placed
-=======
-        hasPlacedModel            = true
-    
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARViewController.swift
         updateNextModelButton()
 
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
@@ -327,15 +346,13 @@ final class ARViewController: UIViewController {
 
     private func updateNextModelButton() {
         let pois = GPSModuleInterface.shared.allPOIs
+        let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .medium)
         if !hasPlacedModel {
-            nextModelButton.setTitle("▶ Ver Modelo", for: .normal)
-            nextModelButton.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.90)
+            nextModelButton.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         } else if currentPOIIndex < pois.count - 1 {
-            nextModelButton.setTitle("Siguiente ›", for: .normal)
-            nextModelButton.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.85)
+            nextModelButton.setImage(UIImage(systemName: "forward.end.fill", withConfiguration: config), for: .normal)
         } else {
-            nextModelButton.setTitle("✓ Último", for: .normal)
-            nextModelButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.75)
+            nextModelButton.setImage(UIImage(systemName: "checkmark", withConfiguration: config), for: .normal)
         }
     }
 

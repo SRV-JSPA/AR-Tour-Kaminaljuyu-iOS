@@ -7,13 +7,8 @@ final class ARGuideArrowManager {
 
     // MARK: - Config
     private let depth: Float = 0.5
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift
-    private let heightOffset: Float = 0.30
+    private let heightOffset: Float = 0.08
     private let modelScale: Float = 0.08
-=======
-    private let heightOffset: Float = 0.20
-    private let modelScale: Float = 0.05
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARGuideArrowManager.swift
     private let modelName = "flecha"
 
     // MARK: - State
@@ -104,11 +99,8 @@ final class ARGuideArrowManager {
         print("[GuideArrow] arrow node built, waiting for camera node…")
     }
 
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift
-=======
     // MARK: - Attach to Camera
 
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARGuideArrowManager.swift
     func attachToCamera() {
         guard let arrow = arrowNode,
               let pov   = sceneView?.pointOfView else {
@@ -119,12 +111,8 @@ final class ARGuideArrowManager {
         print("[GuideArrow] arrow attached to camera (pov) node")
     }
 
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift
-    // MARK: - Update con modelo AR
-=======
     // MARK: - Update
 
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARGuideArrowManager.swift
     func update(modelWorldPosition: SIMD3<Float>?) {
         let hasPOI = modelWorldPosition != nil
 
@@ -137,30 +125,16 @@ final class ARGuideArrowManager {
               let arrow  = arrowNode,
               let pov    = sceneView?.pointOfView else { return }
 
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift
-        let camPos = pov.simdWorldPosition
-=======
         let camPos     = pov.simdWorldPosition
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARGuideArrowManager.swift
         let camFlat    = SIMD3<Float>(camPos.x, 0, camPos.z)
         let targetFlat = SIMD3<Float>(target.x, 0, target.z)
         let diff       = targetFlat - camFlat
         guard simd_length(diff) > 0.01 else { return }
 
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift
-        let diff = targetFlat - camFlat
-        guard simd_length(diff) > 0.01 else { return }
-
-        let worldAngle = -atan2(diff.x, -diff.z)
-        let worldQ    = simd_quatf(angle: worldAngle, axis: SIMD3<Float>(0, 1, 0))
-        let camWorldQ = simd_quatf(pov.simdWorldTransform)
-        let localQ    = camWorldQ.inverse * worldQ
-=======
         let worldAngle = -atan2(diff.x, -diff.z)
         let worldQ     = simd_quatf(angle: worldAngle, axis: SIMD3<Float>(0, 1, 0))
         let camWorldQ  = simd_quatf(pov.simdWorldTransform)
         let localQ     = camWorldQ.inverse * worldQ
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARGuideArrowManager.swift
 
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.12
@@ -207,12 +181,7 @@ final class ARGuideArrowManager {
         arrowNode?.isHidden = true
     }
 
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift
     // MARK: - Bundle resolution
-=======
-    // MARK: - OBJ Resolver
-
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/ARModule/ARGuideArrowManager.swift
     private func resolveOBJ() -> URL? {
         if let url = Bundle.main.url(forResource: modelName, withExtension: "obj") {
             return url

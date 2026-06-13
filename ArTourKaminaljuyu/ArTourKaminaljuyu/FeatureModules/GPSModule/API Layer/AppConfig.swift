@@ -11,14 +11,9 @@ enum AppConfig {
     static let visibilityRadiusMeters: Double = 100.0
 
     // MARK: - Coordenada de inicio del tour
-<<<<<<< HEAD:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift
-    static let tourStartLatitude: Double  = 14.6047420
-    static let tourStartLongitude: Double =  -90.4894056
-    
-=======
+
     static let tourStartLatitude: Double  = 14.632698689382275
     static let tourStartLongitude: Double = -90.46271365264592
->>>>>>> Andre:ArTourKaminaljuyu/ArTourKaminaljuyu/GPSModule/API/AppConfig.swift
     
     
     // MARK: - Calidad del GPS
