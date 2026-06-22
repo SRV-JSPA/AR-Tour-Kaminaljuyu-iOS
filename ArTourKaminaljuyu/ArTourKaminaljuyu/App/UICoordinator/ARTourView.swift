@@ -5,6 +5,13 @@
 //  Created by Alejandra  Salvatierra on 16/05/26.
 //
 
+//
+//  ARTourView.swift
+//  ArTourKaminaljuyu
+//
+//  Created by Alejandra  Salvatierra on 16/05/26.
+//
+
 import SwiftUI
 import Combine
 import CoreLocation
@@ -15,6 +22,9 @@ struct ARTourView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             ARViewControllerWrapper()
+                .ignoresSafeArea()
+
+            VirtualGuideView()
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {

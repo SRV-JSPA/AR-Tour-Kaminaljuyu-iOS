@@ -54,10 +54,14 @@ final class ProximityService: ObservableObject {
         let nearest = pois
             .map { poi -> (POILocation, Double) in
                 let distance = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
+                print("[Proximity] distancia a \(poi.id): \(distance)m")
                 return (poi, distance)
             }
             .filter { _, distance in distance <= AppConfig.visibilityRadiusMeters }
             .min(by: { $0.1 < $1.1 })
+        
+        print("[Proximity] userLocation: \(userLocation.latitude), \(userLocation.longitude)")
+        print("[Proximity] POIs count: \(pois.count)")
 
         guard let (poi, distance) = nearest else {
             DispatchQueue.main.async { self.nearestPOI = nil }
@@ -76,6 +80,8 @@ final class ProximityService: ObservableObject {
         )
 
         DispatchQueue.main.async { self.nearestPOI = result }
+        
+        print("[Proximity] level para \(poi.id): \(level), lastArrived: \(String(describing: lastArrivedPOIId))")
 
         if level == .arrived && lastArrivedPOIId != poi.id {
             lastArrivedPOIId = poi.id
