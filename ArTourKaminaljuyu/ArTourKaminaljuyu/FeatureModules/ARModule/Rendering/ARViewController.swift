@@ -146,34 +146,53 @@ final class ARViewController: UIViewController {
         ])
 
         // ── Right card: Info + Next stacked ─────────────────────────
+
         let rightCard = makeCard()
-        infoButton    = makeCircleButton(icon: "info")
-        nextModelButton = makeCircleButton(icon: "forward.end.fill")
-        nextModelButton.addTarget(self, action: #selector(nextModelTapped), for: .touchUpInside)
-        infoButton.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
+
+        infoButton = makeCircleButton(icon: "info")
+        nextModelButton = makeCircleButton(icon: "play.fill")
+
         infoButton.isHidden = true
 
-        let stack = UIStackView(arrangedSubviews: [infoButton, nextModelButton])
-        stack.axis         = .vertical
-        stack.spacing      = 12
-        stack.alignment    = .center
+        nextModelButton.addTarget(self,
+                                  action: #selector(nextModelTapped),
+                                  for: .touchUpInside)
+
+        infoButton.addTarget(self,
+                             action: #selector(infoTapped),
+                             for: .touchUpInside)
+
+        let stack = UIStackView(arrangedSubviews: [
+            infoButton,
+            nextModelButton
+        ])
+
+        stack.axis = .vertical
+        stack.spacing = 12
+        stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
+
         rightCard.addSubview(stack)
         view.addSubview(rightCard)
 
         NSLayoutConstraint.activate([
+
+            // button sizes
             infoButton.widthAnchor.constraint(equalToConstant: 56),
             infoButton.heightAnchor.constraint(equalToConstant: 56),
+
             nextModelButton.widthAnchor.constraint(equalToConstant: 56),
             nextModelButton.heightAnchor.constraint(equalToConstant: 56),
 
-            stack.centerXAnchor.constraint(equalTo: rightCard.centerXAnchor),
-            stack.centerYAnchor.constraint(equalTo: rightCard.centerYAnchor),
+            // stack padding inside card
+            stack.topAnchor.constraint(equalTo: rightCard.topAnchor, constant: 12),
+            stack.bottomAnchor.constraint(equalTo: rightCard.bottomAnchor, constant: -12),
+            stack.leadingAnchor.constraint(equalTo: rightCard.leadingAnchor, constant: 12),
+            stack.trailingAnchor.constraint(equalTo: rightCard.trailingAnchor, constant: -12),
 
+            // card position
             rightCard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            rightCard.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            rightCard.widthAnchor.constraint(equalToConstant: 80),
-            rightCard.heightAnchor.constraint(equalToConstant: 148),
+            rightCard.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12)
         ])
 
         updateNextModelButton()
