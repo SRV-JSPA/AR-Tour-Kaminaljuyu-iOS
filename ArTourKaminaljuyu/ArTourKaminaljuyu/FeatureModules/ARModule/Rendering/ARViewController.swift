@@ -257,10 +257,14 @@ final class ARViewController: UIViewController {
             print("[AR] no AR frame yet"); return
         }
 
+        let isFirstTap = !hasPlacedModel
+
         if hasPlacedModel {
             let next = currentPOIIndex + 1
-            guard next < pois.count else {
-                print("[AR] already at last POI"); return
+            if next >= pois.count {
+                print("[AR] checkmark en último POI — disparando Despedida")
+                EventBus.shared.publish(.tourEndRequested)
+                return
             }
             currentPOIIndex = next
         }
@@ -280,6 +284,12 @@ final class ARViewController: UIViewController {
         updateNextModelButton()
 
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
+
+        if isFirstTap {
+            EventBus.shared.publish(.tourStarted)
+        } else {
+            EventBus.shared.publish(.nextPOIRequested)
+        }
     }
 
     // MARK: - Info

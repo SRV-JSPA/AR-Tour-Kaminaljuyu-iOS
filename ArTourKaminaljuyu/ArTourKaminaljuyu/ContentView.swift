@@ -1,4 +1,60 @@
 import SwiftUI
+import Combine
+
+struct GuidedTourOverlay: View {
+    @StateObject private var guideVM = VirtualGuideViewModel()
+    @State private var cancellables = Set<AnyCancellable>()
+    var onTourEnded: () -> Void = {}
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            Group {
+                if guideVM.player != nil && guideVM.showsVideo {
+                    VirtualGuideView(viewModel: guideVM)
+                } else {
+                    MapOverlayView()
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: UIScreen.main.bounds.height * 0.28)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(radius: 8)
+            .overlay {
+                if guideVM.player != nil {
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture { guideVM.toggleView() }
+                }
+            }
+            .overlay(alignment: .topTrailing) {
+                if guideVM.player != nil && !guideVM.transcriptLines.isEmpty {
+                    TranscriptToggleButton(viewModel: guideVM)
+                        .padding(10)
+                }
+            }
+            .padding(.horizontal, 12)
+            .padding(.bottom, 24)
+        }
+        .onAppear {
+            guideVM.start()
+            guideVM.playIntroSequence()
+
+            EventBus.shared.publisher
+                .receive(on: DispatchQueue.main)
+                .sink { event in
+                    if case .tourEndCompleted = event {
+                        onTourEnded()
+                    }
+                }
+                .store(in: &cancellables)
+        }
+        .onDisappear {
+            guideVM.stop()
+            cancellables.removeAll()
+        }
+    }
+}
 
 struct ContentView: View {
     @StateObject private var router = AppRouter.shared
@@ -46,21 +102,18 @@ struct ContentView: View {
                         onStartTour: {
                             GPSModuleInterface.shared.startTour()
                             router.navigateTo(.guidedTour)
+                        },
+                        onFinalize: {
+                            router.navigateTo(.guidedTour)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                EventBus.shared.publish(.tourEndRequested)
+                            }
                         }
                     )
                     .toolbar(.hidden, for: .navigationBar)
 
                 case .guidedTour:
-                    VStack(spacing: 0) {
-                        Spacer()
-                        MapOverlayView()
-                            .frame(maxWidth: .infinity)
-                            .frame(height: UIScreen.main.bounds.height * 0.28)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .shadow(radius: 8)
-                            .padding(.horizontal, 12)
-                            .padding(.bottom, 24)
-                    }
+                    GuidedTourOverlay(onTourEnded: { router.navigateTo(.menu) })
                 }
             }
             .onAppear {

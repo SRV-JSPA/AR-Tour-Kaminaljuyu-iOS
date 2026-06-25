@@ -28,26 +28,27 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     // MARK: - Constantes de configuración
 
     private let accuracyThresholdMeters: Double = 5.0
-    
+    private let maxAcceptableHorizontalAccuracy: Double = 15.0
+
     // MARK: - Inicialización
-    
+
     override init() {
         super.init()
-        
-        locationManager.delegate = self
-        
 
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
- 
-        locationManager.distanceFilter = 1.0
-        
+        locationManager.delegate = self
+
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+
+        locationManager.distanceFilter = kCLDistanceFilterNone
+
+        locationManager.activityType = .fitness
+
+        locationManager.pausesLocationUpdatesAutomatically = false
 
         locationManager.showsBackgroundLocationIndicator = true
-        
 
         locationManager.allowsBackgroundLocationUpdates = false
-        
+
         permissionsHelper.onAuthorizationChanged = { [weak self] status in
             self?.handleAuthorizationChange(status)
         }
@@ -132,13 +133,26 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latest = locations.last else { return }
-        
 
-        guard latest.horizontalAccuracy > 0,
-              latest.horizontalAccuracy < 50 else { return }
-        
+        guard latest.horizontalAccuracy > 0 else {
+            print("[LocationService] descartado: precisión inválida (\(latest.horizontalAccuracy)m)")
+            return
+        }
+
+        guard latest.horizontalAccuracy <= maxAcceptableHorizontalAccuracy else {
+            print("[LocationService] descartado: precisión \(Int(latest.horizontalAccuracy))m > máximo \(Int(maxAcceptableHorizontalAccuracy))m")
+            return
+        }
+
+        let age = -latest.timestamp.timeIntervalSinceNow
+        if age > 5.0 {
+            print("[LocationService] descartado: lectura antigua (\(Int(age))s)")
+            return
+        }
+
+        print("[LocationService] update precisión:\(Int(latest.horizontalAccuracy))m lat:\(latest.coordinate.latitude) lng:\(latest.coordinate.longitude)")
+
         currentLocation = latest
-
         isLocationReady = latest.horizontalAccuracy <= accuracyThresholdMeters
     }
     

@@ -10,6 +10,7 @@ import SwiftUI
 struct TourControlsView: View {
     var onBack: () -> Void = {}
     var onStartTour: () -> Void = {}
+    var onFinalize: () -> Void = {}
     
     var body: some View {
         ZStack {
@@ -48,7 +49,7 @@ struct TourControlsView: View {
                 TourControlButton(icon: "info.circle", title: "Ver información del POI cercano", action: {})
                 TourControlButton(icon: "play.fill", title: "Iniciar recorrido guiado automático", action: onStartTour)
                 TourControlButton(icon: "forward.end.fill", title: "Avanzar al siguiente punto de interés", action: {})
-                TourControlButton(icon: "checkmark", title: "Finalizar el recorrido guiado", action: onBack)
+                TourControlButton(icon: "checkmark", title: "Finalizar el recorrido guiado", action: onFinalize)
             }
             .padding()
         }
