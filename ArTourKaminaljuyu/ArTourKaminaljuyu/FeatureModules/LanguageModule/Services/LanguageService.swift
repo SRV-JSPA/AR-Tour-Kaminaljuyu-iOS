@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import Combine
 
-final class LanguageService {
+final class LanguageService: ObservableObject {
     
     static let shared = LanguageService()
     private init() {}
     
-    private(set) var currentLanguage: String = "ES"
+    @Published private(set) var currentLanguage: String = "ES"
     
     func setLanguage(_ language: String) {
         currentLanguage = language
@@ -25,5 +26,9 @@ final class LanguageService {
         let path = "LanguageModule/Resources/\(folder)/\(poiId)"
         print("[LanguageModule] ruta de video para \(poiId): \(path)")
         return path
+    }
+    
+    func string(_ key: String) -> String {
+        LocalizedStrings.get(key)
     }
 }

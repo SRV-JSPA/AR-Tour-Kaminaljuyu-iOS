@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TermsView: View {
     var onBack: () -> Void = {}
+    @ObservedObject private var languageService = LanguageService.shared
 
     var body: some View {
         GeometryReader { geo in
@@ -16,7 +17,6 @@ struct TermsView: View {
                 Color(hex: "#2A5235").ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    // Área superior con personaje — fija
                     ZStack {
                         Color(hex: "#2A5235")
                         Image("maya")
@@ -27,11 +27,10 @@ struct TermsView: View {
                     }
                     .frame(height: geo.size.height * 0.38)
 
-                    // Panel blanco con scroll
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 14) {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Términos y Condiciones")
+                                Text(languageService.string("terms_title"))
                                     .font(.custom("PlusJakartaSans-Bold", size: 24))
                                     .foregroundColor(Color(hex: "#2D2D2D"))
                                 Rectangle()
@@ -40,29 +39,29 @@ struct TermsView: View {
                             }
                             .padding(.bottom, 4)
 
-                            Text("Bienvenido a la aplicación de recorrido virtual del Parque Arqueológico Kaminaljuyú. Al utilizar esta aplicación, usted acepta los siguientes términos:")
+                            Text(languageService.string("terms_intro"))
                                 .font(.custom("PlusJakartaSans-Medium", size: 15))
                                 .foregroundColor(Color(hex: "#2D2D2D"))
                                 .fixedSize(horizontal: false, vertical: true)
 
-                            termItem("Esta aplicación tiene como propósito ofrecer una experiencia educativa e interactiva basada en información histórica, arqueológica y cultural disponible hasta la fecha de su desarrollo.")
-                            termItem("El contenido visual y textual ha sido elaborado a partir de investigaciones académicas, registros históricos y reconstrucciones interpretativas.")
-                            termItem("Debido a limitaciones inherentes a la investigación arqueológica, algunas representaciones de estructuras, objetos y paisajes pueden no reflejar con total exactitud las condiciones originales del sitio en la antigüedad.")
-                            termItem("Parte de la información presentada puede estar sujeta a cambios a medida que se desarrollen nuevas investigaciones arqueológicas o actualizaciones académicas.")
-                            termItem("Esta aplicación no sustituye una visita física ni la asesoría de profesionales en arqueología o historia.")
+                            termItem(languageService.string("term_1"))
+                            termItem(languageService.string("term_2"))
+                            termItem(languageService.string("term_3"))
+                            termItem(languageService.string("term_4"))
+                            termItem(languageService.string("term_5"))
 
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("Descargo de responsabilidad:")
+                                Text(languageService.string("terms_disclaimer_title"))
                                     .font(.custom("PlusJakartaSans-Bold", size: 15))
                                     .foregroundColor(Color(hex: "#2D2D2D"))
-                                Text("Aunque se ha procurado la mayor precisión posible, la representación de ciertas estructuras, escenarios y detalles visuales puede contener elementos hipotéticos o interpretativos debido a la falta de evidencia completa o alteraciones ocurridas a lo largo del tiempo.")
+                                Text(languageService.string("terms_disclaimer_body"))
                                     .font(.custom("PlusJakartaSans-Medium", size: 15))
                                     .foregroundColor(Color(hex: "#2D2D2D"))
                                     .fixedSize(horizontal: false, vertical: true)
                             }
                             .padding(.top, 4)
 
-                            Text("Al utilizar esta aplicación, usted reconoce y acepta estas condiciones.")
+                            Text(languageService.string("terms_footer"))
                                 .font(.custom("PlusJakartaSans-Medium", size: 15))
                                 .foregroundColor(Color(hex: "#2D2D2D"))
                                 .fixedSize(horizontal: false, vertical: true)
@@ -77,7 +76,6 @@ struct TermsView: View {
                 }
                 .ignoresSafeArea(edges: .bottom)
 
-                // Botón regresar
                 VStack {
                     HStack {
                         Button(action: onBack) {

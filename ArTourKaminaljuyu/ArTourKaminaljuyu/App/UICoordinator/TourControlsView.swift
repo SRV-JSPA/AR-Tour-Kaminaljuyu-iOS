@@ -11,6 +11,7 @@ struct TourControlsView: View {
     var onBack: () -> Void = {}
     var onStartTour: () -> Void = {}
     var onFinalize: () -> Void = {}
+    @ObservedObject private var languageService = LanguageService.shared
     
     var body: some View {
         ZStack {
@@ -18,16 +19,15 @@ struct TourControlsView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 12) {
-                // Header
                 HStack {
                     Image(systemName: "gamecontroller.fill")
                         .foregroundColor(.white)
                         .font(.title2)
                     VStack(alignment: .leading) {
-                        Text("Controles del Tour AR")
+                        Text(languageService.string("tour_controls_title"))
                             .font(.custom("PlusJakartaSans-Bold", size: 18))
                             .foregroundColor(.white)
-                        Text("Toca cualquier lugar para continuar")
+                        Text(languageService.string("tour_controls_subtitle"))
                             .font(.custom("PlusJakartaSans-Regular", size: 13))
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -44,12 +44,11 @@ struct TourControlsView: View {
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(16)
                 
-                // Botones
-                TourControlButton(icon: "arrow.uturn.backward", title: "Regresar al menú principal", action: onBack)
-                TourControlButton(icon: "info.circle", title: "Ver información del POI cercano", action: {})
-                TourControlButton(icon: "play.fill", title: "Iniciar recorrido guiado automático", action: onStartTour)
-                TourControlButton(icon: "forward.end.fill", title: "Avanzar al siguiente punto de interés", action: {})
-                TourControlButton(icon: "checkmark", title: "Finalizar el recorrido guiado", action: onFinalize)
+                TourControlButton(icon: "arrow.uturn.backward", title: languageService.string("control_back"), action: onBack)
+                TourControlButton(icon: "info.circle", title: languageService.string("control_info"), action: {})
+                TourControlButton(icon: "play.fill", title: languageService.string("control_start"), action: onStartTour)
+                TourControlButton(icon: "forward.end.fill", title: languageService.string("control_next"), action: {})
+                TourControlButton(icon: "checkmark", title: languageService.string("control_finish"), action: onFinalize)
             }
             .padding()
         }

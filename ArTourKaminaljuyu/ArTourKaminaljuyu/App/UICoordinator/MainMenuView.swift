@@ -36,7 +36,8 @@ struct MainMenuView: View {
 
     @State private var player: AVPlayer?
     @State private var bienvenidaPlayer: AVPlayer?
-    @State private var selectedLanguage: String = "ES"
+    @State private var selectedLanguage: String = LanguageService.shared.currentLanguage
+    @ObservedObject private var languageService = LanguageService.shared
 
     var body: some View {
         GeometryReader { geo in
@@ -60,16 +61,24 @@ struct MainMenuView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Spacer().frame(height: geo.size.height * 0.13)
 
-                        Text("Bienvenidos al\nParque Arqueológico")
+                        Text(languageService.string("welcome_line1"))
                             .font(.custom("PlusJakartaSans-Bold", size: 22))
                             .foregroundColor(Color(hex: "#2D2D2D"))
                             .lineSpacing(2)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.bottom, 2)
 
-                        Text("Kaminaljuyú")
+                        Text(languageService.string("app_title"))
                             .font(.custom("PlusJakartaSans-Bold", size: 32))
                             .foregroundColor(Color(hex: "#D15B33"))
+
+                        let line3 = languageService.string("welcome_line3")
+                        if !line3.isEmpty {
+                            Text(line3)
+                                .font(.custom("PlusJakartaSans-Bold", size: 22))
+                                .foregroundColor(Color(hex: "#2D2D2D"))
+                                .padding(.bottom, 2)
+                        }
 
                         Rectangle()
                             .fill(Color(hex: "#E6BA62"))
@@ -79,7 +88,7 @@ struct MainMenuView: View {
 
                         MenuCardView(
                             icon: AnyView(GuidedTourIcon(size: 28)),
-                            title: "Tour Guiado",
+                            title: languageService.string("guided_tour"),
                             gradientStart: Color(hex: "#E8C4A8"),
                             gradientEnd: Color(hex: "#E8C4A8"),
                             strokeColor: Color(hex: "#C4714A"),
@@ -89,7 +98,7 @@ struct MainMenuView: View {
 
                         MenuCardView(
                             icon: AnyView(FreeTourIcon(size: 28)),
-                            title: "Tour Libre",
+                            title: languageService.string("free_tour"),
                             gradientStart: Color(hex: "#E6BA62"),
                             gradientEnd: Color(hex: "#E6BA62"),
                             strokeColor: Color(hex: "#C4714A"),
@@ -100,7 +109,7 @@ struct MainMenuView: View {
                         HStack(spacing: 10) {
                             MenuSquareCardView(
                                 icon: AnyView(InstructionsIcon(size: 28)),
-                                title: "Instrucciones\nde Uso",
+                                title: languageService.string("instructions"),
                                 gradientStart: Color(hex: "#E5E5C8"),
                                 gradientEnd: Color(hex: "#E5E5C8"),
                                 strokeColor: Color(hex: "#E6BA62"),
@@ -111,7 +120,7 @@ struct MainMenuView: View {
 
                             MenuSquareCardView(
                                 icon: AnyView(TermsIcon(size: 28)),
-                                title: "Términos y\nCondiciones",
+                                title: languageService.string("terms"),
                                 gradientStart: Color(hex: "#E5E5C8"),
                                 gradientEnd: Color(hex: "#E5E5C8"),
                                 strokeColor: Color(hex: "#E6BA62"),

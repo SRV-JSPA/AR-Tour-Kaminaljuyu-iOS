@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InstructionsView: View {
     var onBack: () -> Void = {}
+    @ObservedObject private var languageService = LanguageService.shared
 
     var body: some View {
         GeometryReader { geo in
@@ -16,7 +17,6 @@ struct InstructionsView: View {
                 Color(hex: "#4A9B8E").ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    // Área superior con personaje — fija
                     ZStack {
                         Color(hex: "#4A9B8E")
                         Image("maya")
@@ -27,11 +27,10 @@ struct InstructionsView: View {
                     }
                     .frame(height: geo.size.height * 0.38)
 
-                    // Panel blanco con scroll
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 16) {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Instrucciones de Uso")
+                                Text(languageService.string("instructions_title"))
                                     .font(.custom("PlusJakartaSans-Bold", size: 26))
                                     .foregroundColor(Color(hex: "#2D2D2D"))
                                 Rectangle()
@@ -40,13 +39,13 @@ struct InstructionsView: View {
                             }
                             .padding(.bottom, 4)
 
-                            instructionItem(number: "1", text: "Selecciona 'Tour Guiado' o 'Tour Libre' desde el menú principal.")
-                            instructionItem(number: "2", text: "Si eliges 'Tour Guiado', sigue la ruta recomendada para una mejor experiencia.")
-                            instructionItem(number: "3", text: "Apunta tu dispositivo hacia los puntos de interés para activar las escenas de realidad aumentada.")
-                            instructionItem(number: "4", text: "Utiliza el botón de información para conocer detalles históricos de cada estructura.")
-                            instructionItem(number: "5", text: "En cualquier momento, puedes consultar las 'Instrucciones de Uso' o los 'Términos y Condiciones' desde el menú principal.")
+                            instructionItem(number: "1", text: languageService.string("instruction_1"))
+                            instructionItem(number: "2", text: languageService.string("instruction_2"))
+                            instructionItem(number: "3", text: languageService.string("instruction_3"))
+                            instructionItem(number: "4", text: languageService.string("instruction_4"))
+                            instructionItem(number: "5", text: languageService.string("instruction_5"))
 
-                            Text("¡Disfruta tu recorrido por Kaminaljuyú!")
+                            Text(languageService.string("instructions_footer"))
                                 .font(.custom("PlusJakartaSans-Bold", size: 16))
                                 .foregroundColor(Color(hex: "#D15B33"))
                                 .padding(.top, 4)
@@ -61,7 +60,6 @@ struct InstructionsView: View {
                 }
                 .ignoresSafeArea(edges: .bottom)
 
-                // Botón regresar
                 VStack {
                     HStack {
                         Button(action: onBack) {
