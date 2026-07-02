@@ -197,6 +197,12 @@ struct MainMenuView: View {
             player?.pause()
             bienvenidaPlayer?.pause()
         }
+        .onChange(of: languageService.currentLanguage) { _ in
+            print("[MainMenuView] idioma cambió a \(languageService.currentLanguage), recargando video bienvenida")
+            bienvenidaPlayer?.pause()
+            bienvenidaPlayer = nil
+            setupBienvenidaVideo()
+        }
     }
 
     private func setupVideo() {
@@ -217,13 +223,26 @@ struct MainMenuView: View {
     }
 
     private func setupBienvenidaVideo() {
-        guard let url = Bundle.main.url(forResource: "Bienvenida", withExtension: "mov") else {
+        let lang = languageService.currentLanguage
+        let resource: String
+        let ext: String
+        if lang == "EN" {
+            resource = "Welcome_final"
+            ext = "mov"
+        } else {
+            resource = "Bienvenida"
+            ext = "mov"
+        }
+        guard let url = Bundle.main.url(forResource: resource, withExtension: ext) else {
+            print("[MainMenuView] ✗ video bienvenida no encontrado: \(resource).\(ext)")
             return
         }
         let item = AVPlayerItem(url: url)
         let avPlayer = AVPlayer(playerItem: item)
         avPlayer.isMuted = false
+        avPlayer.play()
         self.bienvenidaPlayer = avPlayer
+        print("[MainMenuView] video bienvenida cargado: \(resource).\(ext)")
     }
 }
 
@@ -235,7 +254,10 @@ struct VideoPlayerView: UIViewRepresentable {
     func makeUIView(context: Context) -> PlayerUIView {
         PlayerUIView(player: player, gravity: gravity, autoPlay: autoPlay)
     }
-    func updateUIView(_ uiView: PlayerUIView, context: Context) {}
+
+    func updateUIView(_ uiView: PlayerUIView, context: Context) {
+        uiView.updatePlayer(player, gravity: gravity, autoPlay: autoPlay)
+    }
 }
 
 class PlayerUIView: UIView {
@@ -244,24 +266,10 @@ class PlayerUIView: UIView {
 
     init(player: AVPlayer, gravity: AVLayerVideoGravity, autoPlay: Bool) {
         super.init(frame: .zero)
-        playerLayer.player = player
         playerLayer.videoGravity = gravity
         playerLayer.backgroundColor = UIColor.clear.cgColor
         layer.addSublayer(playerLayer)
-
-        if autoPlay {
-            if player.currentItem?.status == .readyToPlay {
-                player.play()
-            } else {
-                statusObserver = player.currentItem?.observe(\.status, options: [.initial, .new]) { item, _ in
-                    if item.status == .readyToPlay {
-                        DispatchQueue.main.async {
-                            player.play()
-                        }
-                    }
-                }
-            }
-        }
+        attach(player: player, autoPlay: autoPlay)
     }
 
     required init?(coder: NSCoder) { fatalError() }
@@ -269,6 +277,41 @@ class PlayerUIView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         playerLayer.frame = bounds
+    }
+
+    func updatePlayer(_ newPlayer: AVPlayer, gravity: AVLayerVideoGravity, autoPlay: Bool) {
+        if playerLayer.player !== newPlayer {
+            statusObserver?.invalidate()
+            statusObserver = nil
+            playerLayer.player = newPlayer
+            if autoPlay {
+                startWhenReady(newPlayer)
+            }
+        }
+        if playerLayer.videoGravity != gravity {
+            playerLayer.videoGravity = gravity
+        }
+    }
+
+    private func attach(player: AVPlayer, autoPlay: Bool) {
+        playerLayer.player = player
+        if autoPlay {
+            startWhenReady(player)
+        }
+    }
+
+    private func startWhenReady(_ player: AVPlayer) {
+        if player.currentItem?.status == .readyToPlay {
+            player.play()
+        } else {
+            statusObserver = player.currentItem?.observe(\.status, options: [.initial, .new]) { item, _ in
+                if item.status == .readyToPlay {
+                    DispatchQueue.main.async {
+                        player.play()
+                    }
+                }
+            }
+        }
     }
 
     deinit {

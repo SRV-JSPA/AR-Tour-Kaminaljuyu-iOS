@@ -63,6 +63,59 @@ final class VirtualGuideViewModel: ObservableObject {
     private let videoDatosArq  = "Datos arqueológicos_final"
     private let videoDespedida = "Despedida_final"
 
+    private struct LocalizedVideoFile {
+        let name: String
+        let ext: String
+    }
+
+    private let videoLocalizations: [String: [String: LocalizedVideoFile]] = [
+        "Datos generales_final": [
+            "ES": LocalizedVideoFile(name: "Datos generales_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "Importantdata_final", ext: "mov")
+        ],
+        "Datos arqueológicos_final": [
+            "ES": LocalizedVideoFile(name: "Datos arqueológicos_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "Archaeologicaldata_final", ext: "mov")
+        ],
+        "Indicación flecha_final": [
+            "ES": LocalizedVideoFile(name: "Indicación flecha_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "Arrowindication_final", ext: "mov")
+        ],
+        "Indicación de proximidad_final": [
+            "ES": LocalizedVideoFile(name: "Indicación de proximidad_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "Proximityindication_final", ext: "mov")
+        ],
+        "Punto de interés_final": [
+            "ES": LocalizedVideoFile(name: "Punto de interés_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "Pointofinterest_final", ext: "mov")
+        ],
+        "Despedida_final": [
+            "ES": LocalizedVideoFile(name: "Despedida_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "Goodbye_final", ext: "mov")
+        ],
+        "M CII 5_final": [
+            "ES": LocalizedVideoFile(name: "M CII 5_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII5_en_final", ext: "mov")
+        ],
+        "Estructura E_final": [
+            "ES": LocalizedVideoFile(name: "Estructura E_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "StructureE_final", ext: "mov")
+        ],
+        "M CII 13_final": [
+            "ES": LocalizedVideoFile(name: "M CII 13_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII13_en_final", ext: "mov")
+        ]
+    ]
+
+    private func resolveVideoURL(forKey key: String) -> URL? {
+        let lang = LanguageService.shared.currentLanguage
+        guard let localized = videoLocalizations[key]?[lang] else {
+            print("[VirtualGuide] ⚠ no hay versión en idioma \(lang) para clave: \(key)")
+            return nil
+        }
+        return Bundle.main.url(forResource: localized.name, withExtension: localized.ext)
+    }
+
     private var endingTour: Bool = false
 
     func start() {
@@ -124,7 +177,9 @@ final class VirtualGuideViewModel: ObservableObject {
     }
 
     private func loadTranscript(for videoName: String) {
-        guard let cues = VideoTranscripts.cues(for: videoName), !cues.isEmpty else {
+        let lang = LanguageService.shared.currentLanguage
+        guard let cues = VideoTranscripts.cues(for: videoName, language: lang), !cues.isEmpty else {
+            print("[VirtualGuide] sin transcripción para \(videoName) en idioma \(lang)")
             DispatchQueue.main.async { [weak self] in
                 self?.transcriptLines = []
                 self?.currentLineIndex = -1
@@ -134,7 +189,7 @@ final class VirtualGuideViewModel: ObservableObject {
         let lines = cues.map {
             TranscriptLine(text: $0.text, startTime: $0.startTime, endTime: $0.endTime)
         }
-        print("[VirtualGuide] transcript cargado para \(videoName): \(lines.count) líneas con timestamps reales")
+        print("[VirtualGuide] transcript cargado para \(videoName) (\(lang)): \(lines.count) líneas con timestamps reales")
         DispatchQueue.main.async { [weak self] in
             self?.transcriptLines = lines
             self?.currentLineIndex = -1
@@ -309,8 +364,8 @@ final class VirtualGuideViewModel: ObservableObject {
     }
 
     private func startVideo(named name: String) {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "mov") else {
-            print("[VirtualGuide] ✗ Video NO ENCONTRADO en bundle: \(name).mov")
+        guard let url = resolveVideoURL(forKey: name) else {
+            print("[VirtualGuide] ✗ Video NO disponible en idioma actual o no encontrado en bundle: \(name)")
             currentVideoName = nil
             playNextIfIdle()
             return

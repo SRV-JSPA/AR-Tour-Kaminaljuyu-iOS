@@ -76,7 +76,10 @@ enum VideoTranscripts {
         // "M CII 13_final"
     ]
 
-    static func cues(for videoName: String) -> [TranscriptCue]? {
-        transcripts[videoName]
+    static func cues(for videoName: String, language: String = "ES") -> [TranscriptCue]? {
+        // Por ahora solo hay transcripciones en español.
+        // Cuando se agreguen en inglés, cambiar a estructura `[idioma: [videoName: cues]]`.
+        guard language == "ES" else { return nil }
+        return transcripts[videoName]
     }
 }
