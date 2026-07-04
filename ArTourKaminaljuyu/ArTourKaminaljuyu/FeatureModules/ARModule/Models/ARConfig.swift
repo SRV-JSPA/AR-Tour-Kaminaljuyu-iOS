@@ -20,4 +20,9 @@ enum ARConfig {
     // MARK: - Global scale multiplier applied on top of poi.baseScale
 
     static let globalScaleMultiplier: Float = 0.3
+
+    // MARK: - Distance (meters) within which the placed model becomes visible.
+    // The anchor is placed at the POI's real GPS position as soon as the user
+    // taps "Next", but the mesh stays hidden until the user is this close.
+    static let modelVisibilityDistanceMeters: Double = 5.0
 }

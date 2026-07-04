@@ -228,7 +228,9 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         clearAll(session: session)
 
         let pivot = buildPivotNode(for: poi)
-        pivot.isHidden = false
+        // Hidden by default: reveal only when user is within
+        // ARConfig.modelVisibilityDistanceMeters of the POI.
+        pivot.isHidden = true
 
         let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
         let bear = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
@@ -257,6 +259,21 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         session.add(anchor: activeAnchor!)
 
         applyUserTransforms()
+        updateVisibility(userLocation: userLocation)
+    }
+
+    // MARK: - Visibility gating by GPS distance
+
+    /// Show the placed model only when the user is within
+    /// `ARConfig.modelVisibilityDistanceMeters` of the active POI.
+    /// Call on every GPS update.
+    func updateVisibility(userLocation: CLLocationCoordinate2D) {
+        guard let pivot = pivotNode, let poi = activePOI else { return }
+        let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
+        let shouldShow = dist <= ARConfig.modelVisibilityDistanceMeters
+        guard pivot.isHidden == shouldShow else { return }
+        pivot.isHidden = !shouldShow
+        print("[ARSceneManager] visibility -> \(shouldShow ? "shown" : "hidden") dist:\(String(format:"%.1f", dist))m")
     }
 
     // MARK: - Reset gestures only

@@ -215,7 +215,9 @@ final class ARViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .compactMap { $0 }
             .sink { [weak self] location in
-                self?.lastUserLocation = location
+                guard let self else { return }
+                self.lastUserLocation = location
+                self.sceneManager.updateVisibility(userLocation: location)
             }
             .store(in: &cancellables)
 
