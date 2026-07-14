@@ -28,7 +28,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     // MARK: - Constantes de configuración
 
     private let accuracyThresholdMeters: Double = 5.0
-    private let maxAcceptableHorizontalAccuracy: Double = 15.0
+    private let maxAcceptableHorizontalAccuracy: Double = AppConfig.maxUsableHorizontalAccuracyMeters
 
     // MARK: - Inicialización
 

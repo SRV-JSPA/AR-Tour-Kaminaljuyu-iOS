@@ -45,15 +45,17 @@ final class VirtualGuideViewModel: ObservableObject {
     private var interesFired: Set<String> = []
     private var specificFired: Set<String> = []
 
-    private let proximityTriggerMeters: Double = 8.0
-    private let interesTriggerMeters: Double = 6.0
+    private let proximityTriggerMeters: Double = 15.0
+    private let interesTriggerMeters: Double = 10.0
     private let arrivalTriggerMeters: Double = 5.0
-    private let resetDistanceMeters: Double = 12.0
+    // Debe ser mayor que proximityTriggerMeters: si queda por debajo, entre
+    // ambos radios los flags se resetean y el video de proximidad se repite.
+    private let resetDistanceMeters: Double = 20.0
 
     private let videoMap: [String: String] = [
-        "monticulo_5": "M CII 5_final",
-        "palangana": "Estructura E_final",
-        "monticulo_13": "M CII 13_final"
+        "monticulo_6": "M CII 5_final",
+        "acropolis": "Estructura E_final",
+        "monticulo_3": "M CII 13_final"
     ]
 
     private let videoProximity = "Indicación de proximidad_final"
@@ -225,7 +227,7 @@ final class VirtualGuideViewModel: ObservableObject {
 
         if let result = GPSModuleInterface.shared.nearestPOI {
             let id = result.poi.id
-            let dist = result.distanceMeters
+            let dist = result.effectiveDistanceMeters
             if dist <= proximityTriggerMeters {
                 proximityFired.insert(id)
                 print("[VirtualGuide] startWalking — POI=\(id) ya está a \(Int(dist))m (≤\(Int(proximityTriggerMeters))m): salto Indicación proximidad")
@@ -254,12 +256,12 @@ final class VirtualGuideViewModel: ObservableObject {
     private func handleProximityUpdate(_ result: ProximityResult?) {
         guard hasStartedWalking, let result = result else { return }
         let id = result.poi.id
-        let dist = result.distanceMeters
+        let dist = result.effectiveDistanceMeters
 
         let fase1 = proximityFired.contains(id) ? "✓" : "·"
         let fase2 = interesFired.contains(id) ? "✓" : "·"
         let fase3 = specificFired.contains(id) ? "✓" : "·"
-        print(String(format: "[VirtualGuide] update POI=%@ dist=%.2fm umbrales[%@8/%@6/%@5]", id, dist, fase1, fase2, fase3))
+        print(String(format: "[VirtualGuide] update POI=%@ cruda=%.2fm precisión=%.1fm efectiva=%.2fm umbrales[%@%d/%@%d/%@%d]", id, result.distanceMeters, result.horizontalAccuracy, dist, fase1, Int(proximityTriggerMeters), fase2, Int(interesTriggerMeters), fase3, Int(arrivalTriggerMeters)))
 
         if dist > resetDistanceMeters {
             if proximityFired.contains(id) || interesFired.contains(id) || specificFired.contains(id) {
@@ -274,13 +276,13 @@ final class VirtualGuideViewModel: ObservableObject {
         if dist <= proximityTriggerMeters && !proximityFired.contains(id) {
             proximityFired.insert(id)
             print("[VirtualGuide] >>> fase 1 dispara (dist=\(Int(dist))m ≤ \(Int(proximityTriggerMeters))m) POI=\(id) -> Indicación proximidad")
-            enqueue(videoProximity, for: id, skipIfCloserThan: 6.0)
+            enqueue(videoProximity, for: id, skipIfCloserThan: interesTriggerMeters)
         }
 
         if dist <= interesTriggerMeters && !interesFired.contains(id) {
             interesFired.insert(id)
             print("[VirtualGuide] >>> fase 2 dispara (dist=\(Int(dist))m ≤ \(Int(interesTriggerMeters))m) POI=\(id) -> Punto de interés")
-            enqueue(videoInteres, for: id, skipIfCloserThan: 5.0)
+            enqueue(videoInteres, for: id, skipIfCloserThan: arrivalTriggerMeters)
         }
 
         if dist <= arrivalTriggerMeters && !specificFired.contains(id) {
@@ -307,8 +309,8 @@ final class VirtualGuideViewModel: ObservableObject {
                let poiId = entry.poiId,
                let result = GPSModuleInterface.shared.nearestPOI,
                result.poi.id == poiId,
-               result.distanceMeters < skipThreshold {
-                print(String(format: "[VirtualGuide] saltando %@: usuario a %.1fm < %.0fm (fuera de banda relevante)", entry.name, result.distanceMeters, skipThreshold))
+               result.effectiveDistanceMeters < skipThreshold {
+                print(String(format: "[VirtualGuide] saltando %@: usuario a %.1fm efectivos < %.0fm (fuera de banda relevante)", entry.name, result.effectiveDistanceMeters, skipThreshold))
                 continue
             }
             startVideo(named: entry.name)

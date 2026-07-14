@@ -14,8 +14,15 @@ enum ProximityLevel {
 struct ProximityResult {
     let poi: POILocation
     let distanceMeters: Double
+    let horizontalAccuracy: Double
     let bearing: Double
     let level: ProximityLevel
+
+    // Distancia para lógica de disparos por cercanía (videos, modelo 3D):
+    // compensa el ruido del GPS restando la precisión reportada.
+    var effectiveDistanceMeters: Double {
+        GeoUtils.compensatedDistance(distanceMeters, horizontalAccuracy: horizontalAccuracy)
+    }
 
     var statusMessage: String {
         switch level {
@@ -49,12 +56,12 @@ final class ProximityService: ObservableObject {
     }
 
     // MARK: - Actualización principal
-    func update(userLocation: CLLocationCoordinate2D) {
+    func update(userLocation: CLLocationCoordinate2D, horizontalAccuracy: Double = 0) {
 
         let nearest = pois
             .map { poi -> (POILocation, Double) in
                 let distance = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
-                print("[Proximity] distancia a \(poi.id): \(distance)m")
+                print("[Proximity] distancia a \(poi.id): \(distance)m (precisión GPS: \(horizontalAccuracy)m)")
                 return (poi, distance)
             }
             .filter { _, distance in distance <= AppConfig.visibilityRadiusMeters }
@@ -75,6 +82,7 @@ final class ProximityService: ObservableObject {
         let result = ProximityResult(
             poi: poi,
             distanceMeters: distance,
+            horizontalAccuracy: horizontalAccuracy,
             bearing: bearingToPOI,
             level: level
         )

@@ -267,13 +267,16 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     /// Show the placed model only when the user is within
     /// `ARConfig.modelVisibilityDistanceMeters` of the active POI.
     /// Call on every GPS update.
-    func updateVisibility(userLocation: CLLocationCoordinate2D) {
+    func updateVisibility(userLocation: CLLocationCoordinate2D, horizontalAccuracy: Double = 0) {
         guard let pivot = pivotNode, let poi = activePOI else { return }
-        let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
+        let rawDist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
+        // La distancia cruda nunca baja del ruido del GPS (~precisión), así que
+        // un umbral de 5m sería inalcanzable sin compensar la precisión.
+        let dist = GeoUtils.compensatedDistance(rawDist, horizontalAccuracy: horizontalAccuracy)
         let shouldShow = dist <= ARConfig.modelVisibilityDistanceMeters
         guard pivot.isHidden == shouldShow else { return }
         pivot.isHidden = !shouldShow
-        print("[ARSceneManager] visibility -> \(shouldShow ? "shown" : "hidden") dist:\(String(format:"%.1f", dist))m")
+        print("[ARSceneManager] visibility -> \(shouldShow ? "shown" : "hidden") cruda:\(String(format:"%.1f", rawDist))m efectiva:\(String(format:"%.1f", dist))m")
     }
 
     // MARK: - Reset gestures only

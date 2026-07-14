@@ -24,6 +24,8 @@ final class GPSModuleInterface: ObservableObject {
 
     @Published private(set) var userLocation: CLLocationCoordinate2D? = nil
 
+    @Published private(set) var userHorizontalAccuracy: Double = 0
+
     @Published private(set) var userHeading: Double = 0
 
     @Published private(set) var currentTargetPOI: POILocation? = nil
@@ -94,11 +96,16 @@ final class GPSModuleInterface: ObservableObject {
     private func setupBindings() {
 
         locationService.$currentLocation
-            .compactMap { $0?.coordinate }
-            .sink { [weak self] coord in
+            .compactMap { $0 }
+            .sink { [weak self] location in
                 guard let self else { return }
+                let coord = location.coordinate
                 self.userLocation = coord
-                self.proximityService.update(userLocation: coord)
+                self.userHorizontalAccuracy = max(location.horizontalAccuracy, 0)
+                self.proximityService.update(
+                    userLocation: coord,
+                    horizontalAccuracy: location.horizontalAccuracy
+                )
                 self.tourManager.update(userLocation: coord)
             }
             .store(in: &cancellables)

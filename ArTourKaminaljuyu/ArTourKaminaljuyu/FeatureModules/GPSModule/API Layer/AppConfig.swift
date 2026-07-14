@@ -18,5 +18,16 @@ enum AppConfig {
     
     // MARK: - Calidad del GPS
     static let accuracyGoodMeters: Double = 5.0
+
+    // Lecturas con precisión peor que esto se descartan por completo.
+    // En campo abierto con árboles el iPhone suele reportar 10-30m; si el
+    // límite es muy bajo la posición se congela mientras el usuario camina.
+    static let maxUsableHorizontalAccuracyMeters: Double = 30.0
+
+    // Los umbrales de disparo (8/6/5m) están debajo del ruido del GPS: parado
+    // sobre el POI con precisión de 10m la distancia cruda lee ~8-12m. Se resta
+    // la precisión reportada (con este tope) para que los disparos ocurran a la
+    // distancia física esperada o antes, nunca cuando ya estás encima del punto.
+    static let accuracyCompensationCapMeters: Double = 10.0
 }
 

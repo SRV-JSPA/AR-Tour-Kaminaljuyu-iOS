@@ -217,7 +217,10 @@ final class ARViewController: UIViewController {
             .sink { [weak self] location in
                 guard let self else { return }
                 self.lastUserLocation = location
-                self.sceneManager.updateVisibility(userLocation: location)
+                self.sceneManager.updateVisibility(
+                    userLocation: location,
+                    horizontalAccuracy: GPSModuleInterface.shared.userHorizontalAccuracy
+                )
             }
             .store(in: &cancellables)
 
