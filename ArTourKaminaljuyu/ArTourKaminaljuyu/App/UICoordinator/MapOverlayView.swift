@@ -12,17 +12,26 @@ struct MapOverlayView: View {
 
     @ObservedObject private var gps = GPSModuleInterface.shared
 
+    // MARK: - Aviso temporal de distancia
+    // Cada `noticePeriodSeconds` el mensaje de estado se sustituye por el aviso
+    // de distancia durante `noticeDurationSeconds` y luego vuelve al predeterminado.
+    @State private var showsDistanceNotice = false
+    private let noticePeriodSeconds: Double = 10
+    private let noticeDurationSeconds: Double = 4
+
     var body: some View {
         VStack(spacing: 0) {
 
             // Status bar
             HStack {
-                Image(systemName: statusIcon)
-                    .foregroundColor(statusColor)
-                Text(statusText)
+                Image(systemName: displayedStatus.icon)
+                    .foregroundColor(displayedStatus.color)
+                Text(displayedStatus.text)
                     .font(.caption)
                     .foregroundColor(.primary)
                     .lineLimit(1)
+                    .id(showsDistanceNotice)
+                    .transition(.opacity)
                 Spacer()
                 if let dist = distanceText {
                     Text(dist)
@@ -33,6 +42,7 @@ struct MapOverlayView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
             .background(Color(.systemBackground).opacity(0.95))
+            .task { await runDistanceNoticeLoop() }
 
             // Mapa
             MapViewRepresentable(
@@ -58,6 +68,53 @@ struct MapOverlayView: View {
         }
         .background(Color(.systemBackground))
         .cornerRadius(16)
+    }
+
+    // MARK: - Aviso temporal de distancia
+
+    private func runDistanceNoticeLoop() async {
+        while !Task.isCancelled {
+            try? await Task.sleep(for: .seconds(noticePeriodSeconds))
+            guard !Task.isCancelled else { return }
+            guard distanceNoticeText != nil else { continue }
+
+            withAnimation(.easeInOut(duration: 0.25)) { showsDistanceNotice = true }
+            try? await Task.sleep(for: .seconds(noticeDurationSeconds))
+            withAnimation(.easeInOut(duration: 0.25)) { showsDistanceNotice = false }
+        }
+    }
+
+    // Distancia al montículo relevante: el POI objetivo durante el tour,
+    // o el más cercano detectado en exploración libre.
+    private var distanceNoticeText: String? {
+        let poi: POILocation
+        let distance: Double
+
+        switch gps.tourState {
+        case .navigatingToPOI, .atPOI:
+            guard let target = gps.currentTargetPOI,
+                  let userLoc = gps.userLocation else { return nil }
+            poi = target
+            distance = GeoUtils.distanceInMeters(from: userLoc, to: target.coordinate)
+
+        case .idle:
+            guard let nearest = gps.nearestPOI else { return nil }
+            poi = nearest.poi
+            distance = nearest.distanceMeters
+
+        default:
+            return nil
+        }
+
+        guard distance.isFinite else { return nil }
+        return "Estás a unos \(Int(distance.rounded())) metros de \(poi.name)"
+    }
+
+    private var displayedStatus: (icon: String, text: String, color: Color) {
+        if showsDistanceNotice, let notice = distanceNoticeText {
+            return ("location.circle.fill", notice, .orange)
+        }
+        return (statusIcon, statusText, statusColor)
     }
 
     // MARK: - Status helpers
