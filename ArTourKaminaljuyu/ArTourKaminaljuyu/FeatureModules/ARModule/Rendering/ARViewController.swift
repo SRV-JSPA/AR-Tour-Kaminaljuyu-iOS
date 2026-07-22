@@ -1,8 +1,9 @@
 import UIKit
 import ARKit
 import SceneKit
-import Combine  
+import Combine
 import CoreLocation
+import SwiftUI
 
 final class ARViewController: UIViewController {
 
@@ -82,8 +83,23 @@ final class ARViewController: UIViewController {
     // MARK: - Setup: Gestures
     
     @objc private func backTapped() {
-        // pop back to menu
-        dismiss(animated: true)
+        let confirmView = BackConfirmationView(
+            onConfirm: { [weak self] in
+                self?.dismiss(animated: true) {
+                    GPSModuleInterface.shared.stopTour()
+                    AppRouter.shared.navigateTo(.menu)
+                }
+            },
+            onCancel: { [weak self] in
+                self?.dismiss(animated: true)
+            }
+        )
+
+        let host = UIHostingController(rootView: confirmView)
+        host.modalPresentationStyle = .overFullScreen
+        host.modalTransitionStyle = .crossDissolve
+        host.view.backgroundColor = .clear
+        present(host, animated: true)
     }
 
     private func setupGestures() {
@@ -236,7 +252,7 @@ final class ARViewController: UIViewController {
             .sink { [weak self] state in
                 guard let self else { return }
                 switch state {
-                case .returning, .completed:
+                case .idle, .returning, .completed:
                     self.sceneManager.clearAll(session: self.sceneView.session)
                     self.hasPlacedModel  = false
                     self.currentPOIIndex = 0
@@ -444,6 +460,63 @@ extension ARViewController: ARSessionDelegate {
         switch frame.camera.trackingState {
         case .normal: print("[ARSession] tracking:normal  anchors:\(frame.anchors.count)")
         default: break
+        }
+    }
+}
+
+// MARK: - BackConfirmationView
+
+struct BackConfirmationView: View {
+    let onConfirm: () -> Void
+    let onCancel: () -> Void
+    @ObservedObject private var languageService = LanguageService.shared
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.6)
+                .ignoresSafeArea()
+                .contentShape(Rectangle())
+                .onTapGesture { onCancel() }
+
+            VStack(spacing: 20) {
+                Text(languageService.string("back_confirm_title"))
+                    .font(.custom("PlusJakartaSans-Bold", size: 20))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+
+                Text(languageService.string("back_confirm_message"))
+                    .font(.custom("PlusJakartaSans-Regular", size: 15))
+                    .foregroundColor(.white.opacity(0.85))
+                    .multilineTextAlignment(.center)
+
+                HStack(spacing: 20) {
+                    Button(action: onCancel) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .frame(width: 56, height: 56)
+                            .background(Color.white.opacity(0.15))
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle().stroke(Color.white.opacity(0.5), lineWidth: 2)
+                            )
+                    }
+
+                    Button(action: onConfirm) {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .frame(width: 56, height: 56)
+                            .background(Color(hex: "#D15B33"))
+                            .clipShape(Circle())
+                    }
+                }
+                .padding(.top, 4)
+            }
+            .padding(24)
+            .background(Color.black.opacity(0.75))
+            .cornerRadius(20)
+            .padding(.horizontal, 40)
         }
     }
 }

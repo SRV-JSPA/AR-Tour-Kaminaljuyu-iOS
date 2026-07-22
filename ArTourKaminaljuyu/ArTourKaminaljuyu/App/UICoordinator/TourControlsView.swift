@@ -12,12 +12,14 @@ struct TourControlsView: View {
     var onStartTour: () -> Void = {}
     var onFinalize: () -> Void = {}
     @ObservedObject private var languageService = LanguageService.shared
-    
+
     var body: some View {
         ZStack {
             Color.black.opacity(0.6)
                 .ignoresSafeArea()
-            
+                .contentShape(Rectangle())
+                .onTapGesture { onStartTour() }
+
             VStack(spacing: 12) {
                 HStack {
                     Image(systemName: "gamecontroller.fill")
@@ -43,47 +45,44 @@ struct TourControlsView: View {
                 .padding()
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(16)
-                
-                TourControlButton(icon: "arrow.uturn.backward", title: languageService.string("control_back"), action: onBack)
-                TourControlButton(icon: "info.circle", title: languageService.string("control_info"), action: {})
-                TourControlButton(icon: "play.fill", title: languageService.string("control_start"), action: onStartTour)
-                TourControlButton(icon: "forward.end.fill", title: languageService.string("control_next"), action: {})
-                TourControlButton(icon: "checkmark", title: languageService.string("control_finish"), action: onFinalize)
+
+                TourControlLegendRow(icon: "arrow.uturn.backward", title: languageService.string("control_back"))
+                TourControlLegendRow(icon: "info.circle", title: languageService.string("control_info"))
+                TourControlLegendRow(icon: "play.fill", title: languageService.string("control_start"))
+                TourControlLegendRow(icon: "forward.end.fill", title: languageService.string("control_next"))
+                TourControlLegendRow(icon: "checkmark", title: languageService.string("control_finish"))
             }
             .padding()
         }
     }
 }
 
-struct TourControlButton: View {
+struct TourControlLegendRow: View {
     let icon: String
     let title: String
-    let action: () -> Void
-    
+
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: 16) {
-                Image(systemName: icon)
-                    .foregroundColor(Color(hex: "#D15B33"))
-                    .font(.title3)
-                    .frame(width: 44, height: 44)
-                    .background(Color(hex: "#F5E6D3"))
-                    .clipShape(Circle())
-                    .overlay(
-                        Circle()
-                            .stroke(Color(hex: "#D15B33"), lineWidth: 2)
-                    )
-                
-                Text(title)
-                    .font(.custom("PlusJakartaSans-Bold", size: 16))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.leading)
-                
-                Spacer()
-            }
-            .padding()
-            .background(Color.white.opacity(0.1))
-            .cornerRadius(16)
+        HStack(spacing: 16) {
+            Image(systemName: icon)
+                .foregroundColor(Color(hex: "#D15B33"))
+                .font(.title3)
+                .frame(width: 44, height: 44)
+                .background(Color(hex: "#F5E6D3"))
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .stroke(Color(hex: "#D15B33"), lineWidth: 2)
+                )
+
+            Text(title)
+                .font(.custom("PlusJakartaSans-Bold", size: 16))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.leading)
+
+            Spacer()
         }
+        .padding()
+        .background(Color.white.opacity(0.1))
+        .cornerRadius(16)
     }
 }

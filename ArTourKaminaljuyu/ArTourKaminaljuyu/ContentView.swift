@@ -44,6 +44,7 @@ struct GuidedTourOverlay: View {
                 .receive(on: DispatchQueue.main)
                 .sink { event in
                     if case .tourEndCompleted = event {
+                        GPSModuleInterface.shared.stopTour()
                         onTourEnded()
                     }
                 }

@@ -42,6 +42,10 @@ struct LocalizedStrings {
             "control_start": "Iniciar recorrido guiado automático",
             "control_next": "Avanzar al siguiente punto de interés",
             "control_finish": "Finalizar el recorrido guiado",
+
+            // Back confirmation modal
+            "back_confirm_title": "¿Regresar al menú?",
+            "back_confirm_message": "El recorrido actual se reiniciará.",
             
             // TermsView
             "terms_title": "Términos y Condiciones",
@@ -82,6 +86,10 @@ struct LocalizedStrings {
             "control_start": "Start automatic guided tour",
             "control_next": "Advance to next point of interest",
             "control_finish": "Finish the guided tour",
+
+            // Back confirmation modal
+            "back_confirm_title": "Return to menu?",
+            "back_confirm_message": "The current tour will be reset.",
             
             // TermsView
             "terms_title": "Terms and Conditions",
