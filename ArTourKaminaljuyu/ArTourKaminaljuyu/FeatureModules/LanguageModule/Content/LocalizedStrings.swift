@@ -42,6 +42,12 @@ struct LocalizedStrings {
             "control_start": "Iniciar recorrido guiado automático",
             "control_next": "Avanzar al siguiente punto de interés",
             "control_finish": "Finalizar el recorrido guiado",
+            "control_toggle": "Toca el recuadro para alternar entre el video y el mapa",
+
+            // Video / mapa toggle
+            "hint_toggle_view": "Toca aquí para cambiar entre el video y el mapa",
+            "toggle_to_map": "Mapa",
+            "toggle_to_video": "Video",
 
             // Back confirmation modal
             "back_confirm_title": "¿Regresar al menú?",
@@ -86,6 +92,12 @@ struct LocalizedStrings {
             "control_start": "Start automatic guided tour",
             "control_next": "Advance to next point of interest",
             "control_finish": "Finish the guided tour",
+            "control_toggle": "Tap the panel to switch between video and map",
+
+            // Video / map toggle
+            "hint_toggle_view": "Tap here to switch between video and map",
+            "toggle_to_map": "Map",
+            "toggle_to_video": "Video",
 
             // Back confirmation modal
             "back_confirm_title": "Return to menu?",

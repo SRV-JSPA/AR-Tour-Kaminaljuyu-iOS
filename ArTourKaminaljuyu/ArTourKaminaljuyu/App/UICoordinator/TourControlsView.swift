@@ -20,39 +20,50 @@ struct TourControlsView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { onStartTour() }
 
-            VStack(spacing: 12) {
-                HStack {
-                    Image(systemName: "gamecontroller.fill")
-                        .foregroundColor(.white)
-                        .font(.title2)
-                    VStack(alignment: .leading) {
-                        Text(languageService.string("tour_controls_title"))
-                            .font(.custom("PlusJakartaSans-Bold", size: 18))
-                            .foregroundColor(.white)
-                        Text(languageService.string("tour_controls_subtitle"))
-                            .font(.custom("PlusJakartaSans-Regular", size: 13))
-                            .foregroundColor(.white.opacity(0.8))
-                    }
-                    Spacer()
-                    Button(action: onStartTour) {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.white)
-                            .padding(12)
-                            .background(Color(hex: "#D15B33"))
-                            .clipShape(Circle())
-                    }
-                }
-                .padding()
-                .background(Color.white.opacity(0.1))
-                .cornerRadius(16)
+            GeometryReader { geo in
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 12) {
+                        HStack {
+                            Image(systemName: "gamecontroller.fill")
+                                .foregroundColor(.white)
+                                .font(.title2)
+                            VStack(alignment: .leading) {
+                                Text(languageService.string("tour_controls_title"))
+                                    .font(.custom("PlusJakartaSans-Bold", size: 18))
+                                    .foregroundColor(.white)
+                                Text(languageService.string("tour_controls_subtitle"))
+                                    .font(.custom("PlusJakartaSans-Regular", size: 13))
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                            Spacer()
+                            Button(action: onStartTour) {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.white)
+                                    .padding(12)
+                                    .background(Color(hex: "#D15B33"))
+                                    .clipShape(Circle())
+                            }
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(16)
 
-                TourControlLegendRow(icon: "arrow.uturn.backward", title: languageService.string("control_back"))
-                TourControlLegendRow(icon: "info.circle", title: languageService.string("control_info"))
-                TourControlLegendRow(icon: "play.fill", title: languageService.string("control_start"))
-                TourControlLegendRow(icon: "forward.end.fill", title: languageService.string("control_next"))
-                TourControlLegendRow(icon: "checkmark", title: languageService.string("control_finish"))
+                        TourControlLegendRow(icon: "arrow.uturn.backward", title: languageService.string("control_back"))
+                        TourControlLegendRow(icon: "info.circle", title: languageService.string("control_info"))
+                        TourControlLegendRow(icon: "play.fill", title: languageService.string("control_start"))
+                        TourControlLegendRow(icon: "forward.end.fill", title: languageService.string("control_next"))
+                        TourControlLegendRow(icon: "checkmark", title: languageService.string("control_finish"))
+                        TourControlLegendRow(icon: "hand.tap.fill", title: languageService.string("control_toggle"))
+                    }
+                    .padding()
+                    // Centra la lista como antes; el scroll solo entra en juego
+                    // cuando el contenido no cabe (pantallas pequeñas).
+                    .frame(maxWidth: .infinity, minHeight: geo.size.height)
+                }
+                .scrollBounceBehavior(.basedOnSize)
+                // El scroll cubre el fondo: mantiene el "toca cualquier lugar para continuar".
+                .onTapGesture { onStartTour() }
             }
-            .padding()
         }
     }
 }

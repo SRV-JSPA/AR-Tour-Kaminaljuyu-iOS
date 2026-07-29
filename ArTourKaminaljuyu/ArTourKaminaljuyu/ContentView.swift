@@ -4,6 +4,11 @@ import Combine
 struct GuidedTourOverlay: View {
     @StateObject private var guideVM = VirtualGuideViewModel()
     @State private var cancellables = Set<AnyCancellable>()
+    // El aviso del gesto video/mapa se enseña una sola vez por recorrido,
+    // al arrancar el primer video.
+    @State private var showsToggleHint = false
+    @State private var hasShownToggleHint = false
+    private let toggleHintDurationSeconds: Double = 6
     var onTourEnded: () -> Void = {}
 
     var body: some View {
@@ -28,13 +33,40 @@ struct GuidedTourOverlay: View {
                 }
             }
             .overlay(alignment: .topTrailing) {
-                if guideVM.player != nil && !guideVM.transcriptLines.isEmpty {
-                    TranscriptToggleButton(viewModel: guideVM)
-                        .padding(10)
+                if guideVM.player != nil {
+                    VStack(alignment: .trailing, spacing: 8) {
+                        if !guideVM.transcriptLines.isEmpty {
+                            TranscriptToggleButton(viewModel: guideVM)
+                        }
+                        VideoMapToggleButton(viewModel: guideVM)
+                    }
+                    .padding(10)
+                }
+            }
+            .overlay {
+                if showsToggleHint {
+                    VideoMapToggleHintView()
+                        .transition(.opacity)
                 }
             }
             .padding(.horizontal, 12)
             .padding(.bottom, 24)
+        }
+        .onChange(of: guideVM.showsVideo) { _, shows in
+            if shows {
+                guard !hasShownToggleHint else { return }
+                hasShownToggleHint = true
+                withAnimation(.easeOut(duration: 0.35)) { showsToggleHint = true }
+            } else if showsToggleHint {
+                // El usuario ya usó el gesto (o terminó el video): el aviso sobra.
+                withAnimation(.easeOut(duration: 0.25)) { showsToggleHint = false }
+            }
+        }
+        .task(id: showsToggleHint) {
+            guard showsToggleHint else { return }
+            try? await Task.sleep(for: .seconds(toggleHintDurationSeconds))
+            guard !Task.isCancelled else { return }
+            withAnimation(.easeOut(duration: 0.4)) { showsToggleHint = false }
         }
         .onAppear {
             guideVM.start()
