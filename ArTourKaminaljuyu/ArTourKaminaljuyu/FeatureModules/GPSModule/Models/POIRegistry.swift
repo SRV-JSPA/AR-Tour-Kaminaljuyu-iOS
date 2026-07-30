@@ -118,12 +118,6 @@ final class POIRegistry {
                 baseScale: 0.2,
                 baseAltitudeMeters: -3.0,
                 baseYawDeg: 0.0,
-                description: """
-                Hallazgos:
-
-                • El edificio talud-tablero que se está visualizando data del clásico temprano (425-575 d. C.).
-                • Debajo del edificio se hallaron dos pisos y cerámica que datan del preclásico tardío-terminal (100 a. C.-250 d. C.), clásico temprano (250-575 d. C.) y clásico tardío (575-900 d. C.).
-                """,
                 parts: [
                     ModelPart(
                         modelPath: "Assets/Models/monticulo-7/monticulo-7-Rancho_techo.obj",
@@ -160,7 +154,14 @@ final class POIRegistry {
                         texturePath: "models/textures/clay_plaster_diff_4k.jpg",
                         baseScale: 0.8
                     )
-                ]
+                ],
+                description: """
+                Hallazgos:
+
+                • El edificio talud-tablero que se está visualizando data del clásico temprano (425-575 d. C.).
+                • Debajo del edificio se hallaron dos pisos y cerámica que datan del preclásico tardío-terminal (100 a. C.-250 d. C.), clásico temprano (250-575 d. C.) y clásico tardío (575-900 d. C.).
+                """
+                
             ),
 
             POILocation(
@@ -195,13 +196,6 @@ final class POIRegistry {
                 baseScale: 0.2,
                 baseAltitudeMeters: -3.0,
                 baseYawDeg: 0.0,
-                description: """
-                Hallazgos:
-
-                • Preclásico tardío-terminal (100 a. C.-250 d. C.): Plataforma con escalones de barro, figurillas de mujeres embarazadas, pigmentos y un depósito conformado por vasijas finas y utilitarias, lascas de obsidiana, una piedra con huella de trabajo, dos vasijas miniatura, huesos humanos y de animal.
-                • La plataforma que está visualizando fue una residencia de élite, en la cual se realizaron rituales para la fertilidad.
-                """,
-                images: ["c_ii_12", "c_ii_12_2"],
                 parts: [
                     ModelPart(
                         modelPath: "Assets/Models/monticulo-12/monticulo-12-Rancho_techo.obj",
@@ -238,7 +232,15 @@ final class POIRegistry {
                         texturePath: "models/textures/clay_plaster_diff_4k.jpg",
                         baseScale: 0.8
                     )
-                ]
+                ],
+                description: """
+                Hallazgos:
+
+                • Preclásico tardío-terminal (100 a. C.-250 d. C.): Plataforma con escalones de barro, figurillas de mujeres embarazadas, pigmentos y un depósito conformado por vasijas finas y utilitarias, lascas de obsidiana, una piedra con huella de trabajo, dos vasijas miniatura, huesos humanos y de animal.
+                • La plataforma que está visualizando fue una residencia de élite, en la cual se realizaron rituales para la fertilidad.
+                """,
+                images: ["c_ii_12", "c_ii_12_2"],
+                
             ),
 
             POILocation(
@@ -251,39 +253,6 @@ final class POIRegistry {
                 baseScale: 0.5,
                 baseAltitudeMeters: -3.0,
                 baseYawDeg: 90.0,
-                description: """
-                Clásico tardío (575-900 d. C.)
-
-                Etapa 5:
-                • Al sur del recinto se depositó cerámica y esculturas de etapas constructivas anteriores.
-
-                Etapa 4:
-                • Es la etapa constructiva actualmente expuesta, conformada por un drenaje en el interior del recinto y una estructura de adobe que cubre el estilo talud-tablero. Al frente del recinto se construyó una plataforma del mismo material, la cual fue destruida durante las investigaciones realizadas a inicios del siglo pasado.
-
-                Clásico temprano (425-575 d. C.)
-
-                Etapa 3: Funcionó como residencia de élite o edificio administrativo.
-                • Subetapa 3-c: Es la construcción virtual que observamos ahora. En esta subetapa se modificó el atrio y se construyeron nuevas gradas en la parte frontal del recinto; solo a través de estas se pudo acceder a la plataforma.
-                • Subetapa 3-b: En el recinto se aplicó el estilo talud-tablero y se construyó una grada en el centro del lado sur. Además, se remodeló la escalinata de la plataforma, se incrementó la altura del atrio y se construyeron gradas en los lados este y oeste.
-                • Subetapa 3-a: Se agregó una plataforma con estilo talud-tablero, que presentó en su parte superior agujeros de poste utilizados para sostener una superestructura de materiales perecederos. Asimismo, se construyó un atrio que conectó la plataforma con el recinto remodelado. Durante esta subetapa se hallaron dos tumbas dedicatorias que contenían individuos sentados, acompañados de ofrendas cerámicas. La tumba 2 se localizó en el recinto, mientras que la tumba 3 se construyó con piedras y se ubicó en la esquina noreste de la plataforma.
-
-                Etapa 2: Funcionó como un centro ritual o fue reutilizado para alguna otra actividad pública.
-                • Subetapa 2-c: En el interior del recinto se modificaron las gradas y se incorporó un talud. En la parte sur del exterior se ampliaron las gradas de acceso y se construyeron dos adiciones rectangulares.
-                • Subetapa 2-b: Aumentó la altura del recinto y se construyeron gradas en el interior y exterior.
-                • Subetapa 2-a: Construcción de un recinto hundido al norte de la primera etapa constructiva.
-
-                Etapa 1: Funcionó como altar dedicatorio.
-                • Pequeña pirámide con una base en forma de talud y paredes de tipo tablero. Esta primera etapa se edificó sobre la tumba 1, que contenía restos humanos, estelas lisas y una escultura tallada.
-                """,
-                images: [
-                    "e",
-                    "etapa3",
-                    "etapa3a",
-                    "etapa2a",
-                    "etapa2b",
-                    "etapa2c",
-                    "etapa1"
-                ],
                 parts: [
                     ModelPart(
                         modelPath: "Assets/Models/palangana/palangana-Talud-1.2.obj",
@@ -330,7 +299,41 @@ final class POIRegistry {
                         texturePath: "models/textures/clay_plaster_diff_4k.jpg",
                         baseScale: 0.8
                     )
-                ]
+                ],
+                description: """
+                Clásico tardío (575-900 d. C.)
+
+                Etapa 5:
+                • Al sur del recinto se depositó cerámica y esculturas de etapas constructivas anteriores.
+
+                Etapa 4:
+                • Es la etapa constructiva actualmente expuesta, conformada por un drenaje en el interior del recinto y una estructura de adobe que cubre el estilo talud-tablero. Al frente del recinto se construyó una plataforma del mismo material, la cual fue destruida durante las investigaciones realizadas a inicios del siglo pasado.
+
+                Clásico temprano (425-575 d. C.)
+
+                Etapa 3: Funcionó como residencia de élite o edificio administrativo.
+                • Subetapa 3-c: Es la construcción virtual que observamos ahora. En esta subetapa se modificó el atrio y se construyeron nuevas gradas en la parte frontal del recinto; solo a través de estas se pudo acceder a la plataforma.
+                • Subetapa 3-b: En el recinto se aplicó el estilo talud-tablero y se construyó una grada en el centro del lado sur. Además, se remodeló la escalinata de la plataforma, se incrementó la altura del atrio y se construyeron gradas en los lados este y oeste.
+                • Subetapa 3-a: Se agregó una plataforma con estilo talud-tablero, que presentó en su parte superior agujeros de poste utilizados para sostener una superestructura de materiales perecederos. Asimismo, se construyó un atrio que conectó la plataforma con el recinto remodelado. Durante esta subetapa se hallaron dos tumbas dedicatorias que contenían individuos sentados, acompañados de ofrendas cerámicas. La tumba 2 se localizó en el recinto, mientras que la tumba 3 se construyó con piedras y se ubicó en la esquina noreste de la plataforma.
+
+                Etapa 2: Funcionó como un centro ritual o fue reutilizado para alguna otra actividad pública.
+                • Subetapa 2-c: En el interior del recinto se modificaron las gradas y se incorporó un talud. En la parte sur del exterior se ampliaron las gradas de acceso y se construyeron dos adiciones rectangulares.
+                • Subetapa 2-b: Aumentó la altura del recinto y se construyeron gradas en el interior y exterior.
+                • Subetapa 2-a: Construcción de un recinto hundido al norte de la primera etapa constructiva.
+
+                Etapa 1: Funcionó como altar dedicatorio.
+                • Pequeña pirámide con una base en forma de talud y paredes de tipo tablero. Esta primera etapa se edificó sobre la tumba 1, que contenía restos humanos, estelas lisas y una escultura tallada.
+                """,
+                images: [
+                    "e",
+                    "etapa3",
+                    "etapa3a",
+                    "etapa2a",
+                    "etapa2b",
+                    "etapa2c",
+                    "etapa1"
+                ],
+                
             ),
 
             POILocation(
@@ -367,14 +370,6 @@ final class POIRegistry {
                 baseScale: 0.2,
                 baseAltitudeMeters: -3.0,
                 baseYawDeg: 0.0,
-                description: """
-                Hallazgos y funciones:
-
-                • Clásico tardío (575-900 d. C.): Construcción de la plataforma de barro que se está visualizando, en la cual se realizaron actividades rituales, debido al hallazgo de incensarios quebrados y vasijas con restos de material quemado. También se colocó el Monumento 224, tallado en sus cuatro lados. Las escenas representadas incluyen once círculos, un individuo arrodillado y otro de pie, una serpiente o pescado y una lengua bífida. El monumento data del Preclásico y se reutilizó durante el Clásico tardío, porque Kaminaljuyú experimentó una descentralización del poder, lo que impulsó un retorno a la ideología pasada.
-                • Clásico temprano (250-575 d. C.): Construcción de tres escalinatas superpuestas, doce apisonados y ocho pisos de barro.
-                • Preclásico tardío-terminal (100 a. C.-250 d. C.): Construcción de dos drenajes de piedra, deposición de huesos humanos y una vasija en forma de cuerpo humano esqueletizado.
-                """,
-                images: ["c_ii_13", "c_ii_13_2", "c_ii_13_3"],
                 parts: [
                     ModelPart(
                         modelPath: "Assets/Models/monticulo-13/monticulo-13-Plane004.obj",
@@ -406,7 +401,16 @@ final class POIRegistry {
                         texturePath: "models/textures/clay_plaster_diff_4k.jpg",
                         baseScale: 0.8
                     )
-                ]
+                ],
+                description: """
+                Hallazgos y funciones:
+
+                • Clásico tardío (575-900 d. C.): Construcción de la plataforma de barro que se está visualizando, en la cual se realizaron actividades rituales, debido al hallazgo de incensarios quebrados y vasijas con restos de material quemado. También se colocó el Monumento 224, tallado en sus cuatro lados. Las escenas representadas incluyen once círculos, un individuo arrodillado y otro de pie, una serpiente o pescado y una lengua bífida. El monumento data del Preclásico y se reutilizó durante el Clásico tardío, porque Kaminaljuyú experimentó una descentralización del poder, lo que impulsó un retorno a la ideología pasada.
+                • Clásico temprano (250-575 d. C.): Construcción de tres escalinatas superpuestas, doce apisonados y ocho pisos de barro.
+                • Preclásico tardío-terminal (100 a. C.-250 d. C.): Construcción de dos drenajes de piedra, deposición de huesos humanos y una vasija en forma de cuerpo humano esqueletizado.
+                """,
+                images: ["c_ii_13", "c_ii_13_2", "c_ii_13_3"],
+                
             )
         ]
     }()
