@@ -2,7 +2,9 @@ import SwiftUI
 import Combine
 
 struct GuidedTourOverlay: View {
-    @ObservedObject private var guideVM = VirtualGuideModuleInterface.shared
+    @EnvironmentObject var guideVM: VirtualGuideModuleInterface
+    @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject var gps: GPSModuleInterface
     @State private var cancellables = Set<AnyCancellable>()
     // El aviso del gesto video/mapa se enseña una sola vez por recorrido,
     // al arrancar el primer video.
@@ -79,8 +81,8 @@ struct GuidedTourOverlay: View {
                 .receive(on: DispatchQueue.main)
                 .sink { event in
                     if case .tourEndCompleted = event {
-                        AppStateManager.shared.completeTour()
-                        GPSModuleInterface.shared.stopTour()
+                        appState.completeTour()
+                        gps.stopTour()
                         onTourEnded()
                     }
                 }
@@ -94,7 +96,9 @@ struct GuidedTourOverlay: View {
 }
 
 struct ContentView: View {
-    @StateObject private var router = AppRouter.shared
+    @EnvironmentObject var router: AppRouter
+    @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject var gps: GPSModuleInterface
     @State private var isLoading = true
     @State private var showInstructions = false
     @State private var showTerms = false
@@ -139,8 +143,8 @@ struct ContentView: View {
                         onStartTour: {
                             // AppStateManager es la fuente autoritativa del inicio del tour.
                             // VirtualGuide observa AppState.currentState y reacciona.
-                            AppStateManager.shared.startTour()
-                            GPSModuleInterface.shared.startTour()
+                            appState.startTour()
+                            gps.startTour()
                             router.navigateTo(.guidedTour)
                         },
                         onFinalize: {
@@ -157,7 +161,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                GPSModuleInterface.shared.startTracking()
+                gps.startTracking()
             }
         }
     }

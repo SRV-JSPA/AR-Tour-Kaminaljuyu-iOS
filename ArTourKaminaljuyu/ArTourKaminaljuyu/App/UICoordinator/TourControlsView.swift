@@ -11,7 +11,7 @@ struct TourControlsView: View {
     var onBack: () -> Void = {}
     var onStartTour: () -> Void = {}
     var onFinalize: () -> Void = {}
-    @ObservedObject private var languageService = LanguageService.shared
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         ZStack {

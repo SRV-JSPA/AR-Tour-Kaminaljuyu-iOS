@@ -36,9 +36,9 @@ struct MainMenuView: View {
 
     @State private var player: AVPlayer?
     @State private var bienvenidaPlayer: AVPlayer?
-    @State private var selectedLanguage: String = LanguageService.shared.currentLanguage
+    @State private var selectedLanguage: String = "ES"
     @State private var showFreeTourModal = false
-    @ObservedObject private var languageService = LanguageService.shared
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         GeometryReader { geo in
@@ -165,7 +165,7 @@ struct MainMenuView: View {
                         HStack(spacing: 8) {
                             Button(action: {
                                 selectedLanguage = "ES"
-                                LanguageService.shared.setLanguage("ES")
+                                languageService.setLanguage("ES")
                             }) {
                                 Text("ES")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
@@ -176,7 +176,7 @@ struct MainMenuView: View {
                                 .font(.system(size: 18))
                             Button(action: {
                                 selectedLanguage = "EN"
-                                LanguageService.shared.setLanguage("EN")
+                                languageService.setLanguage("EN")
                             }) {
                                 Text("EN")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
@@ -329,7 +329,7 @@ class PlayerUIView: UIView {
 
 struct ComingSoonView: View {
     let onDismiss: () -> Void
-    @ObservedObject private var languageService = LanguageService.shared
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         ZStack {
@@ -367,4 +367,7 @@ struct ComingSoonView: View {
     }
 }
 
-#Preview { MainMenuView() }
+#Preview {
+    MainMenuView()
+        .environmentObject(LanguageService.shared)
+}
