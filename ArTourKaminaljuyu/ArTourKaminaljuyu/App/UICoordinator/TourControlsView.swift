@@ -36,7 +36,7 @@ struct TourControlsView: View {
                                     .foregroundColor(.white.opacity(0.8))
                             }
                             Spacer()
-                            Button(action: onStartTour) {
+                            Button(action: onBack) {
                                 Image(systemName: "xmark")
                                     .foregroundColor(.white)
                                     .padding(12)
