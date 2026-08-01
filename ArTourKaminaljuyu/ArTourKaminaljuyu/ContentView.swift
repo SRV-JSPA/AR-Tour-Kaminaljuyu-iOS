@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 struct GuidedTourOverlay: View {
-    @StateObject private var guideVM = VirtualGuideViewModel()
+    @ObservedObject private var guideVM = VirtualGuideModuleInterface.shared
     @State private var cancellables = Set<AnyCancellable>()
     // El aviso del gesto video/mapa se enseña una sola vez por recorrido,
     // al arrancar el primer video.
@@ -107,7 +107,7 @@ struct ContentView: View {
         } else {
             ZStack {
                 // AR always loaded in background
-                ARViewControllerWrapper()
+                ARModuleView()
                     .ignoresSafeArea()
 
                 // Navigation on top

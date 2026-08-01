@@ -91,7 +91,7 @@ private struct TapRippleIcon: View {
 /// Botón permanente sobre el recuadro del guía: recuerda que el contenido se
 /// puede alternar y ejecuta el mismo toggle que el toque en el recuadro.
 struct VideoMapToggleButton: View {
-    @ObservedObject var viewModel: VirtualGuideViewModel
+    @ObservedObject var viewModel: VirtualGuideModuleInterface
     @ObservedObject private var languageService = LanguageService.shared
 
     var body: some View {
