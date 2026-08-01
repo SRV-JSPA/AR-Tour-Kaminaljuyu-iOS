@@ -126,7 +126,7 @@ final class VirtualGuideModuleInterface: ObservableObject {
 
     func start() {
         guard cancellables.isEmpty else { return }
-        print("[VirtualGuide] start() — suscribiendo a proximidad + EventBus")
+        print("[VirtualGuide] start() — suscribiendo a proximidad + EventBus + AppState")
         configureAudioSession()
 
         GPSModuleInterface.shared.$nearestPOI
@@ -141,19 +141,28 @@ final class VirtualGuideModuleInterface: ObservableObject {
             .sink { [weak self] event in
                 guard let self else { return }
                 switch event {
-                case .tourStarted:
-                    print("[VirtualGuide] tourStarted — startWalking()")
-                    self.startWalking()
                 case .nextPOIRequested:
                     print("[VirtualGuide] nextPOIRequested — deteniendo video actual y limpiando cola")
                     self.clearQueueAndStop()
                 case .tourEndRequested:
                     print("[VirtualGuide] tourEndRequested — reproduciendo despedida")
                     self.playDespedida()
-                case .tourCompleted:
-                    self.enqueue(self.videoDespedida)
                 default:
                     break
+                }
+            }
+            .store(in: &cancellables)
+
+        // Observación reactiva de AppState — reemplaza al viejo evento .tourStarted.
+        // Cuando el tour entra a .inTour (desde ContentView.onStartTour →
+        // AppStateManager.startTour()), disparamos startWalking() una sola vez.
+        AppStateManager.shared.$currentState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                guard let self else { return }
+                if case .inTour = state, !self.hasStartedWalking {
+                    print("[VirtualGuide] AppState -> .inTour — startWalking()")
+                    self.startWalking()
                 }
             }
             .store(in: &cancellables)

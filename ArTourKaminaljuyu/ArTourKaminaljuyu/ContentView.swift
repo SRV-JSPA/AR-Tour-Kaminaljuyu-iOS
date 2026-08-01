@@ -69,13 +69,17 @@ struct GuidedTourOverlay: View {
             withAnimation(.easeOut(duration: 0.4)) { showsToggleHint = false }
         }
         .onAppear {
-            guideVM.start()
+            // Orden importante: primero se encolan los videos de intro; luego start()
+            // subscribe a AppState y, si ya está en .inTour, dispara startWalking()
+            // que encola el video de flecha DESPUÉS de los intros.
             guideVM.playIntroSequence()
+            guideVM.start()
 
             EventBus.shared.publisher
                 .receive(on: DispatchQueue.main)
                 .sink { event in
                     if case .tourEndCompleted = event {
+                        AppStateManager.shared.completeTour()
                         GPSModuleInterface.shared.stopTour()
                         onTourEnded()
                     }
@@ -133,6 +137,9 @@ struct ContentView: View {
                     TourControlsView(
                         onBack: { router.navigateTo(.menu) },
                         onStartTour: {
+                            // AppStateManager es la fuente autoritativa del inicio del tour.
+                            // VirtualGuide observa AppState.currentState y reacciona.
+                            AppStateManager.shared.startTour()
                             GPSModuleInterface.shared.startTour()
                             router.navigateTo(.guidedTour)
                         },

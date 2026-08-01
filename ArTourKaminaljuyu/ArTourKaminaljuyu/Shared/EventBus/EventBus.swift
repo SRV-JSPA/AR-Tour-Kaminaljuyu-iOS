@@ -9,8 +9,6 @@ import Foundation
 import Combine
 
 enum AppEvent {
-    case tourStarted
-    case tourCompleted
     case languageChanged(language: String)
     case nextPOIRequested
     case tourEndRequested
