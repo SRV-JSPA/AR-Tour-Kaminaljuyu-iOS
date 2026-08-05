@@ -56,10 +56,23 @@ final class VirtualGuideModuleInterface: ObservableObject {
     // ambos radios los flags se resetean y el video de proximidad se repite.
     private let resetDistanceMeters: Double = 20.0
 
+    // POI id (tal como está en POIRegistry) -> clave del video específico de ese
+    // montículo. La clave es el nombre del archivo en español; `videoLocalizations`
+    // resuelve el archivo real según el idioma activo.
+    //
+    // `informacion_inicial` no lleva video propio: al iniciar el recorrido se
+    // reproduce la secuencia de intro (Datos generales + Datos arqueológicos).
     private let videoMap: [String: String] = [
-        "monticulo_6": "M CII 5_final",
-        "acropolis": "Estructura E_final",
-        "monticulo_3": "M CII 13_final"
+        "monticulo_3":  "M CII 3_final",
+        "monticulo_5":  "M CII 5_final",
+        "monticulo_6":  "M CII 6_final",
+        "monticulo_7":  "M CII 7_final",
+        "monticulo_8":  "M CII 8_final",
+        "monticulo_12": "M CII 12_final",
+        "monticulo_13": "M CII 13_final",
+        "monticulo_14": "M CII 14_final",
+        "acropolis":    "Acrópolis CII 4_final",
+        "palangana":    "Estructura E_final"
     ]
 
     private let videoProximity = "Indicación de proximidad_final"
@@ -99,17 +112,46 @@ final class VirtualGuideModuleInterface: ObservableObject {
             "ES": LocalizedVideoFile(name: "Despedida_final", ext: "mov"),
             "EN": LocalizedVideoFile(name: "Goodbye_final", ext: "mov")
         ],
+        // Videos específicos por montículo (uno por POI del recorrido).
+        "M CII 3_final": [
+            "ES": LocalizedVideoFile(name: "M CII 3_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII3_en_final", ext: "mov")
+        ],
         "M CII 5_final": [
             "ES": LocalizedVideoFile(name: "M CII 5_final", ext: "mov"),
             "EN": LocalizedVideoFile(name: "MCII5_en_final", ext: "mov")
         ],
-        "Estructura E_final": [
-            "ES": LocalizedVideoFile(name: "Estructura E_final", ext: "mov"),
-            "EN": LocalizedVideoFile(name: "StructureE_final", ext: "mov")
+        "M CII 6_final": [
+            "ES": LocalizedVideoFile(name: "M CII 6_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII6_en_final", ext: "mov")
+        ],
+        "M CII 7_final": [
+            "ES": LocalizedVideoFile(name: "M CII 7_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII7_en_final", ext: "mov")
+        ],
+        "M CII 8_final": [
+            "ES": LocalizedVideoFile(name: "M CII 8_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII8_en_final", ext: "mov")
+        ],
+        "M CII 12_final": [
+            "ES": LocalizedVideoFile(name: "M CII 12_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII12_en_final", ext: "mov")
         ],
         "M CII 13_final": [
             "ES": LocalizedVideoFile(name: "M CII 13_final", ext: "mov"),
             "EN": LocalizedVideoFile(name: "MCII13_en_final", ext: "mov")
+        ],
+        "M CII 14_final": [
+            "ES": LocalizedVideoFile(name: "M CII 14_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "MCII14_en_final", ext: "mov")
+        ],
+        "Acrópolis CII 4_final": [
+            "ES": LocalizedVideoFile(name: "Acrópolis CII 4_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "AcropolisCII4_en_final", ext: "mov")
+        ],
+        "Estructura E_final": [
+            "ES": LocalizedVideoFile(name: "Estructura E_final", ext: "mov"),
+            "EN": LocalizedVideoFile(name: "StructureE_final", ext: "mov")
         ]
     ]
 
@@ -122,12 +164,48 @@ final class VirtualGuideModuleInterface: ObservableObject {
         return Bundle.main.url(forResource: localized.name, withExtension: localized.ext)
     }
 
+    #if DEBUG
+    /// Reporta en consola los huecos del catálogo: POIs sin video mapeado, claves
+    /// mapeadas sin localización y archivos que no están en el bundle. Sirve para
+    /// validar el mapeo sin tener que llegar físicamente a cada montículo.
+    private func logVideoCatalogStatus() {
+        let poisSinVideo = GPSModuleInterface.shared.allPOIs
+            .map(\.id)
+            .filter { $0 != "informacion_inicial" && videoMap[$0] == nil }
+        if !poisSinVideo.isEmpty {
+            print("[VirtualGuide] ⚠ catálogo: POIs sin video específico -> \(poisSinVideo.joined(separator: ", "))")
+        }
+
+        for (poiId, key) in videoMap.sorted(by: { $0.key < $1.key }) where videoLocalizations[key] == nil {
+            print("[VirtualGuide] ⚠ catálogo: POI \(poiId) apunta a '\(key)', que no está en videoLocalizations")
+        }
+
+        for (key, variants) in videoLocalizations.sorted(by: { $0.key < $1.key }) {
+            for lang in ["ES", "EN"] {
+                guard let file = variants[lang] else {
+                    print("[VirtualGuide] ⚠ catálogo: '\(key)' no tiene variante \(lang)")
+                    continue
+                }
+                if Bundle.main.url(forResource: file.name, withExtension: file.ext) == nil {
+                    print("[VirtualGuide] ⚠ catálogo: '\(key)' [\(lang)] -> \(file.name).\(file.ext) no está en el bundle")
+                }
+            }
+        }
+
+        print("[VirtualGuide] catálogo verificado: \(videoMap.count) POIs con video, \(videoLocalizations.count) videos registrados")
+    }
+    #endif
+
     private var endingTour: Bool = false
 
     func start() {
         guard cancellables.isEmpty else { return }
         print("[VirtualGuide] start() — suscribiendo a proximidad + EventBus + AppState")
         configureAudioSession()
+
+        #if DEBUG
+        logVideoCatalogStatus()
+        #endif
 
         GPSModuleInterface.shared.$nearestPOI
             .receive(on: DispatchQueue.main)
