@@ -10,10 +10,29 @@ enum AppConfig {
     // MARK: - Umbrales de visibilidad
     static let visibilityRadiusMeters: Double = 100.0
 
-    // MARK: - Coordenada de inicio del tour
+    // MARK: - Conectores de ruta
+    //
+    // Los conectores de RouteConfig son waypoints trazados sobre los senderos del
+    // parque. Con el recorrido de prueba en la UVG apuntarían a coordenadas a
+    // kilómetros de distancia y, como el navegador solo avanza al acercarse a
+    // `connectorArrivalMeters`, el tour quedaría trabado entre POIs.
+    //
+    // false -> navegación en línea recta de POI a POI (recorrido de prueba UVG).
+    // true  -> conectores del parque (recorrido real en Kaminaljuyú).
+    static let routeConnectorsEnabled: Bool = false
 
-    static let tourStartLatitude: Double  = 14.6748361
-    static let tourStartLongitude: Double = -90.5520308
+    // MARK: - Coordenada de inicio del tour
+    //
+    // TourManager.startTour() exige estar a menos de `tourStartRadiusMeters` de
+    // este punto, y el tramo de regreso termina aquí. Debe coincidir con el
+    // primer POI del recorrido activo en POIRegistry.
+    //
+    // Actual: recorrido de prueba de 11 POIs en la UVG (POI 1, informacion_inicial).
+    // Valores anteriores, para restaurar cuando se vuelva al parque:
+    //   Parque Kaminaljuyú -> el POI 1 real del sitio
+    //   Pruebas en casa    -> (14.6748361, -90.5520308)
+    static let tourStartLatitude: Double  = 14.6049438
+    static let tourStartLongitude: Double = -90.4903923
     
     
     // MARK: - Calidad del GPS

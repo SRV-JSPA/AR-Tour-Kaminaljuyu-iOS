@@ -142,45 +142,6 @@ final class ARGuideArrowManager {
         SCNTransaction.commit()
     }
 
-    // MARK: - Update con GPS
-    func updateWithGPS(userLocation: CLLocationCoordinate2D, targetLocation: CLLocationCoordinate2D) {
-        guard let arrow = arrowNode,
-              let pov = sceneView?.pointOfView else { return }
-
-        if !isVisible {
-            isVisible = true
-            DispatchQueue.main.async { self.arrowNode?.isHidden = false }
-        }
-
-        let lat1 = userLocation.latitude * .pi / 180
-        let lat2 = targetLocation.latitude * .pi / 180
-        let dLon = (targetLocation.longitude - userLocation.longitude) * .pi / 180
-
-        let y = sin(dLon) * cos(lat2)
-        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
-        let bearing = Float(atan2(y, x))
-
-        let worldQ = simd_quatf(angle: bearing, axis: SIMD3<Float>(0, 1, 0))
-        let camWorldQ = simd_quatf(pov.simdWorldTransform)
-        let localQ = camWorldQ.inverse * worldQ
-
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.12
-        arrow.simdOrientation = localQ
-        SCNTransaction.commit()
-    }
-
-    // MARK: - Show / Hide
-    func show() {
-        isVisible = true
-        arrowNode?.isHidden = false
-    }
-
-    func hide() {
-        isVisible = false
-        arrowNode?.isHidden = true
-    }
-
     // MARK: - Bundle resolution
     private func resolveOBJ() -> URL? {
         if let url = Bundle.main.url(forResource: modelName, withExtension: "obj") {

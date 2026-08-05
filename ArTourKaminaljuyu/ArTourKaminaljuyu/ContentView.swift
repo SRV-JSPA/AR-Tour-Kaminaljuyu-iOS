@@ -2,7 +2,9 @@ import SwiftUI
 import Combine
 
 struct GuidedTourOverlay: View {
-    @StateObject private var guideVM = VirtualGuideViewModel()
+    @EnvironmentObject var guideVM: VirtualGuideModuleInterface
+    @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject var gps: GPSModuleInterface
     @State private var cancellables = Set<AnyCancellable>()
     // El aviso del gesto video/mapa se enseña una sola vez por recorrido,
     // al arrancar el primer video.
@@ -69,14 +71,18 @@ struct GuidedTourOverlay: View {
             withAnimation(.easeOut(duration: 0.4)) { showsToggleHint = false }
         }
         .onAppear {
-            guideVM.start()
+            // Orden importante: primero se encolan los videos de intro; luego start()
+            // subscribe a AppState y, si ya está en .inTour, dispara startWalking()
+            // que encola el video de flecha DESPUÉS de los intros.
             guideVM.playIntroSequence()
+            guideVM.start()
 
             EventBus.shared.publisher
                 .receive(on: DispatchQueue.main)
                 .sink { event in
                     if case .tourEndCompleted = event {
-                        GPSModuleInterface.shared.stopTour()
+                        appState.completeTour()
+                        gps.stopTour()
                         onTourEnded()
                     }
                 }
@@ -90,7 +96,9 @@ struct GuidedTourOverlay: View {
 }
 
 struct ContentView: View {
-    @StateObject private var router = AppRouter.shared
+    @EnvironmentObject var router: AppRouter
+    @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject var gps: GPSModuleInterface
     @State private var isLoading = true
     @State private var showInstructions = false
     @State private var showTerms = false
@@ -107,7 +115,7 @@ struct ContentView: View {
         } else {
             ZStack {
                 // AR always loaded in background
-                ARViewControllerWrapper()
+                ARModuleView()
                     .ignoresSafeArea()
 
                 // Navigation on top
@@ -133,7 +141,10 @@ struct ContentView: View {
                     TourControlsView(
                         onBack: { router.navigateTo(.menu) },
                         onStartTour: {
-                            GPSModuleInterface.shared.startTour()
+                            // AppStateManager es la fuente autoritativa del inicio del tour.
+                            // VirtualGuide observa AppState.currentState y reacciona.
+                            appState.startTour()
+                            gps.startTour()
                             router.navigateTo(.guidedTour)
                         },
                         onFinalize: {
@@ -150,7 +161,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                GPSModuleInterface.shared.startTracking()
+                gps.startTracking()
             }
         }
     }

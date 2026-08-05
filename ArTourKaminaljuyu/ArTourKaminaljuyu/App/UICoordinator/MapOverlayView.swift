@@ -10,7 +10,7 @@ import Combine
 
 struct MapOverlayView: View {
 
-    @ObservedObject private var gps = GPSModuleInterface.shared
+    @EnvironmentObject var gps: GPSModuleInterface
 
     // MARK: - Aviso temporal de distancia
     // Cada `noticePeriodSeconds` el mensaje de estado se sustituye por el aviso

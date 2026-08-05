@@ -11,7 +11,7 @@ struct TourControlsView: View {
     var onBack: () -> Void = {}
     var onStartTour: () -> Void = {}
     var onFinalize: () -> Void = {}
-    @ObservedObject private var languageService = LanguageService.shared
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         ZStack {
@@ -36,7 +36,7 @@ struct TourControlsView: View {
                                     .foregroundColor(.white.opacity(0.8))
                             }
                             Spacer()
-                            Button(action: onStartTour) {
+                            Button(action: onBack) {
                                 Image(systemName: "xmark")
                                     .foregroundColor(.white)
                                     .padding(12)

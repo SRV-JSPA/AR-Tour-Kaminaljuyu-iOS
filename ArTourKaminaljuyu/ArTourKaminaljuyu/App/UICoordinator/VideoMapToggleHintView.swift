@@ -12,7 +12,7 @@ import SwiftUI
 /// Aviso temporal que se muestra sobre el recuadro del guía la primera vez
 /// que arranca un video, para enseñar el gesto de toque.
 struct VideoMapToggleHintView: View {
-    @ObservedObject private var languageService = LanguageService.shared
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         VStack {
@@ -91,8 +91,8 @@ private struct TapRippleIcon: View {
 /// Botón permanente sobre el recuadro del guía: recuerda que el contenido se
 /// puede alternar y ejecuta el mismo toggle que el toque en el recuadro.
 struct VideoMapToggleButton: View {
-    @ObservedObject var viewModel: VirtualGuideViewModel
-    @ObservedObject private var languageService = LanguageService.shared
+    @ObservedObject var viewModel: VirtualGuideModuleInterface
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         Button {

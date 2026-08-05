@@ -23,9 +23,15 @@ struct RouteConfig {
     // MARK: - Mapa de conectores
     
     
+    // Waypoints sobre los senderos del parque. Se desactivan con
+    // `AppConfig.routeConnectorsEnabled` cuando el recorrido activo no es el del
+    // sitio real (por ejemplo el recorrido de prueba en la UVG): sin conectores
+    // la navegación va en línea recta de POI a POI.
     static let CONNECTORS: [String: [CLLocationCoordinate2D]] = {
+        guard AppConfig.routeConnectorsEnabled else { return [:] }
+
         var map = [String: [CLLocationCoordinate2D]]()
-        
+
         map[routeKey(from: "informacion_inicial", to: "monticulo_6")] = [
             CLLocationCoordinate2D(latitude: 14.63141060, longitude: -90.54846954),
             CLLocationCoordinate2D(latitude: 14.63158607, longitude: -90.54853058),

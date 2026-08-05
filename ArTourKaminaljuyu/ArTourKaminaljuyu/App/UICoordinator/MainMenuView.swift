@@ -36,8 +36,9 @@ struct MainMenuView: View {
 
     @State private var player: AVPlayer?
     @State private var bienvenidaPlayer: AVPlayer?
-    @State private var selectedLanguage: String = LanguageService.shared.currentLanguage
-    @ObservedObject private var languageService = LanguageService.shared
+    @State private var selectedLanguage: String = "ES"
+    @State private var showFreeTourModal = false
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         GeometryReader { geo in
@@ -102,7 +103,7 @@ struct MainMenuView: View {
                             gradientStart: Color(hex: "#E6BA62"),
                             gradientEnd: Color(hex: "#E6BA62"),
                             strokeColor: Color(hex: "#C4714A"),
-                            action: onFreeTour
+                            action: { showFreeTourModal = true }
                         )
                         .padding(.bottom, 10)
 
@@ -164,7 +165,7 @@ struct MainMenuView: View {
                         HStack(spacing: 8) {
                             Button(action: {
                                 selectedLanguage = "ES"
-                                LanguageService.shared.setLanguage("ES")
+                                languageService.setLanguage("ES")
                             }) {
                                 Text("ES")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
@@ -175,7 +176,7 @@ struct MainMenuView: View {
                                 .font(.system(size: 18))
                             Button(action: {
                                 selectedLanguage = "EN"
-                                LanguageService.shared.setLanguage("EN")
+                                languageService.setLanguage("EN")
                             }) {
                                 Text("EN")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
@@ -187,7 +188,14 @@ struct MainMenuView: View {
                     }
                     Spacer()
                 }
+
+                if showFreeTourModal {
+                    ComingSoonView(onDismiss: { showFreeTourModal = false })
+                        .transition(.opacity)
+                        .zIndex(100)
+                }
             }
+            .animation(.easeInOut(duration: 0.2), value: showFreeTourModal)
         }
         .onAppear {
             setupVideo()
@@ -319,4 +327,47 @@ class PlayerUIView: UIView {
     }
 }
 
-#Preview { MainMenuView() }
+struct ComingSoonView: View {
+    let onDismiss: () -> Void
+    @EnvironmentObject var languageService: LanguageService
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.6)
+                .ignoresSafeArea()
+                .contentShape(Rectangle())
+                .onTapGesture { onDismiss() }
+
+            VStack(spacing: 20) {
+                Text(languageService.string("coming_soon_title"))
+                    .font(.custom("PlusJakartaSans-Bold", size: 20))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+
+                Text(languageService.string("coming_soon_message"))
+                    .font(.custom("PlusJakartaSans-Regular", size: 15))
+                    .foregroundColor(.white.opacity(0.85))
+                    .multilineTextAlignment(.center)
+
+                Button(action: onDismiss) {
+                    Text("OK")
+                        .font(.custom("PlusJakartaSans-Bold", size: 16))
+                        .foregroundColor(.white)
+                        .frame(width: 100, height: 44)
+                        .background(Color(hex: "#D15B33"))
+                        .clipShape(Capsule())
+                }
+                .padding(.top, 4)
+            }
+            .padding(24)
+            .background(Color.black.opacity(0.75))
+            .cornerRadius(20)
+            .padding(.horizontal, 40)
+        }
+    }
+}
+
+#Preview {
+    MainMenuView()
+        .environmentObject(LanguageService.shared)
+}

@@ -86,6 +86,7 @@ final class ARViewController: UIViewController {
         let confirmView = BackConfirmationView(
             onConfirm: { [weak self] in
                 self?.dismiss(animated: true) {
+                    AppStateManager.shared.reset()
                     GPSModuleInterface.shared.stopTour()
                     AppRouter.shared.navigateTo(.menu)
                 }
@@ -306,9 +307,9 @@ final class ARViewController: UIViewController {
 
         print("[AR] placed POI[\(currentPOIIndex)] '\(poi.id)'")
 
-        if isFirstTap {
-            EventBus.shared.publish(.tourStarted)
-        } else {
+        // .tourStarted es ahora derivado por AppStateManager (state observation) —
+        // ARModule solo publica solicitudes explícitas del usuario.
+        if !isFirstTap {
             EventBus.shared.publish(.nextPOIRequested)
         }
     }

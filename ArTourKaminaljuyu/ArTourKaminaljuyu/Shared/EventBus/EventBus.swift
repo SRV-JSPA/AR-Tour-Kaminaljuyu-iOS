@@ -9,11 +9,6 @@ import Foundation
 import Combine
 
 enum AppEvent {
-    case poiReached(poiId: String)
-    case tourStarted
-    case tourCompleted
-    case poiChanged(poiId: String?)
-    case locationUpdated(latitude: Double, longitude: Double, heading: Double)
     case languageChanged(language: String)
     case nextPOIRequested
     case tourEndRequested

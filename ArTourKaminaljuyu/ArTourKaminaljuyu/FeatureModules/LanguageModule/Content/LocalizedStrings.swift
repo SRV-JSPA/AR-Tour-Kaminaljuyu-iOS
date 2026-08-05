@@ -52,7 +52,11 @@ struct LocalizedStrings {
             // Back confirmation modal
             "back_confirm_title": "¿Regresar al menú?",
             "back_confirm_message": "El recorrido actual se reiniciará.",
-            
+
+            // Coming Soon modal
+            "coming_soon_title": "Próximamente",
+            "coming_soon_message": "Esta función estará disponible en una próxima actualización.",
+
             // TermsView
             "terms_title": "Términos y Condiciones",
             "terms_intro": "Bienvenido a la aplicación de recorrido virtual del Parque Arqueológico Kaminaljuyú. Al utilizar esta aplicación, usted acepta los siguientes términos:",
@@ -102,7 +106,11 @@ struct LocalizedStrings {
             // Back confirmation modal
             "back_confirm_title": "Return to menu?",
             "back_confirm_message": "The current tour will be reset.",
-            
+
+            // Coming Soon modal
+            "coming_soon_title": "Coming Soon",
+            "coming_soon_message": "This feature will be available in a future update.",
+
             // TermsView
             "terms_title": "Terms and Conditions",
             "terms_intro": "Welcome to the virtual tour application of the Kaminaljuyú Archaeological Park. By using this application, you agree to the following terms:",

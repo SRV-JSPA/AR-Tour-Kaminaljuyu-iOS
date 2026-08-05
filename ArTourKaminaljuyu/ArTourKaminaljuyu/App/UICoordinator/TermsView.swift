@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TermsView: View {
     var onBack: () -> Void = {}
-    @ObservedObject private var languageService = LanguageService.shared
+    @EnvironmentObject var languageService: LanguageService
 
     var body: some View {
         GeometryReader { geo in
@@ -110,4 +110,7 @@ struct TermsView: View {
     }
 }
 
-#Preview { TermsView() }
+#Preview {
+    TermsView()
+        .environmentObject(LanguageService.shared)
+}
