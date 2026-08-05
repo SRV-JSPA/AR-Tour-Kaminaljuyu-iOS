@@ -1052,7 +1052,7 @@ enum VideoTranscripts {
             TranscriptCue(
                 text: "cultural deposit, consisting of a vessel fragment, an incense burner, and an obsidian spear point.",
                 startTime: 17.700,
-                endTime: 22.880
+                endTime: 22.880 
             ),
             TranscriptCue(
                 text: "two mandibles, teeth, and a skull fragment were also found, which may have been related to some",
