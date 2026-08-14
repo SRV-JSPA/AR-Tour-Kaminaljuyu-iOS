@@ -269,6 +269,13 @@ final class VirtualGuideModuleInterface: ObservableObject {
         print("[VirtualGuide] toggleTranscript -> showsTranscript=\(showsTranscript)")
     }
 
+    func poiDescription(forPOIId id: String) -> String {
+        guard let videoKey = videoMap[id] else { return "" }
+        let lang = LanguageService.shared.currentLanguage
+        guard let cues = VideoTranscripts.cues(for: videoKey, language: lang) else { return "" }
+        return cues.map(\.text).joined(separator: " ")
+    }
+
     private func loadTranscript(for videoName: String) {
         let lang = LanguageService.shared.currentLanguage
         guard let cues = VideoTranscripts.cues(for: videoName, language: lang), !cues.isEmpty else {

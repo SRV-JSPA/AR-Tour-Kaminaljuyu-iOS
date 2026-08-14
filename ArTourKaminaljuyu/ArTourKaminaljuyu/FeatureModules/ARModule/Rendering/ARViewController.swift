@@ -349,8 +349,9 @@ final class ARViewController: UIViewController {
         stack.addArrangedSubview(makeLabel(poi.name, font: .boldSystemFont(ofSize: 22)))
 
         // Description
-        if !poi.description.isEmpty {
-            stack.addArrangedSubview(makeLabel(poi.description,
+        let desc = VirtualGuideModuleInterface.shared.poiDescription(forPOIId: poi.id)
+        if !desc.isEmpty {
+            stack.addArrangedSubview(makeLabel(desc,
                                                font: .systemFont(ofSize: 16),
                                                color: .secondaryLabel))
         }
