@@ -425,3 +425,7 @@ final class POIRegistry {
         pois[0].coordinate
     }
 }
+
+
+
+///
