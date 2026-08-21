@@ -238,6 +238,9 @@ final class ARViewController: UIViewController {
                     userLocation: location,
                     horizontalAccuracy: GPSModuleInterface.shared.userHorizontalAccuracy
                 )
+                // El botón de avanzar depende de si el modelo ya se reveló, así
+                // que se reevalúa con cada lectura de GPS mientras el usuario camina.
+                self.updateNextModelButton()
             }
             .store(in: &cancellables)
 
@@ -406,6 +409,15 @@ final class ARViewController: UIViewController {
         } else {
             nextModelButton.setImage(UIImage(systemName: "checkmark", withConfiguration: config), for: .normal)
         }
+
+        // Avanzar al siguiente montículo se habilita solo cuando el modelo actual
+        // ya se reveló (el usuario entró al radio de visibilidad). La primera
+        // pulsación —la que coloca el modelo— queda siempre habilitada: sin ancla
+        // colocada, la flecha guía no tiene a dónde apuntar y no podría llevar al
+        // usuario hasta el montículo.
+        let canAdvance = !hasPlacedModel || sceneManager.isActiveModelRevealed
+        nextModelButton.isEnabled = canAdvance
+        nextModelButton.alpha     = canAdvance ? 1.0 : 0.4
     }
 
     // MARK: - Gesture handlers

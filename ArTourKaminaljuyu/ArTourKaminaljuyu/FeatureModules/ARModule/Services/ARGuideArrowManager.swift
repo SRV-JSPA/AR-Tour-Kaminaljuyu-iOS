@@ -11,6 +11,11 @@ final class ARGuideArrowManager {
     private let modelScale: Float = 0.08
     private let modelName = "flecha"
 
+    /// A menos de esta distancia del modelo la flecha se oculta: el usuario ya
+    /// llegó, y de cerca el ángulo se vuelve errático (pequeños pasos giran la
+    /// flecha de golpe) además de estorbar la vista del montículo.
+    private let hideWithinMeters: Float = 8.0
+
     // MARK: - State
     private weak var sceneView: ARSCNView?
     private var arrowNode: SCNNode?
@@ -114,22 +119,24 @@ final class ARGuideArrowManager {
     // MARK: - Update
 
     func update(modelWorldPosition: SIMD3<Float>?) {
-        let hasPOI = modelWorldPosition != nil
-
-        if hasPOI != isVisible {
-            isVisible = hasPOI
-            DispatchQueue.main.async { self.arrowNode?.isHidden = !hasPOI }
-        }
-
         guard let target = modelWorldPosition,
               let arrow  = arrowNode,
-              let pov    = sceneView?.pointOfView else { return }
+              let pov    = sceneView?.pointOfView else {
+            // Sin modelo colocado no hay a dónde apuntar: la flecha solo existe
+            // entre que el usuario tapea Next y que llega al montículo.
+            setVisible(false)
+            return
+        }
 
         let camPos     = pov.simdWorldPosition
         let camFlat    = SIMD3<Float>(camPos.x, 0, camPos.z)
         let targetFlat = SIMD3<Float>(target.x, 0, target.z)
         let diff       = targetFlat - camFlat
-        guard simd_length(diff) > 0.01 else { return }
+        let distance   = simd_length(diff)
+
+        setVisible(distance > hideWithinMeters)
+
+        guard distance > 0.01 else { return }
 
         let worldAngle = -atan2(diff.x, -diff.z)
         let worldQ     = simd_quatf(angle: worldAngle, axis: SIMD3<Float>(0, 1, 0))
@@ -140,6 +147,15 @@ final class ARGuideArrowManager {
         SCNTransaction.animationDuration = 0.12
         arrow.simdOrientation = localQ
         SCNTransaction.commit()
+    }
+
+    // `update` corre en cada frame de AR, así que solo se toca el nodo cuando
+    // el estado realmente cambia.
+    private func setVisible(_ visible: Bool) {
+        guard visible != isVisible else { return }
+        isVisible = visible
+        DispatchQueue.main.async { self.arrowNode?.isHidden = !visible }
+        print("[GuideArrow] \(visible ? "visible" : "oculta")")
     }
 
     // MARK: - Bundle resolution

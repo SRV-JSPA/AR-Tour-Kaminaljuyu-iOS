@@ -353,6 +353,21 @@ final class VirtualGuideModuleInterface: ObservableObject {
 
     private func handleProximityUpdate(_ result: ProximityResult?) {
         guard hasStartedWalking, let result = result else { return }
+
+        // Solo se disparan videos del POI que el recorrido está visitando ahora.
+        // Sin este chequeo, si TourManager no arrancó (p. ej. se tapeó Iniciar
+        // lejos del punto de inicio) ProximityService reporta el montículo más
+        // cercano y sonaba el video del vecino fuera de turno. Preferimos el
+        // silencio a reproducir el video equivocado.
+        guard let targetId = GPSModuleInterface.shared.currentTargetPOI?.id else {
+            print("[VirtualGuide] sin POI objetivo — el tour no arrancó en GPSModule; no se dispara nada")
+            return
+        }
+        guard targetId == result.poi.id else {
+            print("[VirtualGuide] ignorando proximidad a \(result.poi.id): el objetivo actual es \(targetId)")
+            return
+        }
+
         let id = result.poi.id
         let dist = result.effectiveDistanceMeters
 

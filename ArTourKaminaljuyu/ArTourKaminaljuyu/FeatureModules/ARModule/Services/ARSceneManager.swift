@@ -13,6 +13,11 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     private(set) var activeAnchor: ARAnchor?
     private var activePOI:    POILocation?
 
+    /// True cuando el modelo colocado ya se reveló, es decir, el usuario entró
+    /// al radio de `ARConfig.modelVisibilityDistanceMeters`. La UI de AR lo usa
+    /// para no dejar avanzar al siguiente montículo sin haber visto el actual.
+    private(set) var isActiveModelRevealed: Bool = false
+
     // MARK: - User gesture accumulators
     var modelRotationY: Float = 0.0
     var modelScale:     Float = 1.0
@@ -152,6 +157,8 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
             }
         }
 
+        centerPivotContentsHorizontally(pivotNode)
+
         let s = poi.baseScale * ARConfig.globalScaleMultiplier
         pivotNode.scale = SCNVector3(s, s, s)
         pivotNode.simdOrientation = simd_quatf(
@@ -163,6 +170,54 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         pivotNode.enumerateHierarchy { n, _ in if n.geometry != nil { geos += 1 } }
         print("[buildPivot] '\(poi.id)' geos:\(geos) scale:\(s)")
         return pivotNode
+    }
+
+    // MARK: - Horizontal centering
+    //
+    // OBJ meshes are authored with an arbitrary origin (often a corner, not
+    // the geometric center), but the pivot's origin is where the AR anchor
+    // sits — and the guide arrow points straight at that anchor. Any X/Z gap
+    // between mesh origin and mesh center reads as a small angular error from
+    // far away, but becomes an obvious "arrow points beside the model" once
+    // the user is standing close to it.
+    //
+    // This recenters the pivot's children on the X/Z plane only (leaving Y
+    // untouched, since baseAltitudeMeters per POI is already hand-tuned
+    // against the original vertical origin).
+    private func centerPivotContentsHorizontally(_ pivotNode: SCNNode) {
+        var minV = SCNVector3(Float.greatestFiniteMagnitude, 0, Float.greatestFiniteMagnitude)
+        var maxV = SCNVector3(-Float.greatestFiniteMagnitude, 0, -Float.greatestFiniteMagnitude)
+        var found = false
+
+        for child in pivotNode.childNodes {
+            let (childMin, childMax) = child.boundingBox
+            let corners = [
+                SCNVector3(childMin.x, 0, childMin.z),
+                SCNVector3(childMin.x, 0, childMax.z),
+                SCNVector3(childMax.x, 0, childMin.z),
+                SCNVector3(childMax.x, 0, childMax.z),
+            ]
+            for corner in corners {
+                let p = child.convertPosition(corner, to: pivotNode)
+                minV.x = min(minV.x, p.x); maxV.x = max(maxV.x, p.x)
+                minV.z = min(minV.z, p.z); maxV.z = max(maxV.z, p.z)
+                found = true
+            }
+        }
+        guard found else { return }
+
+        let centerX = (minV.x + maxV.x) / 2
+        let centerZ = (minV.z + maxV.z) / 2
+        guard abs(centerX) > 0.0001 || abs(centerZ) > 0.0001 else { return }
+
+        for child in pivotNode.childNodes {
+            child.position = SCNVector3(
+                child.position.x - centerX,
+                child.position.y,
+                child.position.z - centerZ
+            )
+        }
+        print("[buildPivot] horizontal recenter applied: offset=(\(centerX), \(centerZ))")
     }
 
     private func buildNode(modelPath: String, texturePath: String) -> SCNNode? {
@@ -274,6 +329,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         // un umbral de 5m sería inalcanzable sin compensar la precisión.
         let dist = GeoUtils.compensatedDistance(rawDist, horizontalAccuracy: horizontalAccuracy)
         let shouldShow = dist <= ARConfig.modelVisibilityDistanceMeters
+        isActiveModelRevealed = shouldShow
         guard pivot.isHidden == shouldShow else { return }
         pivot.isHidden = !shouldShow
         print("[ARSceneManager] visibility -> \(shouldShow ? "shown" : "hidden") cruda:\(String(format:"%.1f", rawDist))m efectiva:\(String(format:"%.1f", dist))m")
@@ -299,6 +355,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         pivotNode?.removeFromParentNode()
         pivotNode  = nil
         activePOI  = nil
+        isActiveModelRevealed = false
         modelScale     = 1.0
         modelRotationY = 0.0
         modelOffsetY   = 0.0

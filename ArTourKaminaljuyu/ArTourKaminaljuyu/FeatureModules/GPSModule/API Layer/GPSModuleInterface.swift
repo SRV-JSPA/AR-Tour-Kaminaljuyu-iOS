@@ -104,7 +104,8 @@ final class GPSModuleInterface: ObservableObject {
                 self.userHorizontalAccuracy = max(location.horizontalAccuracy, 0)
                 self.proximityService.update(
                     userLocation: coord,
-                    horizontalAccuracy: location.horizontalAccuracy
+                    horizontalAccuracy: location.horizontalAccuracy,
+                    focusPOIId: self.tourManager.currentPOI?.id
                 )
                 self.tourManager.update(userLocation: coord)
             }
@@ -152,6 +153,17 @@ final class GPSModuleInterface: ObservableObject {
         proximityService.$nearestPOI
             .sink { [weak self] result in
                 self?.nearestPOI = result
+            }
+            .store(in: &cancellables)
+
+        // El usuario pidió el siguiente POI desde el módulo AR. TourManager es
+        // quien lleva el orden del recorrido, así que avanza acá; sin esto el
+        // tour quedaba clavado en el POI 0 y `currentTargetPOI` nunca cambiaba.
+        EventBus.shared.publisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] event in
+                guard case .nextPOIRequested = event else { return }
+                self?.tourManager.advanceToNextPOI()
             }
             .store(in: &cancellables)
     }

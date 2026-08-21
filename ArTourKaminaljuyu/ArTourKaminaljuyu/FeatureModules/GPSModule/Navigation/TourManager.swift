@@ -48,10 +48,15 @@ final class TourManager: ObservableObject {
             latitude: AppConfig.tourStartLatitude,
             longitude: AppConfig.tourStartLongitude
         )
+        // El radio de inicio queda como advertencia, no como bloqueo. Antes, si
+        // el usuario tapeaba Iniciar lejos del punto de partida, este guard
+        // devolvía sin arrancar mientras AppState sí entraba a `.inTour`: el
+        // recorrido quedaba a medias, sin POI objetivo, y la proximidad
+        // terminaba disparando videos del montículo más cercano fuera de turno.
+        // Restaurar el `guard` si se quiere volver a exigir estar en el sitio.
         let distToStart = GeoUtils.distanceInMeters(from: userLocation, to: startCoord)
-        guard distToStart <= AppConfig.tourStartRadiusMeters else {
-            print("[TourManager] Usuario muy lejos del inicio: \(Int(distToStart))m")
-            return
+        if distToStart > AppConfig.tourStartRadiusMeters {
+            print("[TourManager] ⚠ Usuario a \(Int(distToStart))m del inicio (radio \(Int(AppConfig.tourStartRadiusMeters))m) — se arranca igual")
         }
 
         guidedCurrentIndex = 0
@@ -69,8 +74,16 @@ final class TourManager: ObservableObject {
         state = .navigatingToPOI(0)
     }
 
+    // Avanza tanto desde `.atPOI` (el usuario llegó al montículo) como desde
+    // `.navigatingToPOI` (todavía va en camino pero tapeó Next). El módulo AR
+    // permite tapear Next sin haber llegado, y si acá no se avanzara, su índice
+    // y el del recorrido quedarían desfasados.
     func advanceToNextPOI() {
-        guard case .atPOI(let idx) = state else { return }
+        let idx: Int
+        switch state {
+        case .atPOI(let i), .navigatingToPOI(let i): idx = i
+        default: return
+        }
         let nextIndex = idx + 1
 
         if nextIndex < pois.count {
