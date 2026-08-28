@@ -234,6 +234,19 @@ final class ARViewController: UIViewController {
             .sink { [weak self] location in
                 guard let self else { return }
                 self.lastUserLocation = location
+                // Recolocar el modelo desde la cámara actual + delta GPS. Esto
+                // evita el drift acumulado de ARKit sobre distancias largas.
+                if let frame = self.sceneView.session.currentFrame {
+                    let camPos = SIMD3<Float>(
+                        frame.camera.transform.columns.3.x,
+                        frame.camera.transform.columns.3.y,
+                        frame.camera.transform.columns.3.z
+                    )
+                    self.sceneManager.updateModelPositionFromGPS(
+                        userLocation: location,
+                        cameraWorldPosition: camPos
+                    )
+                }
                 self.sceneManager.updateVisibility(
                     userLocation: location,
                     horizontalAccuracy: GPSModuleInterface.shared.userHorizontalAccuracy
@@ -267,6 +280,19 @@ final class ARViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
+
+        // El botón Next se destraba por dos señales del VirtualGuide:
+        //   introSequenceCompleted: la secuencia de intro terminó (o se saltó).
+        //   currentPOIVideoCompleted: el video del POI activo ya terminó.
+        VirtualGuideModuleInterface.shared.$introSequenceCompleted
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.updateNextModelButton() }
+            .store(in: &cancellables)
+
+        VirtualGuideModuleInterface.shared.$currentPOIVideoCompleted
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.updateNextModelButton() }
+            .store(in: &cancellables)
     }
 
     // MARK: - Next Model
@@ -282,9 +308,30 @@ final class ARViewController: UIViewController {
             print("[AR] no AR frame yet"); return
         }
 
+        // Ningún tap procede hasta que termine la secuencia de intro. El primer
+        // tap coloca el modelo del POI activo; los siguientes avanzan al POI
+        // N+1 sólo si (a) el video del POI actual ya terminó y (b) el usuario
+        // está dentro del radio de llegada al POI actual.
+        guard VirtualGuideModuleInterface.shared.introSequenceCompleted else {
+            print("[AR] Next bloqueado: intros aún en curso")
+            return
+        }
+
         let isFirstTap = !hasPlacedModel
 
         if hasPlacedModel {
+            guard VirtualGuideModuleInterface.shared.currentPOIVideoCompleted else {
+                print("[AR] Next bloqueado: video del POI actual sigue en curso")
+                return
+            }
+
+            let currentPOI = pois[currentPOIIndex]
+            let dist = GeoUtils.distanceInMeters(from: userLocation, to: currentPOI.coordinate)
+            guard dist <= AppConfig.guidedArrivalMeters else {
+                print("[AR] Next bloqueado: usuario a \(Int(dist))m del POI actual (radio \(Int(AppConfig.guidedArrivalMeters))m)")
+                return
+            }
+
             let next = currentPOIIndex + 1
             if next >= pois.count {
                 print("[AR] checkmark en último POI — disparando Despedida")
@@ -410,14 +457,37 @@ final class ARViewController: UIViewController {
             nextModelButton.setImage(UIImage(systemName: "checkmark", withConfiguration: config), for: .normal)
         }
 
-        // Avanzar al siguiente montículo se habilita solo cuando el modelo actual
-        // ya se reveló (el usuario entró al radio de visibilidad). La primera
-        // pulsación —la que coloca el modelo— queda siempre habilitada: sin ancla
-        // colocada, la flecha guía no tiene a dónde apuntar y no podría llevar al
-        // usuario hasta el montículo.
-        let canAdvance = !hasPlacedModel || sceneManager.isActiveModelRevealed
+        // Reglas de habilitación del botón Next:
+        //   - Los intros deben haber terminado (o sido saltados).
+        //   - Primer tap (colocar modelo): sólo requiere intros listos. Sin
+        //     modelo colocado la flecha guía no tiene ancla, así que este tap
+        //     no depende de proximidad ni de video de POI.
+        //   - Taps siguientes (avanzar): además exigen que el video del POI
+        //     activo terminó y que el usuario esté dentro del radio de llegada.
+        //     Esas condiciones se re-chequean en nextModelTapped para no depender
+        //     sólo del estado de UI.
+        let guide = VirtualGuideModuleInterface.shared
+        let introsReady = guide.introSequenceCompleted
+
+        let canAdvance: Bool
+        if !hasPlacedModel {
+            canAdvance = introsReady
+        } else {
+            canAdvance = introsReady
+                && guide.currentPOIVideoCompleted
+                && isUserWithinArrivalRadiusOfActivePOI()
+        }
         nextModelButton.isEnabled = canAdvance
         nextModelButton.alpha     = canAdvance ? 1.0 : 0.4
+    }
+
+    private func isUserWithinArrivalRadiusOfActivePOI() -> Bool {
+        let pois = GPSModuleInterface.shared.allPOIs
+        guard currentPOIIndex < pois.count,
+              let userLocation = lastUserLocation ?? GPSModuleInterface.shared.userLocation
+        else { return false }
+        let dist = GeoUtils.distanceInMeters(from: userLocation, to: pois[currentPOIIndex].coordinate)
+        return dist <= AppConfig.guidedArrivalMeters
     }
 
     // MARK: - Gesture handlers

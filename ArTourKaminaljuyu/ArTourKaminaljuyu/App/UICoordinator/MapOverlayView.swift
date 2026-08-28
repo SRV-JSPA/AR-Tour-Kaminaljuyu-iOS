@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import CoreLocation
 
 struct MapOverlayView: View {
 
@@ -62,7 +63,11 @@ struct MapOverlayView: View {
                     get: { gps.currentTargetPOI?.id },
                     set: { _ in }
                 ),
-                pois: gps.allPOIs
+                pois: gps.allPOIs,
+                tourStartCoordinate: CLLocationCoordinate2D(
+                    latitude: AppConfig.tourStartLatitude,
+                    longitude: AppConfig.tourStartLongitude
+                )
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

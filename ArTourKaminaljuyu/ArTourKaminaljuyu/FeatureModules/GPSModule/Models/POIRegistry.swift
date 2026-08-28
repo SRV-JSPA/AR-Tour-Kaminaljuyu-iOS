@@ -6,29 +6,17 @@ final class POIRegistry {
     static let shared = POIRegistry()
     private init() {}
 
+    // El punto de partida del recorrido NO es un POI: es solo la coordenada
+    // desde la que arranca el tour (AppConfig.tourStartLatitude/Longitude) y
+    // el ancla del video de bienvenida (secuencia de intro). Este array
+    // contiene únicamente montículos con hallazgos arqueológicos reales.
     lazy var pois: [POILocation] = {
         [
             POILocation(
-                id: "informacion_inicial",
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 14.632644,
-                    longitude: -90.462728
-                ),
-                name: "KaminalJuyú",
-                modelPath: "Assets/Models/Monticulo3.obj",
-                baseScale: 1.0,
-                baseAltitudeMeters: 0.0,
-                description: """
-                Kaminal Juyú es uno de los sitios arqueológicos mayas más importantes de las tierras altas de Guatemala.
-                """,
-                images: ["inicio"]
-            ),
-
-            POILocation(
                 id: "monticulo_6",
                 coordinate: CLLocationCoordinate2D(
-                    latitude: 14.632662,
-                    longitude: -90.463084
+                    latitude: 14.632856,
+                    longitude: -90.463771
                 ),
                 name: "Montículo C-II-6",
                 modelPath: "Assets/Models/Monticulo7.obj",
@@ -46,8 +34,8 @@ final class POIRegistry {
             POILocation(
                 id: "acropolis",
                 coordinate: CLLocationCoordinate2D(
-                    latitude: 14.632856,
-                    longitude: -90.463771
+                    latitude: 14.632662,
+                    longitude: -90.463084
                 ),
                 name: "Acrópolis (C-II-4)",
                 modelPath: "Assets/Models/Monticulo12.obj",
@@ -74,8 +62,14 @@ final class POIRegistry {
     }
 
     // MARK: - Coordenada del punto de inicio de la ruta
+    // Delega a AppConfig para que el punto de partida sea una fuente única
+    // (antes derivaba de pois[0], lo cual dejaba de ser válido al sacar
+    // informacion_inicial del array).
     var tourStartCoordinate: CLLocationCoordinate2D {
-        pois[0].coordinate
+        CLLocationCoordinate2D(
+            latitude: AppConfig.tourStartLatitude,
+            longitude: AppConfig.tourStartLongitude
+        )
     }
 }
 

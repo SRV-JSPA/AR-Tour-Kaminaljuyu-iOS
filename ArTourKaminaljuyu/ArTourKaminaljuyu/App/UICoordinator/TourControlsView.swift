@@ -6,19 +6,40 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct TourControlsView: View {
     var onBack: () -> Void = {}
     var onStartTour: () -> Void = {}
     var onFinalize: () -> Void = {}
     @EnvironmentObject var languageService: LanguageService
+    @EnvironmentObject var gps: GPSModuleInterface
+
+    private var distanceToStart: Double? {
+        guard let userLoc = gps.userLocation else { return nil }
+        let startCoord = CLLocationCoordinate2D(
+            latitude: AppConfig.tourStartLatitude,
+            longitude: AppConfig.tourStartLongitude
+        )
+        return GeoUtils.distanceInMeters(from: userLoc, to: startCoord)
+    }
+
+    private var isWithinStartRadius: Bool {
+        guard let dist = distanceToStart else { return false }
+        return dist <= AppConfig.tourStartRadiusMeters
+    }
+
+    private func startTourIfAllowed() {
+        guard isWithinStartRadius else { return }
+        onStartTour()
+    }
 
     var body: some View {
         ZStack {
             Color.black.opacity(0.6)
                 .ignoresSafeArea()
                 .contentShape(Rectangle())
-                .onTapGesture { onStartTour() }
+                .onTapGesture { startTourIfAllowed() }
 
             GeometryReader { geo in
                 ScrollView(showsIndicators: false) {
@@ -48,6 +69,8 @@ struct TourControlsView: View {
                         .background(Color.white.opacity(0.1))
                         .cornerRadius(16)
 
+                        startPointBanner
+
                         TourControlLegendRow(icon: "arrow.uturn.backward", title: languageService.string("control_back"))
                         TourControlLegendRow(icon: "info.circle", title: languageService.string("control_info"))
                         TourControlLegendRow(icon: "play.fill", title: languageService.string("control_start"))
@@ -56,15 +79,51 @@ struct TourControlsView: View {
                         TourControlLegendRow(icon: "hand.tap.fill", title: languageService.string("control_toggle"))
                     }
                     .padding()
-                    // Centra la lista como antes; el scroll solo entra en juego
-                    // cuando el contenido no cabe (pantallas pequeñas).
                     .frame(maxWidth: .infinity, minHeight: geo.size.height)
                 }
                 .scrollBounceBehavior(.basedOnSize)
-                // El scroll cubre el fondo: mantiene el "toca cualquier lugar para continuar".
-                .onTapGesture { onStartTour() }
+                .onTapGesture { startTourIfAllowed() }
             }
         }
+    }
+
+    @ViewBuilder
+    private var startPointBanner: some View {
+        HStack(spacing: 12) {
+            Image(systemName: isWithinStartRadius ? "checkmark.circle.fill" : "figure.walk")
+                .foregroundColor(isWithinStartRadius ? .green : .yellow)
+                .font(.title2)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(isWithinStartRadius
+                     ? "Listo para iniciar"
+                     : "Camina al punto de partida")
+                    .font(.custom("PlusJakartaSans-Bold", size: 15))
+                    .foregroundColor(.white)
+                Text(bannerSubtitle)
+                    .font(.custom("PlusJakartaSans-Regular", size: 13))
+                    .foregroundColor(.white.opacity(0.85))
+            }
+            Spacer()
+        }
+        .padding()
+        .background(
+            (isWithinStartRadius ? Color.green.opacity(0.2) : Color.yellow.opacity(0.15))
+        )
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(isWithinStartRadius ? Color.green : Color.yellow.opacity(0.6), lineWidth: 1)
+        )
+    }
+
+    private var bannerSubtitle: String {
+        if isWithinStartRadius {
+            return "Toca cualquier lugar para arrancar el tour"
+        }
+        if let dist = distanceToStart {
+            return "Estás a \(Int(dist))m del punto de partida"
+        }
+        return "Esperando ubicación GPS…"
     }
 }
 

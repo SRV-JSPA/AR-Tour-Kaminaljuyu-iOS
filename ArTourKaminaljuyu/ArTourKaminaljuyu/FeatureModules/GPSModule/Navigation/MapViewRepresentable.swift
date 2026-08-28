@@ -15,14 +15,16 @@ struct MapViewRepresentable: UIViewRepresentable {
     @Binding var routeCoordinates: [CLLocationCoordinate2D]
     
     @Binding var highlightedPOIId: String?
-    
+
     let pois: [POILocation]
-    
+    let tourStartCoordinate: CLLocationCoordinate2D?
+
     // MARK: - Colores de marcadores
-    
+
     private let userMarkerColor = UIColor(red: 0/255, green: 200/255, blue: 80/255, alpha: 1.0)
     private let poiMarkerColor  = UIColor(red: 255/255, green: 80/255, blue: 50/255, alpha: 1.0)
     private let poiHighlightColor = UIColor(red: 255/255, green: 215/255, blue: 0/255, alpha: 1.0)
+    private let startMarkerColor = UIColor(red: 46/255, green: 125/255, blue: 50/255, alpha: 1.0)
     private let routeLineColor  = UIColor(red: 33/255, green: 150/255, blue: 243/255, alpha: 0.85)
     
     // MARK: - makeUIView
@@ -58,13 +60,15 @@ struct MapViewRepresentable: UIViewRepresentable {
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
         let coordinator = context.coordinator
-        
+
         updateUserMarker(on: mapView, coordinator: coordinator)
-        
+
+        addStartMarkerIfNeeded(on: mapView, coordinator: coordinator)
+
         addPOIMarkersIfNeeded(on: mapView, coordinator: coordinator)
-        
+
         updateRoutePolyline(on: mapView, coordinator: coordinator)
-        
+
         updateHighlightedMarker(coordinator: coordinator)
     }
     
@@ -77,11 +81,13 @@ struct MapViewRepresentable: UIViewRepresentable {
     // MARK: - Coordinator
     
     class Coordinator: NSObject, GMSMapViewDelegate {
-        
+
         var userMarker: GMSMarker?
 
         var poiMarkers: [String: GMSMarker] = [:]
-        
+
+        var startMarker: GMSMarker?
+
         var routePolyline: GMSPolyline?
         
         var lastRouteCoordinates: [CLLocationCoordinate2D] = []
@@ -144,6 +150,20 @@ private extension MapViewRepresentable {
         }
     }
     
+    func addStartMarkerIfNeeded(on mapView: GMSMapView, coordinator: Coordinator) {
+        guard let start = tourStartCoordinate else { return }
+        guard coordinator.startMarker == nil else { return }
+
+        let marker = GMSMarker()
+        marker.position = start
+        marker.title = "Punto de partida"
+        marker.icon = createStartMarkerIcon(color: startMarkerColor)
+        marker.groundAnchor = CGPoint(x: 0.5, y: 1.0)
+        marker.zIndex = 2
+        marker.map = mapView
+        coordinator.startMarker = marker
+    }
+
     func addPOIMarkersIfNeeded(on mapView: GMSMapView, coordinator: Coordinator) {
         for poi in pois {
             guard coordinator.poiMarkers[poi.id] == nil else { continue }
@@ -240,6 +260,32 @@ private extension MapViewRepresentable {
     }
     
 
+    func createStartMarkerIcon(color: UIColor) -> UIImage {
+        let size = CGSize(width: 32, height: 40)
+        let renderer = UIGraphicsImageRenderer(size: size)
+
+        return renderer.image { _ in
+            let poleRect = CGRect(x: 8, y: 6, width: 3, height: 32)
+            UIColor.white.setFill()
+            UIBezierPath(rect: poleRect).fill()
+
+            let flag = UIBezierPath()
+            flag.move(to: CGPoint(x: 11, y: 8))
+            flag.addLine(to: CGPoint(x: 28, y: 12))
+            flag.addLine(to: CGPoint(x: 22, y: 17))
+            flag.addLine(to: CGPoint(x: 28, y: 22))
+            flag.addLine(to: CGPoint(x: 11, y: 22))
+            flag.close()
+
+            color.setFill()
+            flag.fill()
+
+            UIColor.white.setStroke()
+            flag.lineWidth = 1.5
+            flag.stroke()
+        }
+    }
+
     func createPOIMarkerIcon(color: UIColor, isMain: Bool) -> UIImage {
         let size = isMain ? CGSize(width: 28, height: 36) : CGSize(width: 20, height: 26)
         let renderer = UIGraphicsImageRenderer(size: size)
@@ -297,7 +343,8 @@ struct MapViewRepresentable_Previews: PreviewProvider {
             userHeading: $heading,
             routeCoordinates: $route,
             highlightedPOIId: $highlighted,
-            pois: []
+            pois: [],
+            tourStartCoordinate: nil
         )
         .frame(height: 300)
         .previewDisplayName("Mapa Kaminaljuyú")

@@ -26,6 +26,16 @@ final class VirtualGuideModuleInterface: ObservableObject {
     @Published var hasPlayedIntro: Bool = false
     @Published var hasStartedWalking: Bool = false
 
+    // La proximidad, la flecha AR y el botón Next se mantienen bloqueados
+    // mientras suenan los videos de intro (Datos generales → Datos arqueológicos
+    // → Indicación flecha). Pasa a true cuando termina el video de la flecha.
+    @Published var introSequenceCompleted: Bool = false
+
+    // El botón Next solo debe habilitarse cuando el video específico del POI
+    // activo terminó. Se pone true al terminar un video de videoMap y se
+    // resetea al avanzar al siguiente POI o al arrancar el tour.
+    @Published var currentPOIVideoCompleted: Bool = false
+
     @Published var transcriptLines: [TranscriptLine] = []
     @Published var currentLineIndex: Int = -1
     @Published var showsTranscript: Bool = false
@@ -221,6 +231,7 @@ final class VirtualGuideModuleInterface: ObservableObject {
                 switch event {
                 case .nextPOIRequested:
                     print("[VirtualGuide] nextPOIRequested — deteniendo video actual y limpiando cola")
+                    self.currentPOIVideoCompleted = false
                     self.clearQueueAndStop()
                 case .tourEndRequested:
                     print("[VirtualGuide] tourEndRequested — reproduciendo despedida")
@@ -254,6 +265,8 @@ final class VirtualGuideModuleInterface: ObservableObject {
         specificFired.removeAll()
         hasPlayedIntro = false
         hasStartedWalking = false
+        introSequenceCompleted = false
+        currentPOIVideoCompleted = false
         endingTour = false
     }
 
@@ -318,6 +331,21 @@ final class VirtualGuideModuleInterface: ObservableObject {
         enqueue(videoDatosArq)
     }
 
+    #if DEBUG
+    // Saltar la secuencia de intro (Datos generales + Datos arqueológicos +
+    // Indicación flecha) para acelerar pruebas de campo. Marca intros como
+    // completados para destrabar proximidad, flecha AR y botón Next.
+    func skipIntros() {
+        guard !introSequenceCompleted else { return }
+        print("[VirtualGuide] skipIntros() — saltando secuencia de intro (debug)")
+        queue.removeAll()
+        clearPlayer()
+        hasPlayedIntro = true
+        hasStartedWalking = true
+        introSequenceCompleted = true
+    }
+    #endif
+
     func startWalking() {
         guard !hasStartedWalking else { return }
         hasStartedWalking = true
@@ -353,6 +381,10 @@ final class VirtualGuideModuleInterface: ObservableObject {
 
     private func handleProximityUpdate(_ result: ProximityResult?) {
         guard hasStartedWalking, let result = result else { return }
+
+        // Los videos de intro tienen prioridad: hasta que termine la Indicación
+        // flecha, la proximidad se queda en silencio para no pisarse con ellos.
+        guard introSequenceCompleted else { return }
 
         // Solo se disparan videos del POI que el recorrido está visitando ahora.
         // Sin este chequeo, si TourManager no arrancó (p. ej. se tapeó Iniciar
@@ -554,6 +586,21 @@ final class VirtualGuideModuleInterface: ObservableObject {
             DispatchQueue.main.async {
                 guard let self else { return }
                 self.currentVideoName = nil
+
+                // La secuencia de intro cierra con Indicación flecha; al terminar
+                // se destraban la proximidad, la flecha AR y el botón Next.
+                if videoName == self.videoFlecha, !self.introSequenceCompleted {
+                    self.introSequenceCompleted = true
+                    print("[VirtualGuide] intro completa — proximidad y Next habilitados")
+                }
+
+                // Los videos específicos de POI (los de videoMap) marcan al POI
+                // actual como "ya explicado" para que el botón Next se habilite.
+                if self.videoMap.values.contains(videoName) {
+                    self.currentPOIVideoCompleted = true
+                    print("[VirtualGuide] video POI '\(videoName)' terminó — Next habilitado")
+                }
+
                 if self.queue.isEmpty {
                     self.clearPlayer()
                     if self.endingTour && videoName == self.videoDespedida {

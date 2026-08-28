@@ -22,7 +22,10 @@ enum ARConfig {
     static let globalScaleMultiplier: Float = 0.3
 
     // MARK: - Distance (meters) within which the placed model becomes visible.
-    // The anchor is placed at the POI's real GPS position as soon as the user
-    // taps "Next", but the mesh stays hidden until the user is this close.
-    static let modelVisibilityDistanceMeters: Double = 15.0
+    // El modelo se cuelga del sceneRoot en cuanto el usuario tapea "Next",
+    // pero queda oculto hasta que la distancia GPS al POI cae bajo este umbral.
+    // Coincide con la fase 2 de proximidad (video "Punto de interés"): el
+    // modelo aparece cuando suena ese video, no antes. Una vez visible, la
+    // perspectiva 3D natural de ARKit hace que se vea más grande al acercarse.
+    static let modelVisibilityDistanceMeters: Double = 10.0
 }

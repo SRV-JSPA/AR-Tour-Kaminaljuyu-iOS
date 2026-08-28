@@ -9,8 +9,14 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     private weak var sceneView: ARSCNView?
 
     // MARK: - Single model state
+    //
+    // El modelo del POI se cuelga directamente del sceneRoot (world space) y su
+    // simdWorldPosition se recalcula en cada update de GPS a partir de
+    // (cameraWorldPosition + delta_GPS). No usamos ARAnchor para el modelo
+    // porque en distancias largas (>50m) el drift acumulado de ARKit y el
+    // error inicial de heading hacen que la ancla y el POI real se desalineen.
+    // El GPS sigue siendo la fuente autoritativa de la posición del POI.
     private var pivotNode:    SCNNode?
-    private(set) var activeAnchor: ARAnchor?
     private var activePOI:    POILocation?
 
     /// True cuando el modelo colocado ya se reveló, es decir, el usuario entró
@@ -22,6 +28,12 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     var modelRotationY: Float = 0.0
     var modelScale:     Float = 1.0
     var modelOffsetY:   Float = 0.0
+
+    // NOTA: no se aplica escalado adicional por distancia. La perspectiva 3D
+    // natural de ARKit ya reduce el tamaño aparente del modelo cuando el
+    // usuario está lejos y lo agranda al acercarse — un lerp de escala encima
+    // se siente como una animación artificial. Si el modelo se ve "demasiado
+    // grande" al llegar al POI, ajustar poi.baseScale en POIRegistry.
 
     // MARK: - Texture map
     private var bundleTextureMap: [String: URL] = [:]
@@ -37,15 +49,11 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
 
     // MARK: - Active model world position (for guide arrow)
 
-    /// World-space position of the currently placed model anchor.
+    /// World-space position of the currently placed model.
     /// Returns nil when no model is loaded. Used by ARGuideArrowManager.
     var activeModelWorldPosition: SIMD3<Float>? {
-        guard let anchor = activeAnchor else { return nil }
-        return SIMD3<Float>(
-            anchor.transform.columns.3.x,
-            anchor.transform.columns.3.y,
-            anchor.transform.columns.3.z
-        )
+        guard let pivot = pivotNode else { return nil }
+        return pivot.simdWorldPosition
     }
 
     // MARK: - Bundle texture index
@@ -287,34 +295,60 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         // ARConfig.modelVisibilityDistanceMeters of the POI.
         pivot.isHidden = true
 
+        // Posición inicial derivada de GPS + cámara actual. Los siguientes
+        // ticks de GPS la re-actualizan vía updateModelPositionFromGPS().
+        let camPos = SIMD3<Float>(
+            cameraTransform.columns.3.x,
+            cameraTransform.columns.3.y,
+            cameraTransform.columns.3.z
+        )
+        let worldPos = worldPositionFromGPS(userLocation: userLocation, cameraWorldPosition: camPos, poi: poi)
+
+        pivot.simdPosition = worldPos
+        sceneView?.scene.rootNode.addChildNode(pivot)
+
+        pivotNode = pivot
+        activePOI = poi
+
         let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
         let bear = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
-
-        var relDeg = userHeading - bear
-        while relDeg >  180 { relDeg -= 360 }
-        while relDeg < -180 { relDeg += 360 }
-        let rel = Float(bear * .pi / 180)
-
-        let dx = Float(dist) * sin(rel)
-        let dz = Float(dist) * -cos(rel)
-        let dy = poi.baseAltitudeMeters
-
-        var transform = matrix_identity_float4x4
-        transform.columns.3.x = cameraTransform.columns.3.x + dx
-        transform.columns.3.y = cameraTransform.columns.3.y + dy
-        transform.columns.3.z = cameraTransform.columns.3.z + dz
-        transform.columns.3.w = 1
-
-        print("[place] '\(poi.id)' dist:\(String(format:"%.1f",dist))m bear:\(String(format:"%.1f",bear))°")
-        print("[place] dx:\(String(format:"%.2f",dx)) dy:\(String(format:"%.2f",dy)) dz:\(String(format:"%.2f",dz))")
-
-        pivotNode    = pivot
-        activePOI    = poi
-        activeAnchor = ARAnchor(name: poi.id, transform: transform)
-        session.add(anchor: activeAnchor!)
+        print("[place] '\(poi.id)' dist:\(String(format:"%.1f",dist))m bear:\(String(format:"%.1f",bear))° worldPos:(\(worldPos.x), \(worldPos.y), \(worldPos.z))")
 
         applyUserTransforms()
         updateVisibility(userLocation: userLocation)
+    }
+
+    // MARK: - Recolocación por GPS
+
+    /// Debe llamarse en cada update de GPS mientras haya un modelo colocado.
+    /// Recalcula la posición world del modelo como (cámara_actual + delta_GPS),
+    /// eliminando el drift acumulado de ARKit.
+    func updateModelPositionFromGPS(userLocation: CLLocationCoordinate2D, cameraWorldPosition: SIMD3<Float>) {
+        guard let pivot = pivotNode, let poi = activePOI else { return }
+        pivot.simdPosition = worldPositionFromGPS(
+            userLocation: userLocation,
+            cameraWorldPosition: cameraWorldPosition,
+            poi: poi
+        )
+    }
+
+    private func worldPositionFromGPS(
+        userLocation: CLLocationCoordinate2D,
+        cameraWorldPosition: SIMD3<Float>,
+        poi: POILocation
+    ) -> SIMD3<Float> {
+        let dist = GeoUtils.distanceInMeters(from: userLocation, to: poi.coordinate)
+        let bear = GeoUtils.bearing(from: userLocation, to: poi.coordinate)
+        let rel = Float(bear * .pi / 180)
+        let dx = Float(dist) * sin(rel)
+        let dz = Float(dist) * -cos(rel)
+        // baseAltitude relativa al suelo + offset vertical del gesto del usuario.
+        let dy = poi.baseAltitudeMeters + modelOffsetY
+        return SIMD3<Float>(
+            cameraWorldPosition.x + dx,
+            cameraWorldPosition.y + dy,
+            cameraWorldPosition.z + dz
+        )
     }
 
     // MARK: - Visibility gating by GPS distance
@@ -328,6 +362,7 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         // La distancia cruda nunca baja del ruido del GPS (~precisión), así que
         // un umbral de 5m sería inalcanzable sin compensar la precisión.
         let dist = GeoUtils.compensatedDistance(rawDist, horizontalAccuracy: horizontalAccuracy)
+
         let shouldShow = dist <= ARConfig.modelVisibilityDistanceMeters
         isActiveModelRevealed = shouldShow
         guard pivot.isHidden == shouldShow else { return }
@@ -348,10 +383,6 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
     // MARK: - Clear everything
 
     func clearAll(session: ARSession) {
-        if let anchor = activeAnchor {
-            session.remove(anchor: anchor)
-            activeAnchor = nil
-        }
         pivotNode?.removeFromParentNode()
         pivotNode  = nil
         activePOI  = nil
@@ -387,31 +418,12 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         pivot.scale = SCNVector3(s, s, s)
         let totalYRad = (poi.baseYawDeg + modelRotationY) * (.pi / 180)
         pivot.simdOrientation = simd_quatf(angle: totalYRad, axis: SIMD3<Float>(0, 1, 0))
-        pivot.simdPosition = SIMD3<Float>(pivot.simdPosition.x, modelOffsetY, pivot.simdPosition.z)
+        // La Y world del pivot la controla worldPositionFromGPS (baseAltitude +
+        // modelOffsetY). Aquí solo se aplican escala y rotación.
         print("[gesture] scale:\(modelScale) rotY:\(modelRotationY) offsetY:\(modelOffsetY)")
     }
 
-    // MARK: - ARSCNViewDelegate
-
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        guard anchor.name == activePOI?.id else { return SCNNode() }
-        return SCNNode()
-    }
-
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard anchor.name == activePOI?.id,
-              let pivot = pivotNode,
-              let poi = activePOI else { return }
-
-        let s = poi.baseScale * ARConfig.globalScaleMultiplier * modelScale
-        pivot.scale = SCNVector3(s, s, s)
-        pivot.simdOrientation = simd_quatf(
-            angle: (poi.baseYawDeg + modelRotationY) * (.pi / 180),
-            axis: SIMD3<Float>(0, 1, 0)
-        )
-        pivot.simdPosition = SIMD3<Float>(0, modelOffsetY, 0)
-
-        node.addChildNode(pivot)
-        print("[didAdd] '\(anchor.name ?? "?")' pivot attached to anchor node")
-    }
+    // ARSCNViewDelegate ya no maneja anclas del modelo (se colgó del sceneRoot).
+    // Se conserva la conformidad para futuros usos (planos, imágenes) pero por
+    // ahora no se implementan callbacks.
 }

@@ -51,6 +51,23 @@ struct GuidedTourOverlay: View {
                         .transition(.opacity)
                 }
             }
+            #if DEBUG
+            .overlay(alignment: .topLeading) {
+                if guideVM.player != nil && !guideVM.introSequenceCompleted {
+                    Button {
+                        guideVM.skipIntros()
+                    } label: {
+                        Label("Saltar intros", systemImage: "forward.end.fill")
+                            .font(.custom("PlusJakartaSans-Bold", size: 12))
+                            .padding(8)
+                            .background(Color.black.opacity(0.7))
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    .padding(10)
+                }
+            }
+            #endif
             .padding(.horizontal, 12)
             .padding(.bottom, 24)
         }
