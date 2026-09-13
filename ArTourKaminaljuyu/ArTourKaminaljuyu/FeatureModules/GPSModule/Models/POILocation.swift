@@ -112,4 +112,13 @@ struct POILocation: Equatable, Identifiable {
     var clLocation: CLLocation {
         CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
+
+    /// Nombre del montículo en el idioma activo. Busca `poi_[id]_title` en
+    /// LocalizedStrings y cae a `name` (español, tal como está en POIRegistry)
+    /// si ese POI todavía no tiene traducción cargada.
+    var localizedName: String {
+        let key = "poi_\(id)_title"
+        let localized = LocalizedStrings.get(key)
+        return localized == key ? name : localized
+    }
 }

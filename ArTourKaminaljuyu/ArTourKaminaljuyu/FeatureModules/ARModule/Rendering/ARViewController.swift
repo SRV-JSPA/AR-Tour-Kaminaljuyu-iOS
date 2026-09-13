@@ -396,7 +396,7 @@ final class ARViewController: UIViewController {
         }
 
         // Title
-        stack.addArrangedSubview(makeLabel(poi.name, font: .boldSystemFont(ofSize: 22)))
+        stack.addArrangedSubview(makeLabel(poi.localizedName, font: .boldSystemFont(ofSize: 22)))
 
         // Description
         let desc = VirtualGuideModuleInterface.shared.poiDescription(forPOIId: poi.id)

@@ -100,6 +100,11 @@ struct LocalizedStrings {
             "terms_disclaimer_title": "Descargo de responsabilidad:",
             "terms_disclaimer_body": "Aunque se ha procurado la mayor precisión posible, la representación de ciertas estructuras, escenarios y detalles visuales puede contener elementos hipotéticos o interpretativos debido a la falta de evidencia completa o alteraciones ocurridas a lo largo del tiempo.",
             "terms_footer": "Al utilizar esta aplicación, usted reconoce y acepta estas condiciones.",
+
+            // Nombres de POI (ficha del montículo, marcador del mapa).
+            // Convención: poi_[id]_title, con el id tal como está en POIRegistry.
+            "poi_monticulo_6_title": "Montículo C-II-6",
+            "poi_acropolis_title": "Acrópolis (C-II-4)",
         ],
         "EN": [
             // MainMenuView
@@ -171,6 +176,10 @@ struct LocalizedStrings {
             "terms_disclaimer_title": "Disclaimer:",
             "terms_disclaimer_body": "Although the greatest possible accuracy has been sought, the representation of certain structures, scenarios, and visual details may contain hypothetical or interpretive elements due to lack of complete evidence or alterations that have occurred over time.",
             "terms_footer": "By using this application, you acknowledge and accept these conditions.",
+
+            // POI names (mound info sheet, map marker).
+            "poi_monticulo_6_title": "Mound C-II-6",
+            "poi_acropolis_title": "Acropolis (C-II-4)",
         ]
     ]
 }
