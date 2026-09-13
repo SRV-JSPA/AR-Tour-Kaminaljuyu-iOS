@@ -95,8 +95,8 @@ struct TourControlsView: View {
                 .font(.title2)
             VStack(alignment: .leading, spacing: 2) {
                 Text(isWithinStartRadius
-                     ? "Listo para iniciar"
-                     : "Camina al punto de partida")
+                     ? languageService.string("ready_to_start")
+                     : languageService.string("walk_to_start_point"))
                     .font(.custom("PlusJakartaSans-Bold", size: 15))
                     .foregroundColor(.white)
                 Text(bannerSubtitle)
@@ -118,12 +118,13 @@ struct TourControlsView: View {
 
     private var bannerSubtitle: String {
         if isWithinStartRadius {
-            return "Toca cualquier lugar para arrancar el tour"
+            return languageService.string("tap_anywhere_to_start")
         }
         if let dist = distanceToStart {
-            return "Estás a \(Int(dist))m del punto de partida"
+            let template = languageService.string("distance_to_start")
+            return template.replacingOccurrences(of: "%@", with: "\(Int(dist))")
         }
-        return "Esperando ubicación GPS…"
+        return languageService.string("waiting_for_gps")
     }
 }
 

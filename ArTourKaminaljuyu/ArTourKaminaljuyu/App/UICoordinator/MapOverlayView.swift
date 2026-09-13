@@ -12,6 +12,7 @@ import CoreLocation
 struct MapOverlayView: View {
 
     @EnvironmentObject var gps: GPSModuleInterface
+    @EnvironmentObject var languageService: LanguageService
 
     // MARK: - Aviso temporal de distancia
     // Cada `noticePeriodSeconds` el mensaje de estado se sustituye por el aviso
@@ -112,7 +113,10 @@ struct MapOverlayView: View {
         }
 
         guard distance.isFinite else { return nil }
-        return "Estás a unos \(Int(distance.rounded())) metros de \(poi.name)"
+        let template = languageService.string("distance_to_poi")
+        let distanceStr = "\(Int(distance.rounded()))"
+        return template.replacingOccurrences(of: "%@", with: distanceStr, options: [], range: template.range(of: "%@"))
+            .replacingOccurrences(of: "%@", with: poi.name)
     }
 
     private var displayedStatus: (icon: String, text: String, color: Color) {
@@ -126,12 +130,20 @@ struct MapOverlayView: View {
 
     private var statusText: String {
         switch gps.tourState {
-        case .idle:                   return "Acércate a un montículo para ver el modelo AR"
-        case .navigatingToStart:      return "Camina hacia el inicio del recorrido"
-        case .navigatingToPOI(let i): return "→ \(gps.allPOIs[safe: i]?.name ?? "POI \(i)")"
-        case .atPOI(let i):           return "📍 \(gps.allPOIs[safe: i]?.name ?? "POI \(i)")"
-        case .returning:              return "🔙 Regresando al inicio..."
-        case .completed:              return "🏁 ¡Recorrido completado!"
+        case .idle:
+            return languageService.string("status_idle")
+        case .navigatingToStart:
+            return languageService.string("status_navigating_to_start")
+        case .navigatingToPOI(let i):
+            let poiName = gps.allPOIs[safe: i]?.name ?? "POI \(i)"
+            return "→ \(poiName)"
+        case .atPOI(let i):
+            let poiName = gps.allPOIs[safe: i]?.name ?? "POI \(i)"
+            return "📍 \(poiName)"
+        case .returning:
+            return languageService.string("status_returning")
+        case .completed:
+            return languageService.string("status_completed")
         }
     }
 

@@ -1,5 +1,24 @@
 import SwiftUI
+import SwiftUI
 import Combine
+
+private struct SkipIntrosButton: View {
+    @ObservedObject var viewModel: VirtualGuideModuleInterface
+    @EnvironmentObject var languageService: LanguageService
+    
+    var body: some View {
+        Button {
+            viewModel.skipIntros()
+        } label: {
+            Label(languageService.string("skip_intros"), systemImage: "forward.end.fill")
+                .font(.custom("PlusJakartaSans-Bold", size: 12))
+                .padding(8)
+                .background(Color.black.opacity(0.7))
+                .foregroundColor(.white)
+                .cornerRadius(8)
+        }
+    }
+}
 
 struct GuidedTourOverlay: View {
     @EnvironmentObject var guideVM: VirtualGuideModuleInterface
@@ -54,17 +73,8 @@ struct GuidedTourOverlay: View {
             #if DEBUG
             .overlay(alignment: .topLeading) {
                 if guideVM.player != nil && !guideVM.introSequenceCompleted {
-                    Button {
-                        guideVM.skipIntros()
-                    } label: {
-                        Label("Saltar intros", systemImage: "forward.end.fill")
-                            .font(.custom("PlusJakartaSans-Bold", size: 12))
-                            .padding(8)
-                            .background(Color.black.opacity(0.7))
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                    .padding(10)
+                    SkipIntrosButton(viewModel: guideVM)
+                        .padding(10)
                 }
             }
             #endif

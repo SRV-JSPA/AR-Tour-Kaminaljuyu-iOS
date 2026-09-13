@@ -9,9 +9,24 @@ import Foundation
 
 struct LocalizedStrings {
     
-    static func get(_ key: String) -> String {
+    static func get(_ key: String, arguments: [String] = []) -> String {
         let lang = LanguageService.shared.currentLanguage
-        return strings[lang]?[key] ?? strings["ES"]?[key] ?? key
+        guard let template = strings[lang]?[key] ?? strings["ES"]?[key] else {
+            return key
+        }
+        
+        // Si no hay argumentos, devolver el template directo
+        guard !arguments.isEmpty else { return template }
+        
+        // Reemplazar %@ con los argumentos en orden
+        var result = template
+        for arg in arguments {
+            if let range = result.range(of: "%@") {
+                result.replaceSubrange(range, with: arg)
+            }
+        }
+        
+        return result
     }
     
     private static let strings: [String: [String: String]] = [
@@ -43,11 +58,28 @@ struct LocalizedStrings {
             "control_next": "Avanzar al siguiente punto de interés",
             "control_finish": "Finalizar el recorrido guiado",
             "control_toggle": "Toca el recuadro para alternar entre el video y el mapa",
+            
+            // TourControlsView - Start Point Banner (NUEVAS)
+            "ready_to_start": "Listo para iniciar",
+            "walk_to_start_point": "Camina al punto de partida",
+            "tap_anywhere_to_start": "Toca cualquier lugar para arrancar el tour",
+            "distance_to_start": "Estás a %@m del punto de partida",
+            "waiting_for_gps": "Esperando ubicación GPS…",
 
             // Video / mapa toggle
             "hint_toggle_view": "Toca aquí para cambiar entre el video y el mapa",
             "toggle_to_map": "Mapa",
             "toggle_to_video": "Video",
+            
+            // Skip Intros (NUEVA)
+            "skip_intros": "Saltar intros",
+            
+            // MapOverlayView - Status Messages (NUEVAS)
+            "distance_to_poi": "Estás a unos %@ metros de %@",
+            "status_idle": "Acércate a un montículo para ver el modelo AR",
+            "status_navigating_to_start": "Camina hacia el inicio del recorrido",
+            "status_returning": "🔙 Regresando al inicio...",
+            "status_completed": "🏁 ¡Recorrido completado!",
 
             // Back confirmation modal
             "back_confirm_title": "¿Regresar al menú?",
@@ -97,11 +129,28 @@ struct LocalizedStrings {
             "control_next": "Advance to next point of interest",
             "control_finish": "Finish the guided tour",
             "control_toggle": "Tap the panel to switch between video and map",
+            
+            // TourControlsView - Start Point Banner (NEW)
+            "ready_to_start": "Ready to start",
+            "walk_to_start_point": "Walk to the starting point",
+            "tap_anywhere_to_start": "Tap anywhere to start the tour",
+            "distance_to_start": "You are %@m from the starting point",
+            "waiting_for_gps": "Waiting for GPS location…",
 
             // Video / map toggle
             "hint_toggle_view": "Tap here to switch between video and map",
             "toggle_to_map": "Map",
             "toggle_to_video": "Video",
+            
+            // Skip Intros (NEW)
+            "skip_intros": "Skip intros",
+            
+            // MapOverlayView - Status Messages (NEW)
+            "distance_to_poi": "You are about %@ meters from %@",
+            "status_idle": "Get close to a mound to see the AR model",
+            "status_navigating_to_start": "Walk towards the tour start",
+            "status_returning": "🔙 Returning to start...",
+            "status_completed": "🏁 Tour completed!",
 
             // Back confirmation modal
             "back_confirm_title": "Return to menu?",

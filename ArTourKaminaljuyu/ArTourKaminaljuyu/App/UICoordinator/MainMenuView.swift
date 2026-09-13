@@ -36,7 +36,6 @@ struct MainMenuView: View {
 
     @State private var player: AVPlayer?
     @State private var bienvenidaPlayer: AVPlayer?
-    @State private var selectedLanguage: String = "ES"
     @State private var showFreeTourModal = false
     @EnvironmentObject var languageService: LanguageService
 
@@ -164,23 +163,21 @@ struct MainMenuView: View {
                         Spacer()
                         HStack(spacing: 8) {
                             Button(action: {
-                                selectedLanguage = "ES"
                                 languageService.setLanguage("ES")
                             }) {
                                 Text("ES")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
-                                    .foregroundColor(selectedLanguage == "ES" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
+                                    .foregroundColor(languageService.currentLanguage == "ES" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
                             }
                             Text("|")
                                 .foregroundColor(Color(hex: "#ECEBC8").opacity(0.3))
                                 .font(.system(size: 18))
                             Button(action: {
-                                selectedLanguage = "EN"
                                 languageService.setLanguage("EN")
                             }) {
                                 Text("EN")
                                     .font(.custom("PlusJakartaSans-Bold", size: 18))
-                                    .foregroundColor(selectedLanguage == "EN" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
+                                    .foregroundColor(languageService.currentLanguage == "EN" ? Color(hex: "#D15B33") : Color(hex: "#ECEBC8").opacity(0.5))
                             }
                         }
                         .padding(.top, 56)
