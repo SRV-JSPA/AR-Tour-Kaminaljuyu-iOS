@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AppState {
+enum AppState: Equatable {
     case idle
     case inTour(activePOIId: String?)
     case completed

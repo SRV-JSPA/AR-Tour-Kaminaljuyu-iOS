@@ -3,7 +3,7 @@ import CoreLocation
 import Combine
 
 // MARK: - Estado del tour
-enum TourState {
+enum TourState: Equatable {
     case idle
     case navigatingToStart
     case navigatingToPOI(Int)
