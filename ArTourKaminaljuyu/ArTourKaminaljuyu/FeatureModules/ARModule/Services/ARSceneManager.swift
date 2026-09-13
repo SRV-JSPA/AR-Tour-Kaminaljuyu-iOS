@@ -342,13 +342,51 @@ final class ARSceneManager: NSObject, ARSCNViewDelegate {
         let rel = Float(bear * .pi / 180)
         let dx = Float(dist) * sin(rel)
         let dz = Float(dist) * -cos(rel)
-        // baseAltitude relativa al suelo + offset vertical del gesto del usuario.
-        let dy = poi.baseAltitudeMeters + modelOffsetY
-        return SIMD3<Float>(
-            cameraWorldPosition.x + dx,
-            cameraWorldPosition.y + dy,
-            cameraWorldPosition.z + dz
-        )
+
+        let x = cameraWorldPosition.x + dx
+        let z = cameraWorldPosition.z + dz
+
+        // Altura: si la detección de planos ya encontró un plano horizontal bajo
+        // el punto, esa es la altura real del suelo y se usa tal cual. Si no —lo
+        // habitual mientras el usuario está lejos, porque ARKit solo detecta
+        // planos a pocos metros de la cámara— se cae a la baseAltitude del POI
+        // relativa a la cámara. En ambos casos se respeta el ajuste vertical
+        // manual del usuario (modelOffsetY).
+        let y: Float
+        if let groundY = detectedGroundY(nearX: x, z: z) {
+            y = groundY + modelOffsetY
+        } else {
+            y = cameraWorldPosition.y + poi.baseAltitudeMeters + modelOffsetY
+        }
+
+        return SIMD3<Float>(x, y, z)
+    }
+
+    /// Radio horizontal alrededor del punto dentro del cual se acepta un plano
+    /// como "el suelo de este montículo".
+    private static let planeSearchRadiusMeters: Float = 5.0
+
+    /// Y (world space) del plano horizontal detectado más cercano al punto, o
+    /// `nil` si la detección todavía no encontró ninguno dentro del radio.
+    /// Solo refina la altura: x/z siguen saliendo del bearing y la distancia
+    /// GPS, que son la fuente autoritativa de la posición del POI.
+    private func detectedGroundY(nearX x: Float, z: Float) -> Float? {
+        guard let anchors = sceneView?.session.currentFrame?.anchors else { return nil }
+
+        var best: (y: Float, distance: Float)?
+        for case let plane as ARPlaneAnchor in anchors where plane.alignment == .horizontal {
+            // `center` es relativo al transform del plano, por eso se suman.
+            let planeX = plane.transform.columns.3.x + plane.center.x
+            let planeY = plane.transform.columns.3.y + plane.center.y
+            let planeZ = plane.transform.columns.3.z + plane.center.z
+
+            let distance = simd_length(SIMD2<Float>(planeX - x, planeZ - z))
+            guard distance <= Self.planeSearchRadiusMeters else { continue }
+            if best == nil || distance < best!.distance {
+                best = (planeY, distance)
+            }
+        }
+        return best?.y
     }
 
     // MARK: - Visibility gating by GPS distance

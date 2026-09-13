@@ -220,7 +220,7 @@ final class ARViewController: UIViewController {
 
     private func startARSession() {
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = []
+        config.planeDetection = [.horizontal, .vertical]
         config.worldAlignment = .gravityAndHeading
         sceneView.session.run(config, options: [.removeExistingAnchors, .resetTracking])
     }
@@ -406,6 +406,20 @@ final class ARViewController: UIViewController {
                                                color: .secondaryLabel))
         }
 
+        // Acá se elige qué fotos lleva la ficha. Opciones:
+        //   [Self.placeholderImageNames[7]]                → solo etapa1.png
+        //   Self.placeholderImageNames[7...9]              → un rango
+        //   Self.placeholderImageNames                     → el catálogo completo
+        //   poi.images.isEmpty ? [] : poi.images           → las fotos reales del montículo
+        let imageNames = [Self.placeholderImageNames[7]]
+        for name in imageNames {
+            guard let image = resolvePOIImage(named: name) else {
+                print("[AR] no se pudo cargar la imagen '\(name)'")
+                continue
+            }
+            stack.addArrangedSubview(makePOIImageView(image))
+        }
+
         // Optional extra fields — add only if your POILocation has them
         // Uncomment whichever fields exist on your model:
         //
@@ -442,6 +456,106 @@ final class ARViewController: UIViewController {
         }
 
         present(vc, animated: true)
+    }
+
+    // MARK: - POI images
+
+    /// Catálogo de todas las fotos disponibles en `Assets/Images/`.
+    /// El índice de cada una está anotado al lado para poder referenciarlas
+    /// directamente, p. ej. `Self.placeholderImageNames[7]` es etapa1.png.
+    /// Qué se muestra en la ficha se elige en `showPOIInfo`.
+    private static let placeholderImageNames: [String] = [
+        "Assets/Images/c_ii_4.png",     // 0
+        "Assets/Images/c_ii_8.png",     // 1
+        "Assets/Images/c_ii_12.png",    // 2
+        "Assets/Images/c_ii_12_2.png",  // 3
+        "Assets/Images/c_ii_13.jpg",    // 4
+        "Assets/Images/c_ii_13_2.png",  // 5
+        "Assets/Images/c_ii_13_3.jpg",  // 6
+        "Assets/Images/etapa1.png",     // 7
+        "Assets/Images/etapa2a.png",    // 8
+        "Assets/Images/etapa2b.png",    // 9
+        "Assets/Images/etapa2c.png",    // 10
+        "Assets/Images/etapa3.png",     // 11
+        "Assets/Images/etapa3a.png"     // 12
+    ]
+
+    /// Acepta nombres de asset catalog ("c_ii_4"), rutas relativas dentro del
+    /// bundle ("Assets/Images/etapa1.png") y archivos sueltos ("etapa1.png").
+    /// El proyecto usa carpetas sincronizadas de Xcode, así que un recurso puede
+    /// quedar con su ruta o aplanado en la raíz del bundle: se prueban ambas y,
+    /// como último recurso, se recorre el bundle buscando por nombre de archivo
+    /// (mismo enfoque que ARSceneManager usa para modelos y texturas).
+    private func resolvePOIImage(named name: String) -> UIImage? {
+        if let image = UIImage(named: name) { return image }
+
+        let base = (name as NSString).deletingPathExtension
+        if base != name, let image = UIImage(named: base) { return image }
+
+        let bundleURL = Bundle.main.bundleURL
+        let filename  = (name as NSString).lastPathComponent
+
+        for candidate in [
+            bundleURL.appendingPathComponent(name),
+            bundleURL.appendingPathComponent(filename)
+        ] where FileManager.default.fileExists(atPath: candidate.path) {
+            if let image = UIImage(contentsOfFile: candidate.path) { return image }
+        }
+
+        let ext = (name as NSString).pathExtension
+        if let url = Bundle.main.url(forResource: (filename as NSString).deletingPathExtension,
+                                     withExtension: ext.isEmpty ? "png" : ext),
+           let image = UIImage(contentsOfFile: url.path) {
+            return image
+        }
+
+        if let enumerator = FileManager.default.enumerator(atPath: bundleURL.path) {
+            for case let path as String in enumerator
+            where (path as NSString).lastPathComponent == filename {
+                return UIImage(contentsOfFile: bundleURL.appendingPathComponent(path).path)
+            }
+        }
+        return nil
+    }
+
+    private func makePOIImageView(_ image: UIImage) -> UIImageView {
+        let imageView = UIImageView(image: image)
+        imageView.contentMode     = .scaleAspectFit
+        imageView.clipsToBounds   = true
+        imageView.layer.cornerRadius = 12
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Equivalente a un <img> con width:100%; height:auto — la foto se ve
+        // completa y conserva su proporción, sin recortes ni franjas vacías.
+        if image.size.width > 0, image.size.height > 0 {
+            imageView.heightAnchor.constraint(
+                equalTo:    imageView.widthAnchor,
+                multiplier: image.size.height / image.size.width
+            ).isActive = true
+        } else {
+            imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        }
+
+        // Al tapearla se abre a pantalla completa y con zoom.
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(poiImageTapped(_:)))
+        )
+        return imageView
+    }
+
+    @objc private func poiImageTapped(_ gesture: UITapGestureRecognizer) {
+        guard let image = (gesture.view as? UIImageView)?.image else { return }
+
+        let viewer = POIImageViewerController(image: image)
+        viewer.modalPresentationStyle = .fullScreen
+        viewer.modalTransitionStyle   = .crossDissolve
+
+        // La ficha del POI ya está presentada sobre este controller, así que hay
+        // que presentar desde la de más arriba y no desde `self`.
+        var top: UIViewController = self
+        while let presented = top.presentedViewController { top = presented }
+        top.present(viewer, animated: true)
     }
 
     // MARK: - Button state
@@ -521,7 +635,7 @@ extension ARViewController: ARSessionDelegate {
 
     func session(_ session: ARSession, didFailWithError error: Error) {
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = []
+        config.planeDetection = [.horizontal, .vertical]
         config.worldAlignment = .gravityAndHeading
         session.run(config, options: [.removeExistingAnchors, .resetTracking])
     }
@@ -530,7 +644,7 @@ extension ARViewController: ARSessionDelegate {
 
     func sessionInterruptionEnded(_ session: ARSession) {
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = []
+        config.planeDetection = [.horizontal, .vertical]
         config.worldAlignment = .gravityAndHeading
         session.run(config, options: [.resetTracking])
     }
@@ -546,6 +660,95 @@ extension ARViewController: ARSessionDelegate {
         default: break
         }
     }
+}
+
+// MARK: - POIImageViewerController
+
+/// Visor a pantalla completa de una foto de la ficha del montículo.
+/// Pinch o doble tap para acercar, un tap (o la X) para cerrar.
+final class POIImageViewerController: UIViewController, UIScrollViewDelegate {
+
+    private let image: UIImage
+    private let scrollView = UIScrollView()
+    private let imageView  = UIImageView()
+
+    init(image: UIImage) {
+        self.image = image
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) no soportado")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .black
+
+        scrollView.delegate                       = self
+        scrollView.minimumZoomScale               = 1.0
+        scrollView.maximumZoomScale               = 5.0
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator   = false
+        view.addSubview(scrollView)
+
+        imageView.image       = image
+        imageView.contentMode = .scaleAspectFit
+        scrollView.addSubview(imageView)
+
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(doubleTap)
+
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleClose))
+        singleTap.require(toFail: doubleTap)   // sin esto, el doble tap cerraría el visor
+        scrollView.addGestureRecognizer(singleTap)
+
+        setupCloseButton()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.frame = view.bounds
+        // Solo se reencuadra sin zoom: hacerlo con zoom aplicado pelearía con el
+        // transform que UIScrollView le pone a la vista que está ampliando.
+        if scrollView.zoomScale == scrollView.minimumZoomScale {
+            imageView.frame        = scrollView.bounds
+            scrollView.contentSize = scrollView.bounds.size
+        }
+    }
+
+    private func setupCloseButton() {
+        let button = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
+        button.setImage(UIImage(systemName: "xmark", withConfiguration: config), for: .normal)
+        button.tintColor          = .white
+        button.backgroundColor    = UIColor.black.withAlphaComponent(0.45)
+        button.layer.cornerRadius = 22
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
+        view.addSubview(button)
+
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            button.widthAnchor.constraint(equalToConstant: 44),
+            button.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+
+    @objc private func handleClose() {
+        dismiss(animated: true)
+    }
+
+    @objc private func handleDoubleTap() {
+        let zoomedOut = scrollView.zoomScale <= scrollView.minimumZoomScale
+        scrollView.setZoomScale(zoomedOut ? scrollView.maximumZoomScale / 2
+                                          : scrollView.minimumZoomScale,
+                                animated: true)
+    }
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
 }
 
 // MARK: - BackConfirmationView
