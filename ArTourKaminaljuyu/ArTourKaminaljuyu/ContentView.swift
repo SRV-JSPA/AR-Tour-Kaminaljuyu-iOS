@@ -71,10 +71,11 @@ struct GuidedTourOverlay: View {
                 }
             }
             #if DEBUG
-            .overlay(alignment: .topLeading) {
+            .overlay(alignment: .bottomTrailing) {
                 if guideVM.player != nil && !guideVM.introSequenceCompleted {
                     SkipIntrosButton(viewModel: guideVM)
-                        .padding(10)
+                        .padding(.trailing, 10)
+                        .padding(.bottom, 5)
                 }
             }
             #endif

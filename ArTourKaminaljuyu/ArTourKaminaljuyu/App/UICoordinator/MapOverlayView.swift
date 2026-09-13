@@ -116,7 +116,7 @@ struct MapOverlayView: View {
         let template = languageService.string("distance_to_poi")
         let distanceStr = "\(Int(distance.rounded()))"
         return template.replacingOccurrences(of: "%@", with: distanceStr, options: [], range: template.range(of: "%@"))
-            .replacingOccurrences(of: "%@", with: poi.name)
+            .replacingOccurrences(of: "%@", with: poi.localizedName)
     }
 
     private var displayedStatus: (icon: String, text: String, color: Color) {
@@ -135,10 +135,10 @@ struct MapOverlayView: View {
         case .navigatingToStart:
             return languageService.string("status_navigating_to_start")
         case .navigatingToPOI(let i):
-            let poiName = gps.allPOIs[safe: i]?.name ?? "POI \(i)"
+            let poiName = gps.allPOIs[safe: i]?.localizedName ?? "POI \(i)"
             return "→ \(poiName)"
         case .atPOI(let i):
-            let poiName = gps.allPOIs[safe: i]?.name ?? "POI \(i)"
+            let poiName = gps.allPOIs[safe: i]?.localizedName ?? "POI \(i)"
             return "📍 \(poiName)"
         case .returning:
             return languageService.string("status_returning")

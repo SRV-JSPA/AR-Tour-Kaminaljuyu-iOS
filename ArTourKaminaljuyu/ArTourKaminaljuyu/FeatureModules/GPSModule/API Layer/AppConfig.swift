@@ -31,10 +31,11 @@ enum AppConfig {
     // Valores anteriores, para restaurar cuando se vuelva al parque:
     //   Parque Kaminaljuyú -> el POI 1 real del sitio
     //   Pruebas en casa    -> (14.6748361, -90.5520308)
-    static let tourStartLatitude: Double  = 14.6045448
-    static let tourStartLongitude: Double = -90.4889680
+    static let tourStartLatitude: Double  = 14.499289498736726
+    static let tourStartLongitude: Double = -90.79169423290863
     
     
+
     
     // MARK: - Calidad del GPS
     static let accuracyGoodMeters: Double = 5.0

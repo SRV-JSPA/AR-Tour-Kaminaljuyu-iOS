@@ -15,8 +15,8 @@ final class POIRegistry {
             POILocation(
                 id: "monticulo_6",
                 coordinate: CLLocationCoordinate2D(
-                    latitude: 14.6052822,
-                    longitude: -90.4885325
+                    latitude: 14.499221226677674,
+                    longitude: -90.79159773460417
                 ),
                 name: "Montículo C-II-6",
                 modelPath: "Assets/Models/Monticulo7.obj",
@@ -34,8 +34,8 @@ final class POIRegistry {
             POILocation(
                 id: "acropolis",
                 coordinate: CLLocationCoordinate2D(
-                    latitude: 14.6048439,
-                    longitude: -90.4888225
+                    latitude: 14.499134988257206,
+                    longitude: -90.79142886257137
                 ),
                 name: "Acrópolis (C-II-4)",
                 modelPath: "Assets/Models/Monticulo12.obj",
