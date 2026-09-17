@@ -398,26 +398,20 @@ final class ARViewController: UIViewController {
         // Title
         stack.addArrangedSubview(makeLabel(poi.localizedName, font: .boldSystemFont(ofSize: 22)))
 
+        // Fotos del montículo, entre el título y el texto. El set NO depende del
+        // idioma: las mismas imágenes se muestran en español y en inglés, y se
+        // agregan antes que la descripción para que aparezcan aunque ese idioma
+        // todavía no tenga transcripción cargada.
+        if let gallery = makePOIImagesSection(for: poi) {
+            stack.addArrangedSubview(gallery)
+        }
+
         // Description
         let desc = VirtualGuideModuleInterface.shared.poiDescription(forPOIId: poi.id)
         if !desc.isEmpty {
             stack.addArrangedSubview(makeLabel(desc,
                                                font: .systemFont(ofSize: 16),
                                                color: .secondaryLabel))
-        }
-
-        // Acá se elige qué fotos lleva la ficha. Opciones:
-        //   [Self.placeholderImageNames[7]]                → solo etapa1.png
-        //   Self.placeholderImageNames[7...9]              → un rango
-        //   Self.placeholderImageNames                     → el catálogo completo
-        //   poi.images.isEmpty ? [] : poi.images           → las fotos reales del montículo
-        let imageNames = [Self.placeholderImageNames[7]]
-        for name in imageNames {
-            guard let image = resolvePOIImage(named: name) else {
-                print("[AR] no se pudo cargar la imagen '\(name)'")
-                continue
-            }
-            stack.addArrangedSubview(makePOIImageView(image))
         }
 
         // Optional extra fields — add only if your POILocation has them
@@ -460,24 +454,45 @@ final class ARViewController: UIViewController {
 
     // MARK: - POI images
 
-    /// Catálogo de todas las fotos disponibles en `Assets/Images/`.
-    /// El índice de cada una está anotado al lado para poder referenciarlas
-    /// directamente, p. ej. `Self.placeholderImageNames[7]` es etapa1.png.
-    /// Qué se muestra en la ficha se elige en `showPOIInfo`.
-    private static let placeholderImageNames: [String] = [
-        "Assets/Images/c_ii_4.png",     // 0
-        "Assets/Images/c_ii_8.png",     // 1
-        "Assets/Images/c_ii_12.png",    // 2
-        "Assets/Images/c_ii_12_2.png",  // 3
-        "Assets/Images/c_ii_13.jpg",    // 4
-        "Assets/Images/c_ii_13_2.png",  // 5
-        "Assets/Images/c_ii_13_3.jpg",  // 6
-        "Assets/Images/etapa1.png",     // 7
-        "Assets/Images/etapa2a.png",    // 8
-        "Assets/Images/etapa2b.png",    // 9
-        "Assets/Images/etapa2c.png",    // 10
-        "Assets/Images/etapa3.png",     // 11
-        "Assets/Images/etapa3a.png"     // 12
+    /// Fotos de cada montículo, en el orden en que se muestran en la ficha.
+    /// La llave es el `id` del POI tal como está en `POIRegistry`.
+    ///
+    /// Las imágenes son independientes del idioma: este mismo set se usa en
+    /// español y en inglés, solo cambia el texto que las acompaña.
+    ///
+    /// La correspondencia sale de las transcripciones de cada video en
+    /// `VideoTranscripts.swift`, que describen exactamente lo que ilustra cada
+    /// foto (p. ej. el monumento 224 de C-II-13 "tallado en sus cuatro lados"
+    /// es `c_ii_13.jpg`, con las cuatro caras numeradas 1-4 en la imagen).
+    ///
+    /// Las `etapa*` son las etapas constructivas de la Estructura E
+    /// (`palangana`), ordenadas de la más antigua a la más reciente. El video
+    /// las narra al revés (de la más reciente a la más antigua): para seguir ese
+    /// orden basta con invertir el array.
+    private static let poiImageNames: [String: [String]] = [
+        "acropolis": [
+            "Assets/Images/c_ii_4.png"      // diagrama talud-tablero
+        ],
+        "monticulo_8": [
+            "Assets/Images/c_ii_8.png"      // fragmento de monumento
+        ],
+        "monticulo_12": [
+            "Assets/Images/c_ii_12.png",    // depósito cultural
+            "Assets/Images/c_ii_12_2.png"   // figurilla
+        ],
+        "monticulo_13": [
+            "Assets/Images/c_ii_13.jpg",    // monumento 224, sus cuatro lados
+            "Assets/Images/c_ii_13_2.png",  // escalinatas superpuestas
+            "Assets/Images/c_ii_13_3.jpg"   // drenajes + vasija esqueletizada
+        ],
+        "palangana": [
+            "Assets/Images/etapa1.png",     // Etapa 1
+            "Assets/Images/etapa2a.png",    // Subetapa 2-A
+            "Assets/Images/etapa2b.png",    // Subetapa 2-B
+            "Assets/Images/etapa2c.png",    // Subetapa 2-C
+            "Assets/Images/etapa3a.png",    // Subetapa 3-A
+            "Assets/Images/etapa3.png"      // Subetapa 3-C
+        ]
     ]
 
     /// Acepta nombres de asset catalog ("c_ii_4"), rutas relativas dentro del
@@ -516,6 +531,73 @@ final class ARViewController: UIViewController {
             }
         }
         return nil
+    }
+
+    /// Alto de las miniaturas cuando el montículo tiene más de una foto.
+    private static let poiThumbnailHeight: CGFloat = 150
+
+    /// Construye la sección de fotos de la ficha con las imágenes que le
+    /// corresponden a este POI. Una sola foto ocupa el ancho completo; con
+    /// varias se arma una fila horizontal desplazable. Devuelve `nil` si el POI
+    /// no tiene fotos asignadas o si ninguna se pudo cargar, para no dejar un
+    /// hueco vacío en la ficha.
+    private func makePOIImagesSection(for poi: POILocation) -> UIView? {
+        let names = Self.poiImageNames[poi.id] ?? []
+        guard !names.isEmpty else { return nil }
+
+        let images = names.compactMap { name -> UIImage? in
+            guard let image = resolvePOIImage(named: name) else {
+                print("[AR] no se pudo cargar la imagen '\(name)'")
+                return nil
+            }
+            return image
+        }
+        guard !images.isEmpty else { return nil }
+        guard images.count > 1 else { return makePOIImageView(images[0]) }
+
+        let row = UIStackView(arrangedSubviews: images.map { makePOIThumbnail($0) })
+        row.axis      = .horizontal
+        row.spacing   = 8
+        row.alignment = .center
+        row.translatesAutoresizingMaskIntoConstraints = false
+
+        let scroll = UIScrollView()
+        scroll.showsHorizontalScrollIndicator = false
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.addSubview(row)
+
+        NSLayoutConstraint.activate([
+            row.topAnchor.constraint(equalTo: scroll.contentLayoutGuide.topAnchor),
+            row.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor),
+            row.leadingAnchor.constraint(equalTo: scroll.contentLayoutGuide.leadingAnchor),
+            row.trailingAnchor.constraint(equalTo: scroll.contentLayoutGuide.trailingAnchor),
+            scroll.heightAnchor.constraint(equalToConstant: Self.poiThumbnailHeight)
+        ])
+        return scroll
+    }
+
+    /// Miniatura de alto fijo para la fila horizontal; el ancho sale de la
+    /// proporción de la foto, así ninguna se deforma. Igual que la versión de
+    /// ancho completo, al tapearla se abre a pantalla completa con zoom.
+    private func makePOIThumbnail(_ image: UIImage) -> UIImageView {
+        let imageView = UIImageView(image: image)
+        imageView.contentMode        = .scaleAspectFit
+        imageView.clipsToBounds      = true
+        imageView.layer.cornerRadius = 12
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        let ratio = image.size.height > 0 ? image.size.width / image.size.height : 1
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: Self.poiThumbnailHeight),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor,
+                                             multiplier: ratio)
+        ])
+
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(poiImageTapped(_:)))
+        )
+        return imageView
     }
 
     private func makePOIImageView(_ image: UIImage) -> UIImageView {
