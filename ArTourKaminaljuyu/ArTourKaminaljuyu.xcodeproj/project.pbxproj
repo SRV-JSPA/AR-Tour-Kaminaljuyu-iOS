@@ -8,14 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		424DC7C09681B0296DA72F33 /* Pods_ArTourKaminaljuyu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410665962BDA754AE08C13A /* Pods_ArTourKaminaljuyu.framework */; };
+		B05B5A822FB8DDA4009AB8E1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05B5A812FB8DDA4009AB8E1 /* Launch Screen.storyboard */; };
+		D09597049CCB5535F3F1C18D /* Pods_ArTourKaminaljuyuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3464FB834BA2519E4C6FE5BA /* Pods_ArTourKaminaljuyuTests.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B077FE233056276A0011001D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34D55EE32F3A80D200655844 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34D55EEA2F3A80D200655844;
+			remoteInfo = ArTourKaminaljuyu;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		3464FB834BA2519E4C6FE5BA /* Pods_ArTourKaminaljuyuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArTourKaminaljuyuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34A468492F62720400718027 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		34D55EEB2F3A80D200655844 /* ArTourKaminaljuyu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArTourKaminaljuyu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7562456FE903B7D1D8D2026F /* Pods-ArTourKaminaljuyuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArTourKaminaljuyuTests.release.xcconfig"; path = "Target Support Files/Pods-ArTourKaminaljuyuTests/Pods-ArTourKaminaljuyuTests.release.xcconfig"; sourceTree = "<group>"; };
 		8144D7A19209013C5BAC7F53 /* Pods-ArTourKaminaljuyu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArTourKaminaljuyu.debug.xcconfig"; path = "Target Support Files/Pods-ArTourKaminaljuyu/Pods-ArTourKaminaljuyu.debug.xcconfig"; sourceTree = "<group>"; };
 		9410665962BDA754AE08C13A /* Pods_ArTourKaminaljuyu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArTourKaminaljuyu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B05B5A812FB8DDA4009AB8E1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		B077FE1F3056276A0011001D /* ArTourKaminaljuyuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArTourKaminaljuyuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9056649015DDC5FC5179D53 /* Pods-ArTourKaminaljuyu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArTourKaminaljuyu.release.xcconfig"; path = "Target Support Files/Pods-ArTourKaminaljuyu/Pods-ArTourKaminaljuyu.release.xcconfig"; sourceTree = "<group>"; };
+		E398C2B6459B6550B064C173 /* Pods-ArTourKaminaljuyuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArTourKaminaljuyuTests.debug.xcconfig"; path = "Target Support Files/Pods-ArTourKaminaljuyuTests/Pods-ArTourKaminaljuyuTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -37,6 +54,13 @@
 			path = ArTourKaminaljuyu;
 			sourceTree = "<group>";
 		};
+		B077FE203056276A0011001D /* ArTourKaminaljuyuTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = ArTourKaminaljuyuTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,14 +72,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B077FE1C3056276A0011001D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D09597049CCB5535F3F1C18D /* Pods_ArTourKaminaljuyuTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		34D55EE22F3A80D200655844 = {
 			isa = PBXGroup;
 			children = (
+				B05B5A812FB8DDA4009AB8E1 /* Launch Screen.storyboard */,
 				34A468492F62720400718027 /* Secrets.xcconfig */,
 				34D55EED2F3A80D200655844 /* ArTourKaminaljuyu */,
+				B077FE203056276A0011001D /* ArTourKaminaljuyuTests */,
 				34D55EEC2F3A80D200655844 /* Products */,
 				720D19D59C22325B4ACA2577 /* Pods */,
 				CD935C16E9CE8D38A2F341A1 /* Frameworks */,
@@ -66,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				34D55EEB2F3A80D200655844 /* ArTourKaminaljuyu.app */,
+				B077FE1F3056276A0011001D /* ArTourKaminaljuyuTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +110,8 @@
 			children = (
 				8144D7A19209013C5BAC7F53 /* Pods-ArTourKaminaljuyu.debug.xcconfig */,
 				D9056649015DDC5FC5179D53 /* Pods-ArTourKaminaljuyu.release.xcconfig */,
+				E398C2B6459B6550B064C173 /* Pods-ArTourKaminaljuyuTests.debug.xcconfig */,
+				7562456FE903B7D1D8D2026F /* Pods-ArTourKaminaljuyuTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -83,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				9410665962BDA754AE08C13A /* Pods_ArTourKaminaljuyu.framework */,
+				3464FB834BA2519E4C6FE5BA /* Pods_ArTourKaminaljuyuTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,6 +150,28 @@
 			productReference = 34D55EEB2F3A80D200655844 /* ArTourKaminaljuyu.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B077FE1E3056276A0011001D /* ArTourKaminaljuyuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B077FE273056276A0011001D /* Build configuration list for PBXNativeTarget "ArTourKaminaljuyuTests" */;
+			buildPhases = (
+				2AB1ED1133CB960812F5D908 /* [CP] Check Pods Manifest.lock */,
+				B077FE1B3056276A0011001D /* Sources */,
+				B077FE1C3056276A0011001D /* Frameworks */,
+				B077FE1D3056276A0011001D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B077FE243056276A0011001D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B077FE203056276A0011001D /* ArTourKaminaljuyuTests */,
+			);
+			name = ArTourKaminaljuyuTests;
+			productName = ArTourKaminaljuyuTests;
+			productReference = B077FE1F3056276A0011001D /* ArTourKaminaljuyuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -119,11 +179,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2620;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					34D55EEA2F3A80D200655844 = {
 						CreatedOnToolsVersion = 26.2;
+					};
+					B077FE1E3056276A0011001D = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 34D55EEA2F3A80D200655844;
 					};
 				};
 			};
@@ -142,12 +206,21 @@
 			projectRoot = "";
 			targets = (
 				34D55EEA2F3A80D200655844 /* ArTourKaminaljuyu */,
+				B077FE1E3056276A0011001D /* ArTourKaminaljuyuTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		34D55EE92F3A80D200655844 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05B5A822FB8DDA4009AB8E1 /* Launch Screen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B077FE1D3056276A0011001D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -165,17 +238,35 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ArTourKaminaljuyu/Pods-ArTourKaminaljuyu-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ArTourKaminaljuyu/Pods-ArTourKaminaljuyu-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArTourKaminaljuyu/Pods-ArTourKaminaljuyu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2AB1ED1133CB960812F5D908 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ArTourKaminaljuyuTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		759A5A74ADD0A02CF7C24C32 /* [CP] Check Pods Manifest.lock */ = {
@@ -210,7 +301,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B077FE1B3056276A0011001D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B077FE243056276A0011001D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34D55EEA2F3A80D200655844 /* ArTourKaminaljuyu */;
+			targetProxy = B077FE233056276A0011001D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		34D55EF42F3A80D500655844 /* Debug */ = {
@@ -249,7 +355,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = J3VV6B7MVD;
+				DEVELOPMENT_TEAM = 9L87NGN5G7;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -315,7 +421,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = J3VV6B7MVD;
+				DEVELOPMENT_TEAM = 9L87NGN5G7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -346,25 +452,27 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J3VV6B7MVD;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArTourKaminaljuyu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "rivacy - Location When In Use Usage Description";
 				INFOPLIST_KEY_NSCameraUsageDescription = "ArTourKaminaljuyú usa la cámara para mostrar los modelos 3D de los montículos arqueológicos mediante Realidad Aumentada.";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para detectar cúando te acercas a cada punto de interés durante el recorrido.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para guiarte por el recorrido del parque arqueológico Kaminaljuyú.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gabys.ArTourKaminaljuyu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nancymazariegos.ArTourKaminaljuyu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -384,25 +492,27 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J3VV6B7MVD;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArTourKaminaljuyu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "rivacy - Location When In Use Usage Description";
 				INFOPLIST_KEY_NSCameraUsageDescription = "ArTourKaminaljuyú usa la cámara para mostrar los modelos 3D de los montículos arqueológicos mediante Realidad Aumentada.";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Necesitamos acceso continuo a tu ubicación para detectar cúando te acercas a cada punto de interés durante el recorrido.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Necesitamos tu ubicación para guiarte por el recorrido del parque arqueológico Kaminaljuyú.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación necesita tu ubicación para guiarte en el recorrido del parque";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gabys.ArTourKaminaljuyu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nancymazariegos.ArTourKaminaljuyu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -411,6 +521,52 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B077FE253056276A0011001D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E398C2B6459B6550B064C173 /* Pods-ArTourKaminaljuyuTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L87NGN5G7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uvg.ArTourKaminaljuyuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArTourKaminaljuyu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArTourKaminaljuyu";
+			};
+			name = Debug;
+		};
+		B077FE263056276A0011001D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7562456FE903B7D1D8D2026F /* Pods-ArTourKaminaljuyuTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L87NGN5G7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uvg.ArTourKaminaljuyuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArTourKaminaljuyu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArTourKaminaljuyu";
 			};
 			name = Release;
 		};
@@ -431,6 +587,15 @@
 			buildConfigurations = (
 				34D55EF72F3A80D500655844 /* Debug */,
 				34D55EF82F3A80D500655844 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B077FE273056276A0011001D /* Build configuration list for PBXNativeTarget "ArTourKaminaljuyuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B077FE253056276A0011001D /* Debug */,
+				B077FE263056276A0011001D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

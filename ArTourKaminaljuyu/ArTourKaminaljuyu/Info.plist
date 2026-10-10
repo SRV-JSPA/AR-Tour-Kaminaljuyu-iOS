@@ -4,6 +4,11 @@
 <dict>
 	<key>GoogleMapsAPIKey</key>
 	<string>$(GOOGLE_MAPS_API_KEY)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>plusjakartasans_medium.ttf</string>
+		<string>plusjakartasans_bold.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
