@@ -157,8 +157,3 @@ flujo del tour con módulos simulados (*mocks*). El detalle por archivo está en
 | Gaby | Módulo de guía virtual |
 
 Universidad del Valle de Guatemala — Facultad de Ingeniería, 2026.
-
-## Uso de inteligencia artificial
-
-En este proyecto se utilizó Claude (Anthropic) como herramienta de apoyo durante el
-desarrollo y la documentación. Todo el contenido fue revisado y validado por el equipo.
