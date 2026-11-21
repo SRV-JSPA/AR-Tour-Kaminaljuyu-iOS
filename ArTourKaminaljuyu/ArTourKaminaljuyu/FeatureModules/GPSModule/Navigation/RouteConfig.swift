@@ -32,7 +32,11 @@ struct RouteConfig {
 
         var map = [String: [CLLocationCoordinate2D]]()
 
-        map[routeKey(from: "informacion_inicial", to: "monticulo_6")] = [
+        // En el Android este tramo va de `informacion_inicial` (POI 1) a
+        // C-II-6. Acá `informacion_inicial` no es un POI, así que el tramo
+        // arranca en el punto de partida del tour (AppConfig.tourStart*),
+        // que está a ~4 m de donde el Android pone ese POI.
+        map[routeKeyStart(to: "monticulo_6")] = [
             CLLocationCoordinate2D(latitude: 14.63141060, longitude: -90.54846954),
             CLLocationCoordinate2D(latitude: 14.63158607, longitude: -90.54853058),
             CLLocationCoordinate2D(latitude: 14.63171482, longitude: -90.54850769),

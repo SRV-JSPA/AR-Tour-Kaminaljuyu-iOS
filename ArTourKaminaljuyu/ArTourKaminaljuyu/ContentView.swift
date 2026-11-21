@@ -2,24 +2,6 @@ import SwiftUI
 import SwiftUI
 import Combine
 
-private struct SkipIntrosButton: View {
-    @ObservedObject var viewModel: VirtualGuideModuleInterface
-    @EnvironmentObject var languageService: LanguageService
-    
-    var body: some View {
-        Button {
-            viewModel.skipIntros()
-        } label: {
-            Label(languageService.string("skip_intros"), systemImage: "forward.end.fill")
-                .font(.custom("PlusJakartaSans-Bold", size: 12))
-                .padding(8)
-                .background(Color.black.opacity(0.7))
-                .foregroundColor(.white)
-                .cornerRadius(8)
-        }
-    }
-}
-
 struct GuidedTourOverlay: View {
     @EnvironmentObject var guideVM: VirtualGuideModuleInterface
     @EnvironmentObject var appState: AppStateManager
@@ -70,15 +52,6 @@ struct GuidedTourOverlay: View {
                         .transition(.opacity)
                 }
             }
-            #if DEBUG
-            .overlay(alignment: .bottomTrailing) {
-                if guideVM.player != nil && !guideVM.introSequenceCompleted {
-                    SkipIntrosButton(viewModel: guideVM)
-                        .padding(.trailing, 10)
-                        .padding(.bottom, 5)
-                }
-            }
-            #endif
             .padding(.horizontal, 12)
             .padding(.bottom, 24)
         }
