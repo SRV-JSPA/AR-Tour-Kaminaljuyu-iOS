@@ -1,0 +1,1066 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 61,
+  "totalBatches": 3,
+  "exportsByPath": {
+    "ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj": [],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift": [
+      "AppRoute",
+      "shared",
+      "currentRoute",
+      "navigateTo",
+      "AppRouter"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift": [
+      "ArTourKaminaljuyuApp.init",
+      "body",
+      "ArTourKaminaljuyuApp"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift": [
+      "gps",
+      "language",
+      "ar",
+      "virtualGuide",
+      "appState",
+      "router",
+      "eventBus",
+      "production",
+      "AppContainer"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift": [
+      "onBack",
+      "languageService",
+      "body",
+      "InstructionsView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift": [
+      "path",
+      "ArchShape",
+      "onGuidedTour",
+      "onFreeTour",
+      "onInstructions",
+      "onTerms",
+      "languageService",
+      "body",
+      "MainMenuView",
+      "player",
+      "gravity",
+      "autoPlay",
+      "makeUIView",
+      "updateUIView",
+      "VideoPlayerView",
+      "PlayerUIView.init",
+      "PlayerUIView.init",
+      "layoutSubviews",
+      "updatePlayer",
+      "PlayerUIView",
+      "onDismiss",
+      "languageService",
+      "body",
+      "ComingSoonView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift": [
+      "gps",
+      "languageService",
+      "body",
+      "MapOverlayView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift": [
+      "icon",
+      "title",
+      "gradientStart",
+      "gradientEnd",
+      "strokeColor",
+      "action",
+      "body",
+      "MenuCardView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift": [
+      "size",
+      "body",
+      "GuidedTourIcon",
+      "size",
+      "body",
+      "FreeTourIcon",
+      "size",
+      "body",
+      "InstructionsIcon",
+      "size",
+      "body",
+      "TermsIcon"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift": [
+      "icon",
+      "title",
+      "gradientStart",
+      "gradientEnd",
+      "strokeColor",
+      "action",
+      "body",
+      "MenuSquareCardView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift": [
+      "body",
+      "SplashView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift": [
+      "onBack",
+      "languageService",
+      "body",
+      "TermsView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift": [
+      "onBack",
+      "onStartTour",
+      "onFinalize",
+      "languageService",
+      "gps",
+      "body",
+      "TourControlsView",
+      "icon",
+      "title",
+      "body",
+      "TourControlLegendRow"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift": [
+      "languageService",
+      "body",
+      "VideoMapToggleHintView",
+      "viewModel",
+      "languageService",
+      "body",
+      "VideoMapToggleButton"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift": [
+      "guideVM",
+      "appState",
+      "gps",
+      "onTourEnded",
+      "body",
+      "GuidedTourOverlay",
+      "router",
+      "appState",
+      "gps",
+      "body",
+      "ContentView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift": [
+      "shared",
+      "ARModuleInterface",
+      "ARModuleView.init",
+      "makeUIViewController",
+      "updateUIViewController",
+      "ARModuleView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift": [
+      "minScale",
+      "maxScale",
+      "cameraEyeHeightMeters",
+      "lightAmbient",
+      "lightDiffuse",
+      "modelPlacementDistanceMeters",
+      "globalScaleMultiplier",
+      "modelVisibilityDistanceMeters",
+      "ARConfig"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift": [
+      "viewDidLoad",
+      "viewWillAppear",
+      "viewWillDisappear",
+      "ARViewController",
+      "gestureRecognizer",
+      "session",
+      "sessionWasInterrupted",
+      "sessionInterruptionEnded",
+      "session",
+      "POIImageViewerController.init",
+      "POIImageViewerController.init",
+      "viewDidLoad",
+      "viewDidLayoutSubviews",
+      "viewForZooming",
+      "POIImageViewerController",
+      "onConfirm",
+      "onCancel",
+      "body",
+      "BackConfirmationView"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift": [
+      "ARGuideArrowManager.init",
+      "attachToCamera",
+      "update",
+      "ARGuideArrowManager"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift": [
+      "isActiveModelRevealed",
+      "modelRotationY",
+      "modelScale",
+      "modelOffsetY",
+      "ARSceneManager.init",
+      "activeModelWorldPosition",
+      "placeModel",
+      "updateModelPositionFromGPS",
+      "updateVisibility",
+      "resetGestures",
+      "clearAll",
+      "applyRotation",
+      "applyVerticalTranslation",
+      "applyScale",
+      "ARSceneManager"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift": [
+      "guidedArrivalMeters",
+      "connectorArrivalMeters",
+      "tourStartRadiusMeters",
+      "visibilityRadiusMeters",
+      "routeConnectorsEnabled",
+      "tourStartLatitude",
+      "tourStartLongitude",
+      "accuracyGoodMeters",
+      "maxUsableHorizontalAccuracyMeters",
+      "accuracyCompensationCapMeters",
+      "AppConfig"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift": [
+      "shared",
+      "userLocation",
+      "userHorizontalAccuracy",
+      "userHeading",
+      "currentTargetPOI",
+      "distanceToTarget",
+      "bearingToTarget",
+      "tourState",
+      "routeCoordinates",
+      "nearestPOI",
+      "poiArrivedPublisher",
+      "tourCompletedPublisher",
+      "proximityArrivedPublisher",
+      "startTracking",
+      "stopTracking",
+      "startTour",
+      "advanceToNextPOI",
+      "startReturnPhase",
+      "stopTour",
+      "allPOIs",
+      "GPSModuleInterface"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift": [
+      "modelPath",
+      "texturePath",
+      "baseScale",
+      "ModelPart.init",
+      "ModelPart",
+      "id",
+      "coordinate",
+      "name",
+      "modelPath",
+      "texturePath",
+      "baseScale",
+      "baseAltitudeMeters",
+      "baseYawDeg",
+      "parts",
+      "bobbingEnabled",
+      "bobbingAmplitude",
+      "bobbingSpeed",
+      "description",
+      "historicalInfo",
+      "constructionPeriod",
+      "height",
+      "archaeologicalFeatures",
+      "culturalSignificance",
+      "images",
+      "arrivalThresholdMeters",
+      "POILocation.init",
+      "==",
+      "clLocation",
+      "localizedName",
+      "POILocation"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift": [
+      "shared",
+      "pois",
+      "poi",
+      "tourStartCoordinate",
+      "POIRegistry"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift": [
+      "distanceInMeters",
+      "compensatedDistance",
+      "bearing",
+      "normalizeDeg180",
+      "GeoUtils"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift": [
+      "userLocation",
+      "userHeading",
+      "routeCoordinates",
+      "highlightedPOIId",
+      "pois",
+      "tourStartCoordinate",
+      "makeUIView",
+      "updateUIView",
+      "makeCoordinator",
+      "MapViewRepresentable",
+      "userMarker",
+      "poiMarkers",
+      "startMarker",
+      "routePolyline",
+      "lastRouteCoordinates",
+      "currentHighlightedPOIId",
+      "setInitialCameraPosition",
+      "cameraIdle",
+      "mapView",
+      "mapView",
+      "Coordinator",
+      "location",
+      "heading",
+      "route",
+      "highlighted",
+      "previews",
+      "MapViewRepresentable_Previews"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift": [
+      "START_ID",
+      "routeKey",
+      "routeKeyStart",
+      "routeKeyToStart",
+      "CONNECTORS",
+      "RouteConfig",
+      "buildRouteWaypoints",
+      "buildStartLeg",
+      "buildReturnLeg",
+      "buildFullRouteIncludingStart",
+      "connectorsForStartLeg",
+      "connectorsForPoiLeg",
+      "connectorsForReturnLeg"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift": [
+      "lastDistanceMeters",
+      "RouteNavigator.init",
+      "currentIndex",
+      "isFinished",
+      "currentTarget",
+      "updateAndGetTarget",
+      "reset",
+      "advance",
+      "RouteNavigator"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift": [
+      "TourState",
+      "state",
+      "currentPOI",
+      "targetCoordinate",
+      "bearingToTarget",
+      "distanceToTarget",
+      "routeCoordinates",
+      "poiArrivedPublisher",
+      "tourCompletedPublisher",
+      "TourManager.init",
+      "startTour",
+      "advanceToNextPOI",
+      "startReturnPhase",
+      "stopTour",
+      "update",
+      "TourManager"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift": [
+      "distance",
+      "distance",
+      "bearing",
+      "bearing",
+      "normalizeDeg180",
+      "normalizeDeg360",
+      "distance",
+      "GeoMath"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift": [
+      "onAuthorizationChanged",
+      "LocationPermissionsHelper.init",
+      "hasLocationPermission",
+      "authorizationStatus",
+      "isLocationDenied",
+      "isLocationRestricted",
+      "requestLocationPermission",
+      "requestAlwaysPermission",
+      "openAppSettings",
+      "shouldShowRationale",
+      "locationManagerDidChangeAuthorization",
+      "LocationPermissionsHelper"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift": [
+      "currentLocation",
+      "currentHeading",
+      "authorizationStatus",
+      "isLocationReady",
+      "LocationService.init",
+      "startTracking",
+      "stopTracking",
+      "enableBackgroundTracking",
+      "disableBackgroundTracking",
+      "latitude",
+      "longitude",
+      "altitude",
+      "horizontalAccuracy",
+      "headingDegrees",
+      "hasPermission",
+      "locationManager",
+      "locationManager",
+      "locationManagerDidChangeAuthorization",
+      "locationManager",
+      "LocationService"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift": [
+      "ProximityLevel",
+      "poi",
+      "distanceMeters",
+      "horizontalAccuracy",
+      "bearing",
+      "level",
+      "effectiveDistanceMeters",
+      "statusMessage",
+      "ProximityResult",
+      "nearestPOI",
+      "arrivalPublisher",
+      "ProximityService.init",
+      "update",
+      "reset",
+      "ProximityService"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift": [
+      "get",
+      "LocalizedStrings"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift": [
+      "shared",
+      "currentLanguage",
+      "setLanguage",
+      "videoPath",
+      "string",
+      "LanguageService"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift": [
+      "shared",
+      "player",
+      "showsVideo",
+      "hasPlayedIntro",
+      "hasStartedWalking",
+      "introSequenceCompleted",
+      "currentPOIVideoCompleted",
+      "transcriptLines",
+      "currentLineIndex",
+      "showsTranscript",
+      "start",
+      "stop",
+      "toggleView",
+      "toggleTranscript",
+      "poiDescription",
+      "playIntroSequence",
+      "skipIntros",
+      "startWalking",
+      "VirtualGuideModuleInterface"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift": [
+      "id",
+      "text",
+      "startTime",
+      "endTime",
+      "TranscriptLine"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift": [
+      "text",
+      "startTime",
+      "endTime",
+      "TranscriptCue",
+      "transcripts",
+      "cues",
+      "VideoTranscripts"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift": [
+      "viewModel",
+      "body",
+      "VirtualGuideView",
+      "viewModel",
+      "body",
+      "TranscriptToggleButton"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift": [
+      "shared",
+      "currentState",
+      "activePOIId",
+      "startTour",
+      "setActivePOI",
+      "completeTour",
+      "reset",
+      "AppStateManager"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift": [
+      "AppEvent",
+      "shared",
+      "publisher",
+      "publish",
+      "EventBus"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift": [
+      "AppState"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift": [
+      "subscript"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift": [
+      "Color.init"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift": [
+      "AppStateManagerTests.init",
+      "initialStateIsIdle",
+      "startTourTransition",
+      "setActivePOIUpdatesState",
+      "completeTourClearsPOI",
+      "resetReturnsToIdle",
+      "AppStateManagerTests"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift": [
+      "example",
+      "ArTourKaminaljuyuTests"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift": [
+      "publishLanguageChanged",
+      "publishNextPOIRequested",
+      "multipleSubscribersReceiveEvent",
+      "EventBusTests"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift": [
+      "modulesCommunicateViaInterfaces",
+      "eventBusCoordinatesModules",
+      "appStateManagerIsSingleSourceOfTruth",
+      "dependencyInjectionWorks",
+      "ArchitectureValidationTests",
+      "userCompletesFullGuidedTour",
+      "userChangesLanguageAndVideosUpdate",
+      "userCancelsTourAndSystemResets",
+      "EndToEndFlowTests",
+      "canReplaceImplementations",
+      "multipleEventSubscribers",
+      "reactiveStatePropagates",
+      "DecouplingValidationTests"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift": [],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift": [],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift": [
+      "currentState",
+      "activePOIId",
+      "startTourCalled",
+      "setActivePOICalled",
+      "completeTourCalled",
+      "resetCalled",
+      "startTour",
+      "setActivePOI",
+      "completeTour",
+      "reset",
+      "MockAppStateManager",
+      "currentLanguage",
+      "setLanguageCalled",
+      "lastLanguageSet",
+      "videoPathCalls",
+      "stringCalls",
+      "setLanguage",
+      "videoPath",
+      "string",
+      "MockLanguageService",
+      "publishedEvents",
+      "publisher",
+      "publish",
+      "reset",
+      "MockEventBus",
+      "userLocation",
+      "tourState",
+      "nearestPOI",
+      "startTourCalled",
+      "stopTourCalled",
+      "startTrackingCalled",
+      "stopTrackingCalled",
+      "startTour",
+      "stopTour",
+      "startTracking",
+      "stopTracking",
+      "simulateLocation",
+      "simulateTourState",
+      "MockGPSModuleInterface",
+      "currentRoute",
+      "navigateCalls",
+      "navigateTo",
+      "goBack",
+      "MockAppRouter",
+      "mock",
+      "appState",
+      "language",
+      "gps",
+      "router",
+      "eventBus",
+      "MockAppContainer"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift": [
+      "usesSharedState"
+    ],
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift": [
+      "completeTourFlow",
+      "languageChange",
+      "TourMockTests"
+    ],
+    "ArTourKaminaljuyu/Launch Screen.storyboard": [],
+    "ArTourKaminaljuyu/Podfile": [],
+    "ArTourKaminaljuyu/Secrets.xcconfig.example": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj",
+          "language": "pbxproj",
+          "sizeLines": 608,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+          "language": "swift",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+          "language": "swift",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+          "language": "swift",
+          "sizeLines": 73,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+          "language": "swift",
+          "sizeLines": 101,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+          "language": "swift",
+          "sizeLines": 370,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+          "language": "swift",
+          "sizeLines": 174,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+          "language": "swift",
+          "sizeLines": 65,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+          "language": "swift",
+          "sizeLines": 177,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+          "language": "swift",
+          "sizeLines": 61,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+          "language": "swift",
+          "sizeLines": 49,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+          "language": "swift",
+          "sizeLines": 116,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+          "language": "swift",
+          "sizeLines": 159,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift",
+          "language": "swift",
+          "sizeLines": 117,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md",
+          "language": "markdown",
+          "sizeLines": 431,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift",
+          "language": "swift",
+          "sizeLines": 196,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift",
+          "language": "swift",
+          "sizeLines": 46,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift",
+          "language": "swift",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+          "language": "swift",
+          "sizeLines": 891,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift",
+          "language": "swift",
+          "sizeLines": 179,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+          "language": "swift",
+          "sizeLines": 467,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift",
+          "language": "swift",
+          "sizeLines": 54,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+          "language": "swift",
+          "sizeLines": 170,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+          "language": "swift",
+          "sizeLines": 124,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift",
+          "language": "swift",
+          "sizeLines": 78,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+          "language": "swift",
+          "sizeLines": 60,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift",
+          "language": "swift",
+          "sizeLines": 353,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift",
+          "language": "swift",
+          "sizeLines": 237,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift",
+          "language": "swift",
+          "sizeLines": 52,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+          "language": "swift",
+          "sizeLines": 224,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift",
+          "language": "swift",
+          "sizeLines": 90,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift",
+          "language": "swift",
+          "sizeLines": 67,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+          "language": "swift",
+          "sizeLines": 204,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+          "language": "swift",
+          "sizeLines": 133,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift",
+          "language": "swift",
+          "sizeLines": 185,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+          "language": "swift",
+          "sizeLines": 34,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+          "language": "swift",
+          "sizeLines": 634,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+          "language": "swift",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+          "language": "swift",
+          "sizeLines": 1531,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+          "language": "swift",
+          "sizeLines": 104,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist",
+          "language": "xml",
+          "sizeLines": 17,
+          "fileCategory": "config"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+          "language": "swift",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+          "language": "swift",
+          "sizeLines": 32,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+          "language": "swift",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift",
+          "language": "swift",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift",
+          "language": "swift",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+          "language": "swift",
+          "sizeLines": 114,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift",
+          "language": "swift",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+          "language": "swift",
+          "sizeLines": 89,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+          "language": "swift",
+          "sizeLines": 290,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift",
+          "language": "swift",
+          "sizeLines": 104,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift",
+          "language": "swift",
+          "sizeLines": 72,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+          "language": "swift",
+          "sizeLines": 200,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+          "language": "markdown",
+          "sizeLines": 166,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+          "language": "markdown",
+          "sizeLines": 111,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift",
+          "language": "swift",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+          "language": "swift",
+          "sizeLines": 41,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/Launch Screen.storyboard",
+          "language": "storyboard",
+          "sizeLines": 46,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/Podfile",
+          "language": "unknown",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "ArTourKaminaljuyu/Secrets.xcconfig.example",
+          "language": "example",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "README.md",
+          "language": "markdown",
+          "sizeLines": 0,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift": [],
+        "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift": [],
+        "ArTourKaminaljuyu/Launch Screen.storyboard": [],
+        "ArTourKaminaljuyu/Podfile": [],
+        "ArTourKaminaljuyu/Secrets.xcconfig.example": [],
+        "README.md": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

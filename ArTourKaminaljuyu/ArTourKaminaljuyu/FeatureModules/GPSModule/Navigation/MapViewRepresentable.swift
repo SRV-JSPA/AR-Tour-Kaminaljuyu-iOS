@@ -310,7 +310,7 @@ private extension MapViewRepresentable {
             color.setFill()
             path.fill()
             
-            UIColor.white.setStroke()
+            UIColor.white.setStroke()ter
             path.lineWidth = 2.0
             path.stroke()
             

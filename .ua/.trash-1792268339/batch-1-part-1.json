@@ -1,0 +1,441 @@
+{
+  "nodes": [
+    {
+      "id": "config:ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj",
+      "type": "config",
+      "name": "project.pbxproj",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj",
+      "summary": "Archivo de proyecto de Xcode que define targets, fases de compilación y referencias de archivos del único target de la app; es la configuración de build autoritativa.",
+      "tags": ["configuration", "build-system", "xcode", "ios"],
+      "complexity": "moderate",
+      "languageNotes": "Formato propietario de Xcode (plist-like con UUIDs); normalmente autogenerado y no editado a mano."
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "type": "file",
+      "name": "AppRouter.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "summary": "Define el enrutador de navegación principal (singleton ObservableObject) y el enum AppRoute con las rutas raíz del flujo de la app.",
+      "tags": ["navigation", "singleton", "observable-object", "routing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:AppRouter",
+      "type": "class",
+      "name": "AppRouter",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "lineRange": [17, 26],
+      "summary": "Singleton ObservableObject que publica la ruta actual (currentRoute) y expone navigateTo para cambiar entre menú, controles de tour y tour guiado.",
+      "tags": ["navigation", "singleton", "observable-object", "state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:navigateTo",
+      "type": "function",
+      "name": "navigateTo",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "lineRange": [23, 25],
+      "summary": "API pública de navegación que actualiza la ruta publicada; punto único invocado por las vistas para cambiar de pantalla.",
+      "tags": ["navigation", "api", "state-mutation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "type": "file",
+      "name": "ArTourKaminaljuyuApp.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "summary": "Punto de entrada @main de la app: instancia AppContainer.production(), configura la API key de Google Maps e inyecta cada servicio al árbol SwiftUI vía environmentObject.",
+      "tags": ["entry-point", "dependency-injection", "swiftui-app", "bootstrap"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift:ArTourKaminaljuyuApp",
+      "type": "class",
+      "name": "ArTourKaminaljuyuApp",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "lineRange": [4, 29],
+      "summary": "Struct App raíz que crea el contenedor de dependencias e inyecta gps, language, ar, virtualGuide, appState y router como environmentObjects en ContentView.",
+      "tags": ["entry-point", "swiftui-app", "dependency-injection", "bootstrap"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "type": "file",
+      "name": "AppContainer.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "summary": "Factory central de inyección de dependencias que agrupa las interfaces públicas de los módulos feature y los servicios de coordinación; expone production() con las instancias .shared reales.",
+      "tags": ["dependency-injection", "factory", "service-locator", "architecture"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer",
+      "type": "class",
+      "name": "AppContainer",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "lineRange": [25, 73],
+      "summary": "Contenedor que referencia GPSModuleInterface, LanguageService, ARModuleInterface, VirtualGuideModuleInterface, AppStateManager, AppRouter y EventBus; init privado alimentado por el factory production().",
+      "tags": ["dependency-injection", "factory", "architecture", "composition-root"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:production",
+      "type": "function",
+      "name": "production",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "lineRange": [60, 70],
+      "summary": "Factory estático que construye el AppContainer de producción envolviendo las instancias singleton .shared de cada módulo y servicio.",
+      "tags": ["factory", "dependency-injection", "bootstrap"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+      "type": "file",
+      "name": "InstructionsView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+      "summary": "Vista SwiftUI que muestra las instrucciones de uso de la app como lista numerada de pasos, con textos resueltos vía LanguageService.",
+      "tags": ["component", "swiftui-view", "ui", "localization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift:InstructionsView",
+      "type": "class",
+      "name": "InstructionsView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+      "lineRange": [10, 96],
+      "summary": "View de instrucciones con callback onBack y helper instructionItem para renderizar cada paso numerado; consume languageService para los textos localizados.",
+      "tags": ["component", "swiftui-view", "ui", "localization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "type": "file",
+      "name": "MainMenuView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "summary": "Pantalla de menú principal con video de bienvenida en loop y tarjetas de acceso a tour guiado, tour libre, instrucciones y términos; incluye reproductor AVPlayer embebido y modal Coming Soon.",
+      "tags": ["component", "swiftui-view", "menu", "video-player", "entry-point"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView",
+      "type": "class",
+      "name": "MainMenuView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "lineRange": [31, 252],
+      "summary": "View del menú principal que compone las tarjetas de navegación (MenuCardView/MenuSquareCardView), los íconos de menú y reproduce videos de fondo; expone callbacks onGuidedTour, onFreeTour, onInstructions, onTerms.",
+      "tags": ["component", "swiftui-view", "menu", "navigation", "video-player"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:VideoPlayerView",
+      "type": "class",
+      "name": "VideoPlayerView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "lineRange": [254, 266],
+      "summary": "Adaptador UIViewRepresentable que embebe un PlayerUIView (AVPlayer) en SwiftUI con configuración de gravity y autoPlay.",
+      "tags": ["component", "uiview-representable", "video-player", "bridge"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:PlayerUIView",
+      "type": "class",
+      "name": "PlayerUIView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "lineRange": [268, 325],
+      "summary": "UIView con AVPlayerLayer que gestiona el ciclo de vida del reproductor: adjuntar player, observar estado de reproducción, arrancar al estar listo y limpiar en deinit.",
+      "tags": ["video-player", "uikit", "avfoundation", "lifecycle"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:ComingSoonView",
+      "type": "class",
+      "name": "ComingSoonView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "lineRange": [327, 365],
+      "summary": "Modal placeholder que informa que el Tour Libre aún no está disponible; se muestra al tocar la opción de tour libre en el menú.",
+      "tags": ["component", "swiftui-view", "modal", "placeholder"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:setupVideo",
+      "type": "function",
+      "name": "setupVideo",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "lineRange": [213, 228],
+      "summary": "Prepara el AVPlayer del video de fondo del menú, configurándolo para reproducción en loop silenciosa.",
+      "tags": ["video-player", "avfoundation", "setup"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:setupBienvenidaVideo",
+      "type": "function",
+      "name": "setupBienvenidaVideo",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "lineRange": [230, 251],
+      "summary": "Inicializa el reproductor del video de bienvenida de la guía virtual maya que se muestra en la pantalla de menú.",
+      "tags": ["video-player", "avfoundation", "setup"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "type": "file",
+      "name": "MapOverlayView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "summary": "Overlay que muestra el estado de navegación GPS (distancia al objetivo, estado del tour, POI cercano) y un aviso periódico de distancia durante el recorrido guiado.",
+      "tags": ["component", "swiftui-view", "gps", "overlay", "navigation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView",
+      "type": "class",
+      "name": "MapOverlayView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "lineRange": [12, 174],
+      "summary": "View que observa GPSModuleInterface para mostrar estado, ícono, color y distancia al objetivo, con un loop asíncrono que enseña periódicamente el aviso de distancia.",
+      "tags": ["component", "swiftui-view", "gps", "reactive", "overlay"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+      "type": "file",
+      "name": "MenuCardView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+      "summary": "Tarjeta de menú reutilizable con ícono, título, gradiente y borde, que ejecuta una acción al tocarse con efecto de presión.",
+      "tags": ["component", "swiftui-view", "ui", "reusable"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift:MenuCardView",
+      "type": "class",
+      "name": "MenuCardView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+      "lineRange": [10, 65],
+      "summary": "Botón-tarjeta parametrizable (icon, title, colores de gradiente, stroke, action) usado por el menú principal para las opciones de navegación.",
+      "tags": ["component", "swiftui-view", "ui", "reusable"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "type": "file",
+      "name": "MenuIcons.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "summary": "Colección de íconos vectoriales SwiftUI dibujados a mano (tour guiado, tour libre, instrucciones, términos) usados en las tarjetas del menú principal.",
+      "tags": ["component", "swiftui-view", "icons", "vector-graphics"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:GuidedTourIcon",
+      "type": "class",
+      "name": "GuidedTourIcon",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "lineRange": [11, 55],
+      "summary": "Ícono vectorial del tour guiado dibujado con formas SwiftUI, parametrizado por tamaño.",
+      "tags": ["component", "swiftui-view", "icon", "vector-graphics"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:FreeTourIcon",
+      "type": "class",
+      "name": "FreeTourIcon",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "lineRange": [58, 90],
+      "summary": "Ícono vectorial del tour libre dibujado con formas SwiftUI, parametrizado por tamaño.",
+      "tags": ["component", "swiftui-view", "icon", "vector-graphics"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:InstructionsIcon",
+      "type": "class",
+      "name": "InstructionsIcon",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "lineRange": [93, 128],
+      "summary": "Ícono vectorial de instrucciones dibujado con formas SwiftUI, parametrizado por tamaño.",
+      "tags": ["component", "swiftui-view", "icon", "vector-graphics"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:TermsIcon",
+      "type": "class",
+      "name": "TermsIcon",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "lineRange": [131, 177],
+      "summary": "Ícono vectorial de términos y condiciones dibujado con formas SwiftUI, parametrizado por tamaño.",
+      "tags": ["component", "swiftui-view", "icon", "vector-graphics"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+      "type": "file",
+      "name": "MenuSquareCardView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+      "summary": "Variante cuadrada de la tarjeta de menú con ícono, título, gradiente y acción al tocar; usada para las opciones secundarias del menú.",
+      "tags": ["component", "swiftui-view", "ui", "reusable"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift:MenuSquareCardView",
+      "type": "class",
+      "name": "MenuSquareCardView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+      "lineRange": [10, 61],
+      "summary": "Botón-tarjeta cuadrado parametrizable (icon, title, gradiente, stroke, action) con efecto de presión, hermano de MenuCardView.",
+      "tags": ["component", "swiftui-view", "ui", "reusable"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+      "type": "file",
+      "name": "SplashView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+      "summary": "Pantalla de splash con animación de opacidad y desplazamiento que se muestra al arrancar la app antes de revelar el menú.",
+      "tags": ["component", "swiftui-view", "splash", "animation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift:SplashView",
+      "type": "class",
+      "name": "SplashView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+      "lineRange": [10, 49],
+      "summary": "View de bienvenida animada (opacity, offsetY) mostrada por ContentView durante la carga inicial controlada por isLoading.",
+      "tags": ["component", "swiftui-view", "splash", "animation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+      "type": "file",
+      "name": "TermsView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+      "summary": "Vista SwiftUI que presenta los términos y condiciones como lista de ítems, con textos resueltos vía LanguageService y callback onBack.",
+      "tags": ["component", "swiftui-view", "ui", "localization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift:TermsView",
+      "type": "class",
+      "name": "TermsView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+      "lineRange": [10, 111],
+      "summary": "View de términos y condiciones con helper termItem para renderizar cada punto; consume languageService para los textos localizados.",
+      "tags": ["component", "swiftui-view", "ui", "localization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "type": "file",
+      "name": "TourControlsView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "summary": "Pantalla previa al tour guiado que muestra la distancia al punto de inicio, valida el radio de arranque y permite iniciar o finalizar el recorrido; incluye leyenda de controles.",
+      "tags": ["component", "swiftui-view", "gps", "tour-control", "navigation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView",
+      "type": "class",
+      "name": "TourControlsView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "lineRange": [11, 129],
+      "summary": "View de controles de tour que observa GPSModuleInterface para calcular distancia al inicio y habilitar startTourIfAllowed dentro del radio definido en AppConfig; expone onBack, onStartTour y onFinalize.",
+      "tags": ["component", "swiftui-view", "gps", "tour-control", "reactive"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlLegendRow",
+      "type": "class",
+      "name": "TourControlLegendRow",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "lineRange": [131, 159],
+      "summary": "Fila de leyenda reutilizable (ícono + título) que explica cada control del tour en la pantalla de TourControlsView.",
+      "tags": ["component", "swiftui-view", "ui", "reusable"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    { "source": "config:ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "type": "configures", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:AppRouter", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:navigateTo", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:AppRouter", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:navigateTo", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift:ArTourKaminaljuyuApp", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift:ArTourKaminaljuyuApp", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift:ArTourKaminaljuyuApp", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:production", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:production", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:production", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:GPSModuleInterface", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift:ARModuleInterface", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:AppRouter", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:VirtualGuideModuleInterface", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:AppStateManager", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:EventBus", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift:InstructionsView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift:InstructionsView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift:InstructionsView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:VideoPlayerView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:PlayerUIView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:ComingSoonView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:setupVideo", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:setupBienvenidaVideo", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:VideoPlayerView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:PlayerUIView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:ComingSoonView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift:MenuCardView", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift:MenuSquareCardView", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:GuidedTourIcon", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:FreeTourIcon", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:InstructionsIcon", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:TermsIcon", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:VideoPlayerView", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:ComingSoonView", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:VideoPlayerView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:PlayerUIView", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:GPSModuleInterface", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift:AppConfig", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift:POILocation", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift:MenuCardView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift:MenuCardView", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:GuidedTourIcon", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:FreeTourIcon", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:InstructionsIcon", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:TermsIcon", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:GuidedTourIcon", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:FreeTourIcon", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:InstructionsIcon", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:TermsIcon", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift:MenuSquareCardView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift:MenuSquareCardView", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift:SplashView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift:SplashView", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift:TermsView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift:TermsView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift:TermsView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlLegendRow", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlLegendRow", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:GPSModuleInterface", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift:AppConfig", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlLegendRow", "type": "depends_on", "direction": "forward", "weight": 0.6 }
+  ]
+}

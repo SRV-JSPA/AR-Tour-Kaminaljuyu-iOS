@@ -56,13 +56,6 @@ final class ProximityService: ObservableObject {
     }
 
     // MARK: - Actualización principal
-    //
-    // `focusPOIId` es el POI que el tour está recorriendo ahora mismo. Cuando
-    // viene con valor, se reporta ese POI y no el más cercano: los montículos
-    // están a ~18m unos de otros, así que al caminar hacia el POI que toca es
-    // normal quedar más cerca de un vecino, y reportar al vecino disparaba sus
-    // videos fuera de turno. En exploración libre (sin tour) llega nil y se
-    // mantiene el comportamiento de "el más cercano".
     func update(
         userLocation: CLLocationCoordinate2D,
         horizontalAccuracy: Double = 0,

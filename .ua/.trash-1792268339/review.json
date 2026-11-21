@@ -1,0 +1,32 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift' has no edges (orphan)",
+    "Node 'file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift' has no edges (orphan)",
+    "Node 'file:ArTourKaminaljuyu/Launch Screen.storyboard' has no edges (orphan)",
+    "Node 'document:README.md' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 221,
+    "totalEdges": 397,
+    "totalLayers": 9,
+    "tourSteps": 14,
+    "nodeTypes": {
+      "config": 4,
+      "file": 53,
+      "class": 76,
+      "function": 84,
+      "document": 4
+    },
+    "edgeTypes": {
+      "configures": 4,
+      "contains": 161,
+      "exports": 64,
+      "depends_on": 100,
+      "calls": 39,
+      "documents": 10,
+      "related": 11,
+      "tested_by": 8
+    }
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "nodes": [
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift",
+      "type": "file",
+      "name": "LanguageServiceTests.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift",
+      "summary": "Suite de tests (actualmente deshabilitada y comentada por completo) para LanguageService; validaba el idioma por defecto, el cambio de idioma, videoPath y la publicación del evento languageChanged en EventBus. La funcionalidad se valida ahora mediante mocks.",
+      "tags": ["test", "unit-test", "disabled", "localization", "language-service"],
+      "complexity": "simple",
+      "languageNotes": "Usa el framework Swift Testing (@Suite/@Test). El cuerpo completo está comentado por race conditions con el singleton LanguageService.shared."
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift",
+      "type": "file",
+      "name": "LocalizedStringsTests.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift",
+      "summary": "Suite de tests (deshabilitada y comentada) para LocalizedStrings; verificaba las traducciones ES/EN, el fallback de claves inexistentes y la presencia de todas las claves críticas del menú en ambos idiomas.",
+      "tags": ["test", "unit-test", "disabled", "localization", "i18n"],
+      "complexity": "simple",
+      "languageNotes": "Suite .serialized de Swift Testing, comentada para evitar race conditions con el singleton compartido."
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "type": "file",
+      "name": "MockServices.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "summary": "Proporciona los mocks de los servicios principales (AppStateManager, LanguageService, EventBus, GPSModuleInterface y AppRouter) junto con la factory AppContainer.mock() que construye un contenedor de dependencias simulado para tests E2E sin singletons ni race conditions.",
+      "tags": ["test", "mock", "dependency-injection", "test-fixture", "factory"],
+      "complexity": "complex",
+      "languageNotes": "Cada mock es una clase ObservableObject que replica la superficie del servicio real y registra las llamadas (patrón spy) para las aserciones."
+    },
+    {
+      "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+      "type": "document",
+      "name": "NEW_LOCALIZATION_KEYS.md",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+      "summary": "Documento de especificación que detalla 11 nuevas claves de localización (con traducciones ES/EN) requeridas por ContentView, TourControlsView y MapOverlayView, incluyendo instrucciones de implementación según el patrón de strings del proyecto.",
+      "tags": ["documentation", "localization", "i18n", "specification"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+      "type": "document",
+      "name": "TESTS_README.md",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+      "summary": "Documentación de la estrategia y estructura de los tests del proyecto: contrasta el enfoque con mocks frente al de singletons, describe la cobertura por módulos y los escenarios cubiertos, y detalla el problema de race conditions.",
+      "tags": ["documentation", "testing", "test-strategy", "overview"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift",
+      "type": "file",
+      "name": "TestConfiguration.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift",
+      "summary": "Define el tag personalizado .usesSharedState de Swift Testing, usado para marcar y serializar los tests que dependen de estado compartido (singletons) y así evitar race conditions.",
+      "tags": ["test", "configuration", "test-tags", "swift-testing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "type": "file",
+      "name": "TourMockTests.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "summary": "Suite de tests E2E con mocks que valida el flujo completo del tour (inicio, estado inTour, completado y parada) y el cambio de idioma, usando AppContainer.mock() para evitar los race conditions de los singletons.",
+      "tags": ["test", "integration-test", "mock", "e2e", "tour"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/Launch Screen.storyboard",
+      "type": "file",
+      "name": "Launch Screen.storyboard",
+      "filePath": "ArTourKaminaljuyu/Launch Screen.storyboard",
+      "summary": "Storyboard de la pantalla de lanzamiento (launch screen) que muestra el logotipo de la app centrado sobre un fondo marrón, definido con Interface Builder y Auto Layout.",
+      "tags": ["ui", "launch-screen", "storyboard", "interface-builder"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ArTourKaminaljuyu/Podfile",
+      "type": "config",
+      "name": "Podfile",
+      "filePath": "ArTourKaminaljuyu/Podfile",
+      "summary": "Manifiesto de CocoaPods que fija iOS 15.0 como plataforma y declara las dependencias GoogleMaps y GooglePlaces (~> 9.0) para el target de la app, heredando search paths en el target de tests.",
+      "tags": ["configuration", "dependencies", "cocoapods", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ArTourKaminaljuyu/Secrets.xcconfig.example",
+      "type": "config",
+      "name": "Secrets.xcconfig.example",
+      "filePath": "ArTourKaminaljuyu/Secrets.xcconfig.example",
+      "summary": "Plantilla de archivo xcconfig que documenta el ajuste GOOGLE_MAPS_API_KEY requerido por la app; sirve de ejemplo para crear el Secrets.xcconfig real sin exponer la clave en el repositorio.",
+      "tags": ["configuration", "secrets", "api-key", "build-config", "example"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Archivo README del proyecto; actualmente solo contiene el título del repositorio (AR-Tour-Kaminaljuyu-iOS) sin contenido adicional.",
+      "tags": ["documentation", "readme", "placeholder"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppStateManager",
+      "type": "class",
+      "name": "MockAppStateManager",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "lineRange": [17, 48],
+      "summary": "Mock de AppStateManager que expone el estado actual y el POI activo y registra las llamadas (startTour, setActivePOI, completeTour, reset) para verificarlas en los tests.",
+      "tags": ["mock", "test-double", "state-management", "spy"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockLanguageService",
+      "type": "class",
+      "name": "MockLanguageService",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "lineRange": [52, 91],
+      "summary": "Mock de LanguageService que simula el cambio de idioma, la resolución de videoPath y de strings localizados, registrando cada llamada para las aserciones de los tests.",
+      "tags": ["mock", "test-double", "localization", "spy"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockEventBus",
+      "type": "class",
+      "name": "MockEventBus",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "lineRange": [95, 112],
+      "summary": "Mock de EventBus basado en un PassthroughSubject de Combine que captura los eventos publicados en un array para su inspección en los tests.",
+      "tags": ["mock", "test-double", "event-bus", "combine"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockGPSModuleInterface",
+      "type": "class",
+      "name": "MockGPSModuleInterface",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "lineRange": [116, 152],
+      "summary": "Mock de GPSModuleInterface que permite simular la ubicación, el estado del tour y el POI más cercano, y registra las llamadas de control del recorrido (startTour, stopTour, startTracking, stopTracking).",
+      "tags": ["mock", "test-double", "gps", "spy"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppRouter",
+      "type": "class",
+      "name": "MockAppRouter",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "lineRange": [156, 169],
+      "summary": "Mock de AppRouter que mantiene la ruta actual y registra las navegaciones solicitadas (navigateTo, goBack) para las aserciones de navegación en los tests.",
+      "tags": ["mock", "test-double", "navigation", "router"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppContainer",
+      "type": "class",
+      "name": "MockAppContainer",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "lineRange": [194, 200],
+      "summary": "Contenedor de dependencias mock que agrupa todos los servicios simulados (appState, language, gps, router, eventBus) consumidos por los tests E2E.",
+      "tags": ["mock", "dependency-injection", "container", "test-fixture"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:mock",
+      "type": "function",
+      "name": "mock",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "lineRange": [175, 189],
+      "summary": "Factory estática en una extensión de AppContainer que construye y devuelve un MockAppContainer con todos los servicios simulados listos para usarse en los tests.",
+      "tags": ["factory", "mock", "test-fixture", "dependency-injection"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:TourMockTests",
+      "type": "class",
+      "name": "TourMockTests",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "lineRange": [11, 41],
+      "summary": "Suite de Swift Testing (@Suite) que ejecuta pruebas E2E del flujo del tour y del cambio de idioma sobre dependencias mock obtenidas con AppContainer.mock().",
+      "tags": ["test", "integration-test", "e2e", "mock"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:completeTourFlow",
+      "type": "function",
+      "name": "completeTourFlow",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "lineRange": [14, 28],
+      "summary": "Test que valida el flujo completo del tour (iniciar, estado inTour, completar y detener) coordinando los mocks de AppState y GPS.",
+      "tags": ["test", "e2e", "tour", "assertion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:languageChange",
+      "type": "function",
+      "name": "languageChange",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "lineRange": [30, 40],
+      "summary": "Test que valida el cambio de idioma a EN y que videoPath devuelve la carpeta English mediante MockLanguageService.",
+      "tags": ["test", "localization", "assertion", "mock"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppStateManager", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockLanguageService", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockEventBus", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockGPSModuleInterface", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppRouter", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppContainer", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:mock", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppStateManager", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:AppStateManager", "type": "related", "direction": "forward", "weight": 0.5},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockLanguageService", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "type": "related", "direction": "forward", "weight": 0.5},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockEventBus", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:EventBus", "type": "related", "direction": "forward", "weight": 0.5},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockGPSModuleInterface", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:GPSModuleInterface", "type": "related", "direction": "forward", "weight": 0.5},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppRouter", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:AppRouter", "type": "related", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:TourMockTests", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:completeTourFlow", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:languageChange", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:AppStateManager", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:TourMockTests", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:GPSModuleInterface", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:TourMockTests", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:TourMockTests", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:TourMockTests", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift", "type": "related", "direction": "forward", "weight": 0.5},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "type": "related", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift", "type": "related", "direction": "forward", "weight": 0.5},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift", "type": "related", "direction": "forward", "weight": 0.5},
+
+    {"source": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift", "type": "documents", "direction": "forward", "weight": 0.5},
+    {"source": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift", "type": "documents", "direction": "forward", "weight": 0.5},
+    {"source": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift", "type": "documents", "direction": "forward", "weight": 0.5},
+    {"source": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift", "type": "related", "direction": "forward", "weight": 0.5},
+
+    {"source": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "type": "documents", "direction": "forward", "weight": 0.5},
+    {"source": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift", "type": "documents", "direction": "forward", "weight": 0.5},
+
+    {"source": "config:ArTourKaminaljuyu/Podfile", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "type": "configures", "direction": "forward", "weight": 0.6},
+    {"source": "config:ArTourKaminaljuyu/Secrets.xcconfig.example", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "type": "configures", "direction": "forward", "weight": 0.6}
+  ]
+}

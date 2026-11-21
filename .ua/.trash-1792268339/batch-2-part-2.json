@@ -1,0 +1,687 @@
+{
+  "nodes": [
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "type": "file",
+      "name": "VirtualGuideModuleInterface.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "summary": "Interfaz pública y facade del VirtualGuideModule (singleton `.shared`, `ObservableObject`): orquesta la reproducción de videos de la guía virtual con `AVPlayer`, una cola de videos, la máquina de 3 fases de proximidad (proximidad/interés/llegada), la transcripción sincronizada y la sesión de audio; se suscribe al EventBus, a `AppStateManager.$currentState` y a `GPSModuleInterface.$nearestPOI`.",
+      "tags": ["virtual-guide", "interfaz-publica", "avplayer", "combine", "facade"],
+      "complexity": "complex",
+      "languageNotes": "Facade grande (~480 líneas) documentada como deuda técnica §6.5: concentra cola de videos, máquina de proximidad, orquestación de AVPlayer, transcripción y config de audio; su descomposición (Ruta B) queda pendiente."
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:VirtualGuideModuleInterface",
+      "type": "class",
+      "name": "VirtualGuideModuleInterface",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [19, 634],
+      "summary": "Singleton `ObservableObject` que gestiona la reproducción de la guía virtual en video y publica el estado (video, transcripción) para las views.",
+      "tags": ["virtual-guide", "singleton", "observableobject", "avplayer", "facade"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:start",
+      "type": "function",
+      "name": "start",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [211, 258],
+      "summary": "Arranca el módulo: configura el audio, se suscribe a `GPSModuleInterface.$nearestPOI`, al EventBus (nextPOIRequested/tourEndRequested) y a `AppStateManager.$currentState`.",
+      "tags": ["suscripcion", "combine", "event-bus", "arranque"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:startVideo",
+      "type": "function",
+      "name": "startVideo",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [513, 633],
+      "summary": "Resuelve y reproduce un video con `AVPlayer`: observa estado del item, instala observadores de fin y de tiempo, carga la transcripción y, al terminar la despedida, publica `.tourEndCompleted`.",
+      "tags": ["avplayer", "video", "observadores", "event-bus"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:handleProximityUpdate",
+      "type": "function",
+      "name": "handleProximityUpdate",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [382, 442],
+      "summary": "Máquina de 3 fases que, según la distancia al POI, encola los videos de proximidad, interés y llegada evitando disparos repetidos.",
+      "tags": ["proximidad", "maquina-estados", "cola-videos", "triggers"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:startWalking",
+      "type": "function",
+      "name": "startWalking",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [349, 372],
+      "summary": "Encola el video de indicación de la flecha tras las intros para iniciar la caminata guiada.",
+      "tags": ["cola-videos", "tour", "caminata"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:playNextIfIdle",
+      "type": "function",
+      "name": "playNextIfIdle",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [449, 468],
+      "summary": "Si el reproductor está inactivo, saca el siguiente video de la cola y lo reproduce.",
+      "tags": ["cola-videos", "reproduccion"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:loadTranscript",
+      "type": "function",
+      "name": "loadTranscript",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [292, 310],
+      "summary": "Carga los cues de transcripción de un video desde `VideoTranscripts` y los mapea a `TranscriptLine` publicados para la UI.",
+      "tags": ["transcripcion", "video", "subtitulos"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:clearPlayer",
+      "type": "function",
+      "name": "clearPlayer",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [488, 511],
+      "summary": "Libera el `AVPlayer` actual: remueve observadores (fin, estado, tiempo), pausa y limpia las referencias.",
+      "tags": ["avplayer", "limpieza", "observadores"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:enqueue",
+      "type": "function",
+      "name": "enqueue",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "lineRange": [444, 447],
+      "summary": "Agrega un video a la cola (con opción de omitir si el usuario ya está más cerca de un umbral) e intenta reproducir el siguiente.",
+      "tags": ["cola-videos", "encolado"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+      "type": "file",
+      "name": "TranscriptLine.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+      "summary": "Modelo `Identifiable` de una línea de transcripción (texto más tiempos de inicio y fin) usado para resaltar los subtítulos sincronizados con el video.",
+      "tags": ["modelo", "transcripcion", "subtitulos"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift:TranscriptLine",
+      "type": "class",
+      "name": "TranscriptLine",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+      "lineRange": [11, 16],
+      "summary": "Struct `Identifiable` con el texto de la línea y sus tiempos de inicio y fin.",
+      "tags": ["modelo", "struct", "transcripcion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "type": "file",
+      "name": "VideoTranscripts.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "summary": "Catálogo estático y voluminoso de transcripciones de todos los videos (español/inglés) con sus cues temporizados, más un mapeo de nombres español→inglés y el helper `cues(videoName:language:)` para recuperarlas.",
+      "tags": ["transcripcion", "catalogo", "contenido", "i18n"],
+      "complexity": "complex",
+      "languageNotes": "Archivo de datos muy grande (~1500 líneas) con las transcripciones embebidas en código en vez de recursos externos."
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:VideoTranscripts",
+      "type": "class",
+      "name": "VideoTranscripts",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "lineRange": [14, 1531],
+      "summary": "Namespace con el diccionario de transcripciones por video e idioma y el mapeo de nombres español→inglés.",
+      "tags": ["transcripcion", "catalogo", "static", "i18n"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:cues",
+      "type": "function",
+      "name": "cues",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "lineRange": [1520, 1530],
+      "summary": "Devuelve los cues de transcripción de un video según idioma, traduciendo el nombre español a su variante inglesa cuando aplica.",
+      "tags": ["transcripcion", "lookup", "i18n"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "type": "file",
+      "name": "VirtualGuideView.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "summary": "Views SwiftUI del VirtualGuideModule: reproductor de video a pantalla completa, botón para alternar la transcripción y panel lateral de transcripción con auto-scroll; solo hacen binding reactivo al estado publicado por `VirtualGuideModuleInterface`.",
+      "tags": ["swiftui", "view", "virtual-guide", "transcripcion", "video"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:VirtualGuideView",
+      "type": "class",
+      "name": "VirtualGuideView",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "lineRange": [16, 43],
+      "summary": "View raíz del módulo que compone el reproductor de video y el panel de transcripción observando el view model.",
+      "tags": ["swiftui", "view", "video", "transcripcion"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:TranscriptToggleButton",
+      "type": "class",
+      "name": "TranscriptToggleButton",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "lineRange": [45, 64],
+      "summary": "Botón circular que alterna la visibilidad del panel de transcripción.",
+      "tags": ["swiftui", "view", "boton", "transcripcion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:TranscriptPanel",
+      "type": "class",
+      "name": "TranscriptPanel",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "lineRange": [66, 104],
+      "summary": "Panel lateral que muestra las líneas de transcripción, resaltando la línea actual y haciendo auto-scroll hacia ella.",
+      "tags": ["swiftui", "view", "transcripcion", "scroll"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist",
+      "type": "config",
+      "name": "Info.plist",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist",
+      "summary": "Info.plist del target: inyecta la API key de Google Maps vía variable de build, registra las fuentes Plus Jakarta Sans y habilita el modo de ubicación en segundo plano.",
+      "tags": ["configuration", "info-plist", "google-maps", "ubicacion-background"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "type": "file",
+      "name": "AppStateManager.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "summary": "Fuente autoritativa del estado del tour (singleton `.shared`, `ObservableObject`): mantiene `currentState` (`AppState`) y el POI activo con los métodos `startTour/setActivePOI/completeTour/reset`; los consumidores observan `$currentState` en vez de recibir eventos.",
+      "tags": ["app-state", "single-source-of-truth", "observableobject", "singleton", "shared"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:AppStateManager",
+      "type": "class",
+      "name": "AppStateManager",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "lineRange": [11, 37],
+      "summary": "Singleton `ObservableObject` que centraliza el estado del tour y el POI activo, expuestos de forma reactiva vía `@Published`.",
+      "tags": ["app-state", "singleton", "observableobject"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:startTour",
+      "type": "function",
+      "name": "startTour",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "lineRange": [19, 21],
+      "summary": "Transiciona el estado global a `.inTour` sin POI activo.",
+      "tags": ["app-state", "transicion", "tour"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:setActivePOI",
+      "type": "function",
+      "name": "setActivePOI",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "lineRange": [23, 26],
+      "summary": "Actualiza el POI activo dentro del estado `.inTour`.",
+      "tags": ["app-state", "poi", "transicion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:completeTour",
+      "type": "function",
+      "name": "completeTour",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "lineRange": [28, 31],
+      "summary": "Transiciona el estado global a `.completed` y limpia el POI activo.",
+      "tags": ["app-state", "completado", "transicion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:reset",
+      "type": "function",
+      "name": "reset",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "lineRange": [33, 36],
+      "summary": "Devuelve el estado global a `.idle` y limpia el POI activo.",
+      "tags": ["app-state", "reset", "idle"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "type": "file",
+      "name": "EventBus.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "summary": "Bus de mensajes de dominio compartido (singleton `.shared`) basado en un `PassthroughSubject` de Combine: define el enum `AppEvent` y expone `publish(_:)` y un `publisher` para que los módulos emitan y reaccionen a notificaciones discretas sin acoplarse.",
+      "tags": ["event-bus", "combine", "pub-sub", "shared", "singleton"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:AppEvent",
+      "type": "class",
+      "name": "AppEvent",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "lineRange": [11, 16],
+      "summary": "Enum de eventos de dominio: languageChanged, nextPOIRequested, tourEndRequested y tourEndCompleted.",
+      "tags": ["enum", "eventos", "dominio"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:EventBus",
+      "type": "class",
+      "name": "EventBus",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "lineRange": [18, 32],
+      "summary": "Singleton con un `PassthroughSubject` interno que expone un publisher de solo lectura y el método `publish` para emitir eventos.",
+      "tags": ["event-bus", "singleton", "combine"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish",
+      "type": "function",
+      "name": "publish",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "lineRange": [29, 31],
+      "summary": "Emite un `AppEvent` a través del subject para que lleguen a todos los suscriptores.",
+      "tags": ["event-bus", "publish", "combine"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+      "type": "file",
+      "name": "AppState.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+      "summary": "Enum del estado global del tour (`idle`, `inTour(activePOIId:)`, `completed`), separado del estado de navegación del router.",
+      "tags": ["modelo", "estado", "enum", "tour"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift:AppState",
+      "type": "class",
+      "name": "AppState",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+      "lineRange": [10, 14],
+      "summary": "Enum con los tres estados del tour: idle, inTour (con POI activo) y completed.",
+      "tags": ["enum", "estado", "tour"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift",
+      "type": "file",
+      "name": "ArrayExtension.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift",
+      "summary": "Extensión de `Array` con un subscript seguro (`safe:`) que devuelve `nil` cuando el índice está fuera de rango.",
+      "tags": ["utilidad", "extension", "array", "seguridad-indices"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift",
+      "type": "file",
+      "name": "ColorExtension.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift",
+      "summary": "Extensión de `Color` (SwiftUI) con un inicializador desde un string hexadecimal, usada para la paleta de colores de la app.",
+      "tags": ["utilidad", "extension", "color", "swiftui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift:init",
+      "type": "function",
+      "name": "Color.init(hex:)",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift",
+      "lineRange": [11, 27],
+      "summary": "Inicializa un `Color` a partir de un string hexadecimal, parseándolo a componentes RGB.",
+      "tags": ["color", "hex", "init", "swiftui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "type": "file",
+      "name": "AppStateManagerTests.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "summary": "Suite de tests (Swift Testing) del `AppStateManager`: valida el estado inicial idle y las transiciones de startTour, setActivePOI, completeTour y reset.",
+      "tags": ["test", "app-state", "swift-testing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:AppStateManagerTests",
+      "type": "class",
+      "name": "AppStateManagerTests",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "lineRange": [9, 114],
+      "summary": "Suite de pruebas de las transiciones de estado del AppStateManager.",
+      "tags": ["test", "app-state", "swift-testing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:initialStateIsIdle",
+      "type": "function",
+      "name": "initialStateIsIdle",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "lineRange": [19, 32],
+      "summary": "Verifica que tras un reset el estado inicial del manager es idle.",
+      "tags": ["test", "app-state", "idle"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:startTourTransition",
+      "type": "function",
+      "name": "startTourTransition",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "lineRange": [34, 49],
+      "summary": "Verifica que `startTour()` transiciona el estado a `.inTour`.",
+      "tags": ["test", "app-state", "transicion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:setActivePOIUpdatesState",
+      "type": "function",
+      "name": "setActivePOIUpdatesState",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "lineRange": [51, 70],
+      "summary": "Verifica que `setActivePOI()` actualiza el POI activo dentro del estado del tour.",
+      "tags": ["test", "app-state", "poi"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:completeTourClearsPOI",
+      "type": "function",
+      "name": "completeTourClearsPOI",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "lineRange": [72, 94],
+      "summary": "Verifica que `completeTour()` lleva el estado a `.completed` y limpia el POI activo.",
+      "tags": ["test", "app-state", "completado"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:resetReturnsToIdle",
+      "type": "function",
+      "name": "resetReturnsToIdle",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "lineRange": [96, 113],
+      "summary": "Verifica que `reset()` devuelve el estado a idle desde cualquier estado previo.",
+      "tags": ["test", "app-state", "reset"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift",
+      "type": "file",
+      "name": "ArTourKaminaljuyuTests.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift",
+      "summary": "Archivo de tests de ejemplo generado por Xcode (Swift Testing), con un caso placeholder sin lógica real.",
+      "tags": ["test", "placeholder", "swift-testing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift:ArTourKaminaljuyuTests",
+      "type": "class",
+      "name": "ArTourKaminaljuyuTests",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift",
+      "lineRange": [10, 18],
+      "summary": "Suite placeholder con un único test de ejemplo sin aserciones significativas.",
+      "tags": ["test", "placeholder", "swift-testing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "type": "file",
+      "name": "EventBusTests.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "summary": "Suite de tests del `EventBus`: verifica la publicación de `.languageChanged` y `.nextPOIRequested` y que múltiples suscriptores reciben el mismo evento.",
+      "tags": ["test", "event-bus", "combine", "swift-testing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:EventBusTests",
+      "type": "class",
+      "name": "EventBusTests",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "lineRange": [10, 89],
+      "summary": "Suite de pruebas de la publicación y recepción de eventos en el EventBus.",
+      "tags": ["test", "event-bus", "combine"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishLanguageChanged",
+      "type": "function",
+      "name": "publishLanguageChanged",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "lineRange": [13, 30],
+      "summary": "Verifica que al publicar `.languageChanged` el suscriptor recibe el evento con el idioma esperado.",
+      "tags": ["test", "event-bus", "idioma"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishNextPOIRequested",
+      "type": "function",
+      "name": "publishNextPOIRequested",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "lineRange": [32, 49],
+      "summary": "Verifica que al publicar `.nextPOIRequested` el suscriptor recibe el evento.",
+      "tags": ["test", "event-bus", "poi"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:multipleSubscribersReceiveEvent",
+      "type": "function",
+      "name": "multipleSubscribersReceiveEvent",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "lineRange": [51, 88],
+      "summary": "Verifica que un mismo evento publicado llega a múltiples suscriptores simultáneos.",
+      "tags": ["test", "event-bus", "pub-sub"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "type": "file",
+      "name": "FinalIntegrationTests.swift",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "summary": "Tests de integración de la arquitectura modular: validan la comunicación por interfaces, la coordinación vía EventBus, el AppStateManager como única fuente de verdad, la inyección de dependencias con `AppContainer.mock()`, flujos end-to-end del tour y el desacoplamiento entre módulos.",
+      "tags": ["test", "integracion", "arquitectura", "swift-testing"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:ArchitectureValidationTests",
+      "type": "class",
+      "name": "ArchitectureValidationTests",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [16, 108],
+      "summary": "Valida las reglas de arquitectura: comunicación por interfaces, EventBus, AppStateManager como fuente única e inyección de dependencias.",
+      "tags": ["test", "arquitectura", "integracion"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:EndToEndFlowTests",
+      "type": "class",
+      "name": "EndToEndFlowTests",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [112, 212],
+      "summary": "Valida flujos end-to-end: tour guiado completo, cambio de idioma con actualización de videos y cancelación con reinicio del sistema.",
+      "tags": ["test", "end-to-end", "tour"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:DecouplingValidationTests",
+      "type": "class",
+      "name": "DecouplingValidationTests",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [216, 290],
+      "summary": "Valida el desacoplamiento: reemplazo de implementaciones, múltiples suscriptores de eventos y propagación reactiva de estado.",
+      "tags": ["test", "desacoplamiento", "arquitectura"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:modulesCommunicateViaInterfaces",
+      "type": "function",
+      "name": "modulesCommunicateViaInterfaces",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [19, 34],
+      "summary": "Verifica que los módulos se comunican a través de sus interfaces públicas usando un contenedor mock.",
+      "tags": ["test", "arquitectura", "interfaces"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:eventBusCoordinatesModules",
+      "type": "function",
+      "name": "eventBusCoordinatesModules",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [36, 59],
+      "summary": "Verifica que el EventBus coordina a los módulos entregando los eventos publicados a sus suscriptores.",
+      "tags": ["test", "event-bus", "integracion"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:appStateManagerIsSingleSourceOfTruth",
+      "type": "function",
+      "name": "appStateManagerIsSingleSourceOfTruth",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [61, 85],
+      "summary": "Verifica que el AppStateManager es la única fuente de verdad del estado del tour a lo largo de sus transiciones.",
+      "tags": ["test", "app-state", "single-source-of-truth"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCompletesFullGuidedTour",
+      "type": "function",
+      "name": "userCompletesFullGuidedTour",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [115, 162],
+      "summary": "Simula el flujo completo del usuario recorriendo el tour guiado de inicio a fin.",
+      "tags": ["test", "end-to-end", "tour"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userChangesLanguageAndVideosUpdate",
+      "type": "function",
+      "name": "userChangesLanguageAndVideosUpdate",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [164, 184],
+      "summary": "Verifica que al cambiar el idioma las rutas de video resueltas por el LanguageService se actualizan al idioma correspondiente.",
+      "tags": ["test", "i18n", "video"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCancelsTourAndSystemResets",
+      "type": "function",
+      "name": "userCancelsTourAndSystemResets",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [186, 211],
+      "summary": "Verifica que al cancelar el tour el sistema se reinicia a su estado inicial de forma consistente.",
+      "tags": ["test", "cancelacion", "reset"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:reactiveStatePropagates",
+      "type": "function",
+      "name": "reactiveStatePropagates",
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "lineRange": [266, 289],
+      "summary": "Verifica que los cambios de estado se propagan reactivamente a los suscriptores vía Combine.",
+      "tags": ["test", "reactivo", "combine"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:VirtualGuideModuleInterface", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:start", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:startVideo", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:handleProximityUpdate", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:startWalking", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:playNextIfIdle", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:loadTranscript", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:clearPlayer", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:enqueue", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:VirtualGuideModuleInterface", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:startVideo", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:loadTranscript", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:cues", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:GPSModuleInterface", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift:TranscriptLine", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift:TranscriptLine", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:VideoTranscripts", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:cues", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:VideoTranscripts", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:VirtualGuideView", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:TranscriptToggleButton", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:TranscriptPanel", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:VirtualGuideView", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:VirtualGuideModuleInterface", "type": "depends_on", "direction": "forward", "weight": 0.6},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:AppStateManager", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:startTour", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:setActivePOI", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:completeTour", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:reset", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:AppStateManager", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:AppEvent", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:EventBus", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:EventBus", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:AppEvent", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift:AppState", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift:AppState", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift:init", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "config:ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist", "target": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift", "type": "configures", "direction": "forward", "weight": 0.6},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:AppStateManagerTests", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:initialStateIsIdle", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:startTourTransition", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:setActivePOIUpdatesState", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:completeTourClearsPOI", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:resetReturnsToIdle", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:startTourTransition", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:startTour", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:setActivePOIUpdatesState", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:setActivePOI", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:completeTourClearsPOI", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:completeTour", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:resetReturnsToIdle", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:reset", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift:ArTourKaminaljuyuTests", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:EventBusTests", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishLanguageChanged", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishNextPOIRequested", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:multipleSubscribersReceiveEvent", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishLanguageChanged", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishNextPOIRequested", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:multipleSubscribersReceiveEvent", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:ArchitectureValidationTests", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:EndToEndFlowTests", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift", "target": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:DecouplingValidationTests", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:ArchitectureValidationTests", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:modulesCommunicateViaInterfaces", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:ArchitectureValidationTests", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:eventBusCoordinatesModules", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:ArchitectureValidationTests", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:appStateManagerIsSingleSourceOfTruth", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:EndToEndFlowTests", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCompletesFullGuidedTour", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:EndToEndFlowTests", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userChangesLanguageAndVideosUpdate", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:EndToEndFlowTests", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCancelsTourAndSystemResets", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:DecouplingValidationTests", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:reactiveStatePropagates", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:eventBusCoordinatesModules", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:appStateManagerIsSingleSourceOfTruth", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:startTour", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCompletesFullGuidedTour", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:completeTour", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userChangesLanguageAndVideosUpdate", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:videoPath", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCancelsTourAndSystemResets", "target": "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:reset", "type": "calls", "direction": "forward", "weight": 0.8}
+  ]
+}

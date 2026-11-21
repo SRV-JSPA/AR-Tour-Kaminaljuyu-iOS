@@ -1,0 +1,147 @@
+[
+  {
+    "order": 1,
+    "title": "Panorama del proyecto",
+    "description": "ArTourKaminaljuyu es una app iOS nativa de realidad aumentada que guía al visitante por el sitio arqueológico maya de Kaminaljuyú. El README del repositorio está prácticamente vacío, así que la fuente autoritativa de arquitectura es CLAUDE.md: describe la arquitectura modular basada en EventBus, interfaces públicas y estado global, además del ownership de cada módulo, las reglas de comunicación, la deuda técnica conocida y las decisiones de diseño intencionales. Léelo primero: es el mapa que da sentido a todos los pasos siguientes.",
+    "nodeIds": ["document:ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md"]
+  },
+  {
+    "order": 2,
+    "title": "Arranque y composition root",
+    "description": "La app arranca en ArTourKaminaljuyuApp.swift, el punto de entrada marcado con @main: instancia AppContainer.production(), configura la API key de Google Maps e inyecta cada servicio al árbol SwiftUI mediante environmentObject. AppContainer es el composition root, la factory central de inyección de dependencias que agrupa las interfaces públicas de los módulos feature y los servicios de coordinación, exponiendo las instancias .shared reales. Entender este cableado inicial revela de un vistazo qué piezas componen la app y cómo se conectan.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift"
+    ],
+    "languageLesson": "En SwiftUI, la struct que adopta el protocol App y lleva @main es el punto de entrada único de la app. Inyectar servicios con .environmentObject(...) los hace accesibles a cualquier vista descendiente vía @EnvironmentObject, un patrón de inyección de dependencias idiomático del framework."
+  },
+  {
+    "order": 3,
+    "title": "Navegación raíz",
+    "description": "Con las dependencias ya inyectadas, ContentView.swift es la raíz real de navegación y orquestación: muestra el splash, mantiene la vista de AR siempre cargada en el fondo y conmuta entre menú, controles de tour y overlay de tour guiado según el AppRouter. AppRouter es un singleton ObservableObject que publica la ruta actual mediante el enum AppRoute. Juntos separan el 'qué pantalla se ve' del resto de la lógica, apoyándose en el estado observable que exploraremos a continuación.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift"
+    ],
+    "languageLesson": "Un ObservableObject con propiedades @Published emite cambios que las vistas SwiftUI observan (con @ObservedObject o @EnvironmentObject) y vuelven a renderizar automáticamente. Modelar las rutas como un enum (AppRoute) hace la navegación exhaustiva y segura en tiempo de compilación."
+  },
+  {
+    "order": 4,
+    "title": "Columna vertebral: EventBus y estado global",
+    "description": "Este es el corazón arquitectónico que mantiene desacoplados a los módulos. EventBus es un bus de mensajes de dominio (singleton .shared) construido sobre un PassthroughSubject de Combine: define el enum AppEvent y expone publish(_:) y un publisher para que los módulos emitan y reaccionen a notificaciones discretas sin conocerse entre sí. AppStateManager, en cambio, es la fuente autoritativa del estado del tour: mantiene currentState (el enum AppState: idle, inTour, completed) y el POI activo, y los consumidores observan $currentState en lugar de recibir eventos. La regla clave del proyecto es esa dualidad: eventos puntuales por EventBus, estado continuo por AppStateManager.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift"
+    ],
+    "languageLesson": "Combine distingue dos estilos: un PassthroughSubject reemite eventos efímeros solo a quien esté suscrito en ese instante (ideal para notificaciones), mientras que un @Published conserva y entrega el último valor (ideal para estado). Elegir bien entre ambos evita acoplar módulos y previene condiciones de carrera."
+  },
+  {
+    "order": 5,
+    "title": "El patrón fachada (API Layer)",
+    "description": "Cada feature module expone una única puerta pública en su carpeta 'API Layer', ocultando su implementación interna. GPSModuleInterface envuelve LocationService, ProximityService y TourManager y publica el estado de ubicación y tour; VirtualGuideModuleInterface orquesta la reproducción de video y se suscribe al EventBus, a AppStateManager y a GPSModuleInterface.$nearestPOI; ARModuleInterface expone el singleton del módulo y ARModuleView para embeber la escena AR en SwiftUI. Gracias a estas facades, el resto de la app depende de contratos estables y no de clases internas, lo que permite sustituirlas por mocks en las pruebas del paso final.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift"
+    ],
+    "languageLesson": "El patrón facade reduce la superficie pública de un módulo a un solo tipo: los consumidores usan solo *ModuleInterface y nunca los servicios internos. Combinado con singletons .shared y publishers observables, da a cada módulo un contrato claro y testeable."
+  },
+  {
+    "order": 6,
+    "title": "GPS: ubicación, proximidad y geodesia",
+    "description": "Detrás de la fachada del GPSModule vive su lógica sensora. LocationService es el servicio central de CoreLocation (CLLocationManagerDelegate): configura el CLLocationManager para navegación, filtra por precisión horizontal y publica ubicación y rumbo vía Combine. ProximityService consume esa ubicación para calcular distancia y rumbo a cada POI, derivar un nivel de proximidad (far/visible/near/arrived) y publicar el POI más cercano y un evento de llegada, usando GeoUtils.compensatedDistance para amortiguar el ruido del GPS. GeoUtils es la base matemática Haversine (distancia, rumbo, compensación y normalización de ángulos) que comparten proximidad, tour y rutas; GeoMath es una implementación paralela equivalente que tras el refactor quedó sin llamadores, deuda técnica documentada (§6.3) que ilustra por qué conviene una única fuente de verdad geográfica.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift"
+    ],
+    "languageLesson": "Un CLLocationManagerDelegate recibe callbacks del sistema (nueva ubicación, rumbo, cambios de permiso) que aquí se reexponen como @Published para encajar con Combine. GeoUtils está modelado como un enum sin casos: un idiom de Swift para crear un namespace de funciones estáticas que no se puede instanciar por error."
+  },
+  {
+    "order": 7,
+    "title": "Orquestación del tour guiado",
+    "description": "Sobre la capa sensora se asienta la lógica de recorrido. TourManager es el orquestador de la máquina de estados del tour (TourState): gestiona las fases de navegar-al-inicio, guiado entre POIs y retorno, arma un RouteNavigator por cada tramo y publica POI actual, rumbo, distancia y coordenadas de ruta. RouteNavigator recorre la lista de waypoints de un tramo devolviendo el objetivo actual y detectando la llegada por umbral de distancia, mientras que RouteConfig aporta la configuración estática: los conectores (waypoints intermedios) entre POIs y los helpers que construyen las secuencias de coordenadas de inicio, guiado y retorno.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift"
+    ],
+    "languageLesson": "Modelar el flujo como una máquina de estados con un enum (TourState) hace explícitas las fases válidas y las transiciones permitidas, en lugar de dispersar banderas booleanas por todo el código."
+  },
+  {
+    "order": 8,
+    "title": "Datos del recorrido (sitio maya)",
+    "description": "Aquí vive el dominio del sitio arqueológico. POILocation modela cada punto de interés (coordenada, modelo 3D y escala, metadatos históricos, imágenes y umbral de llegada) y resuelve su nombre localizado a través de LocalizedStrings. POIRegistry es el singleton con la lista autoritativa de todos los POIs del recorrido y la coordenada de inicio, el punto único de consulta por id. AppConfig reúne las constantes de tour y proximidad (radios de llegada, inicio y visibilidad, coordenada de arranque y umbrales de precisión) que los servicios de los pasos anteriores aplican; son los datos que ProximityService y TourManager consumen para guiar al visitante.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift"
+    ]
+  },
+  {
+    "order": 9,
+    "title": "Mapa en vivo (Google Maps)",
+    "description": "La parte visible de la navegación GPS son estas dos vistas. MapViewRepresentable es un wrapper UIViewRepresentable que integra Google Maps (GMSMapView) en SwiftUI y dibuja el marcador del usuario con flecha de rumbo, los marcadores de POIs e inicio y la polilínea de la ruta del tour. MapOverlayView superpone el estado de navegación (distancia al objetivo, estado del tour y POI cercano) y un aviso periódico de distancia durante el recorrido guiado, consumiendo el estado que publican TourManager y el GPSModule introducidos antes.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift"
+    ],
+    "languageLesson": "UIViewRepresentable es el puente oficial para usar una vista de UIKit (aquí GMSMapView de Google Maps) dentro de SwiftUI: makeUIView crea la vista una vez y updateUIView la sincroniza cada vez que cambia el estado observado."
+  },
+  {
+    "order": 10,
+    "title": "Realidad aumentada sobre el GPS",
+    "description": "El ARModule consume el GPS para anclar la experiencia aumentada al mundo real. ARViewController monta la escena ARKit/SceneKit, gestiona gestos y UI programática, se suscribe al GPS y a la guía virtual y maneja la progresión de POIs; está documentado como un 'god object' y deuda técnica por su exceso de responsabilidades. ARSceneManager carga los modelos 3D de los POIs, resuelve y aplica texturas desde MTL/bundle y los posiciona en world space a partir del GPS para evitar el drift de ARKit, mientras ARGuideArrowManager ancla a la cámara una flecha-guía 3D que apunta al POI activo y se oculta al acercarse. Es el ejemplo más claro de cómo un módulo reacciona al estado publicado por otro sin acoplarse a su implementación.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift"
+    ],
+    "languageLesson": "Posicionar los modelos en world space a partir de coordenadas GPS, en lugar de confiar solo en el tracking visual-inercial de ARKit, corrige la deriva (drift) acumulada en sesiones largas al aire libre. El puente a SwiftUI aquí es UIViewControllerRepresentable, la variante de UIViewRepresentable para controladores."
+  },
+  {
+    "order": 11,
+    "title": "Guía virtual: video y transcripción",
+    "description": "El VirtualGuideModule añade la narración audiovisual. Su facade VirtualGuideModuleInterface orquesta la reproducción con AVPlayer, una cola de videos, una máquina de tres fases de proximidad (proximidad/interés/llegada), la transcripción sincronizada y la sesión de audio, suscribiéndose al EventBus, a AppStateManager.$currentState y a GPSModuleInterface.$nearestPOI. VirtualGuideView son las vistas SwiftUI (reproductor a pantalla completa, botón de transcripción y panel lateral con auto-scroll) que solo hacen binding reactivo al estado publicado por la fachada. VideoTranscripts es el catálogo estático de todas las transcripciones español/inglés con sus cues temporizados y el mapeo de nombres entre idiomas.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift"
+    ],
+    "languageLesson": "Separar la fachada (que mantiene el estado con @Published) de la vista (que solo lee ese estado por binding) es el patrón reactivo de SwiftUI: la vista es una función del estado y se re-renderiza sola cuando el AVPlayer avanza o cambia el POI cercano."
+  },
+  {
+    "order": 12,
+    "title": "Internacionalización",
+    "description": "La app es bilingüe español/inglés y este módulo centraliza ese comportamiento. LanguageService es la fachada del LanguageModule (singleton ObservableObject): mantiene el idioma actual, resuelve la ruta del video por POI según idioma y publica el evento .languageChanged en el EventBus al cambiar de idioma, de modo que todos los módulos reaccionan sin conocer al LanguageModule. LocalizedStrings es el diccionario estático de cadenas con un helper get(key:arguments:) que interpola argumentos; es la fuente de todos los textos de la interfaz y, con una de las fan-in más altas del grafo, uno de los archivos más dependidos del proyecto.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift"
+    ],
+    "languageLesson": "Publicar .languageChanged en el EventBus en lugar de notificar a cada vista demuestra el desacoplamiento del paso 4: el emisor no sabe quién escucha. El helper get(key:arguments:) centraliza la interpolación para evitar cadenas concatenadas a mano repartidas por el código."
+  },
+  {
+    "order": 13,
+    "title": "Build y configuración",
+    "description": "Para compilar y ejecutar la app hacen falta estas piezas de configuración. El Podfile es el manifiesto de CocoaPods que fija iOS 15.0 y declara las dependencias GoogleMaps y GooglePlaces (~> 9.0). Secrets.xcconfig.example es la plantilla que documenta el ajuste GOOGLE_MAPS_API_KEY requerido, para que cada desarrollador cree su propio Secrets.xcconfig sin exponer la clave en el repositorio. Info.plist inyecta esa API key vía variable de build, registra las fuentes Plus Jakarta Sans y habilita el modo de ubicación en segundo plano que el GPSModule necesita durante el recorrido.",
+    "nodeIds": [
+      "config:ArTourKaminaljuyu/Podfile",
+      "config:ArTourKaminaljuyu/Secrets.xcconfig.example",
+      "config:ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist"
+    ],
+    "languageLesson": "Los archivos .xcconfig separan la configuración de build (y los secretos) del proyecto Xcode: versionar solo un .example y mantener el .xcconfig real fuera del control de versiones evita filtrar claves de API. El build inyecta ese valor en Info.plist mediante una variable $(GOOGLE_MAPS_API_KEY)."
+  },
+  {
+    "order": 14,
+    "title": "Pruebas con mocks",
+    "description": "El proyecto cierra con una estrategia de pruebas diseñada en torno a su propia arquitectura. MockServices ofrece los dobles de los servicios principales (AppStateManager, LanguageService, EventBus, GPSModuleInterface y AppRouter) y una factory AppContainer.mock() que construye un contenedor de dependencias simulado para tests E2E sin singletons ni condiciones de carrera. FinalIntegrationTests valida la comunicación por interfaces, la coordinación vía EventBus, el AppStateManager como única fuente de verdad, la inyección de dependencias y el desacoplamiento entre módulos, mientras TourMockTests recorre el flujo completo del tour (inicio, estado inTour, completado y parada) y el cambio de idioma. Así se comprueba que las decisiones de los pasos 2, 4 y 5 (composition root, EventBus y facades) no solo son elegantes sino verificables.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift"
+    ],
+    "languageLesson": "Inyectar AppContainer.mock() en lugar de los singletons .shared permite que cada test parta de un estado limpio y corra en aislamiento, evitando las condiciones de carrera que comparten los singletons globales. Es la contrapartida práctica del composition root del paso 2."
+  }
+]

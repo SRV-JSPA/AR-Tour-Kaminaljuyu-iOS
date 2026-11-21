@@ -1,0 +1,126 @@
+[
+  {
+    "id": "layer:app",
+    "name": "Capa de Aplicación y Composición",
+    "description": "Punto de entrada @main, enrutador de navegación, composition root de inyección de dependencias (AppContainer) y contenedor raíz que arrancan y cablean toda la app.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift"
+    ]
+  },
+  {
+    "id": "layer:ui",
+    "name": "Capa de Presentación (UI)",
+    "description": "Pantallas SwiftUI del UICoordinator (menú, mapa, instrucciones, términos, splash, controles de tour), componentes de menú, vistas del guía virtual, el renderizado ARKit/SceneKit y el puente de Google Maps, más el storyboard de arranque.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift",
+      "file:ArTourKaminaljuyu/Launch Screen.storyboard"
+    ]
+  },
+  {
+    "id": "layer:module-api",
+    "name": "Capa de API de Módulos (Fachadas)",
+    "description": "Fachadas públicas 'API Layer' de cada feature module (AR, GPS, VirtualGuide) y las constantes públicas de configuración del GPSModule que exponen cada módulo al resto de la app ocultando su implementación interna.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift"
+    ]
+  },
+  {
+    "id": "layer:service",
+    "name": "Capa de Servicios y Lógica de Dominio",
+    "description": "Lógica de negocio de los módulos: orquestación del tour y navegación de rutas (TourManager, RouteNavigator, GeoUtils), servicios de GPS y permisos de ubicación, gestores de escena/flechas de AR y el servicio de idioma.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift"
+    ]
+  },
+  {
+    "id": "layer:data",
+    "name": "Capa de Modelos y Datos",
+    "description": "Modelos de dominio y datos estáticos de cada módulo: POIs y su registro, configuración de ruta y de la experiencia AR, líneas de transcripción y el diccionario de cadenas localizadas español/inglés.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift"
+    ]
+  },
+  {
+    "id": "layer:shared",
+    "name": "Capa Compartida (Cross-cutting)",
+    "description": "Infraestructura transversal: EventBus de publicación/suscripción, AppStateManager, el enum de estado global AppState y extensiones compartidas de Array y Color usadas por todos los módulos.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift"
+    ]
+  },
+  {
+    "id": "layer:test",
+    "name": "Capa de Pruebas",
+    "description": "Suite de pruebas unitarias y de integración (EventBus, AppStateManager, idioma, cadenas localizadas, tour) junto con mocks, configuración de tests e integración final.",
+    "nodeIds": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift"
+    ]
+  },
+  {
+    "id": "layer:config",
+    "name": "Capa de Build y Configuración",
+    "description": "Configuración de build y del proyecto: archivo project.pbxproj de Xcode, Info.plist de la app, Podfile de CocoaPods y la plantilla de secretos Secrets.xcconfig.example.",
+    "nodeIds": [
+      "config:ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj",
+      "config:ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist",
+      "config:ArTourKaminaljuyu/Podfile",
+      "config:ArTourKaminaljuyu/Secrets.xcconfig.example"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "Capa de Documentación",
+    "description": "Documentación del proyecto: README general, guía CLAUDE.md para la app y notas de pruebas/localización (TESTS_README.md y NEW_LOCALIZATION_KEYS.md).",
+    "nodeIds": [
+      "document:ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md",
+      "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+      "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+      "document:README.md"
+    ]
+  }
+]

@@ -1,0 +1,1671 @@
+{
+  "scriptCompleted": true,
+  "projection": "metrics computed on file-level graph (member edges mapped to containing file via filePath; depends_on+calls used for BFS)",
+  "entryPointCandidates": [
+    {
+      "id": "document:README.md",
+      "score": 5,
+      "name": "README.md",
+      "type": "document",
+      "summary": "Archivo README del proyecto; actualmente solo contiene el título del repositorio (AR-Tour-Kaminaljuyu-iOS) sin contenido adicional."
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "score": 3,
+      "name": "ArTourKaminaljuyuApp.swift",
+      "type": "file",
+      "summary": "Punto de entrada @main de la app: instancia AppContainer.production(), configura la API key de Google Maps e inyecta cada servicio al árbol SwiftUI vía environmentObject."
+    },
+    {
+      "id": "config:ArTourKaminaljuyu/Podfile",
+      "score": 2,
+      "name": "Podfile",
+      "type": "config",
+      "summary": "Manifiesto de CocoaPods que fija iOS 15.0 como plataforma y declara las dependencias GoogleMaps y GooglePlaces (~> 9.0) para el target de la app, heredando search paths en el target de tests."
+    },
+    {
+      "id": "config:ArTourKaminaljuyu/Secrets.xcconfig.example",
+      "score": 2,
+      "name": "Secrets.xcconfig.example",
+      "type": "config",
+      "summary": "Plantilla de archivo xcconfig que documenta el ajuste GOOGLE_MAPS_API_KEY requerido por la app; sirve de ejemplo para crear el Secrets.xcconfig real sin exponer la clave en el repositorio."
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/Launch Screen.storyboard",
+      "score": 2,
+      "name": "Launch Screen.storyboard",
+      "type": "file",
+      "summary": "Storyboard de la pantalla de lanzamiento (launch screen) que muestra el logotipo de la app centrado sobre un fondo marrón, definido con Interface Builder y Auto Layout."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+      "fanIn": 14,
+      "name": "LanguageService.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "fanIn": 10,
+      "name": "EventBus.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+      "fanIn": 8,
+      "name": "GPSModuleInterface.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+      "fanIn": 8,
+      "name": "POILocation.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "fanIn": 7,
+      "name": "AppStateManager.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+      "fanIn": 6,
+      "name": "GeoUtils.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "fanIn": 5,
+      "name": "AppRouter.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift",
+      "fanIn": 5,
+      "name": "AppConfig.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "fanIn": 5,
+      "name": "VirtualGuideModuleInterface.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "fanIn": 5,
+      "name": "TourMockTests.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "fanIn": 4,
+      "name": "ArTourKaminaljuyuApp.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift",
+      "fanIn": 4,
+      "name": "POIRegistry.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift",
+      "fanIn": 4,
+      "name": "LocalizedStrings.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "fanIn": 3,
+      "name": "AppContainer.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift",
+      "fanIn": 3,
+      "name": "ContentView.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "fanIn": 2,
+      "name": "MapOverlayView.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "fanIn": 2,
+      "name": "TourControlsView.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift",
+      "fanIn": 2,
+      "name": "ARModuleInterface.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+      "fanIn": 2,
+      "name": "LocationService.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "fanIn": 2,
+      "name": "FinalIntegrationTests.swift"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift",
+      "fanOut": 15,
+      "name": "ContentView.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+      "fanOut": 11,
+      "name": "ARViewController.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "fanOut": 8,
+      "name": "AppContainer.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+      "fanOut": 7,
+      "name": "GPSModuleInterface.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "fanOut": 6,
+      "name": "VirtualGuideModuleInterface.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "fanOut": 6,
+      "name": "MockServices.swift"
+    },
+    {
+      "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md",
+      "fanOut": 5,
+      "name": "CLAUDE.md"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+      "fanOut": 5,
+      "name": "TourManager.swift"
+    },
+    {
+      "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+      "fanOut": 4,
+      "name": "NEW_LOCALIZATION_KEYS.md"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "fanOut": 4,
+      "name": "MainMenuView.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "fanOut": 4,
+      "name": "MapOverlayView.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+      "fanOut": 4,
+      "name": "ARSceneManager.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "fanOut": 4,
+      "name": "AppStateManager.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "fanOut": 3,
+      "name": "TourControlsView.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+      "fanOut": 3,
+      "name": "ProximityService.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+      "fanOut": 3,
+      "name": "LanguageService.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "fanOut": 3,
+      "name": "FinalIntegrationTests.swift"
+    },
+    {
+      "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+      "fanOut": 2,
+      "name": "TESTS_README.md"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "fanOut": 2,
+      "name": "ArTourKaminaljuyuApp.swift"
+    },
+    {
+      "id": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift",
+      "fanOut": 2,
+      "name": "VideoMapToggleHintView.swift"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+    "order": [
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift",
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift"
+    ],
+    "depthMap": {
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift": 0,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift": 1,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift": 1,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift": 2,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift": 3,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift": 4,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift": 4,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift": 4,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift": 4,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift": 4,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift": 4,
+      "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift": 5
+    },
+    "byDepth": {
+      "0": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift"
+      ],
+      "1": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift"
+      ],
+      "2": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift"
+      ],
+      "3": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift"
+      ],
+      "4": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift"
+      ],
+      "5": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md",
+        "name": "CLAUDE.md",
+        "type": "document",
+        "summary": "Documentación arquitectónica autoritativa del proyecto: describe la arquitectura modular por EventBus + interfaces públicas + estado global, ownership de módulos, reglas de comunicación, deuda técnica conocida y decisiones de diseño intencionales."
+      },
+      {
+        "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+        "name": "NEW_LOCALIZATION_KEYS.md",
+        "type": "document",
+        "summary": "Documento de especificación que detalla 11 nuevas claves de localización (con traducciones ES/EN) requeridas por ContentView, TourControlsView y MapOverlayView, incluyendo instrucciones de implementación según el patrón de strings del proyecto."
+      },
+      {
+        "id": "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+        "name": "TESTS_README.md",
+        "type": "document",
+        "summary": "Documentación de la estrategia y estructura de los tests del proyecto: contrasta el enfoque con mocks frente al de singletons, describe la cobertura por módulos y los escenarios cubiertos, y detalla el problema de race conditions."
+      },
+      {
+        "id": "document:README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Archivo README del proyecto; actualmente solo contiene el título del repositorio (AR-Tour-Kaminaljuyu-iOS) sin contenido adicional."
+      }
+    ],
+    "infrastructure": [],
+    "data": [],
+    "config": [
+      {
+        "id": "config:ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj",
+        "name": "project.pbxproj",
+        "type": "config",
+        "summary": "Archivo de proyecto de Xcode que define targets, fases de compilación y referencias de archivos del único target de la app; es la configuración de build autoritativa."
+      },
+      {
+        "id": "config:ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist",
+        "name": "Info.plist",
+        "type": "config",
+        "summary": "Info.plist del target: inyecta la API key de Google Maps vía variable de build, registra las fuentes Plus Jakarta Sans y habilita el modo de ubicación en segundo plano."
+      },
+      {
+        "id": "config:ArTourKaminaljuyu/Podfile",
+        "name": "Podfile",
+        "type": "config",
+        "summary": "Manifiesto de CocoaPods que fija iOS 15.0 como plataforma y declara las dependencias GoogleMaps y GooglePlaces (~> 9.0) para el target de la app, heredando search paths en el target de tests."
+      },
+      {
+        "id": "config:ArTourKaminaljuyu/Secrets.xcconfig.example",
+        "name": "Secrets.xcconfig.example",
+        "type": "config",
+        "summary": "Plantilla de archivo xcconfig que documenta el ajuste GOOGLE_MAPS_API_KEY requerido por la app; sirve de ejemplo para crear el Secrets.xcconfig real sin exponer la clave en el repositorio."
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+        "document:ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift"
+      ],
+      "edgeCount": 12
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift"
+      ],
+      "edgeCount": 10
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift"
+      ],
+      "edgeCount": 9
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift"
+      ],
+      "edgeCount": 5
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift"
+      ],
+      "edgeCount": 4
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift"
+      ],
+      "edgeCount": 4
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift"
+      ],
+      "edgeCount": 4
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift"
+      ],
+      "edgeCount": 4
+    },
+    {
+      "nodes": [
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+        "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift"
+      ],
+      "edgeCount": 3
+    }
+  ],
+  "layers": {
+    "count": 9,
+    "list": [
+      {
+        "id": "layer:app",
+        "name": "Capa de Aplicación y Composición",
+        "description": "Punto de entrada @main, enrutador de navegación, composition root de inyección de dependencias (AppContainer) y contenedor raíz que arrancan y cablean toda la app."
+      },
+      {
+        "id": "layer:ui",
+        "name": "Capa de Presentación (UI)",
+        "description": "Pantallas SwiftUI del UICoordinator (menú, mapa, instrucciones, términos, splash, controles de tour), componentes de menú, vistas del guía virtual, el renderizado ARKit/SceneKit y el puente de Google Maps, más el storyboard de arranque."
+      },
+      {
+        "id": "layer:module-api",
+        "name": "Capa de API de Módulos (Fachadas)",
+        "description": "Fachadas públicas 'API Layer' de cada feature module (AR, GPS, VirtualGuide) y las constantes públicas de configuración del GPSModule que exponen cada módulo al resto de la app ocultando su implementación interna."
+      },
+      {
+        "id": "layer:service",
+        "name": "Capa de Servicios y Lógica de Dominio",
+        "description": "Lógica de negocio de los módulos: orquestación del tour y navegación de rutas (TourManager, RouteNavigator, GeoUtils), servicios de GPS y permisos de ubicación, gestores de escena/flechas de AR y el servicio de idioma."
+      },
+      {
+        "id": "layer:data",
+        "name": "Capa de Modelos y Datos",
+        "description": "Modelos de dominio y datos estáticos de cada módulo: POIs y su registro, configuración de ruta y de la experiencia AR, líneas de transcripción y el diccionario de cadenas localizadas español/inglés."
+      },
+      {
+        "id": "layer:shared",
+        "name": "Capa Compartida (Cross-cutting)",
+        "description": "Infraestructura transversal: EventBus de publicación/suscripción, AppStateManager, el enum de estado global AppState y extensiones compartidas de Array y Color usadas por todos los módulos."
+      },
+      {
+        "id": "layer:test",
+        "name": "Capa de Pruebas",
+        "description": "Suite de pruebas unitarias y de integración (EventBus, AppStateManager, idioma, cadenas localizadas, tour) junto con mocks, configuración de tests e integración final."
+      },
+      {
+        "id": "layer:config",
+        "name": "Capa de Build y Configuración",
+        "description": "Configuración de build y del proyecto: archivo project.pbxproj de Xcode, Info.plist de la app, Podfile de CocoaPods y la plantilla de secretos Secrets.xcconfig.example."
+      },
+      {
+        "id": "layer:documentation",
+        "name": "Capa de Documentación",
+        "description": "Documentación del proyecto: README general, guía CLAUDE.md para la app y notas de pruebas/localización (TESTS_README.md y NEW_LOCALIZATION_KEYS.md)."
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "config:ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj": {
+      "name": "project.pbxproj",
+      "type": "config",
+      "summary": "Archivo de proyecto de Xcode que define targets, fases de compilación y referencias de archivos del único target de la app; es la configuración de build autoritativa."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift": {
+      "name": "AppRouter.swift",
+      "type": "file",
+      "summary": "Define el enrutador de navegación principal (singleton ObservableObject) y el enum AppRoute con las rutas raíz del flujo de la app."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:AppRouter": {
+      "name": "AppRouter",
+      "type": "class",
+      "summary": "Singleton ObservableObject que publica la ruta actual (currentRoute) y expone navigateTo para cambiar entre menú, controles de tour y tour guiado."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift:navigateTo": {
+      "name": "navigateTo",
+      "type": "function",
+      "summary": "API pública de navegación que actualiza la ruta publicada; punto único invocado por las vistas para cambiar de pantalla."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift": {
+      "name": "ArTourKaminaljuyuApp.swift",
+      "type": "file",
+      "summary": "Punto de entrada @main de la app: instancia AppContainer.production(), configura la API key de Google Maps e inyecta cada servicio al árbol SwiftUI vía environmentObject."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift:ArTourKaminaljuyuApp": {
+      "name": "ArTourKaminaljuyuApp",
+      "type": "class",
+      "summary": "Struct App raíz que crea el contenedor de dependencias e inyecta gps, language, ar, virtualGuide, appState y router como environmentObjects en ContentView."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift": {
+      "name": "AppContainer.swift",
+      "type": "file",
+      "summary": "Factory central de inyección de dependencias que agrupa las interfaces públicas de los módulos feature y los servicios de coordinación; expone production() con las instancias .shared reales."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:AppContainer": {
+      "name": "AppContainer",
+      "type": "class",
+      "summary": "Contenedor que referencia GPSModuleInterface, LanguageService, ARModuleInterface, VirtualGuideModuleInterface, AppStateManager, AppRouter y EventBus; init privado alimentado por el factory production()."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift:production": {
+      "name": "production",
+      "type": "function",
+      "summary": "Factory estático que construye el AppContainer de producción envolviendo las instancias singleton .shared de cada módulo y servicio."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift": {
+      "name": "InstructionsView.swift",
+      "type": "file",
+      "summary": "Vista SwiftUI que muestra las instrucciones de uso de la app como lista numerada de pasos, con textos resueltos vía LanguageService."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift:InstructionsView": {
+      "name": "InstructionsView",
+      "type": "class",
+      "summary": "View de instrucciones con callback onBack y helper instructionItem para renderizar cada paso numerado; consume languageService para los textos localizados."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift": {
+      "name": "MainMenuView.swift",
+      "type": "file",
+      "summary": "Pantalla de menú principal con video de bienvenida en loop y tarjetas de acceso a tour guiado, tour libre, instrucciones y términos; incluye reproductor AVPlayer embebido y modal Coming Soon."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:MainMenuView": {
+      "name": "MainMenuView",
+      "type": "class",
+      "summary": "View del menú principal que compone las tarjetas de navegación (MenuCardView/MenuSquareCardView), los íconos de menú y reproduce videos de fondo; expone callbacks onGuidedTour, onFreeTour, onInstructions, onTerms."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:VideoPlayerView": {
+      "name": "VideoPlayerView",
+      "type": "class",
+      "summary": "Adaptador UIViewRepresentable que embebe un PlayerUIView (AVPlayer) en SwiftUI con configuración de gravity y autoPlay."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:PlayerUIView": {
+      "name": "PlayerUIView",
+      "type": "class",
+      "summary": "UIView con AVPlayerLayer que gestiona el ciclo de vida del reproductor: adjuntar player, observar estado de reproducción, arrancar al estar listo y limpiar en deinit."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:ComingSoonView": {
+      "name": "ComingSoonView",
+      "type": "class",
+      "summary": "Modal placeholder que informa que el Tour Libre aún no está disponible; se muestra al tocar la opción de tour libre en el menú."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:setupVideo": {
+      "name": "setupVideo",
+      "type": "function",
+      "summary": "Prepara el AVPlayer del video de fondo del menú, configurándolo para reproducción en loop silenciosa."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift:setupBienvenidaVideo": {
+      "name": "setupBienvenidaVideo",
+      "type": "function",
+      "summary": "Inicializa el reproductor del video de bienvenida de la guía virtual maya que se muestra en la pantalla de menú."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift": {
+      "name": "MapOverlayView.swift",
+      "type": "file",
+      "summary": "Overlay que muestra el estado de navegación GPS (distancia al objetivo, estado del tour, POI cercano) y un aviso periódico de distancia durante el recorrido guiado."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift:MapOverlayView": {
+      "name": "MapOverlayView",
+      "type": "class",
+      "summary": "View que observa GPSModuleInterface para mostrar estado, ícono, color y distancia al objetivo, con un loop asíncrono que enseña periódicamente el aviso de distancia."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift": {
+      "name": "MenuCardView.swift",
+      "type": "file",
+      "summary": "Tarjeta de menú reutilizable con ícono, título, gradiente y borde, que ejecuta una acción al tocarse con efecto de presión."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift:MenuCardView": {
+      "name": "MenuCardView",
+      "type": "class",
+      "summary": "Botón-tarjeta parametrizable (icon, title, colores de gradiente, stroke, action) usado por el menú principal para las opciones de navegación."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift": {
+      "name": "MenuIcons.swift",
+      "type": "file",
+      "summary": "Colección de íconos vectoriales SwiftUI dibujados a mano (tour guiado, tour libre, instrucciones, términos) usados en las tarjetas del menú principal."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:GuidedTourIcon": {
+      "name": "GuidedTourIcon",
+      "type": "class",
+      "summary": "Ícono vectorial del tour guiado dibujado con formas SwiftUI, parametrizado por tamaño."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:FreeTourIcon": {
+      "name": "FreeTourIcon",
+      "type": "class",
+      "summary": "Ícono vectorial del tour libre dibujado con formas SwiftUI, parametrizado por tamaño."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:InstructionsIcon": {
+      "name": "InstructionsIcon",
+      "type": "class",
+      "summary": "Ícono vectorial de instrucciones dibujado con formas SwiftUI, parametrizado por tamaño."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift:TermsIcon": {
+      "name": "TermsIcon",
+      "type": "class",
+      "summary": "Ícono vectorial de términos y condiciones dibujado con formas SwiftUI, parametrizado por tamaño."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift": {
+      "name": "MenuSquareCardView.swift",
+      "type": "file",
+      "summary": "Variante cuadrada de la tarjeta de menú con ícono, título, gradiente y acción al tocar; usada para las opciones secundarias del menú."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift:MenuSquareCardView": {
+      "name": "MenuSquareCardView",
+      "type": "class",
+      "summary": "Botón-tarjeta cuadrado parametrizable (icon, title, gradiente, stroke, action) con efecto de presión, hermano de MenuCardView."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift": {
+      "name": "SplashView.swift",
+      "type": "file",
+      "summary": "Pantalla de splash con animación de opacidad y desplazamiento que se muestra al arrancar la app antes de revelar el menú."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift:SplashView": {
+      "name": "SplashView",
+      "type": "class",
+      "summary": "View de bienvenida animada (opacity, offsetY) mostrada por ContentView durante la carga inicial controlada por isLoading."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift": {
+      "name": "TermsView.swift",
+      "type": "file",
+      "summary": "Vista SwiftUI que presenta los términos y condiciones como lista de ítems, con textos resueltos vía LanguageService y callback onBack."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift:TermsView": {
+      "name": "TermsView",
+      "type": "class",
+      "summary": "View de términos y condiciones con helper termItem para renderizar cada punto; consume languageService para los textos localizados."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift": {
+      "name": "TourControlsView.swift",
+      "type": "file",
+      "summary": "Pantalla previa al tour guiado que muestra la distancia al punto de inicio, valida el radio de arranque y permite iniciar o finalizar el recorrido; incluye leyenda de controles."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlsView": {
+      "name": "TourControlsView",
+      "type": "class",
+      "summary": "View de controles de tour que observa GPSModuleInterface para calcular distancia al inicio y habilitar startTourIfAllowed dentro del radio definido en AppConfig; expone onBack, onStartTour y onFinalize."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift:TourControlLegendRow": {
+      "name": "TourControlLegendRow",
+      "type": "class",
+      "summary": "Fila de leyenda reutilizable (ícono + título) que explica cada control del tour en la pantalla de TourControlsView."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift": {
+      "name": "VideoMapToggleHintView.swift",
+      "type": "file",
+      "summary": "Aviso visual con ícono animado que enseña al usuario a alternar entre el video de la guía y el mapa durante el tour, más el botón que dispara ese toggle en VirtualGuideModuleInterface."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift:VideoMapToggleHintView": {
+      "name": "VideoMapToggleHintView",
+      "type": "class",
+      "summary": "Overlay de ayuda que combina un ícono de tap animado (TapRippleIcon) y texto localizado explicando el gesto para alternar video/mapa."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift:TapRippleIcon": {
+      "name": "TapRippleIcon",
+      "type": "class",
+      "summary": "Ícono animado de toque con efecto de onda (ripple) que indica visualmente la interacción de tap, usado en el aviso de toggle."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift:VideoMapToggleButton": {
+      "name": "VideoMapToggleButton",
+      "type": "class",
+      "summary": "Botón que alterna la vista entre el video de la guía virtual y el mapa invocando el view model VirtualGuideModuleInterface."
+    },
+    "document:ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md": {
+      "name": "CLAUDE.md",
+      "type": "document",
+      "summary": "Documentación arquitectónica autoritativa del proyecto: describe la arquitectura modular por EventBus + interfaces públicas + estado global, ownership de módulos, reglas de comunicación, deuda técnica conocida y decisiones de diseño intencionales."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift": {
+      "name": "ContentView.swift",
+      "type": "file",
+      "summary": "Raíz real de navegación y orquestación del tour: muestra el splash, mantiene ARModuleView siempre cargado en el fondo y conmuta entre menú, controles de tour y overlay de tour guiado según AppRouter."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift:SkipIntrosButton": {
+      "name": "SkipIntrosButton",
+      "type": "class",
+      "summary": "Botón de depuración (solo DEBUG) que permite saltar la secuencia de videos de intro invocando skipIntros en VirtualGuideModuleInterface."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift:GuidedTourOverlay": {
+      "name": "GuidedTourOverlay",
+      "type": "class",
+      "summary": "Overlay del tour guiado que alterna entre VirtualGuideView y MapOverlayView, arranca la secuencia de la guía y se suscribe a EventBus para completar el tour cuando termina el video de despedida."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift:ContentView": {
+      "name": "ContentView",
+      "type": "class",
+      "summary": "View raíz que observa AppRouter, AppStateManager y GPSModuleInterface para controlar el splash, iniciar el tracking GPS y coordinar el inicio/finalización del tour con AR precargado en el ZStack."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift": {
+      "name": "ARModuleInterface.swift",
+      "type": "file",
+      "summary": "Puerta pública única del ARModule: expone el singleton ARModuleInterface (placeholder de estado/comandos futuros) y ARModuleView, el adaptador UIViewControllerRepresentable para embeber la escena AR en SwiftUI."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift:ARModuleInterface": {
+      "name": "ARModuleInterface",
+      "type": "class",
+      "summary": "Singleton ObservableObject placeholder que será la puerta pública de comandos y estado del ARModule en fases futuras; hoy solo expone .shared."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift:ARModuleView": {
+      "name": "ARModuleView",
+      "type": "class",
+      "summary": "Adaptador UIViewControllerRepresentable que instancia y expone ARViewController como único punto de entrada SwiftUI de la escena AR."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift": {
+      "name": "ARConfig.swift",
+      "type": "file",
+      "summary": "Constantes de configuración de la experiencia AR: límites de escala, altura de cámara, intensidades de luz, distancia de colocación y visibilidad de los modelos 3D."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift:ARConfig": {
+      "name": "ARConfig",
+      "type": "class",
+      "summary": "Enum/namespace de constantes estáticas que parametrizan el renderizado AR (minScale, maxScale, globalScaleMultiplier, modelVisibilityDistanceMeters, etc.)."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift": {
+      "name": "ARViewController.swift",
+      "type": "file",
+      "summary": "God object del ARModule (documentado como deuda técnica): monta la escena ARKit/SceneKit, gestiona gestos y UI programática, se suscribe a GPS y a la guía virtual, maneja progresión de POIs y presenta la ficha informativa y el visor de imágenes."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:ARViewController": {
+      "name": "ARViewController",
+      "type": "class",
+      "summary": "UIViewController que orquesta ARSceneManager y ARGuideArrowManager, se suscribe a GPSModuleInterface y VirtualGuideModuleInterface, coloca modelos por POI y coordina los comandos del tour vía EventBus, AppStateManager y AppRouter."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:POIImageViewerController": {
+      "name": "POIImageViewerController",
+      "type": "class",
+      "summary": "Visor de imágenes a pantalla completa con scroll y zoom (pinch + doble tap) para mostrar las fotos de cada montículo desde la ficha del POI."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:BackConfirmationView": {
+      "name": "BackConfirmationView",
+      "type": "class",
+      "summary": "Modal SwiftUI de confirmación para salir del tour AR, con callbacks onConfirm/onCancel y textos localizados; presentado desde ARViewController vía UIHostingController."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:setupSceneView": {
+      "name": "setupSceneView",
+      "type": "function",
+      "summary": "Configura el ARSCNView, la iluminación ambiental y direccional de la escena e instancia ARSceneManager y ARGuideArrowManager."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:subscribeToGPS": {
+      "name": "subscribeToGPS",
+      "type": "function",
+      "summary": "Se suscribe a los publishers de GPSModuleInterface (ubicación, heading, estado del tour) y de VirtualGuideModuleInterface para recolocar el modelo, actualizar visibilidad y re-evaluar el botón Next."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:nextModelTapped": {
+      "name": "nextModelTapped",
+      "type": "function",
+      "summary": "Maneja el tap del botón Next: coloca el modelo del POI activo o avanza al siguiente validando intros completadas, video terminado y radio de llegada, publicando nextPOIRequested o tourEndRequested según corresponda."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:showPOIInfo": {
+      "name": "showPOIInfo",
+      "type": "function",
+      "summary": "Construye y presenta la ficha informativa del POI (título localizado, galería de imágenes y descripción desde VirtualGuideModuleInterface) en un sheet con detents."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift:updateNextModelButton": {
+      "name": "updateNextModelButton",
+      "type": "function",
+      "summary": "Actualiza el estado visual y de habilitación del botón de avanzar según si el modelo fue colocado/revelado y si el usuario está dentro del radio de llegada del POI activo."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift": {
+      "name": "ARGuideArrowManager.swift",
+      "type": "file",
+      "summary": "Gestiona la flecha-guía 3D (modelo flecha.obj) anclada a la cámara que apunta hacia el modelo del POI activo y se oculta al acercarse al objetivo."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift:ARGuideArrowManager": {
+      "name": "ARGuideArrowManager",
+      "type": "class",
+      "summary": "Construye un nodo flecha a partir de un OBJ, lo adjunta a la cámara y lo orienta cada frame hacia la posición mundial del modelo, ocultándolo dentro de hideWithinMeters."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift:buildArrowNode": {
+      "name": "buildArrowNode",
+      "type": "function",
+      "summary": "Carga el modelo OBJ de la flecha (o construye una geometría de respaldo), aplica materiales y escala, y prepara el nodo SceneKit para adjuntarlo a la cámara."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift:update": {
+      "name": "update",
+      "type": "function",
+      "summary": "Orienta la flecha hacia la posición mundial del modelo del POI y alterna su visibilidad según la distancia al objetivo."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift": {
+      "name": "ARSceneManager.swift",
+      "type": "file",
+      "summary": "Servicio que carga modelos 3D de los POIs, resuelve y aplica texturas desde MTL/bundle, los posiciona en world space a partir del GPS (evitando drift de ARKit) y aplica transformaciones de gestos del usuario."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift:ARSceneManager": {
+      "name": "ARSceneManager",
+      "type": "class",
+      "summary": "ARSCNViewDelegate que gestiona el único modelo activo colgado del sceneRoot, lo recoloca por delta GPS, controla visibilidad por distancia (ARConfig) y aplica rotación, escala y traslación vertical por gestos."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift:placeModel": {
+      "name": "placeModel",
+      "type": "function",
+      "summary": "Coloca el modelo 3D del POI en la escena calculando su posición mundial desde la ubicación y heading del usuario y la transformada de la cámara."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift:buildNode": {
+      "name": "buildNode",
+      "type": "function",
+      "summary": "Carga la geometría de un modelo desde su ruta, le aplica la textura resuelta y devuelve el nodo SceneKit listo para añadir a la escena."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift:worldPositionFromGPS": {
+      "name": "worldPositionFromGPS",
+      "type": "function",
+      "summary": "Convierte la coordenada GPS de un POI a una posición mundial relativa a la cámara usando distancia y bearing (GeoUtils), fuente autoritativa de la posición del modelo."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift:updateVisibility": {
+      "name": "updateVisibility",
+      "type": "function",
+      "summary": "Revela u oculta el modelo activo según si el usuario entró al radio de visibilidad de ARConfig, marcando isActiveModelRevealed."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift:parseMTL": {
+      "name": "parseMTL",
+      "type": "function",
+      "summary": "Parsea el archivo MTL asociado a un OBJ para mapear materiales a sus texturas y poder aplicarlas forzadamente al modelo cargado."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift": {
+      "name": "AppConfig.swift",
+      "type": "file",
+      "summary": "Constantes de tour y proximidad del GPSModule: radios de llegada y de inicio, radio de visibilidad, coordenada de inicio del tour y umbrales de precisión horizontal."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift:AppConfig": {
+      "name": "AppConfig",
+      "type": "class",
+      "summary": "Enum/namespace de constantes estáticas que parametrizan proximidad y tour (guidedArrivalMeters, tourStartRadiusMeters, tourStartLatitude/Longitude, maxUsableHorizontalAccuracyMeters, etc.)."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift": {
+      "name": "GPSModuleInterface.swift",
+      "type": "file",
+      "summary": "Interfaz pública del GPSModule: singleton ObservableObject que envuelve LocationService, ProximityService y TourManager, publica estado de ubicación/tour y expone comandos y publishers de eventos para AR y UI."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:GPSModuleInterface": {
+      "name": "GPSModuleInterface",
+      "type": "class",
+      "summary": "Facade del GPSModule que coordina servicios internos vía bindings Combine, re-publica ubicación, heading, POI objetivo, distancia, bearing y estado del tour, y escucha nextPOIRequested del EventBus para avanzar el recorrido."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:setupBindings": {
+      "name": "setupBindings",
+      "type": "function",
+      "summary": "Conecta con Combine los publishers de LocationService, ProximityService y TourManager al estado publicado de la interfaz, y suscribe al EventBus para avanzar de POI ante nextPOIRequested."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:startTracking": {
+      "name": "startTracking",
+      "type": "function",
+      "summary": "Comando público que arranca el rastreo de ubicación delegando en LocationService."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift:startTour": {
+      "name": "startTour",
+      "type": "function",
+      "summary": "Comando público que inicia el recorrido en TourManager usando la ubicación actual del usuario si está disponible."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift": {
+      "name": "POILocation.swift",
+      "type": "file",
+      "summary": "Modelo de dato de un punto de interés arqueológico (coordenada, modelo 3D, escala, metadatos históricos, imágenes y umbral de llegada), más ModelPart para modelos compuestos; resuelve su nombre localizado vía LocalizedStrings."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift:POILocation": {
+      "name": "POILocation",
+      "type": "class",
+      "summary": "Estructura de datos de un POI con coordenada, parámetros del modelo 3D (parts, bobbing), metadatos arqueológicos e imágenes; expone clLocation y localizedName (vía LocalizedStrings) y conformidad Equatable."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift:ModelPart": {
+      "name": "ModelPart",
+      "type": "class",
+      "summary": "Submodelo que describe una pieza individual de un modelo 3D compuesto (ruta de modelo, textura y escala base) usada en el arreglo parts de un POILocation."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift": {
+      "name": "POIRegistry.swift",
+      "type": "file",
+      "summary": "Registro singleton con la lista autoritativa de todos los POILocation del recorrido y la coordenada de inicio del tour; punto único de consulta de POIs por id."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift:POIRegistry": {
+      "name": "POIRegistry",
+      "type": "class",
+      "summary": "Singleton que define el arreglo de POILocation del parque y tourStartCoordinate (desde AppConfig), con un helper poi(id:) para buscar un POI por identificador."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift": {
+      "name": "GeoUtils.swift",
+      "type": "file",
+      "summary": "Utilidades geográficas (enum `GeoUtils`) con distancia Haversine, rumbo, compensación de distancia por precisión GPS y normalización de ángulos; es la base matemática que usan ProximityService, TourManager, RouteNavigator y RouteConfig."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift:GeoUtils": {
+      "name": "GeoUtils",
+      "type": "class",
+      "summary": "Enum namespace con funciones estáticas de geometría GPS reutilizadas por los servicios de proximidad y navegación."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift:distanceInMeters": {
+      "name": "distanceInMeters",
+      "type": "function",
+      "summary": "Calcula la distancia en metros entre dos coordenadas mediante la fórmula de Haversine."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift:bearing": {
+      "name": "bearing",
+      "type": "function",
+      "summary": "Calcula el rumbo inicial (bearing) en grados desde una coordenada de origen hacia una de destino."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift:compensatedDistance": {
+      "name": "compensatedDistance",
+      "type": "function",
+      "summary": "Compensa el ruido del GPS restando la precisión horizontal reportada a la distancia medida, para decidir disparos por cercanía."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift": {
+      "name": "MapViewRepresentable.swift",
+      "type": "file",
+      "summary": "Wrapper `UIViewRepresentable` que integra Google Maps (`GMSMapView`) en SwiftUI; dibuja el marcador del usuario con flecha de rumbo, los marcadores de POIs y de inicio, y la polilínea de la ruta del tour."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:MapViewRepresentable": {
+      "name": "MapViewRepresentable",
+      "type": "class",
+      "summary": "Struct `UIViewRepresentable` con bindings de ubicación, rumbo, ruta, POIs y colores que crea y actualiza el `GMSMapView`."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:Coordinator": {
+      "name": "Coordinator",
+      "type": "class",
+      "summary": "Coordinator que actúa como `GMSMapViewDelegate` y conserva el estado de los marcadores, la polilínea y la cámara entre actualizaciones."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:makeUIView": {
+      "name": "makeUIView",
+      "type": "function",
+      "summary": "Construye el `GMSMapView` inicial con la cámara, las opciones del mapa y el delegate del Coordinator."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:updateUIView": {
+      "name": "updateUIView",
+      "type": "function",
+      "summary": "Sincroniza el mapa con el estado de SwiftUI actualizando marcador de usuario, marcadores de inicio y POIs, polilínea y resaltado."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:updateUserMarker": {
+      "name": "updateUserMarker",
+      "type": "function",
+      "summary": "Crea o actualiza el marcador del usuario con flecha de rumbo y anima la cámara para seguir su posición."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:updateRoutePolyline": {
+      "name": "updateRoutePolyline",
+      "type": "function",
+      "summary": "Redibuja la polilínea de la ruta sobre el mapa cuando cambian las coordenadas del tour."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:addPOIMarkersIfNeeded": {
+      "name": "addPOIMarkersIfNeeded",
+      "type": "function",
+      "summary": "Agrega los marcadores de los POIs al mapa una sola vez, usando iconos generados según sea POI principal o secundario."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift:createPOIMarkerIcon": {
+      "name": "createPOIMarkerIcon",
+      "type": "function",
+      "summary": "Dibuja programáticamente el icono de un marcador de POI (pin con punto) mediante UIBezierPath y UIGraphicsImageRenderer."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift": {
+      "name": "RouteConfig.swift",
+      "type": "file",
+      "summary": "Configuración estática de la ruta del tour: define los conectores (waypoints intermedios) entre POIs y los helpers para construir las secuencias de coordenadas de cada tramo (inicio, guiado y retorno)."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift:RouteConfig": {
+      "name": "RouteConfig",
+      "type": "class",
+      "summary": "Enum/namespace con el `START_ID`, el diccionario `CONNECTORS` de waypoints entre POIs y los helpers de claves de ruta."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift:buildRouteWaypoints": {
+      "name": "buildRouteWaypoints",
+      "type": "function",
+      "summary": "Construye la lista de coordenadas que recorre los POIs intercalando los conectores definidos entre cada par consecutivo."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift:buildFullRouteIncludingStart": {
+      "name": "buildFullRouteIncludingStart",
+      "type": "function",
+      "summary": "Ensambla la ruta completa del tour uniendo el tramo de inicio con el recorrido de los POIs."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift:buildStartLeg": {
+      "name": "buildStartLeg",
+      "type": "function",
+      "summary": "Construye las coordenadas del tramo desde la ubicación de inicio hasta el primer POI, incluyendo sus conectores."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift:buildReturnLeg": {
+      "name": "buildReturnLeg",
+      "type": "function",
+      "summary": "Construye las coordenadas del tramo de retorno desde el último POI hasta el punto de inicio."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift:connectorsForPoiLeg": {
+      "name": "connectorsForPoiLeg",
+      "type": "function",
+      "summary": "Devuelve los conectores configurados entre dos POIs para un tramo guiado concreto."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift": {
+      "name": "RouteNavigator.swift",
+      "type": "file",
+      "summary": "Navegador de un tramo de ruta: avanza por una lista de waypoints devolviendo el objetivo actual y detectando la llegada según un umbral de distancia."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift:RouteNavigator": {
+      "name": "RouteNavigator",
+      "type": "class",
+      "summary": "Mantiene el índice del waypoint actual de un tramo y determina cuándo se alcanza según el umbral de llegada."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift:updateAndGetTarget": {
+      "name": "updateAndGetTarget",
+      "type": "function",
+      "summary": "Actualiza el progreso con la ubicación del usuario, avanza al siguiente waypoint si se alcanzó y devuelve el objetivo actual."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift": {
+      "name": "TourManager.swift",
+      "type": "file",
+      "summary": "Orquestador de la máquina de estados del tour guiado (`TourState`): gestiona las fases navegar-al-inicio, guiado entre POIs y retorno, arma los `RouteNavigator` de cada tramo y publica POI actual, rumbo, distancia y coordenadas de ruta vía `@Published` y publishers Combine."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:TourState": {
+      "name": "TourState",
+      "type": "class",
+      "summary": "Enum de los estados del tour: idle, navegando al inicio, navegando a un POI, en un POI, retornando y completado."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:TourManager": {
+      "name": "TourManager",
+      "type": "class",
+      "summary": "`ObservableObject` que dirige el tour por tramos y expone estado reactivo y publishers de llegada a POI y de tour completado."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:startTour": {
+      "name": "startTour",
+      "type": "function",
+      "summary": "Arranca el tour desde la ubicación del usuario: decide si debe navegar primero al inicio o entrar directo a la fase guiada y construye la ruta completa."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:advanceToNextPOI": {
+      "name": "advanceToNextPOI",
+      "type": "function",
+      "summary": "Avanza la fase guiada al siguiente POI construyendo su navegador de tramo, o inicia el retorno si ya no quedan POIs."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:startReturnPhase": {
+      "name": "startReturnPhase",
+      "type": "function",
+      "summary": "Inicia la fase de retorno construyendo el navegador del tramo desde el último POI hacia el punto de inicio."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:update": {
+      "name": "update",
+      "type": "function",
+      "summary": "Punto de actualización por ubicación: delega en el tramo activo (inicio/guiado/retorno) y recalcula rumbo y distancia al objetivo."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:updateGuidedLeg": {
+      "name": "updateGuidedLeg",
+      "type": "function",
+      "summary": "Actualiza el tramo guiado hacia un POI y emite el publisher de llegada cuando el usuario alcanza el objetivo."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift:updateReturnLeg": {
+      "name": "updateReturnLeg",
+      "type": "function",
+      "summary": "Actualiza el tramo de retorno y marca el tour como completado, emitiendo el publisher correspondiente, al llegar al inicio."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift": {
+      "name": "GeoMath.swift",
+      "type": "file",
+      "summary": "Implementación alternativa de matemática geográfica Haversine (distancia y rumbo con sobrecargas) más una extensión `Double` para grados/radianes; duplica a `GeoUtils` y hoy no tiene llamadores tras el refactor (deuda técnica §6.3)."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift:GeoMath": {
+      "name": "GeoMath",
+      "type": "class",
+      "summary": "Namespace con distancia y rumbo Haversine en varias sobrecargas (coordenadas, lat/lon y CLLocation)."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift:distance": {
+      "name": "distance",
+      "type": "function",
+      "summary": "Distancia Haversine en metros entre dos coordenadas (con sobrecargas por lat/lon y CLLocation)."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift:bearing": {
+      "name": "bearing",
+      "type": "function",
+      "summary": "Rumbo en grados entre dos coordenadas (con sobrecarga por lat/lon)."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift": {
+      "name": "LocationPermissionsHelper.swift",
+      "type": "file",
+      "summary": "Helper (`CLLocationManagerDelegate`) que encapsula la solicitud y consulta de permisos de ubicación (when-in-use / always), expone el estado de autorización y abre los Ajustes del sistema cuando el permiso fue denegado."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift:LocationPermissionsHelper": {
+      "name": "LocationPermissionsHelper",
+      "type": "class",
+      "summary": "Encapsula un `CLLocationManager` para gestionar y notificar los cambios de autorización de ubicación."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift:openAppSettings": {
+      "name": "openAppSettings",
+      "type": "function",
+      "summary": "Abre la pantalla de Ajustes de la app para que el usuario corrija un permiso de ubicación denegado."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift": {
+      "name": "LocationService.swift",
+      "type": "file",
+      "summary": "Servicio central de CoreLocation (`CLLocationManagerDelegate`, `ObservableObject`): configura el `CLLocationManager` para navegación, publica ubicación y rumbo vía Combine `@Published`, filtra por precisión horizontal y delega los permisos en `LocationPermissionsHelper`."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift:LocationService": {
+      "name": "LocationService",
+      "type": "class",
+      "summary": "Envuelve el `CLLocationManager`, publica ubicación/rumbo/autorización y arranca o detiene el tracking según el estado del permiso."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift:init": {
+      "name": "init",
+      "type": "function",
+      "summary": "Configura el `CLLocationManager` (precisión de navegación, filtro, tipo de actividad) y conecta el callback de cambio de autorización del helper de permisos."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift:startTracking": {
+      "name": "startTracking",
+      "type": "function",
+      "summary": "Inicia las actualizaciones de ubicación y rumbo, solicitando el permiso de ubicación si aún no se concedió."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift:locationManager": {
+      "name": "locationManager(didUpdateLocations:)",
+      "type": "function",
+      "summary": "Callback del delegate que recibe las nuevas ubicaciones, filtra por precisión horizontal aceptable y actualiza la ubicación publicada."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift:handleAuthorizationChange": {
+      "name": "handleAuthorizationChange",
+      "type": "function",
+      "summary": "Reacciona a los cambios de autorización arrancando o deteniendo el tracking según el nuevo estado del permiso."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift": {
+      "name": "ProximityService.swift",
+      "type": "file",
+      "summary": "Servicio que calcula distancia y rumbo del usuario a cada POI, determina el nivel de proximidad (`far/visible/near/arrived`) y publica el POI más cercano (`nearestPOI`) y un evento de llegada; compensa el ruido del GPS con `GeoUtils.compensatedDistance`."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift:ProximityLevel": {
+      "name": "ProximityLevel",
+      "type": "class",
+      "summary": "Enum con los niveles de proximidad a un POI: lejos, visible, cerca y llegado."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift:ProximityResult": {
+      "name": "ProximityResult",
+      "type": "class",
+      "summary": "Struct con el resultado de proximidad a un POI (distancia, precisión, rumbo, nivel) y propiedades derivadas de distancia efectiva y mensaje de estado localizado."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift:ProximityService": {
+      "name": "ProximityService",
+      "type": "class",
+      "summary": "`ObservableObject` que evalúa la proximidad a los POIs y publica el más cercano y las llegadas vía un PassthroughSubject."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift:update": {
+      "name": "update",
+      "type": "function",
+      "summary": "Calcula distancias a los POIs (o a uno enfocado), determina el más cercano y su nivel, publica `nearestPOI` y dispara el evento de llegada evitando repeticiones."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift": {
+      "name": "LocalizedStrings.swift",
+      "type": "file",
+      "summary": "Diccionario estático de cadenas localizadas (español/inglés) con un helper `get(key:arguments:)` que interpola argumentos; fuente de los textos de la interfaz."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift:LocalizedStrings": {
+      "name": "LocalizedStrings",
+      "type": "class",
+      "summary": "Namespace con el diccionario de traducciones por idioma y el helper estático de lookup con interpolación de argumentos."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift:get": {
+      "name": "get",
+      "type": "function",
+      "summary": "Devuelve la cadena localizada para una clave e idioma, reemplazando los placeholders con los argumentos recibidos."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift": {
+      "name": "LanguageService.swift",
+      "type": "file",
+      "summary": "Interfaz pública del LanguageModule (singleton `.shared`, `ObservableObject`): mantiene el idioma actual, resuelve la ruta del video por POI según idioma y publica `.languageChanged` en el EventBus al cambiar de idioma."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:LanguageService": {
+      "name": "LanguageService",
+      "type": "class",
+      "summary": "Singleton que gestiona el idioma seleccionado y expone helpers para rutas de video y cadenas localizadas."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:setLanguage": {
+      "name": "setLanguage",
+      "type": "function",
+      "summary": "Cambia el idioma actual y publica el evento `.languageChanged` en el EventBus."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift:videoPath": {
+      "name": "videoPath",
+      "type": "function",
+      "summary": "Resuelve la ruta del video correspondiente a un POI según el idioma seleccionado."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift": {
+      "name": "VirtualGuideModuleInterface.swift",
+      "type": "file",
+      "summary": "Interfaz pública y facade del VirtualGuideModule (singleton `.shared`, `ObservableObject`): orquesta la reproducción de videos de la guía virtual con `AVPlayer`, una cola de videos, la máquina de 3 fases de proximidad (proximidad/interés/llegada), la transcripción sincronizada y la sesión de audio; se suscribe al EventBus, a `AppStateManager.$currentState` y a `GPSModuleInterface.$nearestPOI`."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:VirtualGuideModuleInterface": {
+      "name": "VirtualGuideModuleInterface",
+      "type": "class",
+      "summary": "Singleton `ObservableObject` que gestiona la reproducción de la guía virtual en video y publica el estado (video, transcripción) para las views."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:start": {
+      "name": "start",
+      "type": "function",
+      "summary": "Arranca el módulo: configura el audio, se suscribe a `GPSModuleInterface.$nearestPOI`, al EventBus (nextPOIRequested/tourEndRequested) y a `AppStateManager.$currentState`."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:startVideo": {
+      "name": "startVideo",
+      "type": "function",
+      "summary": "Resuelve y reproduce un video con `AVPlayer`: observa estado del item, instala observadores de fin y de tiempo, carga la transcripción y, al terminar la despedida, publica `.tourEndCompleted`."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:handleProximityUpdate": {
+      "name": "handleProximityUpdate",
+      "type": "function",
+      "summary": "Máquina de 3 fases que, según la distancia al POI, encola los videos de proximidad, interés y llegada evitando disparos repetidos."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:startWalking": {
+      "name": "startWalking",
+      "type": "function",
+      "summary": "Encola el video de indicación de la flecha tras las intros para iniciar la caminata guiada."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:playNextIfIdle": {
+      "name": "playNextIfIdle",
+      "type": "function",
+      "summary": "Si el reproductor está inactivo, saca el siguiente video de la cola y lo reproduce."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:loadTranscript": {
+      "name": "loadTranscript",
+      "type": "function",
+      "summary": "Carga los cues de transcripción de un video desde `VideoTranscripts` y los mapea a `TranscriptLine` publicados para la UI."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:clearPlayer": {
+      "name": "clearPlayer",
+      "type": "function",
+      "summary": "Libera el `AVPlayer` actual: remueve observadores (fin, estado, tiempo), pausa y limpia las referencias."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift:enqueue": {
+      "name": "enqueue",
+      "type": "function",
+      "summary": "Agrega un video a la cola (con opción de omitir si el usuario ya está más cerca de un umbral) e intenta reproducir el siguiente."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift": {
+      "name": "TranscriptLine.swift",
+      "type": "file",
+      "summary": "Modelo `Identifiable` de una línea de transcripción (texto más tiempos de inicio y fin) usado para resaltar los subtítulos sincronizados con el video."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift:TranscriptLine": {
+      "name": "TranscriptLine",
+      "type": "class",
+      "summary": "Struct `Identifiable` con el texto de la línea y sus tiempos de inicio y fin."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift": {
+      "name": "VideoTranscripts.swift",
+      "type": "file",
+      "summary": "Catálogo estático y voluminoso de transcripciones de todos los videos (español/inglés) con sus cues temporizados, más un mapeo de nombres español→inglés y el helper `cues(videoName:language:)` para recuperarlas."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:VideoTranscripts": {
+      "name": "VideoTranscripts",
+      "type": "class",
+      "summary": "Namespace con el diccionario de transcripciones por video e idioma y el mapeo de nombres español→inglés."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift:cues": {
+      "name": "cues",
+      "type": "function",
+      "summary": "Devuelve los cues de transcripción de un video según idioma, traduciendo el nombre español a su variante inglesa cuando aplica."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift": {
+      "name": "VirtualGuideView.swift",
+      "type": "file",
+      "summary": "Views SwiftUI del VirtualGuideModule: reproductor de video a pantalla completa, botón para alternar la transcripción y panel lateral de transcripción con auto-scroll; solo hacen binding reactivo al estado publicado por `VirtualGuideModuleInterface`."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:VirtualGuideView": {
+      "name": "VirtualGuideView",
+      "type": "class",
+      "summary": "View raíz del módulo que compone el reproductor de video y el panel de transcripción observando el view model."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:TranscriptToggleButton": {
+      "name": "TranscriptToggleButton",
+      "type": "class",
+      "summary": "Botón circular que alterna la visibilidad del panel de transcripción."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift:TranscriptPanel": {
+      "name": "TranscriptPanel",
+      "type": "class",
+      "summary": "Panel lateral que muestra las líneas de transcripción, resaltando la línea actual y haciendo auto-scroll hacia ella."
+    },
+    "config:ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist": {
+      "name": "Info.plist",
+      "type": "config",
+      "summary": "Info.plist del target: inyecta la API key de Google Maps vía variable de build, registra las fuentes Plus Jakarta Sans y habilita el modo de ubicación en segundo plano."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift": {
+      "name": "AppStateManager.swift",
+      "type": "file",
+      "summary": "Fuente autoritativa del estado del tour (singleton `.shared`, `ObservableObject`): mantiene `currentState` (`AppState`) y el POI activo con los métodos `startTour/setActivePOI/completeTour/reset`; los consumidores observan `$currentState` en vez de recibir eventos."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:AppStateManager": {
+      "name": "AppStateManager",
+      "type": "class",
+      "summary": "Singleton `ObservableObject` que centraliza el estado del tour y el POI activo, expuestos de forma reactiva vía `@Published`."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:startTour": {
+      "name": "startTour",
+      "type": "function",
+      "summary": "Transiciona el estado global a `.inTour` sin POI activo."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:setActivePOI": {
+      "name": "setActivePOI",
+      "type": "function",
+      "summary": "Actualiza el POI activo dentro del estado `.inTour`."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:completeTour": {
+      "name": "completeTour",
+      "type": "function",
+      "summary": "Transiciona el estado global a `.completed` y limpia el POI activo."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift:reset": {
+      "name": "reset",
+      "type": "function",
+      "summary": "Devuelve el estado global a `.idle` y limpia el POI activo."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift": {
+      "name": "EventBus.swift",
+      "type": "file",
+      "summary": "Bus de mensajes de dominio compartido (singleton `.shared`) basado en un `PassthroughSubject` de Combine: define el enum `AppEvent` y expone `publish(_:)` y un `publisher` para que los módulos emitan y reaccionen a notificaciones discretas sin acoplarse."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:AppEvent": {
+      "name": "AppEvent",
+      "type": "class",
+      "summary": "Enum de eventos de dominio: languageChanged, nextPOIRequested, tourEndRequested y tourEndCompleted."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:EventBus": {
+      "name": "EventBus",
+      "type": "class",
+      "summary": "Singleton con un `PassthroughSubject` interno que expone un publisher de solo lectura y el método `publish` para emitir eventos."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift:publish": {
+      "name": "publish",
+      "type": "function",
+      "summary": "Emite un `AppEvent` a través del subject para que lleguen a todos los suscriptores."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift": {
+      "name": "AppState.swift",
+      "type": "file",
+      "summary": "Enum del estado global del tour (`idle`, `inTour(activePOIId:)`, `completed`), separado del estado de navegación del router."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift:AppState": {
+      "name": "AppState",
+      "type": "class",
+      "summary": "Enum con los tres estados del tour: idle, inTour (con POI activo) y completed."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift": {
+      "name": "ArrayExtension.swift",
+      "type": "file",
+      "summary": "Extensión de `Array` con un subscript seguro (`safe:`) que devuelve `nil` cuando el índice está fuera de rango."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift": {
+      "name": "ColorExtension.swift",
+      "type": "file",
+      "summary": "Extensión de `Color` (SwiftUI) con un inicializador desde un string hexadecimal, usada para la paleta de colores de la app."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift:init": {
+      "name": "Color.init(hex:)",
+      "type": "function",
+      "summary": "Inicializa un `Color` a partir de un string hexadecimal, parseándolo a componentes RGB."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift": {
+      "name": "AppStateManagerTests.swift",
+      "type": "file",
+      "summary": "Suite de tests (Swift Testing) del `AppStateManager`: valida el estado inicial idle y las transiciones de startTour, setActivePOI, completeTour y reset."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:AppStateManagerTests": {
+      "name": "AppStateManagerTests",
+      "type": "class",
+      "summary": "Suite de pruebas de las transiciones de estado del AppStateManager."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:initialStateIsIdle": {
+      "name": "initialStateIsIdle",
+      "type": "function",
+      "summary": "Verifica que tras un reset el estado inicial del manager es idle."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:startTourTransition": {
+      "name": "startTourTransition",
+      "type": "function",
+      "summary": "Verifica que `startTour()` transiciona el estado a `.inTour`."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:setActivePOIUpdatesState": {
+      "name": "setActivePOIUpdatesState",
+      "type": "function",
+      "summary": "Verifica que `setActivePOI()` actualiza el POI activo dentro del estado del tour."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:completeTourClearsPOI": {
+      "name": "completeTourClearsPOI",
+      "type": "function",
+      "summary": "Verifica que `completeTour()` lleva el estado a `.completed` y limpia el POI activo."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift:resetReturnsToIdle": {
+      "name": "resetReturnsToIdle",
+      "type": "function",
+      "summary": "Verifica que `reset()` devuelve el estado a idle desde cualquier estado previo."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift": {
+      "name": "ArTourKaminaljuyuTests.swift",
+      "type": "file",
+      "summary": "Archivo de tests de ejemplo generado por Xcode (Swift Testing), con un caso placeholder sin lógica real."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift:ArTourKaminaljuyuTests": {
+      "name": "ArTourKaminaljuyuTests",
+      "type": "class",
+      "summary": "Suite placeholder con un único test de ejemplo sin aserciones significativas."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift": {
+      "name": "EventBusTests.swift",
+      "type": "file",
+      "summary": "Suite de tests del `EventBus`: verifica la publicación de `.languageChanged` y `.nextPOIRequested` y que múltiples suscriptores reciben el mismo evento."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:EventBusTests": {
+      "name": "EventBusTests",
+      "type": "class",
+      "summary": "Suite de pruebas de la publicación y recepción de eventos en el EventBus."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishLanguageChanged": {
+      "name": "publishLanguageChanged",
+      "type": "function",
+      "summary": "Verifica que al publicar `.languageChanged` el suscriptor recibe el evento con el idioma esperado."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:publishNextPOIRequested": {
+      "name": "publishNextPOIRequested",
+      "type": "function",
+      "summary": "Verifica que al publicar `.nextPOIRequested` el suscriptor recibe el evento."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift:multipleSubscribersReceiveEvent": {
+      "name": "multipleSubscribersReceiveEvent",
+      "type": "function",
+      "summary": "Verifica que un mismo evento publicado llega a múltiples suscriptores simultáneos."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift": {
+      "name": "FinalIntegrationTests.swift",
+      "type": "file",
+      "summary": "Tests de integración de la arquitectura modular: validan la comunicación por interfaces, la coordinación vía EventBus, el AppStateManager como única fuente de verdad, la inyección de dependencias con `AppContainer.mock()`, flujos end-to-end del tour y el desacoplamiento entre módulos."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:ArchitectureValidationTests": {
+      "name": "ArchitectureValidationTests",
+      "type": "class",
+      "summary": "Valida las reglas de arquitectura: comunicación por interfaces, EventBus, AppStateManager como fuente única e inyección de dependencias."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:EndToEndFlowTests": {
+      "name": "EndToEndFlowTests",
+      "type": "class",
+      "summary": "Valida flujos end-to-end: tour guiado completo, cambio de idioma con actualización de videos y cancelación con reinicio del sistema."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:DecouplingValidationTests": {
+      "name": "DecouplingValidationTests",
+      "type": "class",
+      "summary": "Valida el desacoplamiento: reemplazo de implementaciones, múltiples suscriptores de eventos y propagación reactiva de estado."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:modulesCommunicateViaInterfaces": {
+      "name": "modulesCommunicateViaInterfaces",
+      "type": "function",
+      "summary": "Verifica que los módulos se comunican a través de sus interfaces públicas usando un contenedor mock."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:eventBusCoordinatesModules": {
+      "name": "eventBusCoordinatesModules",
+      "type": "function",
+      "summary": "Verifica que el EventBus coordina a los módulos entregando los eventos publicados a sus suscriptores."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:appStateManagerIsSingleSourceOfTruth": {
+      "name": "appStateManagerIsSingleSourceOfTruth",
+      "type": "function",
+      "summary": "Verifica que el AppStateManager es la única fuente de verdad del estado del tour a lo largo de sus transiciones."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCompletesFullGuidedTour": {
+      "name": "userCompletesFullGuidedTour",
+      "type": "function",
+      "summary": "Simula el flujo completo del usuario recorriendo el tour guiado de inicio a fin."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userChangesLanguageAndVideosUpdate": {
+      "name": "userChangesLanguageAndVideosUpdate",
+      "type": "function",
+      "summary": "Verifica que al cambiar el idioma las rutas de video resueltas por el LanguageService se actualizan al idioma correspondiente."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:userCancelsTourAndSystemResets": {
+      "name": "userCancelsTourAndSystemResets",
+      "type": "function",
+      "summary": "Verifica que al cancelar el tour el sistema se reinicia a su estado inicial de forma consistente."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift:reactiveStatePropagates": {
+      "name": "reactiveStatePropagates",
+      "type": "function",
+      "summary": "Verifica que los cambios de estado se propagan reactivamente a los suscriptores vía Combine."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift": {
+      "name": "LanguageServiceTests.swift",
+      "type": "file",
+      "summary": "Suite de tests (actualmente deshabilitada y comentada por completo) para LanguageService; validaba el idioma por defecto, el cambio de idioma, videoPath y la publicación del evento languageChanged en EventBus. La funcionalidad se valida ahora mediante mocks."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift": {
+      "name": "LocalizedStringsTests.swift",
+      "type": "file",
+      "summary": "Suite de tests (deshabilitada y comentada) para LocalizedStrings; verificaba las traducciones ES/EN, el fallback de claves inexistentes y la presencia de todas las claves críticas del menú en ambos idiomas."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift": {
+      "name": "MockServices.swift",
+      "type": "file",
+      "summary": "Proporciona los mocks de los servicios principales (AppStateManager, LanguageService, EventBus, GPSModuleInterface y AppRouter) junto con la factory AppContainer.mock() que construye un contenedor de dependencias simulado para tests E2E sin singletons ni race conditions."
+    },
+    "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md": {
+      "name": "NEW_LOCALIZATION_KEYS.md",
+      "type": "document",
+      "summary": "Documento de especificación que detalla 11 nuevas claves de localización (con traducciones ES/EN) requeridas por ContentView, TourControlsView y MapOverlayView, incluyendo instrucciones de implementación según el patrón de strings del proyecto."
+    },
+    "document:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md": {
+      "name": "TESTS_README.md",
+      "type": "document",
+      "summary": "Documentación de la estrategia y estructura de los tests del proyecto: contrasta el enfoque con mocks frente al de singletons, describe la cobertura por módulos y los escenarios cubiertos, y detalla el problema de race conditions."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift": {
+      "name": "TestConfiguration.swift",
+      "type": "file",
+      "summary": "Define el tag personalizado .usesSharedState de Swift Testing, usado para marcar y serializar los tests que dependen de estado compartido (singletons) y así evitar race conditions."
+    },
+    "file:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift": {
+      "name": "TourMockTests.swift",
+      "type": "file",
+      "summary": "Suite de tests E2E con mocks que valida el flujo completo del tour (inicio, estado inTour, completado y parada) y el cambio de idioma, usando AppContainer.mock() para evitar los race conditions de los singletons."
+    },
+    "file:ArTourKaminaljuyu/Launch Screen.storyboard": {
+      "name": "Launch Screen.storyboard",
+      "type": "file",
+      "summary": "Storyboard de la pantalla de lanzamiento (launch screen) que muestra el logotipo de la app centrado sobre un fondo marrón, definido con Interface Builder y Auto Layout."
+    },
+    "config:ArTourKaminaljuyu/Podfile": {
+      "name": "Podfile",
+      "type": "config",
+      "summary": "Manifiesto de CocoaPods que fija iOS 15.0 como plataforma y declara las dependencias GoogleMaps y GooglePlaces (~> 9.0) para el target de la app, heredando search paths en el target de tests."
+    },
+    "config:ArTourKaminaljuyu/Secrets.xcconfig.example": {
+      "name": "Secrets.xcconfig.example",
+      "type": "config",
+      "summary": "Plantilla de archivo xcconfig que documenta el ajuste GOOGLE_MAPS_API_KEY requerido por la app; sirve de ejemplo para crear el Secrets.xcconfig real sin exponer la clave en el repositorio."
+    },
+    "document:README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Archivo README del proyecto; actualmente solo contiene el título del repositorio (AR-Tour-Kaminaljuyu-iOS) sin contenido adicional."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppStateManager": {
+      "name": "MockAppStateManager",
+      "type": "class",
+      "summary": "Mock de AppStateManager que expone el estado actual y el POI activo y registra las llamadas (startTour, setActivePOI, completeTour, reset) para verificarlas en los tests."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockLanguageService": {
+      "name": "MockLanguageService",
+      "type": "class",
+      "summary": "Mock de LanguageService que simula el cambio de idioma, la resolución de videoPath y de strings localizados, registrando cada llamada para las aserciones de los tests."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockEventBus": {
+      "name": "MockEventBus",
+      "type": "class",
+      "summary": "Mock de EventBus basado en un PassthroughSubject de Combine que captura los eventos publicados en un array para su inspección en los tests."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockGPSModuleInterface": {
+      "name": "MockGPSModuleInterface",
+      "type": "class",
+      "summary": "Mock de GPSModuleInterface que permite simular la ubicación, el estado del tour y el POI más cercano, y registra las llamadas de control del recorrido (startTour, stopTour, startTracking, stopTracking)."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppRouter": {
+      "name": "MockAppRouter",
+      "type": "class",
+      "summary": "Mock de AppRouter que mantiene la ruta actual y registra las navegaciones solicitadas (navigateTo, goBack) para las aserciones de navegación en los tests."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:MockAppContainer": {
+      "name": "MockAppContainer",
+      "type": "class",
+      "summary": "Contenedor de dependencias mock que agrupa todos los servicios simulados (appState, language, gps, router, eventBus) consumidos por los tests E2E."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift:mock": {
+      "name": "mock",
+      "type": "function",
+      "summary": "Factory estática en una extensión de AppContainer que construye y devuelve un MockAppContainer con todos los servicios simulados listos para usarse en los tests."
+    },
+    "class:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:TourMockTests": {
+      "name": "TourMockTests",
+      "type": "class",
+      "summary": "Suite de Swift Testing (@Suite) que ejecuta pruebas E2E del flujo del tour y del cambio de idioma sobre dependencias mock obtenidas con AppContainer.mock()."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:completeTourFlow": {
+      "name": "completeTourFlow",
+      "type": "function",
+      "summary": "Test que valida el flujo completo del tour (iniciar, estado inTour, completar y detener) coordinando los mocks de AppState y GPS."
+    },
+    "function:ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift:languageChange": {
+      "name": "languageChange",
+      "type": "function",
+      "summary": "Test que valida el cambio de idioma a EN y que videoPath devuelve la carpeta English mediante MockLanguageService."
+    }
+  },
+  "totalNodes": 221,
+  "totalEdges": 397,
+  "fileLevelNodeCount": 61
+}

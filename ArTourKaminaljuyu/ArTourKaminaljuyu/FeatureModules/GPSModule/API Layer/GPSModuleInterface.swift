@@ -102,12 +102,33 @@ final class GPSModuleInterface: ObservableObject {
                 let coord = location.coordinate
                 self.userLocation = coord
                 self.userHorizontalAccuracy = max(location.horizontalAccuracy, 0)
+
+                // Instrumentación: tiempo de cómputo de la distancia Haversine del
+                // usuario a todos los POIs (la carga real del módulo por update),
+                // medida sin el ruido de los prints de ProximityService.
+                let pois = POIRegistry.shared.pois
+                let calcStart = DispatchTime.now()
+                for poi in pois {
+                    _ = GeoUtils.distanceInMeters(from: coord, to: poi.coordinate)
+                }
+                let proximityCalcMs = Double(DispatchTime.now().uptimeNanoseconds
+                                             - calcStart.uptimeNanoseconds) / 1_000_000.0
+
                 self.proximityService.update(
                     userLocation: coord,
                     horizontalAccuracy: location.horizontalAccuracy,
                     focusPOIId: self.tourManager.currentPOI?.id
                 )
                 self.tourManager.update(userLocation: coord)
+
+                let distanceToTarget = self.currentTargetPOI.map {
+                    GeoUtils.distanceInMeters(from: coord, to: $0.coordinate)
+                } ?? Double.nan
+                PerformanceLogger.shared.logAcceptedFix(
+                    location,
+                    proximityCalcMs: proximityCalcMs,
+                    distanceToTarget: distanceToTarget
+                )
             }
             .store(in: &cancellables)
 

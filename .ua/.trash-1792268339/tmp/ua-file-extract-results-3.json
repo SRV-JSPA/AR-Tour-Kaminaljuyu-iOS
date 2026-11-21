@@ -1,0 +1,999 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [
+    "ArTourKaminaljuyu/Launch Screen.storyboard",
+    "ArTourKaminaljuyu/Podfile",
+    "ArTourKaminaljuyu/Secrets.xcconfig.example"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 8,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 5,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 86,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 61,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 200,
+      "nonEmptyLines": 160,
+      "functions": [
+        {
+          "name": "startTour",
+          "startLine": 26,
+          "endLine": 29,
+          "params": []
+        },
+        {
+          "name": "setActivePOI",
+          "startLine": 31,
+          "endLine": 35,
+          "params": [
+            "poiId"
+          ]
+        },
+        {
+          "name": "completeTour",
+          "startLine": 37,
+          "endLine": 41,
+          "params": []
+        },
+        {
+          "name": "reset",
+          "startLine": 43,
+          "endLine": 47,
+          "params": []
+        },
+        {
+          "name": "setLanguage",
+          "startLine": 60,
+          "endLine": 64,
+          "params": [
+            "language"
+          ]
+        },
+        {
+          "name": "videoPath",
+          "startLine": 66,
+          "endLine": 70,
+          "params": [
+            "poiId"
+          ]
+        },
+        {
+          "name": "string",
+          "startLine": 72,
+          "endLine": 90,
+          "params": [
+            "key"
+          ]
+        },
+        {
+          "name": "publish",
+          "startLine": 104,
+          "endLine": 107,
+          "params": [
+            "event"
+          ]
+        },
+        {
+          "name": "reset",
+          "startLine": 109,
+          "endLine": 111,
+          "params": []
+        },
+        {
+          "name": "startTour",
+          "startLine": 126,
+          "endLine": 129,
+          "params": []
+        },
+        {
+          "name": "stopTour",
+          "startLine": 131,
+          "endLine": 134,
+          "params": []
+        },
+        {
+          "name": "startTracking",
+          "startLine": 136,
+          "endLine": 138,
+          "params": []
+        },
+        {
+          "name": "stopTracking",
+          "startLine": 140,
+          "endLine": 142,
+          "params": []
+        },
+        {
+          "name": "simulateLocation",
+          "startLine": 145,
+          "endLine": 147,
+          "params": [
+            "location"
+          ]
+        },
+        {
+          "name": "simulateTourState",
+          "startLine": 149,
+          "endLine": 151,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "navigateTo",
+          "startLine": 161,
+          "endLine": 164,
+          "params": [
+            "route"
+          ]
+        },
+        {
+          "name": "goBack",
+          "startLine": 166,
+          "endLine": 168,
+          "params": []
+        },
+        {
+          "name": "mock",
+          "startLine": 175,
+          "endLine": 189,
+          "params": [
+            "appState",
+            "language",
+            "gps",
+            "router",
+            "eventBus"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "MockAppStateManager",
+          "startLine": 17,
+          "endLine": 48,
+          "methods": [
+            "startTour",
+            "setActivePOI",
+            "completeTour",
+            "reset"
+          ],
+          "properties": [
+            "currentState",
+            "activePOIId",
+            "startTourCalled",
+            "setActivePOICalled",
+            "completeTourCalled",
+            "resetCalled"
+          ]
+        },
+        {
+          "name": "MockLanguageService",
+          "startLine": 52,
+          "endLine": 91,
+          "methods": [
+            "setLanguage",
+            "videoPath",
+            "string"
+          ],
+          "properties": [
+            "currentLanguage",
+            "setLanguageCalled",
+            "lastLanguageSet",
+            "videoPathCalls",
+            "stringCalls"
+          ]
+        },
+        {
+          "name": "MockEventBus",
+          "startLine": 95,
+          "endLine": 112,
+          "methods": [
+            "publish",
+            "reset"
+          ],
+          "properties": [
+            "subject",
+            "publishedEvents",
+            "publisher"
+          ]
+        },
+        {
+          "name": "MockGPSModuleInterface",
+          "startLine": 116,
+          "endLine": 152,
+          "methods": [
+            "startTour",
+            "stopTour",
+            "startTracking",
+            "stopTracking",
+            "simulateLocation",
+            "simulateTourState"
+          ],
+          "properties": [
+            "userLocation",
+            "tourState",
+            "nearestPOI",
+            "startTourCalled",
+            "stopTourCalled",
+            "startTrackingCalled",
+            "stopTrackingCalled"
+          ]
+        },
+        {
+          "name": "MockAppRouter",
+          "startLine": 156,
+          "endLine": 169,
+          "methods": [
+            "navigateTo",
+            "goBack"
+          ],
+          "properties": [
+            "currentRoute",
+            "navigateCalls"
+          ]
+        },
+        {
+          "name": "extension AppContainer",
+          "startLine": 173,
+          "endLine": 190,
+          "methods": [
+            "mock"
+          ],
+          "properties": []
+        },
+        {
+          "name": "MockAppContainer",
+          "startLine": 194,
+          "endLine": 200,
+          "methods": [],
+          "properties": [
+            "appState",
+            "language",
+            "gps",
+            "router",
+            "eventBus"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "currentState",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "activePOIId",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "startTourCalled",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "setActivePOICalled",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "completeTourCalled",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "resetCalled",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "startTour",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "setActivePOI",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "completeTour",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "reset",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "MockAppStateManager",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "currentLanguage",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "setLanguageCalled",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "lastLanguageSet",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "videoPathCalls",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "stringCalls",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "setLanguage",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "videoPath",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "string",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "MockLanguageService",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "publishedEvents",
+          "line": 98,
+          "isDefault": false
+        },
+        {
+          "name": "publisher",
+          "line": 100,
+          "isDefault": false
+        },
+        {
+          "name": "publish",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "reset",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "MockEventBus",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "userLocation",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "tourState",
+          "line": 118,
+          "isDefault": false
+        },
+        {
+          "name": "nearestPOI",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "startTourCalled",
+          "line": 121,
+          "isDefault": false
+        },
+        {
+          "name": "stopTourCalled",
+          "line": 122,
+          "isDefault": false
+        },
+        {
+          "name": "startTrackingCalled",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "stopTrackingCalled",
+          "line": 124,
+          "isDefault": false
+        },
+        {
+          "name": "startTour",
+          "line": 126,
+          "isDefault": false
+        },
+        {
+          "name": "stopTour",
+          "line": 131,
+          "isDefault": false
+        },
+        {
+          "name": "startTracking",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "stopTracking",
+          "line": 140,
+          "isDefault": false
+        },
+        {
+          "name": "simulateLocation",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "simulateTourState",
+          "line": 149,
+          "isDefault": false
+        },
+        {
+          "name": "MockGPSModuleInterface",
+          "line": 116,
+          "isDefault": false
+        },
+        {
+          "name": "currentRoute",
+          "line": 157,
+          "isDefault": false
+        },
+        {
+          "name": "navigateCalls",
+          "line": 159,
+          "isDefault": false
+        },
+        {
+          "name": "navigateTo",
+          "line": 161,
+          "isDefault": false
+        },
+        {
+          "name": "goBack",
+          "line": 166,
+          "isDefault": false
+        },
+        {
+          "name": "MockAppRouter",
+          "line": 156,
+          "isDefault": false
+        },
+        {
+          "name": "mock",
+          "line": 175,
+          "isDefault": false
+        },
+        {
+          "name": "appState",
+          "line": 195,
+          "isDefault": false
+        },
+        {
+          "name": "language",
+          "line": 196,
+          "isDefault": false
+        },
+        {
+          "name": "gps",
+          "line": 197,
+          "isDefault": false
+        },
+        {
+          "name": "router",
+          "line": 198,
+          "isDefault": false
+        },
+        {
+          "name": "eventBus",
+          "line": 199,
+          "isDefault": false
+        },
+        {
+          "name": "MockAppContainer",
+          "line": 194,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "videoPath",
+          "callee": "append",
+          "lineNumber": 67
+        },
+        {
+          "caller": "string",
+          "callee": "append",
+          "lineNumber": 73
+        },
+        {
+          "caller": "string",
+          "callee": "strings",
+          "lineNumber": 89
+        },
+        {
+          "caller": "publisher",
+          "callee": "eraseToAnyPublisher",
+          "lineNumber": 101
+        },
+        {
+          "caller": "publish",
+          "callee": "append",
+          "lineNumber": 105
+        },
+        {
+          "caller": "publish",
+          "callee": "send",
+          "lineNumber": 106
+        },
+        {
+          "caller": "reset",
+          "callee": "removeAll",
+          "lineNumber": 110
+        },
+        {
+          "caller": "navigateTo",
+          "callee": "append",
+          "lineNumber": 162
+        },
+        {
+          "caller": "mock",
+          "callee": "MockAppContainer",
+          "lineNumber": 182
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 51,
+        "functionCount": 18,
+        "classCount": 7
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 166,
+      "nonEmptyLines": 126,
+      "sections": [
+        {
+          "heading": "Nuevas Claves de Localización Requeridas",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Claves para ContentView.swift",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "skip_intros",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Claves para TourControlsView.swift",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "ready_to_start",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "walk_to_start_point",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "tap_anywhere_to_start",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "distance_to_start",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "waiting_for_gps",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Claves para MapOverlayView.swift",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "distance_to_poi",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "status_idle",
+          "level": 3,
+          "line": 96
+        },
+        {
+          "heading": "status_navigating_to_start",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "status_returning",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "status_completed",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "Resumen de Cambios",
+          "level": 2,
+          "line": 142
+        },
+        {
+          "heading": "Archivos de código modificados:",
+          "level": 3,
+          "line": 144
+        },
+        {
+          "heading": "Total de claves nuevas: 11",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "Instrucciones de Implementación",
+          "level": 2,
+          "line": 153
+        },
+        {
+          "heading": "Si usas diccionarios en código Swift:",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "Si usas archivos `.strings`:",
+          "level": 3,
+          "line": 160
+        },
+        {
+          "heading": "Si usas el patrón que vi en tu código:",
+          "level": 3,
+          "line": 165
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 22
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 111,
+      "nonEmptyLines": 82,
+      "sections": [
+        {
+          "heading": "Tests - ArTourKaminaljuyu",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Estructura de Tests",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "📁 Archivos de Tests",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "**Tests con Mocks** (Recomendado - Sin Race Conditions)",
+          "level": 4,
+          "line": 9
+        },
+        {
+          "heading": "**Tests Unitarios con Singletons** (Con delays para evitar race conditions)",
+          "level": 4,
+          "line": 14
+        },
+        {
+          "heading": "✅ Total: 35 Tests",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Estrategia de Testing",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "1. **Tests con Mocks** (Preferred)",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "2. **Tests con Singletons** (Legacy)",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Ejecutar Tests",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Cobertura de Tests",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Módulos Testeados",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "Escenarios Cubiertos",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "Para Protocolo de Graduación",
+          "level": 2,
+          "line": 79
+        },
+        {
+          "heading": "Contribución de Tesis",
+          "level": 3,
+          "line": 81
+        },
+        {
+          "heading": "Métricas",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "Notas Técnicas",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "Problema de Race Conditions",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "Limitación Conocida",
+          "level": 3,
+          "line": 105
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 11,
+      "classes": [
+        {
+          "name": "extension Tag",
+          "startLine": 11,
+          "endLine": 13,
+          "methods": [],
+          "properties": [
+            "usesSharedState"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "usesSharedState",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "completeTourFlow",
+          "startLine": 14,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "languageChange",
+          "startLine": 30,
+          "endLine": 40,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "TourMockTests",
+          "startLine": 11,
+          "endLine": 41,
+          "methods": [
+            "completeTourFlow",
+            "languageChange"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "completeTourFlow",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "languageChange",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "TourMockTests",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "completeTourFlow",
+          "callee": "AppContainer.mock",
+          "lineNumber": 16
+        },
+        {
+          "caller": "completeTourFlow",
+          "callee": "startTour",
+          "lineNumber": 19
+        },
+        {
+          "caller": "completeTourFlow",
+          "callee": "startTour",
+          "lineNumber": 20
+        },
+        {
+          "caller": "completeTourFlow",
+          "callee": "completeTour",
+          "lineNumber": 25
+        },
+        {
+          "caller": "completeTourFlow",
+          "callee": "stopTour",
+          "lineNumber": 26
+        },
+        {
+          "caller": "languageChange",
+          "callee": "AppContainer.mock",
+          "lineNumber": 32
+        },
+        {
+          "caller": "languageChange",
+          "callee": "setLanguage",
+          "lineNumber": 33
+        },
+        {
+          "caller": "languageChange",
+          "callee": "videoPath",
+          "lineNumber": 38
+        },
+        {
+          "caller": "languageChange",
+          "callee": "contains",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "sections": [
+        {
+          "heading": "AR-Tour-Kaminaljuyu-iOS",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}

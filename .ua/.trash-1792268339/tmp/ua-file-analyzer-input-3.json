@@ -1,0 +1,17 @@
+{
+  "projectRoot": "/Users/josepereira/Documents/AR-Tour-Kaminaljuyu-iOS",
+  "batchFiles": [
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift", "language": "swift", "sizeLines": 104, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift", "language": "swift", "sizeLines": 72, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift", "language": "swift", "sizeLines": 200, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md", "language": "markdown", "sizeLines": 166, "fileCategory": "docs"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md", "language": "markdown", "sizeLines": 111, "fileCategory": "docs"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift", "language": "swift", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift", "language": "swift", "sizeLines": 41, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/Launch Screen.storyboard", "language": "storyboard", "sizeLines": 46, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/Podfile", "language": "unknown", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/Secrets.xcconfig.example", "language": "example", "sizeLines": 10, "fileCategory": "code"},
+    {"path": "README.md", "language": "markdown", "sizeLines": 0, "fileCategory": "docs"}
+  ],
+  "batchImportData": {}
+}

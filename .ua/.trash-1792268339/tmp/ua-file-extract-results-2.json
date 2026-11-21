@@ -1,0 +1,6371 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 24,
+  "filesSkipped": [
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 24,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 24,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 48,
+      "functions": [
+        {
+          "name": "distanceInMeters",
+          "startLine": 7,
+          "endLine": 25,
+          "params": [
+            "from",
+            "to"
+          ]
+        },
+        {
+          "name": "compensatedDistance",
+          "startLine": 28,
+          "endLine": 34,
+          "params": [
+            "distanceMeters",
+            "horizontalAccuracy"
+          ]
+        },
+        {
+          "name": "bearing",
+          "startLine": 37,
+          "endLine": 51,
+          "params": [
+            "from",
+            "to"
+          ]
+        },
+        {
+          "name": "normalizeDeg180",
+          "startLine": 54,
+          "endLine": 59,
+          "params": [
+            "degrees"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GeoUtils",
+          "startLine": 4,
+          "endLine": 60,
+          "methods": [
+            "distanceInMeters",
+            "compensatedDistance",
+            "bearing",
+            "normalizeDeg180"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "distanceInMeters",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "compensatedDistance",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "bearing",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "normalizeDeg180",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "GeoUtils",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "distanceInMeters",
+          "callee": "sin",
+          "lineNumber": 18
+        },
+        {
+          "caller": "distanceInMeters",
+          "callee": "sqrt",
+          "lineNumber": 22
+        },
+        {
+          "caller": "distanceInMeters",
+          "callee": "sqrt",
+          "lineNumber": 22
+        },
+        {
+          "caller": "compensatedDistance",
+          "callee": "min",
+          "lineNumber": 32
+        },
+        {
+          "caller": "compensatedDistance",
+          "callee": "max",
+          "lineNumber": 32
+        },
+        {
+          "caller": "compensatedDistance",
+          "callee": "max",
+          "lineNumber": 33
+        },
+        {
+          "caller": "bearing",
+          "callee": "sin",
+          "lineNumber": 45
+        },
+        {
+          "caller": "bearing",
+          "callee": "cos",
+          "lineNumber": 46
+        },
+        {
+          "caller": "bearing",
+          "callee": "atan2",
+          "lineNumber": 48
+        },
+        {
+          "caller": "normalizeDeg180",
+          "callee": "truncatingRemainder",
+          "lineNumber": 55
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 353,
+      "nonEmptyLines": 266,
+      "functions": [
+        {
+          "name": "makeUIView",
+          "startLine": 32,
+          "endLine": 57,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "updateUIView",
+          "startLine": 61,
+          "endLine": 73,
+          "params": [
+            "mapView",
+            "context"
+          ]
+        },
+        {
+          "name": "makeCoordinator",
+          "startLine": 77,
+          "endLine": 79,
+          "params": []
+        },
+        {
+          "name": "mapView",
+          "startLine": 103,
+          "endLine": 105,
+          "params": [
+            "mapView",
+            "gesture"
+          ]
+        },
+        {
+          "name": "mapView",
+          "startLine": 107,
+          "endLine": 109,
+          "params": [
+            "mapView",
+            "position"
+          ]
+        },
+        {
+          "name": "updateUserMarker",
+          "startLine": 117,
+          "endLine": 151,
+          "params": [
+            "mapView",
+            "coordinator"
+          ]
+        },
+        {
+          "name": "addStartMarkerIfNeeded",
+          "startLine": 153,
+          "endLine": 165,
+          "params": [
+            "mapView",
+            "coordinator"
+          ]
+        },
+        {
+          "name": "addPOIMarkersIfNeeded",
+          "startLine": 167,
+          "endLine": 186,
+          "params": [
+            "mapView",
+            "coordinator"
+          ]
+        },
+        {
+          "name": "updateRoutePolyline",
+          "startLine": 188,
+          "endLine": 215,
+          "params": [
+            "mapView",
+            "coordinator"
+          ]
+        },
+        {
+          "name": "updateHighlightedMarker",
+          "startLine": 218,
+          "endLine": 234,
+          "params": [
+            "coordinator"
+          ]
+        },
+        {
+          "name": "createDirectionArrowIcon",
+          "startLine": 241,
+          "endLine": 260,
+          "params": [
+            "color"
+          ]
+        },
+        {
+          "name": "createStartMarkerIcon",
+          "startLine": 263,
+          "endLine": 287,
+          "params": [
+            "color"
+          ]
+        },
+        {
+          "name": "createPOIMarkerIcon",
+          "startLine": 289,
+          "endLine": 323,
+          "params": [
+            "color",
+            "isMain"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "MapViewRepresentable",
+          "startLine": 7,
+          "endLine": 111,
+          "methods": [
+            "makeUIView",
+            "updateUIView",
+            "makeCoordinator"
+          ],
+          "properties": [
+            "userLocation",
+            "userHeading",
+            "routeCoordinates",
+            "highlightedPOIId",
+            "pois",
+            "tourStartCoordinate",
+            "userMarkerColor",
+            "poiMarkerColor",
+            "poiHighlightColor",
+            "startMarkerColor",
+            "routeLineColor"
+          ]
+        },
+        {
+          "name": "Coordinator",
+          "startLine": 83,
+          "endLine": 110,
+          "methods": [
+            "mapView",
+            "mapView"
+          ],
+          "properties": [
+            "userMarker",
+            "poiMarkers",
+            "startMarker",
+            "routePolyline",
+            "lastRouteCoordinates",
+            "currentHighlightedPOIId",
+            "setInitialCameraPosition",
+            "cameraIdle"
+          ]
+        },
+        {
+          "name": "extension MapViewRepresentable",
+          "startLine": 115,
+          "endLine": 235,
+          "methods": [
+            "updateUserMarker",
+            "addStartMarkerIfNeeded",
+            "addPOIMarkersIfNeeded",
+            "updateRoutePolyline",
+            "updateHighlightedMarker"
+          ],
+          "properties": []
+        },
+        {
+          "name": "extension MapViewRepresentable",
+          "startLine": 239,
+          "endLine": 324,
+          "methods": [
+            "createDirectionArrowIcon",
+            "createStartMarkerIcon",
+            "createPOIMarkerIcon"
+          ],
+          "properties": []
+        },
+        {
+          "name": "MapViewRepresentable_Previews",
+          "startLine": 330,
+          "endLine": 352,
+          "methods": [],
+          "properties": [
+            "location",
+            "heading",
+            "route",
+            "highlighted",
+            "previews"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "userLocation",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "userHeading",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "routeCoordinates",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "highlightedPOIId",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "pois",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "tourStartCoordinate",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "makeUIView",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "updateUIView",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "makeCoordinator",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "MapViewRepresentable",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "userMarker",
+          "line": 85,
+          "isDefault": false
+        },
+        {
+          "name": "poiMarkers",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "startMarker",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "routePolyline",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "lastRouteCoordinates",
+          "line": 93,
+          "isDefault": false
+        },
+        {
+          "name": "currentHighlightedPOIId",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "setInitialCameraPosition",
+          "line": 97,
+          "isDefault": false
+        },
+        {
+          "name": "cameraIdle",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "mapView",
+          "line": 103,
+          "isDefault": false
+        },
+        {
+          "name": "mapView",
+          "line": 107,
+          "isDefault": false
+        },
+        {
+          "name": "Coordinator",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "location",
+          "line": 332,
+          "isDefault": false
+        },
+        {
+          "name": "heading",
+          "line": 336,
+          "isDefault": false
+        },
+        {
+          "name": "route",
+          "line": 337,
+          "isDefault": false
+        },
+        {
+          "name": "highlighted",
+          "line": 338,
+          "isDefault": false
+        },
+        {
+          "name": "previews",
+          "line": 340,
+          "isDefault": false
+        },
+        {
+          "name": "MapViewRepresentable_Previews",
+          "line": 330,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeUIView",
+          "callee": "GMSCameraPosition.camera",
+          "lineNumber": 35
+        },
+        {
+          "caller": "makeUIView",
+          "callee": "GMSMapViewOptions",
+          "lineNumber": 41
+        },
+        {
+          "caller": "makeUIView",
+          "callee": "GMSMapView",
+          "lineNumber": 43
+        },
+        {
+          "caller": "updateUIView",
+          "callee": "updateUserMarker",
+          "lineNumber": 64
+        },
+        {
+          "caller": "updateUIView",
+          "callee": "addStartMarkerIfNeeded",
+          "lineNumber": 66
+        },
+        {
+          "caller": "updateUIView",
+          "callee": "addPOIMarkersIfNeeded",
+          "lineNumber": 68
+        },
+        {
+          "caller": "updateUIView",
+          "callee": "updateRoutePolyline",
+          "lineNumber": 70
+        },
+        {
+          "caller": "updateUIView",
+          "callee": "updateHighlightedMarker",
+          "lineNumber": 72
+        },
+        {
+          "caller": "makeCoordinator",
+          "callee": "Coordinator",
+          "lineNumber": 78
+        },
+        {
+          "caller": "updateUserMarker",
+          "callee": "GMSMarker",
+          "lineNumber": 121
+        },
+        {
+          "caller": "updateUserMarker",
+          "callee": "createDirectionArrowIcon",
+          "lineNumber": 122
+        },
+        {
+          "caller": "updateUserMarker",
+          "callee": "CGPoint",
+          "lineNumber": 123
+        },
+        {
+          "caller": "updateUserMarker",
+          "callee": "GMSCameraPosition.camera",
+          "lineNumber": 136
+        },
+        {
+          "caller": "updateUserMarker",
+          "callee": "animate",
+          "lineNumber": 141
+        },
+        {
+          "caller": "updateUserMarker",
+          "callee": "GMSCameraPosition.camera",
+          "lineNumber": 143
+        },
+        {
+          "caller": "updateUserMarker",
+          "callee": "animate",
+          "lineNumber": 148
+        },
+        {
+          "caller": "addStartMarkerIfNeeded",
+          "callee": "GMSMarker",
+          "lineNumber": 157
+        },
+        {
+          "caller": "addStartMarkerIfNeeded",
+          "callee": "createStartMarkerIcon",
+          "lineNumber": 160
+        },
+        {
+          "caller": "addStartMarkerIfNeeded",
+          "callee": "CGPoint",
+          "lineNumber": 161
+        },
+        {
+          "caller": "addPOIMarkersIfNeeded",
+          "callee": "poiMarkers",
+          "lineNumber": 169
+        },
+        {
+          "caller": "addPOIMarkersIfNeeded",
+          "callee": "GMSMarker",
+          "lineNumber": 171
+        },
+        {
+          "caller": "addPOIMarkersIfNeeded",
+          "callee": "createPOIMarkerIcon",
+          "lineNumber": 178
+        },
+        {
+          "caller": "addPOIMarkersIfNeeded",
+          "callee": "createPOIMarkerIcon",
+          "lineNumber": 179
+        },
+        {
+          "caller": "addPOIMarkersIfNeeded",
+          "callee": "CGPoint",
+          "lineNumber": 181
+        },
+        {
+          "caller": "addPOIMarkersIfNeeded",
+          "callee": "poiMarkers",
+          "lineNumber": 184
+        },
+        {
+          "caller": "updateRoutePolyline",
+          "callee": "contains",
+          "lineNumber": 190
+        },
+        {
+          "caller": "updateRoutePolyline",
+          "callee": "zip",
+          "lineNumber": 190
+        },
+        {
+          "caller": "updateRoutePolyline",
+          "callee": "GMSMutablePath",
+          "lineNumber": 202
+        },
+        {
+          "caller": "updateRoutePolyline",
+          "callee": "add",
+          "lineNumber": 204
+        },
+        {
+          "caller": "updateRoutePolyline",
+          "callee": "GMSPolyline",
+          "lineNumber": 207
+        },
+        {
+          "caller": "updateHighlightedMarker",
+          "callee": "poiMarkers",
+          "lineNumber": 222
+        },
+        {
+          "caller": "updateHighlightedMarker",
+          "callee": "createPOIMarkerIcon",
+          "lineNumber": 223
+        },
+        {
+          "caller": "updateHighlightedMarker",
+          "callee": "poiMarkers",
+          "lineNumber": 228
+        },
+        {
+          "caller": "updateHighlightedMarker",
+          "callee": "createPOIMarkerIcon",
+          "lineNumber": 229
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "CGSize",
+          "lineNumber": 242
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "UIGraphicsImageRenderer",
+          "lineNumber": 243
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "image",
+          "lineNumber": 245
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "UIBezierPath",
+          "lineNumber": 246
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "move",
+          "lineNumber": 247
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "CGPoint",
+          "lineNumber": 247
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "addLine",
+          "lineNumber": 248
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "CGPoint",
+          "lineNumber": 248
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "addLine",
+          "lineNumber": 249
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "CGPoint",
+          "lineNumber": 249
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "addLine",
+          "lineNumber": 250
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "CGPoint",
+          "lineNumber": 250
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "close",
+          "lineNumber": 251
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "setFill",
+          "lineNumber": 253
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "fill",
+          "lineNumber": 254
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "UIColor.white.setStroke",
+          "lineNumber": 256
+        },
+        {
+          "caller": "createDirectionArrowIcon",
+          "callee": "stroke",
+          "lineNumber": 258
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "CGSize",
+          "lineNumber": 264
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "UIGraphicsImageRenderer",
+          "lineNumber": 265
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "image",
+          "lineNumber": 267
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "CGRect",
+          "lineNumber": 268
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "UIColor.white.setFill",
+          "lineNumber": 269
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "UIBezierPath(rect: poleRect).fill",
+          "lineNumber": 270
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "UIBezierPath",
+          "lineNumber": 270
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "UIBezierPath",
+          "lineNumber": 272
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "move",
+          "lineNumber": 273
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 273
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "addLine",
+          "lineNumber": 274
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 274
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "addLine",
+          "lineNumber": 275
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 275
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "addLine",
+          "lineNumber": 276
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 276
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "addLine",
+          "lineNumber": 277
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 277
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "close",
+          "lineNumber": 278
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "setFill",
+          "lineNumber": 280
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "fill",
+          "lineNumber": 281
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "UIColor.white.setStroke",
+          "lineNumber": 283
+        },
+        {
+          "caller": "createStartMarkerIcon",
+          "callee": "stroke",
+          "lineNumber": 285
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "CGSize",
+          "lineNumber": 290
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "CGSize",
+          "lineNumber": 290
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "UIGraphicsImageRenderer",
+          "lineNumber": 291
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "image",
+          "lineNumber": 293
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "UIBezierPath",
+          "lineNumber": 298
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "move",
+          "lineNumber": 299
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 299
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "addLine",
+          "lineNumber": 300
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 300
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "addArc",
+          "lineNumber": 301
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "CGPoint",
+          "lineNumber": 302
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "close",
+          "lineNumber": 308
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "setFill",
+          "lineNumber": 310
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "fill",
+          "lineNumber": 311
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "UIColor.white.setStroke",
+          "lineNumber": 313
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "stroke",
+          "lineNumber": 315
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "CGRect",
+          "lineNumber": 318
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "UIColor.white.setFill",
+          "lineNumber": 319
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "UIBezierPath(ovalIn: dotRect).fill",
+          "lineNumber": 320
+        },
+        {
+          "caller": "createPOIMarkerIcon",
+          "callee": "UIBezierPath",
+          "lineNumber": 320
+        },
+        {
+          "caller": "previews",
+          "callee": "MapViewRepresentable( userLocation: $location, userHeading: $heading, routeCoordinates: $route, highlightedPOIId: $highlighted, pois: [], tourStartCoordinate: nil ).frame(height: 300).previewDisplayName",
+          "lineNumber": 341
+        },
+        {
+          "caller": "previews",
+          "callee": "MapViewRepresentable( userLocation: $location, userHeading: $heading, routeCoordinates: $route, highlightedPOIId: $highlighted, pois: [], tourStartCoordinate: nil ).frame",
+          "lineNumber": 341
+        },
+        {
+          "caller": "previews",
+          "callee": "MapViewRepresentable",
+          "lineNumber": 341
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 27,
+        "functionCount": 13,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 237,
+      "nonEmptyLines": 194,
+      "functions": [
+        {
+          "name": "routeKey",
+          "startLine": 11,
+          "endLine": 13,
+          "params": [
+            "from",
+            "to"
+          ]
+        },
+        {
+          "name": "routeKeyStart",
+          "startLine": 15,
+          "endLine": 17,
+          "params": [
+            "to"
+          ]
+        },
+        {
+          "name": "routeKeyToStart",
+          "startLine": 19,
+          "endLine": 21,
+          "params": [
+            "from"
+          ]
+        },
+        {
+          "name": "buildRouteWaypoints",
+          "startLine": 145,
+          "endLine": 167,
+          "params": [
+            "pois",
+            "connectors"
+          ]
+        },
+        {
+          "name": "buildStartLeg",
+          "startLine": 170,
+          "endLine": 182,
+          "params": [
+            "start",
+            "first",
+            "connectors"
+          ]
+        },
+        {
+          "name": "buildReturnLeg",
+          "startLine": 185,
+          "endLine": 197,
+          "params": [
+            "last",
+            "start",
+            "connectors"
+          ]
+        },
+        {
+          "name": "buildFullRouteIncludingStart",
+          "startLine": 200,
+          "endLine": 213,
+          "params": [
+            "start",
+            "pois",
+            "connectors"
+          ]
+        },
+        {
+          "name": "connectorsForStartLeg",
+          "startLine": 217,
+          "endLine": 222,
+          "params": [
+            "first",
+            "connectors"
+          ]
+        },
+        {
+          "name": "connectorsForPoiLeg",
+          "startLine": 224,
+          "endLine": 230,
+          "params": [
+            "from",
+            "to",
+            "connectors"
+          ]
+        },
+        {
+          "name": "connectorsForReturnLeg",
+          "startLine": 232,
+          "endLine": 237,
+          "params": [
+            "last",
+            "connectors"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "RouteConfig",
+          "startLine": 5,
+          "endLine": 140,
+          "methods": [
+            "routeKey",
+            "routeKeyStart",
+            "routeKeyToStart"
+          ],
+          "properties": [
+            "START_ID",
+            "CONNECTORS"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "START_ID",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "routeKey",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "routeKeyStart",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "routeKeyToStart",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "CONNECTORS",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "RouteConfig",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "buildRouteWaypoints",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "buildStartLeg",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "buildReturnLeg",
+          "line": 185,
+          "isDefault": false
+        },
+        {
+          "name": "buildFullRouteIncludingStart",
+          "line": 200,
+          "isDefault": false
+        },
+        {
+          "name": "connectorsForStartLeg",
+          "line": 217,
+          "isDefault": false
+        },
+        {
+          "name": "connectorsForPoiLeg",
+          "line": 224,
+          "isDefault": false
+        },
+        {
+          "name": "connectorsForReturnLeg",
+          "line": 232,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "routeKeyStart",
+          "callee": "routeKey",
+          "lineNumber": 16
+        },
+        {
+          "caller": "routeKeyToStart",
+          "callee": "routeKey",
+          "lineNumber": 20
+        },
+        {
+          "caller": "buildRouteWaypoints",
+          "callee": "pois",
+          "lineNumber": 154
+        },
+        {
+          "caller": "buildRouteWaypoints",
+          "callee": "append",
+          "lineNumber": 155
+        },
+        {
+          "caller": "buildRouteWaypoints",
+          "callee": "pois",
+          "lineNumber": 158
+        },
+        {
+          "caller": "buildRouteWaypoints",
+          "callee": "RouteConfig.routeKey",
+          "lineNumber": 159
+        },
+        {
+          "caller": "buildRouteWaypoints",
+          "callee": "connectors",
+          "lineNumber": 160
+        },
+        {
+          "caller": "buildRouteWaypoints",
+          "callee": "append",
+          "lineNumber": 161
+        },
+        {
+          "caller": "buildStartLeg",
+          "callee": "RouteConfig.routeKeyStart",
+          "lineNumber": 176
+        },
+        {
+          "caller": "buildStartLeg",
+          "callee": "connectors",
+          "lineNumber": 177
+        },
+        {
+          "caller": "buildStartLeg",
+          "callee": "append",
+          "lineNumber": 178
+        },
+        {
+          "caller": "buildStartLeg",
+          "callee": "append",
+          "lineNumber": 180
+        },
+        {
+          "caller": "buildReturnLeg",
+          "callee": "RouteConfig.routeKeyToStart",
+          "lineNumber": 191
+        },
+        {
+          "caller": "buildReturnLeg",
+          "callee": "connectors",
+          "lineNumber": 192
+        },
+        {
+          "caller": "buildReturnLeg",
+          "callee": "append",
+          "lineNumber": 193
+        },
+        {
+          "caller": "buildReturnLeg",
+          "callee": "append",
+          "lineNumber": 195
+        },
+        {
+          "caller": "buildFullRouteIncludingStart",
+          "callee": "buildStartLeg",
+          "lineNumber": 207
+        },
+        {
+          "caller": "buildFullRouteIncludingStart",
+          "callee": "pois",
+          "lineNumber": 207
+        },
+        {
+          "caller": "buildFullRouteIncludingStart",
+          "callee": "dropFirst",
+          "lineNumber": 209
+        },
+        {
+          "caller": "buildFullRouteIncludingStart",
+          "callee": "buildRouteWaypoints",
+          "lineNumber": 209
+        },
+        {
+          "caller": "buildFullRouteIncludingStart",
+          "callee": "append",
+          "lineNumber": 210
+        },
+        {
+          "caller": "connectorsForStartLeg",
+          "callee": "connectors",
+          "lineNumber": 221
+        },
+        {
+          "caller": "connectorsForStartLeg",
+          "callee": "RouteConfig.routeKeyStart",
+          "lineNumber": 221
+        },
+        {
+          "caller": "connectorsForPoiLeg",
+          "callee": "connectors",
+          "lineNumber": 229
+        },
+        {
+          "caller": "connectorsForPoiLeg",
+          "callee": "RouteConfig.routeKey",
+          "lineNumber": 229
+        },
+        {
+          "caller": "connectorsForReturnLeg",
+          "callee": "connectors",
+          "lineNumber": 236
+        },
+        {
+          "caller": "connectorsForReturnLeg",
+          "callee": "RouteConfig.routeKeyToStart",
+          "lineNumber": 236
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 13,
+        "functionCount": 10,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 52,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "RouteNavigator.init",
+          "startLine": 12,
+          "endLine": 18,
+          "params": [
+            "waypoints",
+            "arrivalThresholdMeters"
+          ]
+        },
+        {
+          "name": "updateAndGetTarget",
+          "startLine": 31,
+          "endLine": 43,
+          "params": [
+            "userLocation"
+          ]
+        },
+        {
+          "name": "reset",
+          "startLine": 46,
+          "endLine": 46,
+          "params": []
+        },
+        {
+          "name": "advance",
+          "startLine": 49,
+          "endLine": 51,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "RouteNavigator",
+          "startLine": 3,
+          "endLine": 52,
+          "methods": [
+            "init",
+            "updateAndGetTarget",
+            "reset",
+            "advance"
+          ],
+          "properties": [
+            "route",
+            "index",
+            "arrivalThresholdMeters",
+            "lastDistanceMeters",
+            "currentIndex",
+            "isFinished",
+            "currentTarget"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "lastDistanceMeters",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "RouteNavigator.init",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "currentIndex",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "isFinished",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "currentTarget",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "updateAndGetTarget",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "reset",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "advance",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "RouteNavigator",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "currentTarget",
+          "callee": "contains",
+          "lineNumber": 27
+        },
+        {
+          "caller": "currentTarget",
+          "callee": "route",
+          "lineNumber": 28
+        },
+        {
+          "caller": "updateAndGetTarget",
+          "callee": "GeoUtils.distanceInMeters",
+          "lineNumber": 35
+        },
+        {
+          "caller": "advance",
+          "callee": "contains",
+          "lineNumber": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 9,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 224,
+      "nonEmptyLines": 187,
+      "functions": [
+        {
+          "name": "TourManager.init",
+          "startLine": 38,
+          "endLine": 40,
+          "params": [
+            "pois"
+          ]
+        },
+        {
+          "name": "startTour",
+          "startLine": 44,
+          "endLine": 75,
+          "params": [
+            "userLocation"
+          ]
+        },
+        {
+          "name": "advanceToNextPOI",
+          "startLine": 81,
+          "endLine": 95,
+          "params": []
+        },
+        {
+          "name": "startReturnPhase",
+          "startLine": 97,
+          "endLine": 115,
+          "params": []
+        },
+        {
+          "name": "stopTour",
+          "startLine": 117,
+          "endLine": 126,
+          "params": []
+        },
+        {
+          "name": "update",
+          "startLine": 129,
+          "endLine": 152,
+          "params": [
+            "userLocation"
+          ]
+        },
+        {
+          "name": "updateStartLeg",
+          "startLine": 156,
+          "endLine": 164,
+          "params": [
+            "userLocation"
+          ]
+        },
+        {
+          "name": "updateGuidedLeg",
+          "startLine": 166,
+          "endLine": 189,
+          "params": [
+            "userLocation",
+            "poiIndex"
+          ]
+        },
+        {
+          "name": "updateReturnLeg",
+          "startLine": 191,
+          "endLine": 210,
+          "params": [
+            "userLocation"
+          ]
+        },
+        {
+          "name": "buildGuidedLegNavigator",
+          "startLine": 214,
+          "endLine": 223,
+          "params": [
+            "fromIndex",
+            "toIndex"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TourState",
+          "startLine": 6,
+          "endLine": 13,
+          "methods": [],
+          "properties": [
+            "idle",
+            "navigatingToStart",
+            "navigatingToPOI",
+            "atPOI",
+            "returning",
+            "completed"
+          ]
+        },
+        {
+          "name": "TourManager",
+          "startLine": 16,
+          "endLine": 224,
+          "methods": [
+            "init",
+            "startTour",
+            "advanceToNextPOI",
+            "startReturnPhase",
+            "stopTour",
+            "update",
+            "updateStartLeg",
+            "updateGuidedLeg",
+            "updateReturnLeg",
+            "buildGuidedLegNavigator"
+          ],
+          "properties": [
+            "state",
+            "currentPOI",
+            "targetCoordinate",
+            "bearingToTarget",
+            "distanceToTarget",
+            "routeCoordinates",
+            "poiArrivedPublisher",
+            "tourCompletedPublisher",
+            "pois",
+            "guidedCurrentIndex",
+            "startLegNavigator",
+            "guidedLegNavigator",
+            "returnLegNavigator"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TourState",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "state",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "currentPOI",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "targetCoordinate",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "bearingToTarget",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "distanceToTarget",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "routeCoordinates",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "poiArrivedPublisher",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "tourCompletedPublisher",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "TourManager.init",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "startTour",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "advanceToNextPOI",
+          "line": 81,
+          "isDefault": false
+        },
+        {
+          "name": "startReturnPhase",
+          "line": 97,
+          "isDefault": false
+        },
+        {
+          "name": "stopTour",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "update",
+          "line": 129,
+          "isDefault": false
+        },
+        {
+          "name": "TourManager",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "startTour",
+          "callee": "CLLocationCoordinate2D",
+          "lineNumber": 47
+        },
+        {
+          "caller": "startTour",
+          "callee": "GeoUtils.distanceInMeters",
+          "lineNumber": 57
+        },
+        {
+          "caller": "startTour",
+          "callee": "print",
+          "lineNumber": 59
+        },
+        {
+          "caller": "startTour",
+          "callee": "Int",
+          "lineNumber": 59
+        },
+        {
+          "caller": "startTour",
+          "callee": "Int",
+          "lineNumber": 59
+        },
+        {
+          "caller": "startTour",
+          "callee": "pois",
+          "lineNumber": 64
+        },
+        {
+          "caller": "startTour",
+          "callee": "connectorsForStartLeg",
+          "lineNumber": 65
+        },
+        {
+          "caller": "startTour",
+          "callee": "RouteNavigator",
+          "lineNumber": 68
+        },
+        {
+          "caller": "startTour",
+          "callee": "buildFullRouteIncludingStart",
+          "lineNumber": 71
+        },
+        {
+          "caller": "advanceToNextPOI",
+          "callee": "buildGuidedLegNavigator",
+          "lineNumber": 91
+        },
+        {
+          "caller": "advanceToNextPOI",
+          "callee": "pois",
+          "lineNumber": 92
+        },
+        {
+          "caller": "startReturnPhase",
+          "callee": "pois",
+          "lineNumber": 100
+        },
+        {
+          "caller": "startReturnPhase",
+          "callee": "CLLocationCoordinate2D",
+          "lineNumber": 101
+        },
+        {
+          "caller": "startReturnPhase",
+          "callee": "connectorsForReturnLeg",
+          "lineNumber": 106
+        },
+        {
+          "caller": "startReturnPhase",
+          "callee": "RouteNavigator",
+          "lineNumber": 109
+        },
+        {
+          "caller": "startReturnPhase",
+          "callee": "buildReturnLeg",
+          "lineNumber": 112
+        },
+        {
+          "caller": "update",
+          "callee": "updateStartLeg",
+          "lineNumber": 136
+        },
+        {
+          "caller": "update",
+          "callee": "updateGuidedLeg",
+          "lineNumber": 139
+        },
+        {
+          "caller": "update",
+          "callee": "updateReturnLeg",
+          "lineNumber": 145
+        },
+        {
+          "caller": "update",
+          "callee": "GeoUtils.distanceInMeters",
+          "lineNumber": 149
+        },
+        {
+          "caller": "update",
+          "callee": "GeoUtils.bearing",
+          "lineNumber": 150
+        },
+        {
+          "caller": "updateStartLeg",
+          "callee": "updateAndGetTarget",
+          "lineNumber": 158
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "updateAndGetTarget",
+          "lineNumber": 168
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "pois",
+          "lineNumber": 170
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "updateAndGetTarget",
+          "lineNumber": 175
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "pois",
+          "lineNumber": 177
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "pois",
+          "lineNumber": 179
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "GeoUtils.distanceInMeters",
+          "lineNumber": 180
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "pois",
+          "lineNumber": 182
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "send",
+          "lineNumber": 186
+        },
+        {
+          "caller": "updateGuidedLeg",
+          "callee": "pois",
+          "lineNumber": 186
+        },
+        {
+          "caller": "updateReturnLeg",
+          "callee": "CLLocationCoordinate2D",
+          "lineNumber": 192
+        },
+        {
+          "caller": "updateReturnLeg",
+          "callee": "updateAndGetTarget",
+          "lineNumber": 198
+        },
+        {
+          "caller": "updateReturnLeg",
+          "callee": "GeoUtils.distanceInMeters",
+          "lineNumber": 203
+        },
+        {
+          "caller": "updateReturnLeg",
+          "callee": "send",
+          "lineNumber": 207
+        },
+        {
+          "caller": "buildGuidedLegNavigator",
+          "callee": "connectorsForPoiLeg",
+          "lineNumber": 215
+        },
+        {
+          "caller": "buildGuidedLegNavigator",
+          "callee": "pois",
+          "lineNumber": 216
+        },
+        {
+          "caller": "buildGuidedLegNavigator",
+          "callee": "pois",
+          "lineNumber": 217
+        },
+        {
+          "caller": "buildGuidedLegNavigator",
+          "callee": "RouteNavigator",
+          "lineNumber": 221
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 16,
+        "functionCount": 10,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 75,
+      "functions": [
+        {
+          "name": "distance",
+          "startLine": 10,
+          "endLine": 26,
+          "params": [
+            "origin",
+            "destination"
+          ]
+        },
+        {
+          "name": "distance",
+          "startLine": 28,
+          "endLine": 36,
+          "params": [
+            "lat1",
+            "lon1",
+            "lat2",
+            "lon2"
+          ]
+        },
+        {
+          "name": "bearing",
+          "startLine": 39,
+          "endLine": 53,
+          "params": [
+            "origin",
+            "destination"
+          ]
+        },
+        {
+          "name": "bearing",
+          "startLine": 55,
+          "endLine": 63,
+          "params": [
+            "lat1",
+            "lon1",
+            "lat2",
+            "lon2"
+          ]
+        },
+        {
+          "name": "normalizeDeg180",
+          "startLine": 66,
+          "endLine": 71,
+          "params": [
+            "degrees"
+          ]
+        },
+        {
+          "name": "normalizeDeg360",
+          "startLine": 73,
+          "endLine": 77,
+          "params": [
+            "degrees"
+          ]
+        },
+        {
+          "name": "distance",
+          "startLine": 80,
+          "endLine": 83,
+          "params": [
+            "location",
+            "coordinate"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GeoMath",
+          "startLine": 5,
+          "endLine": 84,
+          "methods": [
+            "distance",
+            "distance",
+            "bearing",
+            "bearing",
+            "normalizeDeg180",
+            "normalizeDeg360",
+            "distance"
+          ],
+          "properties": [
+            "earthRadius"
+          ]
+        },
+        {
+          "name": "extension Double",
+          "startLine": 87,
+          "endLine": 90,
+          "methods": [],
+          "properties": [
+            "toRadians",
+            "toDegrees"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "distance",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "distance",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "bearing",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "bearing",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "normalizeDeg180",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "normalizeDeg360",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "distance",
+          "line": 80,
+          "isDefault": false
+        },
+        {
+          "name": "GeoMath",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "distance",
+          "callee": "sin",
+          "lineNumber": 19
+        },
+        {
+          "caller": "distance",
+          "callee": "sqrt",
+          "lineNumber": 23
+        },
+        {
+          "caller": "distance",
+          "callee": "sqrt",
+          "lineNumber": 23
+        },
+        {
+          "caller": "distance",
+          "callee": "distance",
+          "lineNumber": 32
+        },
+        {
+          "caller": "distance",
+          "callee": "CLLocationCoordinate2D",
+          "lineNumber": 33
+        },
+        {
+          "caller": "distance",
+          "callee": "CLLocationCoordinate2D",
+          "lineNumber": 34
+        },
+        {
+          "caller": "bearing",
+          "callee": "sin",
+          "lineNumber": 47
+        },
+        {
+          "caller": "bearing",
+          "callee": "cos",
+          "lineNumber": 48
+        },
+        {
+          "caller": "bearing",
+          "callee": "atan2",
+          "lineNumber": 50
+        },
+        {
+          "caller": "bearing",
+          "callee": "bearing",
+          "lineNumber": 59
+        },
+        {
+          "caller": "bearing",
+          "callee": "CLLocationCoordinate2D",
+          "lineNumber": 60
+        },
+        {
+          "caller": "bearing",
+          "callee": "CLLocationCoordinate2D",
+          "lineNumber": 61
+        },
+        {
+          "caller": "normalizeDeg180",
+          "callee": "truncatingRemainder",
+          "lineNumber": 67
+        },
+        {
+          "caller": "normalizeDeg360",
+          "callee": "truncatingRemainder",
+          "lineNumber": 74
+        },
+        {
+          "caller": "distance",
+          "callee": "CLLocation",
+          "lineNumber": 81
+        },
+        {
+          "caller": "distance",
+          "callee": "distance",
+          "lineNumber": 82
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 7,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "LocationPermissionsHelper.init",
+          "startLine": 11,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "requestLocationPermission",
+          "startLine": 38,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "requestAlwaysPermission",
+          "startLine": 42,
+          "endLine": 44,
+          "params": []
+        },
+        {
+          "name": "openAppSettings",
+          "startLine": 49,
+          "endLine": 54,
+          "params": []
+        },
+        {
+          "name": "locationManagerDidChangeAuthorization",
+          "startLine": 64,
+          "endLine": 66,
+          "params": [
+            "manager"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LocationPermissionsHelper",
+          "startLine": 5,
+          "endLine": 67,
+          "methods": [
+            "init",
+            "requestLocationPermission",
+            "requestAlwaysPermission",
+            "openAppSettings",
+            "locationManagerDidChangeAuthorization"
+          ],
+          "properties": [
+            "locationManager",
+            "onAuthorizationChanged",
+            "hasLocationPermission",
+            "authorizationStatus",
+            "isLocationDenied",
+            "isLocationRestricted",
+            "shouldShowRationale"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "onAuthorizationChanged",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "LocationPermissionsHelper.init",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "hasLocationPermission",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "authorizationStatus",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "isLocationDenied",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "isLocationRestricted",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "requestLocationPermission",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "requestAlwaysPermission",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "openAppSettings",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "shouldShowRationale",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "locationManagerDidChangeAuthorization",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "LocationPermissionsHelper",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LocationPermissionsHelper.init",
+          "callee": "super.init",
+          "lineNumber": 12
+        },
+        {
+          "caller": "requestLocationPermission",
+          "callee": "requestWhenInUseAuthorization",
+          "lineNumber": 39
+        },
+        {
+          "caller": "requestAlwaysPermission",
+          "callee": "requestAlwaysAuthorization",
+          "lineNumber": 43
+        },
+        {
+          "caller": "openAppSettings",
+          "callee": "URL",
+          "lineNumber": 50
+        },
+        {
+          "caller": "openAppSettings",
+          "callee": "UIApplication.shared.canOpenURL",
+          "lineNumber": 51
+        },
+        {
+          "caller": "openAppSettings",
+          "callee": "UIApplication.shared.open",
+          "lineNumber": 52
+        },
+        {
+          "caller": "locationManagerDidChangeAuthorization",
+          "callee": "onAuthorizationChanged",
+          "lineNumber": 65
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 12,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 204,
+      "nonEmptyLines": 135,
+      "functions": [
+        {
+          "name": "LocationService.init",
+          "startLine": 35,
+          "endLine": 55,
+          "params": []
+        },
+        {
+          "name": "startTracking",
+          "startLine": 60,
+          "endLine": 80,
+          "params": []
+        },
+        {
+          "name": "stopTracking",
+          "startLine": 83,
+          "endLine": 87,
+          "params": []
+        },
+        {
+          "name": "enableBackgroundTracking",
+          "startLine": 89,
+          "endLine": 95,
+          "params": []
+        },
+        {
+          "name": "disableBackgroundTracking",
+          "startLine": 98,
+          "endLine": 100,
+          "params": []
+        },
+        {
+          "name": "locationManager",
+          "startLine": 134,
+          "endLine": 157,
+          "params": [
+            "manager",
+            "locations"
+          ]
+        },
+        {
+          "name": "locationManager",
+          "startLine": 160,
+          "endLine": 164,
+          "params": [
+            "manager",
+            "newHeading"
+          ]
+        },
+        {
+          "name": "locationManagerDidChangeAuthorization",
+          "startLine": 167,
+          "endLine": 169,
+          "params": [
+            "manager"
+          ]
+        },
+        {
+          "name": "locationManager",
+          "startLine": 171,
+          "endLine": 182,
+          "params": [
+            "manager",
+            "error"
+          ]
+        },
+        {
+          "name": "handleAuthorizationChange",
+          "startLine": 186,
+          "endLine": 203,
+          "params": [
+            "status"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LocationService",
+          "startLine": 8,
+          "endLine": 204,
+          "methods": [
+            "init",
+            "startTracking",
+            "stopTracking",
+            "enableBackgroundTracking",
+            "disableBackgroundTracking",
+            "locationManager",
+            "locationManager",
+            "locationManagerDidChangeAuthorization",
+            "locationManager",
+            "handleAuthorizationChange"
+          ],
+          "properties": [
+            "currentLocation",
+            "currentHeading",
+            "authorizationStatus",
+            "isLocationReady",
+            "locationManager",
+            "permissionsHelper",
+            "accuracyThresholdMeters",
+            "maxAcceptableHorizontalAccuracy",
+            "latitude",
+            "longitude",
+            "altitude",
+            "horizontalAccuracy",
+            "headingDegrees",
+            "hasPermission"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "currentLocation",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "currentHeading",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "authorizationStatus",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "isLocationReady",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "LocationService.init",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "startTracking",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "stopTracking",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "enableBackgroundTracking",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "disableBackgroundTracking",
+          "line": 98,
+          "isDefault": false
+        },
+        {
+          "name": "latitude",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "longitude",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "altitude",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "horizontalAccuracy",
+          "line": 118,
+          "isDefault": false
+        },
+        {
+          "name": "headingDegrees",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "hasPermission",
+          "line": 127,
+          "isDefault": false
+        },
+        {
+          "name": "locationManager",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "locationManager",
+          "line": 160,
+          "isDefault": false
+        },
+        {
+          "name": "locationManagerDidChangeAuthorization",
+          "line": 167,
+          "isDefault": false
+        },
+        {
+          "name": "locationManager",
+          "line": 171,
+          "isDefault": false
+        },
+        {
+          "name": "LocationService",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LocationService.init",
+          "callee": "super.init",
+          "lineNumber": 36
+        },
+        {
+          "caller": "LocationService.init",
+          "callee": "handleAuthorizationChange",
+          "lineNumber": 53
+        },
+        {
+          "caller": "startTracking",
+          "callee": "startUpdatingLocation",
+          "lineNumber": 63
+        },
+        {
+          "caller": "startTracking",
+          "callee": "startUpdatingHeading",
+          "lineNumber": 64
+        },
+        {
+          "caller": "startTracking",
+          "callee": "requestLocationPermission",
+          "lineNumber": 68
+        },
+        {
+          "caller": "startTracking",
+          "callee": "print",
+          "lineNumber": 72
+        },
+        {
+          "caller": "startTracking",
+          "callee": "print",
+          "lineNumber": 75
+        },
+        {
+          "caller": "stopTracking",
+          "callee": "stopUpdatingLocation",
+          "lineNumber": 84
+        },
+        {
+          "caller": "stopTracking",
+          "callee": "stopUpdatingHeading",
+          "lineNumber": 85
+        },
+        {
+          "caller": "enableBackgroundTracking",
+          "callee": "requestAlwaysPermission",
+          "lineNumber": 91
+        },
+        {
+          "caller": "locationManager",
+          "callee": "print",
+          "lineNumber": 138
+        },
+        {
+          "caller": "locationManager",
+          "callee": "print",
+          "lineNumber": 143
+        },
+        {
+          "caller": "locationManager",
+          "callee": "Int",
+          "lineNumber": 143
+        },
+        {
+          "caller": "locationManager",
+          "callee": "Int",
+          "lineNumber": 143
+        },
+        {
+          "caller": "locationManager",
+          "callee": "print",
+          "lineNumber": 149
+        },
+        {
+          "caller": "locationManager",
+          "callee": "Int",
+          "lineNumber": 149
+        },
+        {
+          "caller": "locationManager",
+          "callee": "print",
+          "lineNumber": 153
+        },
+        {
+          "caller": "locationManager",
+          "callee": "Int",
+          "lineNumber": 153
+        },
+        {
+          "caller": "locationManagerDidChangeAuthorization",
+          "callee": "handleAuthorizationChange",
+          "lineNumber": 168
+        },
+        {
+          "caller": "locationManager",
+          "callee": "stopTracking",
+          "lineNumber": 175
+        },
+        {
+          "caller": "locationManager",
+          "callee": "print",
+          "lineNumber": 177
+        },
+        {
+          "caller": "locationManager",
+          "callee": "print",
+          "lineNumber": 179
+        },
+        {
+          "caller": "handleAuthorizationChange",
+          "callee": "startUpdatingLocation",
+          "lineNumber": 191
+        },
+        {
+          "caller": "handleAuthorizationChange",
+          "callee": "startUpdatingHeading",
+          "lineNumber": 192
+        },
+        {
+          "caller": "handleAuthorizationChange",
+          "callee": "stopTracking",
+          "lineNumber": 195
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 20,
+        "functionCount": 10,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 133,
+      "nonEmptyLines": 109,
+      "functions": [
+        {
+          "name": "ProximityService.init",
+          "startLine": 54,
+          "endLine": 56,
+          "params": [
+            "pois"
+          ]
+        },
+        {
+          "name": "update",
+          "startLine": 59,
+          "endLine": 115,
+          "params": [
+            "userLocation",
+            "horizontalAccuracy",
+            "focusPOIId"
+          ]
+        },
+        {
+          "name": "proximityLevel",
+          "startLine": 118,
+          "endLine": 126,
+          "params": [
+            "distance"
+          ]
+        },
+        {
+          "name": "reset",
+          "startLine": 129,
+          "endLine": 132,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProximityLevel",
+          "startLine": 6,
+          "endLine": 11,
+          "methods": [],
+          "properties": [
+            "far",
+            "visible",
+            "near",
+            "arrived"
+          ]
+        },
+        {
+          "name": "ProximityResult",
+          "startLine": 14,
+          "endLine": 39,
+          "methods": [],
+          "properties": [
+            "poi",
+            "distanceMeters",
+            "horizontalAccuracy",
+            "bearing",
+            "level",
+            "effectiveDistanceMeters",
+            "statusMessage"
+          ]
+        },
+        {
+          "name": "ProximityService",
+          "startLine": 42,
+          "endLine": 133,
+          "methods": [
+            "init",
+            "update",
+            "proximityLevel",
+            "reset"
+          ],
+          "properties": [
+            "nearestPOI",
+            "arrivalPublisher",
+            "pois",
+            "lastArrivedPOIId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProximityLevel",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "poi",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "distanceMeters",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "horizontalAccuracy",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "bearing",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "level",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "effectiveDistanceMeters",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "statusMessage",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "ProximityResult",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "nearestPOI",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "arrivalPublisher",
+          "line": 47,
+          "isDefault": false
+        },
+        {
+          "name": "ProximityService.init",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "update",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "reset",
+          "line": 129,
+          "isDefault": false
+        },
+        {
+          "name": "ProximityService",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "effectiveDistanceMeters",
+          "callee": "GeoUtils.compensatedDistance",
+          "lineNumber": 24
+        },
+        {
+          "caller": "statusMessage",
+          "callee": "Int",
+          "lineNumber": 30
+        },
+        {
+          "caller": "statusMessage",
+          "callee": "Int",
+          "lineNumber": 32
+        },
+        {
+          "caller": "statusMessage",
+          "callee": "Int",
+          "lineNumber": 34
+        },
+        {
+          "caller": "update",
+          "callee": "first",
+          "lineNumber": 67
+        },
+        {
+          "caller": "update",
+          "callee": "GeoUtils.distanceInMeters",
+          "lineNumber": 68
+        },
+        {
+          "caller": "update",
+          "callee": "print",
+          "lineNumber": 69
+        },
+        {
+          "caller": "update",
+          "callee": "map",
+          "lineNumber": 72
+        },
+        {
+          "caller": "update",
+          "callee": "GeoUtils.distanceInMeters",
+          "lineNumber": 73
+        },
+        {
+          "caller": "update",
+          "callee": "print",
+          "lineNumber": 74
+        },
+        {
+          "caller": "update",
+          "callee": "min",
+          "lineNumber": 79
+        },
+        {
+          "caller": "update",
+          "callee": "filter",
+          "lineNumber": 79
+        },
+        {
+          "caller": "update",
+          "callee": "print",
+          "lineNumber": 83
+        },
+        {
+          "caller": "update",
+          "callee": "print",
+          "lineNumber": 84
+        },
+        {
+          "caller": "update",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 87
+        },
+        {
+          "caller": "update",
+          "callee": "GeoUtils.bearing",
+          "lineNumber": 91
+        },
+        {
+          "caller": "update",
+          "callee": "proximityLevel",
+          "lineNumber": 93
+        },
+        {
+          "caller": "update",
+          "callee": "ProximityResult",
+          "lineNumber": 95
+        },
+        {
+          "caller": "update",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 103
+        },
+        {
+          "caller": "update",
+          "callee": "print",
+          "lineNumber": 105
+        },
+        {
+          "caller": "update",
+          "callee": "String",
+          "lineNumber": 105
+        },
+        {
+          "caller": "update",
+          "callee": "send",
+          "lineNumber": 109
+        },
+        {
+          "caller": "reset",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 131
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 15,
+        "functionCount": 4,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 185,
+      "nonEmptyLines": 158,
+      "functions": [
+        {
+          "name": "get",
+          "startLine": 12,
+          "endLine": 30,
+          "params": [
+            "key",
+            "arguments"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LocalizedStrings",
+          "startLine": 10,
+          "endLine": 185,
+          "methods": [
+            "get"
+          ],
+          "properties": [
+            "strings"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "get",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "LocalizedStrings",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "strings",
+          "lineNumber": 14
+        },
+        {
+          "caller": "get",
+          "callee": "strings",
+          "lineNumber": 14
+        },
+        {
+          "caller": "get",
+          "callee": "range",
+          "lineNumber": 24
+        },
+        {
+          "caller": "get",
+          "callee": "replaceSubrange",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 27,
+      "functions": [
+        {
+          "name": "LanguageService.init",
+          "startLine": 14,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "setLanguage",
+          "startLine": 18,
+          "endLine": 22,
+          "params": [
+            "language"
+          ]
+        },
+        {
+          "name": "videoPath",
+          "startLine": 24,
+          "endLine": 29,
+          "params": [
+            "poiId"
+          ]
+        },
+        {
+          "name": "string",
+          "startLine": 31,
+          "endLine": 33,
+          "params": [
+            "key"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LanguageService",
+          "startLine": 11,
+          "endLine": 34,
+          "methods": [
+            "init",
+            "setLanguage",
+            "videoPath",
+            "string"
+          ],
+          "properties": [
+            "shared",
+            "currentLanguage"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "shared",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "currentLanguage",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "setLanguage",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "videoPath",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "string",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "LanguageService",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setLanguage",
+          "callee": "print",
+          "lineNumber": 20
+        },
+        {
+          "caller": "setLanguage",
+          "callee": "EventBus.shared.publish",
+          "lineNumber": 21
+        },
+        {
+          "caller": "videoPath",
+          "callee": "print",
+          "lineNumber": 27
+        },
+        {
+          "caller": "string",
+          "callee": "LocalizedStrings.get",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 634,
+      "nonEmptyLines": 567,
+      "functions": [
+        {
+          "name": "VirtualGuideModuleInterface.init",
+          "startLine": 22,
+          "endLine": 22,
+          "params": []
+        },
+        {
+          "name": "resolveVideoURL",
+          "startLine": 168,
+          "endLine": 175,
+          "params": [
+            "key"
+          ]
+        },
+        {
+          "name": "logVideoCatalogStatus",
+          "startLine": 181,
+          "endLine": 206,
+          "params": []
+        },
+        {
+          "name": "start",
+          "startLine": 211,
+          "endLine": 258,
+          "params": []
+        },
+        {
+          "name": "stop",
+          "startLine": 260,
+          "endLine": 271,
+          "params": []
+        },
+        {
+          "name": "toggleView",
+          "startLine": 273,
+          "endLine": 277,
+          "params": []
+        },
+        {
+          "name": "toggleTranscript",
+          "startLine": 279,
+          "endLine": 283,
+          "params": []
+        },
+        {
+          "name": "poiDescription",
+          "startLine": 285,
+          "endLine": 290,
+          "params": [
+            "id"
+          ]
+        },
+        {
+          "name": "loadTranscript",
+          "startLine": 292,
+          "endLine": 310,
+          "params": [
+            "videoName"
+          ]
+        },
+        {
+          "name": "updateCurrentLine",
+          "startLine": 312,
+          "endLine": 324,
+          "params": [
+            "seconds"
+          ]
+        },
+        {
+          "name": "playIntroSequence",
+          "startLine": 326,
+          "endLine": 332,
+          "params": []
+        },
+        {
+          "name": "skipIntros",
+          "startLine": 338,
+          "endLine": 346,
+          "params": []
+        },
+        {
+          "name": "startWalking",
+          "startLine": 349,
+          "endLine": 372,
+          "params": []
+        },
+        {
+          "name": "playDespedida",
+          "startLine": 374,
+          "endLine": 380,
+          "params": []
+        },
+        {
+          "name": "handleProximityUpdate",
+          "startLine": 382,
+          "endLine": 442,
+          "params": [
+            "result"
+          ]
+        },
+        {
+          "name": "enqueue",
+          "startLine": 444,
+          "endLine": 447,
+          "params": [
+            "videoName",
+            "poiId",
+            "skipIfCloserThan"
+          ]
+        },
+        {
+          "name": "playNextIfIdle",
+          "startLine": 449,
+          "endLine": 468,
+          "params": []
+        },
+        {
+          "name": "clearQueueAndStop",
+          "startLine": 470,
+          "endLine": 473,
+          "params": []
+        },
+        {
+          "name": "configureAudioSession",
+          "startLine": 475,
+          "endLine": 486,
+          "params": []
+        },
+        {
+          "name": "clearPlayer",
+          "startLine": 488,
+          "endLine": 511,
+          "params": []
+        },
+        {
+          "name": "startVideo",
+          "startLine": 513,
+          "endLine": 633,
+          "params": [
+            "name"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "VirtualGuideModuleInterface",
+          "startLine": 19,
+          "endLine": 634,
+          "methods": [
+            "init",
+            "resolveVideoURL",
+            "logVideoCatalogStatus",
+            "start",
+            "stop",
+            "toggleView",
+            "toggleTranscript",
+            "poiDescription",
+            "loadTranscript",
+            "updateCurrentLine",
+            "playIntroSequence",
+            "skipIntros",
+            "startWalking",
+            "playDespedida",
+            "handleProximityUpdate",
+            "enqueue",
+            "playNextIfIdle",
+            "clearQueueAndStop",
+            "configureAudioSession",
+            "clearPlayer",
+            "startVideo"
+          ],
+          "properties": [
+            "shared",
+            "player",
+            "showsVideo",
+            "hasPlayedIntro",
+            "hasStartedWalking",
+            "introSequenceCompleted",
+            "currentPOIVideoCompleted",
+            "transcriptLines",
+            "currentLineIndex",
+            "showsTranscript",
+            "cancellables",
+            "endObserver",
+            "itemStatusObserver",
+            "timeControlObserver",
+            "periodicTimeObserver",
+            "queue",
+            "currentVideoName",
+            "proximityFired",
+            "interesFired",
+            "specificFired",
+            "proximityTriggerMeters",
+            "interesTriggerMeters",
+            "arrivalTriggerMeters",
+            "resetDistanceMeters",
+            "videoMap",
+            "videoProximity",
+            "videoInteres",
+            "videoFlecha",
+            "videoDatosGen",
+            "videoDatosArq",
+            "videoDespedida",
+            "videoLocalizations",
+            "endingTour"
+          ]
+        },
+        {
+          "name": "QueuedVideo",
+          "startLine": 49,
+          "endLine": 53,
+          "methods": [],
+          "properties": [
+            "name",
+            "poiId",
+            "skipIfCloserThan"
+          ]
+        },
+        {
+          "name": "LocalizedVideoFile",
+          "startLine": 95,
+          "endLine": 98,
+          "methods": [],
+          "properties": [
+            "name",
+            "ext"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "shared",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "player",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "showsVideo",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "hasPlayedIntro",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "hasStartedWalking",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "introSequenceCompleted",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "currentPOIVideoCompleted",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "transcriptLines",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "currentLineIndex",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "showsTranscript",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "start",
+          "line": 211,
+          "isDefault": false
+        },
+        {
+          "name": "stop",
+          "line": 260,
+          "isDefault": false
+        },
+        {
+          "name": "toggleView",
+          "line": 273,
+          "isDefault": false
+        },
+        {
+          "name": "toggleTranscript",
+          "line": 279,
+          "isDefault": false
+        },
+        {
+          "name": "poiDescription",
+          "line": 285,
+          "isDefault": false
+        },
+        {
+          "name": "playIntroSequence",
+          "line": 326,
+          "isDefault": false
+        },
+        {
+          "name": "skipIntros",
+          "line": 338,
+          "isDefault": false
+        },
+        {
+          "name": "startWalking",
+          "line": 349,
+          "isDefault": false
+        },
+        {
+          "name": "VirtualGuideModuleInterface",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolveVideoURL",
+          "callee": "videoLocalizations",
+          "lineNumber": 170
+        },
+        {
+          "caller": "resolveVideoURL",
+          "callee": "print",
+          "lineNumber": 171
+        },
+        {
+          "caller": "resolveVideoURL",
+          "callee": "Bundle.main.url",
+          "lineNumber": 174
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "GPSModuleInterface.shared.allPOIs.map(\\.id).filter",
+          "lineNumber": 182
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "GPSModuleInterface.shared.allPOIs.map",
+          "lineNumber": 182
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "videoMap",
+          "lineNumber": 184
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "print",
+          "lineNumber": 186
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "joined",
+          "lineNumber": 186
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "sorted",
+          "lineNumber": 189
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "videoLocalizations",
+          "lineNumber": 189
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "print",
+          "lineNumber": 190
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "sorted",
+          "lineNumber": 193
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "variants",
+          "lineNumber": 195
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "print",
+          "lineNumber": 196
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "Bundle.main.url",
+          "lineNumber": 199
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "print",
+          "lineNumber": 200
+        },
+        {
+          "caller": "logVideoCatalogStatus",
+          "callee": "print",
+          "lineNumber": 205
+        },
+        {
+          "caller": "start",
+          "callee": "print",
+          "lineNumber": 213
+        },
+        {
+          "caller": "start",
+          "callee": "configureAudioSession",
+          "lineNumber": 214
+        },
+        {
+          "caller": "start",
+          "callee": "logVideoCatalogStatus",
+          "lineNumber": 217
+        },
+        {
+          "caller": "start",
+          "callee": "GPSModuleInterface.shared.$nearestPOI.receive(on: DispatchQueue.main).sink { [weak self] result in self.handleProximityUpdate(result) }.store",
+          "lineNumber": 220
+        },
+        {
+          "caller": "start",
+          "callee": "GPSModuleInterface.shared.$nearestPOI.receive(on: DispatchQueue.main).sink",
+          "lineNumber": 220
+        },
+        {
+          "caller": "start",
+          "callee": "GPSModuleInterface.shared.$nearestPOI.receive",
+          "lineNumber": 220
+        },
+        {
+          "caller": "start",
+          "callee": "handleProximityUpdate",
+          "lineNumber": 223
+        },
+        {
+          "caller": "start",
+          "callee": "EventBus.shared.publisher.receive(on: DispatchQueue.main).sink { [weak self] event in guard let self else { return } switch event { case.nextPOIRequested: print(\"[VirtualGuide] nextPOIRequested — deteniendo video actual y limpiando cola\") self.currentPOIVideoCompleted = false self.clearQueueAndStop() case.tourEndRequested: print(\"[VirtualGuide] tourEndRequested — reproduciendo despedida\") self.playDespedida() default: break } }.store",
+          "lineNumber": 227
+        },
+        {
+          "caller": "start",
+          "callee": "EventBus.shared.publisher.receive(on: DispatchQueue.main).sink",
+          "lineNumber": 227
+        },
+        {
+          "caller": "start",
+          "callee": "EventBus.shared.publisher.receive",
+          "lineNumber": 227
+        },
+        {
+          "caller": "start",
+          "callee": "print",
+          "lineNumber": 233
+        },
+        {
+          "caller": "start",
+          "callee": "clearQueueAndStop",
+          "lineNumber": 235
+        },
+        {
+          "caller": "start",
+          "callee": "print",
+          "lineNumber": 237
+        },
+        {
+          "caller": "start",
+          "callee": "playDespedida",
+          "lineNumber": 238
+        },
+        {
+          "caller": "start",
+          "callee": "AppStateManager.shared.$currentState.receive(on: DispatchQueue.main).sink { [weak self] state in guard let self else { return } if case.inTour = state, self.hasStartedWalking { print(\"[VirtualGuide] AppState ->.inTour — startWalking()\") self.startWalking() } }.store",
+          "lineNumber": 248
+        },
+        {
+          "caller": "start",
+          "callee": "AppStateManager.shared.$currentState.receive(on: DispatchQueue.main).sink",
+          "lineNumber": 248
+        },
+        {
+          "caller": "start",
+          "callee": "AppStateManager.shared.$currentState.receive",
+          "lineNumber": 248
+        },
+        {
+          "caller": "start",
+          "callee": "print",
+          "lineNumber": 253
+        },
+        {
+          "caller": "start",
+          "callee": "startWalking",
+          "lineNumber": 254
+        },
+        {
+          "caller": "stop",
+          "callee": "removeAll",
+          "lineNumber": 261
+        },
+        {
+          "caller": "stop",
+          "callee": "clearQueueAndStop",
+          "lineNumber": 262
+        },
+        {
+          "caller": "stop",
+          "callee": "removeAll",
+          "lineNumber": 263
+        },
+        {
+          "caller": "stop",
+          "callee": "removeAll",
+          "lineNumber": 264
+        },
+        {
+          "caller": "stop",
+          "callee": "removeAll",
+          "lineNumber": 265
+        },
+        {
+          "caller": "toggleView",
+          "callee": "toggle",
+          "lineNumber": 275
+        },
+        {
+          "caller": "toggleView",
+          "callee": "print",
+          "lineNumber": 276
+        },
+        {
+          "caller": "toggleTranscript",
+          "callee": "toggle",
+          "lineNumber": 281
+        },
+        {
+          "caller": "toggleTranscript",
+          "callee": "print",
+          "lineNumber": 282
+        },
+        {
+          "caller": "poiDescription",
+          "callee": "videoMap",
+          "lineNumber": 286
+        },
+        {
+          "caller": "poiDescription",
+          "callee": "VideoTranscripts.cues",
+          "lineNumber": 288
+        },
+        {
+          "caller": "poiDescription",
+          "callee": "joined",
+          "lineNumber": 289
+        },
+        {
+          "caller": "poiDescription",
+          "callee": "map",
+          "lineNumber": 289
+        },
+        {
+          "caller": "loadTranscript",
+          "callee": "VideoTranscripts.cues",
+          "lineNumber": 294
+        },
+        {
+          "caller": "loadTranscript",
+          "callee": "print",
+          "lineNumber": 295
+        },
+        {
+          "caller": "loadTranscript",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 296
+        },
+        {
+          "caller": "loadTranscript",
+          "callee": "map",
+          "lineNumber": 302
+        },
+        {
+          "caller": "loadTranscript",
+          "callee": "TranscriptLine",
+          "lineNumber": 303
+        },
+        {
+          "caller": "loadTranscript",
+          "callee": "print",
+          "lineNumber": 305
+        },
+        {
+          "caller": "loadTranscript",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 306
+        },
+        {
+          "caller": "updateCurrentLine",
+          "callee": "enumerated",
+          "lineNumber": 315
+        },
+        {
+          "caller": "playIntroSequence",
+          "callee": "print",
+          "lineNumber": 329
+        },
+        {
+          "caller": "playIntroSequence",
+          "callee": "enqueue",
+          "lineNumber": 330
+        },
+        {
+          "caller": "playIntroSequence",
+          "callee": "enqueue",
+          "lineNumber": 331
+        },
+        {
+          "caller": "skipIntros",
+          "callee": "print",
+          "lineNumber": 340
+        },
+        {
+          "caller": "skipIntros",
+          "callee": "removeAll",
+          "lineNumber": 341
+        },
+        {
+          "caller": "skipIntros",
+          "callee": "clearPlayer",
+          "lineNumber": 342
+        },
+        {
+          "caller": "startWalking",
+          "callee": "print",
+          "lineNumber": 352
+        },
+        {
+          "caller": "startWalking",
+          "callee": "insert",
+          "lineNumber": 358
+        },
+        {
+          "caller": "startWalking",
+          "callee": "print",
+          "lineNumber": 359
+        },
+        {
+          "caller": "startWalking",
+          "callee": "Int",
+          "lineNumber": 359
+        },
+        {
+          "caller": "startWalking",
+          "callee": "Int",
+          "lineNumber": 359
+        },
+        {
+          "caller": "startWalking",
+          "callee": "insert",
+          "lineNumber": 362
+        },
+        {
+          "caller": "startWalking",
+          "callee": "print",
+          "lineNumber": 363
+        },
+        {
+          "caller": "startWalking",
+          "callee": "Int",
+          "lineNumber": 363
+        },
+        {
+          "caller": "startWalking",
+          "callee": "Int",
+          "lineNumber": 363
+        },
+        {
+          "caller": "startWalking",
+          "callee": "insert",
+          "lineNumber": 366
+        },
+        {
+          "caller": "startWalking",
+          "callee": "print",
+          "lineNumber": 367
+        },
+        {
+          "caller": "startWalking",
+          "callee": "Int",
+          "lineNumber": 367
+        },
+        {
+          "caller": "startWalking",
+          "callee": "Int",
+          "lineNumber": 367
+        },
+        {
+          "caller": "startWalking",
+          "callee": "enqueue",
+          "lineNumber": 371
+        },
+        {
+          "caller": "playDespedida",
+          "callee": "removeAll",
+          "lineNumber": 377
+        },
+        {
+          "caller": "playDespedida",
+          "callee": "clearPlayer",
+          "lineNumber": 378
+        },
+        {
+          "caller": "playDespedida",
+          "callee": "enqueue",
+          "lineNumber": 379
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 395
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 399
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "contains",
+          "lineNumber": 406
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "contains",
+          "lineNumber": 407
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "contains",
+          "lineNumber": 408
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 409
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "String",
+          "lineNumber": 409
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 409
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 409
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 409
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "contains",
+          "lineNumber": 412
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "contains",
+          "lineNumber": 412
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "contains",
+          "lineNumber": 412
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 413
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 413
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 413
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "remove",
+          "lineNumber": 415
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "remove",
+          "lineNumber": 416
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "remove",
+          "lineNumber": 417
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "insert",
+          "lineNumber": 422
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 423
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 423
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 423
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "enqueue",
+          "lineNumber": 424
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "insert",
+          "lineNumber": 428
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 429
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 429
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 429
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "enqueue",
+          "lineNumber": 430
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "insert",
+          "lineNumber": 434
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "videoMap",
+          "lineNumber": 435
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 436
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 436
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 436
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "enqueue",
+          "lineNumber": 437
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "print",
+          "lineNumber": 439
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 439
+        },
+        {
+          "caller": "handleProximityUpdate",
+          "callee": "Int",
+          "lineNumber": 439
+        },
+        {
+          "caller": "enqueue",
+          "callee": "append",
+          "lineNumber": 445
+        },
+        {
+          "caller": "enqueue",
+          "callee": "QueuedVideo",
+          "lineNumber": 445
+        },
+        {
+          "caller": "enqueue",
+          "callee": "playNextIfIdle",
+          "lineNumber": 446
+        },
+        {
+          "caller": "playNextIfIdle",
+          "callee": "removeFirst",
+          "lineNumber": 452
+        },
+        {
+          "caller": "playNextIfIdle",
+          "callee": "print",
+          "lineNumber": 458
+        },
+        {
+          "caller": "playNextIfIdle",
+          "callee": "String",
+          "lineNumber": 458
+        },
+        {
+          "caller": "playNextIfIdle",
+          "callee": "startVideo",
+          "lineNumber": 461
+        },
+        {
+          "caller": "playNextIfIdle",
+          "callee": "print",
+          "lineNumber": 465
+        },
+        {
+          "caller": "playNextIfIdle",
+          "callee": "clearPlayer",
+          "lineNumber": 466
+        },
+        {
+          "caller": "clearQueueAndStop",
+          "callee": "removeAll",
+          "lineNumber": 471
+        },
+        {
+          "caller": "clearQueueAndStop",
+          "callee": "clearPlayer",
+          "lineNumber": 472
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "AVAudioSession.sharedInstance",
+          "lineNumber": 476
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "setCategory",
+          "lineNumber": 478
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "setActive",
+          "lineNumber": 479
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "overrideOutputAudioPort",
+          "lineNumber": 480
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "joined",
+          "lineNumber": 481
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "map",
+          "lineNumber": 481
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "print",
+          "lineNumber": 482
+        },
+        {
+          "caller": "configureAudioSession",
+          "callee": "print",
+          "lineNumber": 484
+        },
+        {
+          "caller": "clearPlayer",
+          "callee": "print",
+          "lineNumber": 489
+        },
+        {
+          "caller": "clearPlayer",
+          "callee": "NotificationCenter.default.removeObserver",
+          "lineNumber": 491
+        },
+        {
+          "caller": "clearPlayer",
+          "callee": "invalidate",
+          "lineNumber": 494
+        },
+        {
+          "caller": "clearPlayer",
+          "callee": "invalidate",
+          "lineNumber": 496
+        },
+        {
+          "caller": "clearPlayer",
+          "callee": "removeTimeObserver",
+          "lineNumber": 499
+        },
+        {
+          "caller": "clearPlayer",
+          "callee": "pause",
+          "lineNumber": 502
+        },
+        {
+          "caller": "clearPlayer",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 504
+        },
+        {
+          "caller": "startVideo",
+          "callee": "resolveVideoURL",
+          "lineNumber": 514
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 515
+        },
+        {
+          "caller": "startVideo",
+          "callee": "playNextIfIdle",
+          "lineNumber": 517
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Date",
+          "lineNumber": 520
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 521
+        },
+        {
+          "caller": "startVideo",
+          "callee": "NotificationCenter.default.removeObserver",
+          "lineNumber": 525
+        },
+        {
+          "caller": "startVideo",
+          "callee": "invalidate",
+          "lineNumber": 528
+        },
+        {
+          "caller": "startVideo",
+          "callee": "invalidate",
+          "lineNumber": 530
+        },
+        {
+          "caller": "startVideo",
+          "callee": "removeTimeObserver",
+          "lineNumber": 533
+        },
+        {
+          "caller": "startVideo",
+          "callee": "pause",
+          "lineNumber": 536
+        },
+        {
+          "caller": "startVideo",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 538
+        },
+        {
+          "caller": "startVideo",
+          "callee": "configureAudioSession",
+          "lineNumber": 544
+        },
+        {
+          "caller": "startVideo",
+          "callee": "AVPlayerItem",
+          "lineNumber": 546
+        },
+        {
+          "caller": "startVideo",
+          "callee": "AVPlayer",
+          "lineNumber": 547
+        },
+        {
+          "caller": "startVideo",
+          "callee": "loadTranscript",
+          "lineNumber": 552
+        },
+        {
+          "caller": "startVideo",
+          "callee": "observe",
+          "lineNumber": 553
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Int",
+          "lineNumber": 554
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Date().timeIntervalSince",
+          "lineNumber": 554
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Date",
+          "lineNumber": 554
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 557
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 559
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 561
+        },
+        {
+          "caller": "startVideo",
+          "callee": "observe",
+          "lineNumber": 567
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Int",
+          "lineNumber": 568
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Date().timeIntervalSince",
+          "lineNumber": 568
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Date",
+          "lineNumber": 568
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 577
+        },
+        {
+          "caller": "startVideo",
+          "callee": "NotificationCenter.default.addObserver",
+          "lineNumber": 580
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 585
+        },
+        {
+          "caller": "startVideo",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 586
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 594
+        },
+        {
+          "caller": "startVideo",
+          "callee": "contains",
+          "lineNumber": 599
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 601
+        },
+        {
+          "caller": "startVideo",
+          "callee": "clearPlayer",
+          "lineNumber": 605
+        },
+        {
+          "caller": "startVideo",
+          "callee": "EventBus.shared.publish",
+          "lineNumber": 608
+        },
+        {
+          "caller": "startVideo",
+          "callee": "playNextIfIdle",
+          "lineNumber": 611
+        },
+        {
+          "caller": "startVideo",
+          "callee": "CMTime",
+          "lineNumber": 616
+        },
+        {
+          "caller": "startVideo",
+          "callee": "addPeriodicTimeObserver",
+          "lineNumber": 617
+        },
+        {
+          "caller": "startVideo",
+          "callee": "updateCurrentLine",
+          "lineNumber": 618
+        },
+        {
+          "caller": "startVideo",
+          "callee": "DispatchQueue.main.async",
+          "lineNumber": 621
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Int",
+          "lineNumber": 624
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Date().timeIntervalSince",
+          "lineNumber": 624
+        },
+        {
+          "caller": "startVideo",
+          "callee": "Date",
+          "lineNumber": 624
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 625
+        },
+        {
+          "caller": "startVideo",
+          "callee": "play",
+          "lineNumber": 626
+        },
+        {
+          "caller": "startVideo",
+          "callee": "UIImpactFeedbackGenerator",
+          "lineNumber": 628
+        },
+        {
+          "caller": "startVideo",
+          "callee": "prepare",
+          "lineNumber": 629
+        },
+        {
+          "caller": "startVideo",
+          "callee": "impactOccurred",
+          "lineNumber": 630
+        },
+        {
+          "caller": "startVideo",
+          "callee": "print",
+          "lineNumber": 631
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 19,
+        "functionCount": 21,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "classes": [
+        {
+          "name": "TranscriptLine",
+          "startLine": 11,
+          "endLine": 16,
+          "methods": [],
+          "properties": [
+            "id",
+            "text",
+            "startTime",
+            "endTime"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "id",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "text",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "startTime",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "endTime",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "TranscriptLine",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 1531,
+      "nonEmptyLines": 1491,
+      "functions": [
+        {
+          "name": "cues",
+          "startLine": 1520,
+          "endLine": 1530,
+          "params": [
+            "videoName",
+            "language"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TranscriptCue",
+          "startLine": 8,
+          "endLine": 12,
+          "methods": [],
+          "properties": [
+            "text",
+            "startTime",
+            "endTime"
+          ]
+        },
+        {
+          "name": "VideoTranscripts",
+          "startLine": 14,
+          "endLine": 1531,
+          "methods": [
+            "cues"
+          ],
+          "properties": [
+            "transcripts",
+            "spanishToEnglishNames"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "text",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "startTime",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "endTime",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "TranscriptCue",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "transcripts",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "cues",
+          "line": 1520,
+          "isDefault": false
+        },
+        {
+          "name": "VideoTranscripts",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "cues",
+          "callee": "spanishToEnglishNames",
+          "lineNumber": 1525
+        },
+        {
+          "caller": "cues",
+          "callee": "transcripts",
+          "lineNumber": 1529
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 1,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 95,
+      "classes": [
+        {
+          "name": "VirtualGuideView",
+          "startLine": 16,
+          "endLine": 43,
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "body"
+          ]
+        },
+        {
+          "name": "TranscriptToggleButton",
+          "startLine": 45,
+          "endLine": 64,
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "body"
+          ]
+        },
+        {
+          "name": "TranscriptPanel",
+          "startLine": 66,
+          "endLine": 104,
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "body"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "viewModel",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "body",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "VirtualGuideView",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "viewModel",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "body",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "TranscriptToggleButton",
+          "line": 45,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "body",
+          "callee": "GeometryReader",
+          "lineNumber": 20
+        },
+        {
+          "caller": "body",
+          "callee": "ZStack",
+          "lineNumber": 21
+        },
+        {
+          "caller": "body",
+          "callee": "HStack(spacing: 0) { if viewModel.showsTranscript { TranscriptPanel(viewModel: viewModel).frame(width: geo.size.width * 0.45).transition(.move(edge:.leading).combined(with:.opacity)) } ZStack { Color.black if let player = viewModel.player { VideoPlayerView(player: player, gravity:.resizeAspect, autoPlay: true) } }.frame(maxWidth:.infinity, maxHeight:.infinity) }.animation",
+          "lineNumber": 24
+        },
+        {
+          "caller": "body",
+          "callee": "HStack",
+          "lineNumber": 24
+        },
+        {
+          "caller": "body",
+          "callee": "TranscriptPanel(viewModel: viewModel).frame(width: geo.size.width * 0.45).transition",
+          "lineNumber": 26
+        },
+        {
+          "caller": "body",
+          "callee": "TranscriptPanel(viewModel: viewModel).frame",
+          "lineNumber": 26
+        },
+        {
+          "caller": "body",
+          "callee": "TranscriptPanel",
+          "lineNumber": 26
+        },
+        {
+          "caller": "body",
+          "callee": "combined",
+          "lineNumber": 28
+        },
+        {
+          "caller": "body",
+          "callee": "ZStack { Color.black if let player = viewModel.player { VideoPlayerView(player: player, gravity:.resizeAspect, autoPlay: true) } }.frame",
+          "lineNumber": 31
+        },
+        {
+          "caller": "body",
+          "callee": "ZStack",
+          "lineNumber": 31
+        },
+        {
+          "caller": "body",
+          "callee": "VideoPlayerView",
+          "lineNumber": 34
+        },
+        {
+          "caller": "body",
+          "callee": "Button { viewModel.toggleTranscript() } label: { Image(systemName: viewModel.showsTranscript  \"text.bubble.fill\" : \"text.bubble\").font(.system(size: 16, weight:.semibold)).foregroundColor(.white).frame(width: 36, height: 36).background(Color.black.opacity(0.6)).clipShape(Circle()).overlay( Circle().stroke(Color.white.opacity(0.4), lineWidth: 1) ) }.buttonStyle",
+          "lineNumber": 49
+        },
+        {
+          "caller": "body",
+          "callee": "Button",
+          "lineNumber": 49
+        },
+        {
+          "caller": "body",
+          "callee": "toggleTranscript",
+          "lineNumber": 50
+        },
+        {
+          "caller": "body",
+          "callee": "Image(systemName: viewModel.showsTranscript  \"text.bubble.fill\" : \"text.bubble\").font(.system(size: 16, weight:.semibold)).foregroundColor(.white).frame(width: 36, height: 36).background(Color.black.opacity(0.6)).clipShape(Circle()).overlay",
+          "lineNumber": 52
+        },
+        {
+          "caller": "body",
+          "callee": "Image(systemName: viewModel.showsTranscript  \"text.bubble.fill\" : \"text.bubble\").font(.system(size: 16, weight:.semibold)).foregroundColor(.white).frame(width: 36, height: 36).background(Color.black.opacity(0.6)).clipShape",
+          "lineNumber": 52
+        },
+        {
+          "caller": "body",
+          "callee": "Image(systemName: viewModel.showsTranscript  \"text.bubble.fill\" : \"text.bubble\").font(.system(size: 16, weight:.semibold)).foregroundColor(.white).frame(width: 36, height: 36).background",
+          "lineNumber": 52
+        },
+        {
+          "caller": "body",
+          "callee": "Image(systemName: viewModel.showsTranscript  \"text.bubble.fill\" : \"text.bubble\").font(.system(size: 16, weight:.semibold)).foregroundColor(.white).frame",
+          "lineNumber": 52
+        },
+        {
+          "caller": "body",
+          "callee": "Image(systemName: viewModel.showsTranscript  \"text.bubble.fill\" : \"text.bubble\").font(.system(size: 16, weight:.semibold)).foregroundColor",
+          "lineNumber": 52
+        },
+        {
+          "caller": "body",
+          "callee": "Image(systemName: viewModel.showsTranscript  \"text.bubble.fill\" : \"text.bubble\").font",
+          "lineNumber": 52
+        },
+        {
+          "caller": "body",
+          "callee": "Image",
+          "lineNumber": 52
+        },
+        {
+          "caller": "body",
+          "callee": "Color.black.opacity",
+          "lineNumber": 56
+        },
+        {
+          "caller": "body",
+          "callee": "Circle",
+          "lineNumber": 57
+        },
+        {
+          "caller": "body",
+          "callee": "Circle().stroke",
+          "lineNumber": 59
+        },
+        {
+          "caller": "body",
+          "callee": "Circle",
+          "lineNumber": 59
+        },
+        {
+          "caller": "body",
+          "callee": "Color.white.opacity",
+          "lineNumber": 59
+        },
+        {
+          "caller": "body",
+          "callee": "ScrollViewReader",
+          "lineNumber": 70
+        },
+        {
+          "caller": "body",
+          "callee": "ScrollView(.vertical, showsIndicators: false) { VStack(alignment:.leading, spacing: 10) { Spacer().frame(height: 8) ForEach(Array(viewModel.transcriptLines.enumerated()), id: \\.element.id) { i, line in Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true).id(i).padding(.horizontal, 10).animation(.easeInOut(duration: 0.2), value: viewModel.currentLineIndex) } Spacer().frame(height: 8) }.frame(maxWidth:.infinity, alignment:.leading) }.background(Color.black.opacity(0.92)).onChange",
+          "lineNumber": 71
+        },
+        {
+          "caller": "body",
+          "callee": "ScrollView(.vertical, showsIndicators: false) { VStack(alignment:.leading, spacing: 10) { Spacer().frame(height: 8) ForEach(Array(viewModel.transcriptLines.enumerated()), id: \\.element.id) { i, line in Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true).id(i).padding(.horizontal, 10).animation(.easeInOut(duration: 0.2), value: viewModel.currentLineIndex) } Spacer().frame(height: 8) }.frame(maxWidth:.infinity, alignment:.leading) }.background",
+          "lineNumber": 71
+        },
+        {
+          "caller": "body",
+          "callee": "ScrollView",
+          "lineNumber": 71
+        },
+        {
+          "caller": "body",
+          "callee": "VStack(alignment:.leading, spacing: 10) { Spacer().frame(height: 8) ForEach(Array(viewModel.transcriptLines.enumerated()), id: \\.element.id) { i, line in Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true).id(i).padding(.horizontal, 10).animation(.easeInOut(duration: 0.2), value: viewModel.currentLineIndex) } Spacer().frame(height: 8) }.frame",
+          "lineNumber": 72
+        },
+        {
+          "caller": "body",
+          "callee": "VStack",
+          "lineNumber": 72
+        },
+        {
+          "caller": "body",
+          "callee": "Spacer().frame",
+          "lineNumber": 73
+        },
+        {
+          "caller": "body",
+          "callee": "Spacer",
+          "lineNumber": 73
+        },
+        {
+          "caller": "body",
+          "callee": "ForEach",
+          "lineNumber": 74
+        },
+        {
+          "caller": "body",
+          "callee": "Array",
+          "lineNumber": 74
+        },
+        {
+          "caller": "body",
+          "callee": "enumerated",
+          "lineNumber": 74
+        },
+        {
+          "caller": "body",
+          "callee": "Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true).id(i).padding(.horizontal, 10).animation",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true).id(i).padding",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true).id",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment(.leading).fixedSize",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor( i == viewModel.currentLineIndex  Color(red: 0.82, green: 0.36, blue: 0.20) : Color.white.opacity(0.55) ).multilineTextAlignment",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Text(line.text).font(.system( size: i == viewModel.currentLineIndex  13 : 11, weight: i == viewModel.currentLineIndex.bold :.regular )).foregroundColor",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Text(line.text).font",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Text",
+          "lineNumber": 75
+        },
+        {
+          "caller": "body",
+          "callee": "Color",
+          "lineNumber": 82
+        },
+        {
+          "caller": "body",
+          "callee": "Color.white.opacity",
+          "lineNumber": 83
+        },
+        {
+          "caller": "body",
+          "callee": "Spacer().frame",
+          "lineNumber": 91
+        },
+        {
+          "caller": "body",
+          "callee": "Spacer",
+          "lineNumber": 91
+        },
+        {
+          "caller": "body",
+          "callee": "Color.black.opacity",
+          "lineNumber": 95
+        },
+        {
+          "caller": "body",
+          "callee": "withAnimation",
+          "lineNumber": 98
+        },
+        {
+          "caller": "body",
+          "callee": "scrollTo",
+          "lineNumber": 99
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 29,
+      "functions": [
+        {
+          "name": "AppStateManager.init",
+          "startLine": 14,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "startTour",
+          "startLine": 19,
+          "endLine": 21,
+          "params": []
+        },
+        {
+          "name": "setActivePOI",
+          "startLine": 23,
+          "endLine": 26,
+          "params": [
+            "poiId"
+          ]
+        },
+        {
+          "name": "completeTour",
+          "startLine": 28,
+          "endLine": 31,
+          "params": []
+        },
+        {
+          "name": "reset",
+          "startLine": 33,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppStateManager",
+          "startLine": 11,
+          "endLine": 37,
+          "methods": [
+            "init",
+            "startTour",
+            "setActivePOI",
+            "completeTour",
+            "reset"
+          ],
+          "properties": [
+            "shared",
+            "currentState",
+            "activePOIId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "shared",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "currentState",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "activePOIId",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "startTour",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "setActivePOI",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "completeTour",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "reset",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "AppStateManager",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "EventBus.init",
+          "startLine": 21,
+          "endLine": 21,
+          "params": []
+        },
+        {
+          "name": "publish",
+          "startLine": 29,
+          "endLine": 31,
+          "params": [
+            "event"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppEvent",
+          "startLine": 11,
+          "endLine": 16,
+          "methods": [],
+          "properties": [
+            "languageChanged",
+            "nextPOIRequested",
+            "tourEndRequested",
+            "tourEndCompleted"
+          ]
+        },
+        {
+          "name": "EventBus",
+          "startLine": 18,
+          "endLine": 32,
+          "methods": [
+            "init",
+            "publish"
+          ],
+          "properties": [
+            "shared",
+            "subject",
+            "publisher"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppEvent",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "shared",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "publisher",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "publish",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "EventBus",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "publisher",
+          "callee": "eraseToAnyPublisher",
+          "lineNumber": 26
+        },
+        {
+          "caller": "publish",
+          "callee": "send",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 2,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "classes": [
+        {
+          "name": "AppState",
+          "startLine": 10,
+          "endLine": 14,
+          "methods": [],
+          "properties": [
+            "idle",
+            "inTour",
+            "completed"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppState",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "subscript",
+          "startLine": 11,
+          "endLine": 13,
+          "params": [
+            "index"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "extension Array",
+          "startLine": 10,
+          "endLine": 14,
+          "methods": [
+            "subscript"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "subscript",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "Color.init",
+          "startLine": 11,
+          "endLine": 27,
+          "params": [
+            "hex"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "extension Color",
+          "startLine": 10,
+          "endLine": 28,
+          "methods": [
+            "init"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Color.init",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Color.init",
+          "callee": "trimmingCharacters",
+          "lineNumber": 12
+        },
+        {
+          "caller": "Color.init",
+          "callee": "Scanner(string: hex).scanHexInt64",
+          "lineNumber": 14
+        },
+        {
+          "caller": "Color.init",
+          "callee": "Scanner",
+          "lineNumber": 14
+        },
+        {
+          "caller": "Color.init",
+          "callee": "init",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Color.init",
+          "callee": "Double",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Color.init",
+          "callee": "Double",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Color.init",
+          "callee": "Double",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Color.init",
+          "callee": "Double",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "AppStateManagerTests.init",
+          "startLine": 14,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "initialStateIsIdle",
+          "startLine": 19,
+          "endLine": 32,
+          "params": []
+        },
+        {
+          "name": "startTourTransition",
+          "startLine": 34,
+          "endLine": 49,
+          "params": []
+        },
+        {
+          "name": "setActivePOIUpdatesState",
+          "startLine": 51,
+          "endLine": 70,
+          "params": []
+        },
+        {
+          "name": "completeTourClearsPOI",
+          "startLine": 72,
+          "endLine": 94,
+          "params": []
+        },
+        {
+          "name": "resetReturnsToIdle",
+          "startLine": 96,
+          "endLine": 113,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppStateManagerTests",
+          "startLine": 9,
+          "endLine": 114,
+          "methods": [
+            "init",
+            "initialStateIsIdle",
+            "startTourTransition",
+            "setActivePOIUpdatesState",
+            "completeTourClearsPOI",
+            "resetReturnsToIdle"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppStateManagerTests.init",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "initialStateIsIdle",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "startTourTransition",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "setActivePOIUpdatesState",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "completeTourClearsPOI",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "resetReturnsToIdle",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "AppStateManagerTests",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AppStateManagerTests.init",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 16
+        },
+        {
+          "caller": "initialStateIsIdle",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 21
+        },
+        {
+          "caller": "initialStateIsIdle",
+          "callee": "Task.sleep",
+          "lineNumber": 24
+        },
+        {
+          "caller": "initialStateIsIdle",
+          "callee": "Bool",
+          "lineNumber": 27
+        },
+        {
+          "caller": "initialStateIsIdle",
+          "callee": "Bool",
+          "lineNumber": 29
+        },
+        {
+          "caller": "startTourTransition",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 36
+        },
+        {
+          "caller": "startTourTransition",
+          "callee": "Task.sleep",
+          "lineNumber": 37
+        },
+        {
+          "caller": "startTourTransition",
+          "callee": "AppStateManager.shared.startTour",
+          "lineNumber": 39
+        },
+        {
+          "caller": "startTourTransition",
+          "callee": "Task.sleep",
+          "lineNumber": 40
+        },
+        {
+          "caller": "startTourTransition",
+          "callee": "Bool",
+          "lineNumber": 45
+        },
+        {
+          "caller": "startTourTransition",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 48
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 53
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "Task.sleep",
+          "lineNumber": 54
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "AppStateManager.shared.startTour",
+          "lineNumber": 56
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "Task.sleep",
+          "lineNumber": 57
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "AppStateManager.shared.setActivePOI",
+          "lineNumber": 59
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "Task.sleep",
+          "lineNumber": 60
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "Bool",
+          "lineNumber": 66
+        },
+        {
+          "caller": "setActivePOIUpdatesState",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 69
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 74
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "Task.sleep",
+          "lineNumber": 75
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "AppStateManager.shared.startTour",
+          "lineNumber": 77
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "Task.sleep",
+          "lineNumber": 78
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "AppStateManager.shared.setActivePOI",
+          "lineNumber": 80
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "Task.sleep",
+          "lineNumber": 81
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "AppStateManager.shared.completeTour",
+          "lineNumber": 83
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "Task.sleep",
+          "lineNumber": 84
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "Bool",
+          "lineNumber": 87
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "Bool",
+          "lineNumber": 89
+        },
+        {
+          "caller": "completeTourClearsPOI",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 93
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "AppStateManager.shared.startTour",
+          "lineNumber": 98
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "Task.sleep",
+          "lineNumber": 99
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "AppStateManager.shared.setActivePOI",
+          "lineNumber": 101
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "Task.sleep",
+          "lineNumber": 102
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "AppStateManager.shared.reset",
+          "lineNumber": 104
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "Task.sleep",
+          "lineNumber": 105
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "Bool",
+          "lineNumber": 108
+        },
+        {
+          "caller": "resetReturnsToIdle",
+          "callee": "Bool",
+          "lineNumber": 110
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "example",
+          "startLine": 12,
+          "endLine": 16,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArTourKaminaljuyuTests",
+          "startLine": 10,
+          "endLine": 18,
+          "methods": [
+            "example"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "example",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "ArTourKaminaljuyuTests",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 75,
+      "functions": [
+        {
+          "name": "publishLanguageChanged",
+          "startLine": 13,
+          "endLine": 30,
+          "params": []
+        },
+        {
+          "name": "publishNextPOIRequested",
+          "startLine": 32,
+          "endLine": 49,
+          "params": []
+        },
+        {
+          "name": "multipleSubscribersReceiveEvent",
+          "startLine": 51,
+          "endLine": 88,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "EventBusTests",
+          "startLine": 10,
+          "endLine": 89,
+          "methods": [
+            "publishLanguageChanged",
+            "publishNextPOIRequested",
+            "multipleSubscribersReceiveEvent"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "publishLanguageChanged",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "publishNextPOIRequested",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "multipleSubscribersReceiveEvent",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "EventBusTests",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "publishLanguageChanged",
+          "callee": "withCheckedContinuation",
+          "lineNumber": 18
+        },
+        {
+          "caller": "publishLanguageChanged",
+          "callee": "EventBus.shared.publisher.sink",
+          "lineNumber": 19
+        },
+        {
+          "caller": "publishLanguageChanged",
+          "callee": "resume",
+          "lineNumber": 22
+        },
+        {
+          "caller": "publishLanguageChanged",
+          "callee": "EventBus.shared.publish",
+          "lineNumber": 25
+        },
+        {
+          "caller": "publishLanguageChanged",
+          "callee": "cancel",
+          "lineNumber": 28
+        },
+        {
+          "caller": "publishNextPOIRequested",
+          "callee": "withCheckedContinuation",
+          "lineNumber": 37
+        },
+        {
+          "caller": "publishNextPOIRequested",
+          "callee": "EventBus.shared.publisher.sink",
+          "lineNumber": 38
+        },
+        {
+          "caller": "publishNextPOIRequested",
+          "callee": "resume",
+          "lineNumber": 41
+        },
+        {
+          "caller": "publishNextPOIRequested",
+          "callee": "EventBus.shared.publish",
+          "lineNumber": 44
+        },
+        {
+          "caller": "publishNextPOIRequested",
+          "callee": "cancel",
+          "lineNumber": 47
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "withCheckedContinuation",
+          "lineNumber": 58
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "resume",
+          "lineNumber": 63
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "EventBus.shared.publisher.sink",
+          "lineNumber": 66
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "checkDone",
+          "lineNumber": 70
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "EventBus.shared.publisher.sink",
+          "lineNumber": 73
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "checkDone",
+          "lineNumber": 77
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "EventBus.shared.publish",
+          "lineNumber": 81
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "cancel",
+          "lineNumber": 84
+        },
+        {
+          "caller": "multipleSubscribersReceiveEvent",
+          "callee": "cancel",
+          "lineNumber": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "language": "swift",
+      "fileCategory": "code",
+      "totalLines": 290,
+      "nonEmptyLines": 226,
+      "functions": [
+        {
+          "name": "modulesCommunicateViaInterfaces",
+          "startLine": 19,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "eventBusCoordinatesModules",
+          "startLine": 36,
+          "endLine": 59,
+          "params": []
+        },
+        {
+          "name": "appStateManagerIsSingleSourceOfTruth",
+          "startLine": 61,
+          "endLine": 85,
+          "params": []
+        },
+        {
+          "name": "dependencyInjectionWorks",
+          "startLine": 87,
+          "endLine": 107,
+          "params": []
+        },
+        {
+          "name": "userCompletesFullGuidedTour",
+          "startLine": 115,
+          "endLine": 162,
+          "params": []
+        },
+        {
+          "name": "userChangesLanguageAndVideosUpdate",
+          "startLine": 164,
+          "endLine": 184,
+          "params": []
+        },
+        {
+          "name": "userCancelsTourAndSystemResets",
+          "startLine": 186,
+          "endLine": 211,
+          "params": []
+        },
+        {
+          "name": "canReplaceImplementations",
+          "startLine": 219,
+          "endLine": 236,
+          "params": []
+        },
+        {
+          "name": "multipleEventSubscribers",
+          "startLine": 238,
+          "endLine": 264,
+          "params": []
+        },
+        {
+          "name": "reactiveStatePropagates",
+          "startLine": 266,
+          "endLine": 289,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArchitectureValidationTests",
+          "startLine": 16,
+          "endLine": 108,
+          "methods": [
+            "modulesCommunicateViaInterfaces",
+            "eventBusCoordinatesModules",
+            "appStateManagerIsSingleSourceOfTruth",
+            "dependencyInjectionWorks"
+          ],
+          "properties": []
+        },
+        {
+          "name": "EndToEndFlowTests",
+          "startLine": 112,
+          "endLine": 212,
+          "methods": [
+            "userCompletesFullGuidedTour",
+            "userChangesLanguageAndVideosUpdate",
+            "userCancelsTourAndSystemResets"
+          ],
+          "properties": []
+        },
+        {
+          "name": "DecouplingValidationTests",
+          "startLine": 216,
+          "endLine": 290,
+          "methods": [
+            "canReplaceImplementations",
+            "multipleEventSubscribers",
+            "reactiveStatePropagates"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "modulesCommunicateViaInterfaces",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "eventBusCoordinatesModules",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "appStateManagerIsSingleSourceOfTruth",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "dependencyInjectionWorks",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "ArchitectureValidationTests",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "userCompletesFullGuidedTour",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "userChangesLanguageAndVideosUpdate",
+          "line": 164,
+          "isDefault": false
+        },
+        {
+          "name": "userCancelsTourAndSystemResets",
+          "line": 186,
+          "isDefault": false
+        },
+        {
+          "name": "EndToEndFlowTests",
+          "line": 112,
+          "isDefault": false
+        },
+        {
+          "name": "canReplaceImplementations",
+          "line": 219,
+          "isDefault": false
+        },
+        {
+          "name": "multipleEventSubscribers",
+          "line": 238,
+          "isDefault": false
+        },
+        {
+          "name": "reactiveStatePropagates",
+          "line": 266,
+          "isDefault": false
+        },
+        {
+          "name": "DecouplingValidationTests",
+          "line": 216,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "modulesCommunicateViaInterfaces",
+          "callee": "AppContainer.mock",
+          "lineNumber": 21
+        },
+        {
+          "caller": "modulesCommunicateViaInterfaces",
+          "callee": "startTour",
+          "lineNumber": 24
+        },
+        {
+          "caller": "modulesCommunicateViaInterfaces",
+          "callee": "startTour",
+          "lineNumber": 25
+        },
+        {
+          "caller": "modulesCommunicateViaInterfaces",
+          "callee": "navigateTo",
+          "lineNumber": 26
+        },
+        {
+          "caller": "modulesCommunicateViaInterfaces",
+          "callee": "setLanguage",
+          "lineNumber": 27
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "AppContainer.mock",
+          "lineNumber": 38
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "sink",
+          "lineNumber": 41
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "append",
+          "lineNumber": 43
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "publish",
+          "lineNumber": 47
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "publish",
+          "lineNumber": 48
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "publish",
+          "lineNumber": 49
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "publish",
+          "lineNumber": 50
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "Task.sleep",
+          "lineNumber": 52
+        },
+        {
+          "caller": "eventBusCoordinatesModules",
+          "callee": "cancel",
+          "lineNumber": 58
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "AppContainer.mock",
+          "lineNumber": 63
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "sink",
+          "lineNumber": 66
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "append",
+          "lineNumber": 68
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "reset",
+          "lineNumber": 72
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "startTour",
+          "lineNumber": 73
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "setActivePOI",
+          "lineNumber": 74
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "completeTour",
+          "lineNumber": 75
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "reset",
+          "lineNumber": 76
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "Task.sleep",
+          "lineNumber": 78
+        },
+        {
+          "caller": "appStateManagerIsSingleSourceOfTruth",
+          "callee": "cancel",
+          "lineNumber": 84
+        },
+        {
+          "caller": "dependencyInjectionWorks",
+          "callee": "AppContainer.mock",
+          "lineNumber": 89
+        },
+        {
+          "caller": "dependencyInjectionWorks",
+          "callee": "startTour",
+          "lineNumber": 99
+        },
+        {
+          "caller": "dependencyInjectionWorks",
+          "callee": "startTour",
+          "lineNumber": 102
+        },
+        {
+          "caller": "dependencyInjectionWorks",
+          "callee": "setLanguage",
+          "lineNumber": 105
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "AppContainer.mock",
+          "lineNumber": 117
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "setLanguage",
+          "lineNumber": 123
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "startTour",
+          "lineNumber": 127
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "startTour",
+          "lineNumber": 128
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "navigateTo",
+          "lineNumber": 129
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "setActivePOI",
+          "lineNumber": 138
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "simulateTourState",
+          "lineNumber": 139
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "publish",
+          "lineNumber": 147
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "completeTour",
+          "lineNumber": 148
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "stopTour",
+          "lineNumber": 149
+        },
+        {
+          "caller": "userCompletesFullGuidedTour",
+          "callee": "navigateTo",
+          "lineNumber": 150
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "AppContainer.mock",
+          "lineNumber": 166
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "setLanguage",
+          "lineNumber": 169
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "videoPath",
+          "lineNumber": 170
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "contains",
+          "lineNumber": 171
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "setLanguage",
+          "lineNumber": 174
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "videoPath",
+          "lineNumber": 175
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "contains",
+          "lineNumber": 176
+        },
+        {
+          "caller": "userChangesLanguageAndVideosUpdate",
+          "callee": "contains",
+          "lineNumber": 183
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "AppContainer.mock",
+          "lineNumber": 188
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "startTour",
+          "lineNumber": 191
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "startTour",
+          "lineNumber": 192
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "navigateTo",
+          "lineNumber": 193
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "setActivePOI",
+          "lineNumber": 194
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "setActivePOI",
+          "lineNumber": 195
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "reset",
+          "lineNumber": 198
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "stopTour",
+          "lineNumber": 199
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "navigateTo",
+          "lineNumber": 200
+        },
+        {
+          "caller": "userCancelsTourAndSystemResets",
+          "callee": "startTour",
+          "lineNumber": 209
+        },
+        {
+          "caller": "canReplaceImplementations",
+          "callee": "AppContainer.mock",
+          "lineNumber": 222
+        },
+        {
+          "caller": "canReplaceImplementations",
+          "callee": "AppContainer.mock",
+          "lineNumber": 223
+        },
+        {
+          "caller": "canReplaceImplementations",
+          "callee": "startTour",
+          "lineNumber": 226
+        },
+        {
+          "caller": "canReplaceImplementations",
+          "callee": "startTour",
+          "lineNumber": 227
+        },
+        {
+          "caller": "canReplaceImplementations",
+          "callee": "completeTour",
+          "lineNumber": 233
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "AppContainer.mock",
+          "lineNumber": 240
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "sink",
+          "lineNumber": 246
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "append",
+          "lineNumber": 246
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "sink",
+          "lineNumber": 247
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "append",
+          "lineNumber": 247
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "sink",
+          "lineNumber": 248
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "append",
+          "lineNumber": 248
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "publish",
+          "lineNumber": 251
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "publish",
+          "lineNumber": 252
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "Task.sleep",
+          "lineNumber": 254
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "cancel",
+          "lineNumber": 261
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "cancel",
+          "lineNumber": 262
+        },
+        {
+          "caller": "multipleEventSubscribers",
+          "callee": "cancel",
+          "lineNumber": 263
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "AppContainer.mock",
+          "lineNumber": 268
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "sink",
+          "lineNumber": 271
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "append",
+          "lineNumber": 273
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "setLanguage",
+          "lineNumber": 277
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "setLanguage",
+          "lineNumber": 278
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "setLanguage",
+          "lineNumber": 279
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "Task.sleep",
+          "lineNumber": 281
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "contains",
+          "lineNumber": 285
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "contains",
+          "lineNumber": 286
+        },
+        {
+          "caller": "reactiveStatePropagates",
+          "callee": "cancel",
+          "lineNumber": 288
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 13,
+        "functionCount": 10,
+        "classCount": 3
+      }
+    }
+  ]
+}

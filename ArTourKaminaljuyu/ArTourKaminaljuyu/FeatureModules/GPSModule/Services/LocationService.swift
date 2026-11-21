@@ -84,6 +84,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         locationManager.stopUpdatingHeading()
         isLocationReady = false
+        PerformanceLogger.shared.finishSession()
     }
 
     func enableBackgroundTracking() {
@@ -136,17 +137,20 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
 
         guard latest.horizontalAccuracy > 0 else {
             print("[LocationService] descartado: precisión inválida (\(latest.horizontalAccuracy)m)")
+            PerformanceLogger.shared.logRejectedFix(latest, reason: .invalidAccuracy)
             return
         }
 
         guard latest.horizontalAccuracy <= maxAcceptableHorizontalAccuracy else {
             print("[LocationService] descartado: precisión \(Int(latest.horizontalAccuracy))m > máximo \(Int(maxAcceptableHorizontalAccuracy))m")
+            PerformanceLogger.shared.logRejectedFix(latest, reason: .lowAccuracy)
             return
         }
 
         let age = -latest.timestamp.timeIntervalSinceNow
         if age > 5.0 {
             print("[LocationService] descartado: lectura antigua (\(Int(age))s)")
+            PerformanceLogger.shared.logRejectedFix(latest, reason: .stale)
             return
         }
 

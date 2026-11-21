@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/Users/josepereira/Documents/AR-Tour-Kaminaljuyu-iOS",
+  "batchFiles": [
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj", "language": "pbxproj", "sizeLines": 608, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift", "language": "swift", "sizeLines": 26, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift", "language": "swift", "sizeLines": 29, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift", "language": "swift", "sizeLines": 73, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift", "language": "swift", "sizeLines": 101, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift", "language": "swift", "sizeLines": 370, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift", "language": "swift", "sizeLines": 174, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift", "language": "swift", "sizeLines": 65, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift", "language": "swift", "sizeLines": 177, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift", "language": "swift", "sizeLines": 61, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift", "language": "swift", "sizeLines": 49, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift", "language": "swift", "sizeLines": 116, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift", "language": "swift", "sizeLines": 159, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift", "language": "swift", "sizeLines": 117, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md", "language": "markdown", "sizeLines": 431, "fileCategory": "docs"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift", "language": "swift", "sizeLines": 196, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift", "language": "swift", "sizeLines": 46, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift", "language": "swift", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift", "language": "swift", "sizeLines": 891, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift", "language": "swift", "sizeLines": 179, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift", "language": "swift", "sizeLines": 467, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift", "language": "swift", "sizeLines": 54, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift", "language": "swift", "sizeLines": 170, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift", "language": "swift", "sizeLines": 124, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift", "language": "swift", "sizeLines": 78, "fileCategory": "code"}
+  ],
+  "batchImportData": {}
+}

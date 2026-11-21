@@ -1,0 +1,19 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 4,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Sección 'Fixed' coherente: la única corrección mecánica fue descartar 4 aristas tested_by. El merge mantuvo 221/221 nodos y no hubo correcciones de ID, tipo ni complejidad, así que no hay patrón sistémico anómalo (0% de nodos requirió corrección de ID).",
+    "Distribuciones sanas: tipos de nodo todos válidos (config 4, file 53, class 76, function 84, document 4); complejidad moderate 96 / simple 92 / complex 33; todos los nodos traen id, name, filePath, summary y tags; 0 nodos sin id, 0 tipos desconocidos, 0 valores de complejidad desconocidos.",
+    "No hubo sección 'Could not fix': el merge no reportó nodos sin id, tipos desconocidos ni valores de complejidad desconocidos; el grafo de salida ya venía sin aristas colgantes ni duplicados.",
+    "Las 8 aristas tested_by de los batches se redujeron a 4 porque el linker de merge-batch-graphs.py solo clasifica nodos de tipo 'file'. Las 4 descartadas eran class->class (class:...:TourMockTests como destino): sus extremos quedan sin clasificar y caen en la rama 'else: dropped'. No eran orfandades reales ni pares test<->test/prod<->prod.",
+    "Verificado en fuente (ArTourKaminaljuyuTests/TourMockTests.swift): el suite ejercita AppContainer.mock(), appState (AppStateManager), gps (GPSModuleInterface) y language (LanguageService). Las 4 relaciones tested_by son genuinas y TourMockTests.swift quedaba sin ninguna arista de cobertura en el grafo.",
+    "Restauradas 4 aristas tested_by a nivel de archivo (convención usada por las 4 que sobrevivieron): AppStateManager.swift, GPSModuleInterface.swift, LanguageService.swift y AppContainer.swift -> TourMockTests.swift, con {direction:'forward', weight:0.5}. Se etiquetó 'tested' a los 3 nodos de producción que ganaron cobertura (AppStateManager ya la tenía).",
+    "Aristas entre módulos coherentes con la arquitectura desacoplada: App orquesta a los módulos de features y a Shared; GPSModule, LanguageModule y VirtualGuideModule dependen/llaman a Shared (EventBus/AppStateManager); ARModule depende fuertemente de GPSModule (7 aristas). No se detectaron huecos estructurales evidentes.",
+    "crossBatchEdgesAdded = 0 a propósito: el importMap está vacío por diseño (el escáner determinista no resuelve imports de Swift) y las instrucciones prohíben inventar aristas estructurales sin respaldo en fuente. No se añadió ninguna arista 'imports' especulativa.",
+    "Estado final validado: JSON reparseable, 221 nodos y 397 aristas (393 + 4 restauradas), 0 aristas colgantes y 0 duplicados."
+  ]
+}

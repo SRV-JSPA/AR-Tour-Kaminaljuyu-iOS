@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/Users/josepereira/Documents/AR-Tour-Kaminaljuyu-iOS",
+  "batchFiles": [
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift", "language": "swift", "sizeLines": 60, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift", "language": "swift", "sizeLines": 353, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift", "language": "swift", "sizeLines": 237, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift", "language": "swift", "sizeLines": 52, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift", "language": "swift", "sizeLines": 224, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift", "language": "swift", "sizeLines": 90, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift", "language": "swift", "sizeLines": 67, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift", "language": "swift", "sizeLines": 204, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift", "language": "swift", "sizeLines": 133, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift", "language": "swift", "sizeLines": 185, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift", "language": "swift", "sizeLines": 34, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift", "language": "swift", "sizeLines": 634, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift", "language": "swift", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift", "language": "swift", "sizeLines": 1531, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift", "language": "swift", "sizeLines": 104, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist", "language": "xml", "sizeLines": 17, "fileCategory": "config"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift", "language": "swift", "sizeLines": 37, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift", "language": "swift", "sizeLines": 32, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift", "language": "swift", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift", "language": "swift", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift", "language": "swift", "sizeLines": 28, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift", "language": "swift", "sizeLines": 114, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift", "language": "swift", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift", "language": "swift", "sizeLines": 89, "fileCategory": "code"},
+    {"path": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift", "language": "swift", "sizeLines": 290, "fileCategory": "code"}
+  ],
+  "batchImportData": {}
+}

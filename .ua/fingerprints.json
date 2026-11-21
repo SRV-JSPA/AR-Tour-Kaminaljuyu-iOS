@@ -1,0 +1,5221 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "79eb8df86f6a19af9a95c2e94623de643db2687a",
+  "generatedAt": "2026-10-17T20:18:48.871Z",
+  "files": {
+    "ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu.xcodeproj/project.pbxproj",
+      "contentHash": "ac2967eff29885e658c42c17252fb7f29889e68c68cf4946ed468a7d6335b8a9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 609,
+      "hasStructuralAnalysis": false
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/AppRouter/AppRouter.swift",
+      "contentHash": "869c2363998074f8553b7aac85c8206dddcad5813cfc1b3cab9f928656d47977",
+      "functions": [
+        {
+          "name": "AppRouter.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "navigateTo",
+          "params": [
+            "route"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppRoute",
+          "methods": [],
+          "properties": [
+            "menu",
+            "tourControls",
+            "guidedTour"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "AppRouter",
+          "methods": [
+            "init",
+            "navigateTo"
+          ],
+          "properties": [
+            "shared",
+            "currentRoute"
+          ],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "AppRoute",
+        "shared",
+        "currentRoute",
+        "navigateTo",
+        "AppRouter"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/ArTourKaminaljuyuApp.swift",
+      "contentHash": "9c058a5edb6f73c8e50a75eb382d99f757fc961f623a0f9b2582a6f48119d533",
+      "functions": [
+        {
+          "name": "ArTourKaminaljuyuApp.init",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArTourKaminaljuyuApp",
+          "methods": [
+            "init"
+          ],
+          "properties": [
+            "container",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 26
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "GoogleMaps",
+          "specifiers": [
+            "GoogleMaps"
+          ]
+        }
+      ],
+      "exports": [
+        "ArTourKaminaljuyuApp.init",
+        "body",
+        "ArTourKaminaljuyuApp"
+      ],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/DependencyContainer/AppContainer.swift",
+      "contentHash": "06af119b31dc412dbf19d7957c66ee278bb24c5fe25b89ec0ebe69286aded64c",
+      "functions": [
+        {
+          "name": "AppContainer.init",
+          "params": [
+            "gps",
+            "language",
+            "ar",
+            "virtualGuide",
+            "appState",
+            "router",
+            "eventBus"
+          ],
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "production",
+          "params": [],
+          "returnType": "AppContainer",
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppContainer",
+          "methods": [
+            "init",
+            "production"
+          ],
+          "properties": [
+            "gps",
+            "language",
+            "ar",
+            "virtualGuide",
+            "appState",
+            "router",
+            "eventBus"
+          ],
+          "exported": true,
+          "lineCount": 49
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "gps",
+        "language",
+        "ar",
+        "virtualGuide",
+        "appState",
+        "router",
+        "eventBus",
+        "production",
+        "AppContainer"
+      ],
+      "totalLines": 74,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/InstructionsView.swift",
+      "contentHash": "2e4ef097441a1236a3c1af4be6d9b80cbf1b0c4e02c6fa819519e51c94933d3f",
+      "functions": [
+        {
+          "name": "instructionItem",
+          "params": [
+            "number",
+            "text"
+          ],
+          "returnType": "some View",
+          "exported": false,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "InstructionsView",
+          "methods": [
+            "instructionItem"
+          ],
+          "properties": [
+            "onBack",
+            "languageService",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 87
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "onBack",
+        "languageService",
+        "body",
+        "InstructionsView"
+      ],
+      "totalLines": 102,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MainMenuView.swift",
+      "contentHash": "f62a89e6f48c1d1878b6ec8fba576b89a10d23b2880c13125061473e748ee769",
+      "functions": [
+        {
+          "name": "path",
+          "params": [
+            "rect"
+          ],
+          "returnType": "Path",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "setupVideo",
+          "params": [],
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "setupBienvenidaVideo",
+          "params": [],
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "makeUIView",
+          "params": [
+            "context"
+          ],
+          "returnType": "PlayerUIView",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "updateUIView",
+          "params": [
+            "uiView",
+            "context"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "PlayerUIView.init",
+          "params": [
+            "player",
+            "gravity",
+            "autoPlay"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "PlayerUIView.init",
+          "params": [
+            "coder"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "layoutSubviews",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "updatePlayer",
+          "params": [
+            "newPlayer",
+            "gravity",
+            "autoPlay"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "attach",
+          "params": [
+            "player",
+            "autoPlay"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "startWhenReady",
+          "params": [
+            "player"
+          ],
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "PlayerUIView.deinit",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArchShape",
+          "methods": [
+            "path"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "MainMenuView",
+          "methods": [
+            "setupVideo",
+            "setupBienvenidaVideo"
+          ],
+          "properties": [
+            "onGuidedTour",
+            "onFreeTour",
+            "onInstructions",
+            "onTerms",
+            "player",
+            "bienvenidaPlayer",
+            "showFreeTourModal",
+            "languageService",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 222
+        },
+        {
+          "name": "VideoPlayerView",
+          "methods": [
+            "makeUIView",
+            "updateUIView"
+          ],
+          "properties": [
+            "player",
+            "gravity",
+            "autoPlay"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "PlayerUIView",
+          "methods": [
+            "init",
+            "init",
+            "layoutSubviews",
+            "updatePlayer",
+            "attach",
+            "startWhenReady",
+            "deinit"
+          ],
+          "properties": [
+            "playerLayer",
+            "statusObserver"
+          ],
+          "exported": true,
+          "lineCount": 58
+        },
+        {
+          "name": "ComingSoonView",
+          "methods": [],
+          "properties": [
+            "onDismiss",
+            "languageService",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "AVKit",
+          "specifiers": [
+            "AVKit"
+          ]
+        }
+      ],
+      "exports": [
+        "path",
+        "ArchShape",
+        "onGuidedTour",
+        "onFreeTour",
+        "onInstructions",
+        "onTerms",
+        "languageService",
+        "body",
+        "MainMenuView",
+        "player",
+        "gravity",
+        "autoPlay",
+        "makeUIView",
+        "updateUIView",
+        "VideoPlayerView",
+        "PlayerUIView.init",
+        "PlayerUIView.init",
+        "layoutSubviews",
+        "updatePlayer",
+        "PlayerUIView",
+        "onDismiss",
+        "languageService",
+        "body",
+        "ComingSoonView"
+      ],
+      "totalLines": 371,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MapOverlayView.swift",
+      "contentHash": "79085e3abf1a5a79c29e111bc9af88111760697458e0cecf6d58b3c036dc12b6",
+      "functions": [
+        {
+          "name": "runDistanceNoticeLoop",
+          "params": [],
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "MapOverlayView",
+          "methods": [
+            "runDistanceNoticeLoop"
+          ],
+          "properties": [
+            "gps",
+            "languageService",
+            "showsDistanceNotice",
+            "noticePeriodSeconds",
+            "noticeDurationSeconds",
+            "body",
+            "distanceNoticeText",
+            "displayedStatus",
+            "statusText",
+            "statusIcon",
+            "statusColor",
+            "distanceText"
+          ],
+          "exported": true,
+          "lineCount": 163
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "gps",
+        "languageService",
+        "body",
+        "MapOverlayView"
+      ],
+      "totalLines": 175,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuCardView.swift",
+      "contentHash": "9c44a95708162603f52305f60ea2e4d7c430a000181da51724f88fe4e68c970a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "MenuCardView",
+          "methods": [],
+          "properties": [
+            "icon",
+            "title",
+            "gradientStart",
+            "gradientEnd",
+            "strokeColor",
+            "action",
+            "isPressed",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 56
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "icon",
+        "title",
+        "gradientStart",
+        "gradientEnd",
+        "strokeColor",
+        "action",
+        "body",
+        "MenuCardView"
+      ],
+      "totalLines": 66,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuIcons.swift",
+      "contentHash": "c5780e1cf66649078ddcafcc44a5f26c2152376b157ff9b88966bccebcc6c81f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "GuidedTourIcon",
+          "methods": [],
+          "properties": [
+            "size",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 45
+        },
+        {
+          "name": "FreeTourIcon",
+          "methods": [],
+          "properties": [
+            "size",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "InstructionsIcon",
+          "methods": [],
+          "properties": [
+            "size",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "TermsIcon",
+          "methods": [],
+          "properties": [
+            "size",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 47
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "size",
+        "body",
+        "GuidedTourIcon",
+        "size",
+        "body",
+        "FreeTourIcon",
+        "size",
+        "body",
+        "InstructionsIcon",
+        "size",
+        "body",
+        "TermsIcon"
+      ],
+      "totalLines": 178,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/MenuSquareCardView.swift",
+      "contentHash": "2074d49ffbd72bbf36735394f29094728983bac7a4e56d25ea0b60cde9041323",
+      "functions": [],
+      "classes": [
+        {
+          "name": "MenuSquareCardView",
+          "methods": [],
+          "properties": [
+            "icon",
+            "title",
+            "gradientStart",
+            "gradientEnd",
+            "strokeColor",
+            "action",
+            "isPressed",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 52
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "icon",
+        "title",
+        "gradientStart",
+        "gradientEnd",
+        "strokeColor",
+        "action",
+        "body",
+        "MenuSquareCardView"
+      ],
+      "totalLines": 62,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/SplashView.swift",
+      "contentHash": "8bc825c35fe7d325ce286b31ec6310fb968b2c3b99fb1409f3d6a6d010c7aef3",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SplashView",
+          "methods": [],
+          "properties": [
+            "opacity",
+            "offsetY",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "body",
+        "SplashView"
+      ],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TermsView.swift",
+      "contentHash": "fba44f08da024c743dfe10d47f7b93dc2c4605117a87ef0ede1b2bfd4497a382",
+      "functions": [
+        {
+          "name": "termItem",
+          "params": [
+            "text"
+          ],
+          "returnType": "some View",
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "TermsView",
+          "methods": [
+            "termItem"
+          ],
+          "properties": [
+            "onBack",
+            "languageService",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 102
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "onBack",
+        "languageService",
+        "body",
+        "TermsView"
+      ],
+      "totalLines": 117,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/TourControlsView.swift",
+      "contentHash": "2f66e497df0b9a6dc36cee51827e483248a207c42d48ffaafdc2e45e5008fcfe",
+      "functions": [
+        {
+          "name": "startTourIfAllowed",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "TourControlsView",
+          "methods": [
+            "startTourIfAllowed"
+          ],
+          "properties": [
+            "onBack",
+            "onStartTour",
+            "onFinalize",
+            "languageService",
+            "gps",
+            "distanceToStart",
+            "isWithinStartRadius",
+            "body",
+            "startPointBanner",
+            "bannerSubtitle"
+          ],
+          "exported": true,
+          "lineCount": 119
+        },
+        {
+          "name": "TourControlLegendRow",
+          "methods": [],
+          "properties": [
+            "icon",
+            "title",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 29
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "onBack",
+        "onStartTour",
+        "onFinalize",
+        "languageService",
+        "gps",
+        "body",
+        "TourControlsView",
+        "icon",
+        "title",
+        "body",
+        "TourControlLegendRow"
+      ],
+      "totalLines": 160,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/App/UICoordinator/VideoMapToggleHintView.swift",
+      "contentHash": "0331c03062fce96bde564004bfc045c96cbdb0751110134adbfa2b537d376421",
+      "functions": [],
+      "classes": [
+        {
+          "name": "VideoMapToggleHintView",
+          "methods": [],
+          "properties": [
+            "languageService",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "TapRippleIcon",
+          "methods": [],
+          "properties": [
+            "animates",
+            "body"
+          ],
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "VideoMapToggleButton",
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "languageService",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "languageService",
+        "body",
+        "VideoMapToggleHintView",
+        "viewModel",
+        "languageService",
+        "body",
+        "VideoMapToggleButton"
+      ],
+      "totalLines": 118,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/CLAUDE.md",
+      "contentHash": "be4eb549ce1e0b2c8e9ef3974e91da9663cc12a09490d8f87b95bdbb25f664b5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 432,
+      "hasStructuralAnalysis": false
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/ContentView.swift",
+      "contentHash": "6e294e9de650e94ab5fe336980207ee237c1a27d923fbc2020b3db6fc4f50561",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SkipIntrosButton",
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "languageService",
+            "body"
+          ],
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "GuidedTourOverlay",
+          "methods": [],
+          "properties": [
+            "guideVM",
+            "appState",
+            "gps",
+            "cancellables",
+            "showsToggleHint",
+            "hasShownToggleHint",
+            "toggleHintDurationSeconds",
+            "onTourEnded",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 102
+        },
+        {
+          "name": "ContentView",
+          "methods": [],
+          "properties": [
+            "router",
+            "appState",
+            "gps",
+            "isLoading",
+            "showInstructions",
+            "showTerms",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 71
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "guideVM",
+        "appState",
+        "gps",
+        "onTourEnded",
+        "body",
+        "GuidedTourOverlay",
+        "router",
+        "appState",
+        "gps",
+        "body",
+        "ContentView"
+      ],
+      "totalLines": 197,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/API Layer/ARModuleInterface.swift",
+      "contentHash": "f9b7b5ced380c1a02538c3a8bd58e0eeead1aac841679f60c8070f8ad1e7a480",
+      "functions": [
+        {
+          "name": "ARModuleInterface.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "ARModuleView.init",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "makeUIViewController",
+          "params": [
+            "context"
+          ],
+          "returnType": "ARViewController",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "updateUIViewController",
+          "params": [
+            "uiViewController",
+            "context"
+          ],
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "ARModuleInterface",
+          "methods": [
+            "init"
+          ],
+          "properties": [
+            "shared"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "ARModuleView",
+          "methods": [
+            "init",
+            "makeUIViewController",
+            "updateUIViewController"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "ARKit",
+          "specifiers": [
+            "ARKit"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "shared",
+        "ARModuleInterface",
+        "ARModuleView.init",
+        "makeUIViewController",
+        "updateUIViewController",
+        "ARModuleView"
+      ],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Models/ARConfig.swift",
+      "contentHash": "aea8ac36770452522356b0649940d3d8a758b3ca3d55708c6246ab1a5f763c5f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ARConfig",
+          "methods": [],
+          "properties": [
+            "minScale",
+            "maxScale",
+            "cameraEyeHeightMeters",
+            "lightAmbient",
+            "lightDiffuse",
+            "modelPlacementDistanceMeters",
+            "globalScaleMultiplier",
+            "modelVisibilityDistanceMeters"
+          ],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "minScale",
+        "maxScale",
+        "cameraEyeHeightMeters",
+        "lightAmbient",
+        "lightDiffuse",
+        "modelPlacementDistanceMeters",
+        "globalScaleMultiplier",
+        "modelVisibilityDistanceMeters",
+        "ARConfig"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Rendering/ARViewController.swift",
+      "contentHash": "bd953becd76867066a77c8e82043a53222094b806ad8a67a07f5dda48af018d5",
+      "functions": [
+        {
+          "name": "viewDidLoad",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "viewWillAppear",
+          "params": [
+            "animated"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "viewWillDisappear",
+          "params": [
+            "animated"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "setupSceneView",
+          "params": [],
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "backTapped",
+          "params": [],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "setupGestures",
+          "params": [],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "makeCard",
+          "params": [],
+          "returnType": "UIView",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "makeCircleButton",
+          "params": [
+            "icon"
+          ],
+          "returnType": "UIButton",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "setupButtons",
+          "params": [],
+          "exported": false,
+          "lineCount": 72
+        },
+        {
+          "name": "startARSession",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "subscribeToGPS",
+          "params": [],
+          "exported": false,
+          "lineCount": 67
+        },
+        {
+          "name": "nextModelTapped",
+          "params": [],
+          "exported": false,
+          "lineCount": 66
+        },
+        {
+          "name": "infoTapped",
+          "params": [],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "showPOIInfo",
+          "params": [
+            "poi"
+          ],
+          "exported": false,
+          "lineCount": 79
+        },
+        {
+          "name": "resolvePOIImage",
+          "params": [
+            "name"
+          ],
+          "returnType": "UIImage?",
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "makePOIImagesSection",
+          "params": [
+            "poi"
+          ],
+          "returnType": "UIView?",
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "makePOIThumbnail",
+          "params": [
+            "image"
+          ],
+          "returnType": "UIImageView",
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "makePOIImageView",
+          "params": [
+            "image"
+          ],
+          "returnType": "UIImageView",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "poiImageTapped",
+          "params": [
+            "gesture"
+          ],
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "updateNextModelButton",
+          "params": [],
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "isUserWithinArrivalRadiusOfActivePOI",
+          "params": [],
+          "returnType": "Bool",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "handlePan",
+          "params": [
+            "g"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "handlePinch",
+          "params": [
+            "g"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "gestureRecognizer",
+          "params": [
+            "g",
+            "other"
+          ],
+          "returnType": "Bool",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "session",
+          "params": [
+            "session",
+            "error"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "sessionWasInterrupted",
+          "params": [
+            "session"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "sessionInterruptionEnded",
+          "params": [
+            "session"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "session",
+          "params": [
+            "session",
+            "frame"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "POIImageViewerController.init",
+          "params": [
+            "image"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "POIImageViewerController.init",
+          "params": [
+            "coder"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "viewDidLoad",
+          "params": [],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "viewDidLayoutSubviews",
+          "params": [],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "setupCloseButton",
+          "params": [],
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "handleClose",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "handleDoubleTap",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "viewForZooming",
+          "params": [
+            "scrollView"
+          ],
+          "returnType": "UIView?",
+          "exported": true,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "ARViewController",
+          "methods": [
+            "viewDidLoad",
+            "viewWillAppear",
+            "viewWillDisappear",
+            "setupSceneView",
+            "backTapped",
+            "setupGestures",
+            "makeCard",
+            "makeCircleButton",
+            "setupButtons",
+            "startARSession",
+            "subscribeToGPS",
+            "nextModelTapped",
+            "infoTapped",
+            "showPOIInfo",
+            "resolvePOIImage",
+            "makePOIImagesSection",
+            "makePOIThumbnail",
+            "makePOIImageView",
+            "poiImageTapped",
+            "updateNextModelButton",
+            "isUserWithinArrivalRadiusOfActivePOI",
+            "handlePan",
+            "handlePinch"
+          ],
+          "properties": [
+            "sceneView",
+            "sceneManager",
+            "infoButton",
+            "guideArrow",
+            "cancellables",
+            "lastHeading",
+            "lastUserLocation",
+            "hasPlacedModel",
+            "currentPOIIndex",
+            "panGesture",
+            "pinchGesture",
+            "nextModelButton",
+            "poiImageNames",
+            "poiThumbnailHeight"
+          ],
+          "exported": true,
+          "lineCount": 698
+        },
+        {
+          "name": "extension ARViewController",
+          "methods": [
+            "gestureRecognizer"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "extension ARViewController",
+          "methods": [
+            "session",
+            "sessionWasInterrupted",
+            "sessionInterruptionEnded",
+            "session"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "POIImageViewerController",
+          "methods": [
+            "init",
+            "init",
+            "viewDidLoad",
+            "viewDidLayoutSubviews",
+            "setupCloseButton",
+            "handleClose",
+            "handleDoubleTap",
+            "viewForZooming"
+          ],
+          "properties": [
+            "image",
+            "scrollView",
+            "imageView"
+          ],
+          "exported": true,
+          "lineCount": 84
+        },
+        {
+          "name": "BackConfirmationView",
+          "methods": [],
+          "properties": [
+            "onConfirm",
+            "onCancel",
+            "languageService",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 54
+        }
+      ],
+      "imports": [
+        {
+          "source": "UIKit",
+          "specifiers": [
+            "UIKit"
+          ]
+        },
+        {
+          "source": "ARKit",
+          "specifiers": [
+            "ARKit"
+          ]
+        },
+        {
+          "source": "SceneKit",
+          "specifiers": [
+            "SceneKit"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "viewDidLoad",
+        "viewWillAppear",
+        "viewWillDisappear",
+        "ARViewController",
+        "gestureRecognizer",
+        "session",
+        "sessionWasInterrupted",
+        "sessionInterruptionEnded",
+        "session",
+        "POIImageViewerController.init",
+        "POIImageViewerController.init",
+        "viewDidLoad",
+        "viewDidLayoutSubviews",
+        "viewForZooming",
+        "POIImageViewerController",
+        "onConfirm",
+        "onCancel",
+        "body",
+        "BackConfirmationView"
+      ],
+      "totalLines": 892,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARGuideArrowManager.swift",
+      "contentHash": "eea2b63da1c8babc1c132829108afc4d45d2f70c4e402889713a8c1ed5bfcd9e",
+      "functions": [
+        {
+          "name": "ARGuideArrowManager.init",
+          "params": [
+            "sceneView"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "buildArrowNode",
+          "params": [],
+          "exported": false,
+          "lineCount": 75
+        },
+        {
+          "name": "attachToCamera",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "update",
+          "params": [
+            "modelWorldPosition"
+          ],
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "setVisible",
+          "params": [
+            "visible"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "resolveOBJ",
+          "params": [],
+          "returnType": "URL?",
+          "exported": false,
+          "lineCount": 17
+        }
+      ],
+      "classes": [
+        {
+          "name": "ARGuideArrowManager",
+          "methods": [
+            "init",
+            "buildArrowNode",
+            "attachToCamera",
+            "update",
+            "setVisible",
+            "resolveOBJ"
+          ],
+          "properties": [
+            "depth",
+            "heightOffset",
+            "modelScale",
+            "modelName",
+            "hideWithinMeters",
+            "sceneView",
+            "arrowNode",
+            "isVisible"
+          ],
+          "exported": true,
+          "lineCount": 174
+        }
+      ],
+      "imports": [
+        {
+          "source": "ARKit",
+          "specifiers": [
+            "ARKit"
+          ]
+        },
+        {
+          "source": "SceneKit",
+          "specifiers": [
+            "SceneKit"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "simd",
+          "specifiers": [
+            "simd"
+          ]
+        }
+      ],
+      "exports": [
+        "ARGuideArrowManager.init",
+        "attachToCamera",
+        "update",
+        "ARGuideArrowManager"
+      ],
+      "totalLines": 180,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/ARModule/Services/ARSceneManager.swift",
+      "contentHash": "6e4dfc7b592b0ca78e8845872ea02b0d2fb66e968859db98cf22775f2e548b2c",
+      "functions": [
+        {
+          "name": "ARSceneManager.init",
+          "params": [
+            "sceneView"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "buildBundleTextureMap",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "resolveTexture",
+          "params": [
+            "name"
+          ],
+          "returnType": "URL?",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "parseMTL",
+          "params": [
+            "objURL"
+          ],
+          "returnType": "[String: String]",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "forceApplyTextures",
+          "params": [
+            "modelNode",
+            "mtlMap"
+          ],
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "buildPivotNode",
+          "params": [
+            "poi"
+          ],
+          "returnType": "SCNNode",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "centerPivotContentsHorizontally",
+          "params": [
+            "pivotNode"
+          ],
+          "exported": false,
+          "lineCount": 35
+        },
+        {
+          "name": "buildNode",
+          "params": [
+            "modelPath",
+            "texturePath"
+          ],
+          "returnType": "SCNNode?",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "placeModel",
+          "params": [
+            "poi",
+            "userLocation",
+            "userHeading",
+            "cameraTransform",
+            "session"
+          ],
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "updateModelPositionFromGPS",
+          "params": [
+            "userLocation",
+            "cameraWorldPosition"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "worldPositionFromGPS",
+          "params": [
+            "userLocation",
+            "cameraWorldPosition",
+            "poi"
+          ],
+          "returnType": "SIMD3<Float>",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "detectedGroundY",
+          "params": [
+            "x",
+            "z"
+          ],
+          "returnType": "Float?",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "updateVisibility",
+          "params": [
+            "userLocation",
+            "horizontalAccuracy"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "resetGestures",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "clearAll",
+          "params": [
+            "session"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "applyRotation",
+          "params": [
+            "delta"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "applyVerticalTranslation",
+          "params": [
+            "delta"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "applyScale",
+          "params": [
+            "factor"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "applyUserTransforms",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "ARSceneManager",
+          "methods": [
+            "init",
+            "buildBundleTextureMap",
+            "resolveTexture",
+            "parseMTL",
+            "forceApplyTextures",
+            "buildPivotNode",
+            "centerPivotContentsHorizontally",
+            "buildNode",
+            "placeModel",
+            "updateModelPositionFromGPS",
+            "worldPositionFromGPS",
+            "detectedGroundY",
+            "updateVisibility",
+            "resetGestures",
+            "clearAll",
+            "applyRotation",
+            "applyVerticalTranslation",
+            "applyScale",
+            "applyUserTransforms"
+          ],
+          "properties": [
+            "sceneView",
+            "pivotNode",
+            "activePOI",
+            "isActiveModelRevealed",
+            "modelRotationY",
+            "modelScale",
+            "modelOffsetY",
+            "bundleTextureMap",
+            "activeModelWorldPosition",
+            "planeSearchRadiusMeters"
+          ],
+          "exported": true,
+          "lineCount": 462
+        }
+      ],
+      "imports": [
+        {
+          "source": "ARKit",
+          "specifiers": [
+            "ARKit"
+          ]
+        },
+        {
+          "source": "SceneKit",
+          "specifiers": [
+            "SceneKit"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "simd",
+          "specifiers": [
+            "simd"
+          ]
+        }
+      ],
+      "exports": [
+        "isActiveModelRevealed",
+        "modelRotationY",
+        "modelScale",
+        "modelOffsetY",
+        "ARSceneManager.init",
+        "activeModelWorldPosition",
+        "placeModel",
+        "updateModelPositionFromGPS",
+        "updateVisibility",
+        "resetGestures",
+        "clearAll",
+        "applyRotation",
+        "applyVerticalTranslation",
+        "applyScale",
+        "ARSceneManager"
+      ],
+      "totalLines": 468,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/AppConfig.swift",
+      "contentHash": "f7bce196678fef029307604d4e0cdab2321975c188c25ddc6ea4ed750d41ec08",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AppConfig",
+          "methods": [],
+          "properties": [
+            "guidedArrivalMeters",
+            "connectorArrivalMeters",
+            "tourStartRadiusMeters",
+            "visibilityRadiusMeters",
+            "routeConnectorsEnabled",
+            "tourStartLatitude",
+            "tourStartLongitude",
+            "accuracyGoodMeters",
+            "maxUsableHorizontalAccuracyMeters",
+            "accuracyCompensationCapMeters"
+          ],
+          "exported": true,
+          "lineCount": 53
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "guidedArrivalMeters",
+        "connectorArrivalMeters",
+        "tourStartRadiusMeters",
+        "visibilityRadiusMeters",
+        "routeConnectorsEnabled",
+        "tourStartLatitude",
+        "tourStartLongitude",
+        "accuracyGoodMeters",
+        "maxUsableHorizontalAccuracyMeters",
+        "accuracyCompensationCapMeters",
+        "AppConfig"
+      ],
+      "totalLines": 55,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/API Layer/GPSModuleInterface.swift",
+      "contentHash": "80dbaff5eb829f95eacd90716b4ff2456a63ebf3cadce6ce76520fbb3775ef4f",
+      "functions": [
+        {
+          "name": "GPSModuleInterface.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "startTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "stopTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "startTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "advanceToNextPOI",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "startReturnPhase",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "stopTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "setupBindings",
+          "params": [],
+          "exported": false,
+          "lineCount": 74
+        }
+      ],
+      "classes": [
+        {
+          "name": "GPSModuleInterface",
+          "methods": [
+            "init",
+            "startTracking",
+            "stopTracking",
+            "startTour",
+            "advanceToNextPOI",
+            "startReturnPhase",
+            "stopTour",
+            "setupBindings"
+          ],
+          "properties": [
+            "shared",
+            "locationService",
+            "proximityService",
+            "tourManager",
+            "cancellables",
+            "userLocation",
+            "userHorizontalAccuracy",
+            "userHeading",
+            "currentTargetPOI",
+            "distanceToTarget",
+            "bearingToTarget",
+            "tourState",
+            "routeCoordinates",
+            "nearestPOI",
+            "poiArrivedPublisher",
+            "tourCompletedPublisher",
+            "proximityArrivedPublisher",
+            "allPOIs"
+          ],
+          "exported": true,
+          "lineCount": 159
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "shared",
+        "userLocation",
+        "userHorizontalAccuracy",
+        "userHeading",
+        "currentTargetPOI",
+        "distanceToTarget",
+        "bearingToTarget",
+        "tourState",
+        "routeCoordinates",
+        "nearestPOI",
+        "poiArrivedPublisher",
+        "tourCompletedPublisher",
+        "proximityArrivedPublisher",
+        "startTracking",
+        "stopTracking",
+        "startTour",
+        "advanceToNextPOI",
+        "startReturnPhase",
+        "stopTour",
+        "allPOIs",
+        "GPSModuleInterface"
+      ],
+      "totalLines": 171,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POILocation.swift",
+      "contentHash": "50b018c5d8b306e40136ba3f644bad9dbf7687a6c1cc0bb74b44ab442033f0e0",
+      "functions": [
+        {
+          "name": "ModelPart.init",
+          "params": [
+            "modelPath",
+            "texturePath",
+            "baseScale"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "POILocation.init",
+          "params": [
+            "id",
+            "coordinate",
+            "name",
+            "modelPath",
+            "texturePath",
+            "baseScale",
+            "baseAltitudeMeters",
+            "baseYawDeg",
+            "parts",
+            "bobbingEnabled",
+            "bobbingAmplitude",
+            "bobbingSpeed",
+            "description",
+            "historicalInfo",
+            "constructionPeriod",
+            "height",
+            "archaeologicalFeatures",
+            "culturalSignificance",
+            "images",
+            "arrivalThresholdMeters"
+          ],
+          "exported": true,
+          "lineCount": 43
+        },
+        {
+          "name": "==",
+          "params": [
+            "lhs",
+            "rhs"
+          ],
+          "returnType": "Bool",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "ModelPart",
+          "methods": [
+            "init"
+          ],
+          "properties": [
+            "modelPath",
+            "texturePath",
+            "baseScale"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "POILocation",
+          "methods": [
+            "init",
+            "=="
+          ],
+          "properties": [
+            "id",
+            "coordinate",
+            "name",
+            "modelPath",
+            "texturePath",
+            "baseScale",
+            "baseAltitudeMeters",
+            "baseYawDeg",
+            "parts",
+            "bobbingEnabled",
+            "bobbingAmplitude",
+            "bobbingSpeed",
+            "description",
+            "historicalInfo",
+            "constructionPeriod",
+            "height",
+            "archaeologicalFeatures",
+            "culturalSignificance",
+            "images",
+            "arrivalThresholdMeters",
+            "clLocation",
+            "localizedName"
+          ],
+          "exported": true,
+          "lineCount": 105
+        }
+      ],
+      "imports": [
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "modelPath",
+        "texturePath",
+        "baseScale",
+        "ModelPart.init",
+        "ModelPart",
+        "id",
+        "coordinate",
+        "name",
+        "modelPath",
+        "texturePath",
+        "baseScale",
+        "baseAltitudeMeters",
+        "baseYawDeg",
+        "parts",
+        "bobbingEnabled",
+        "bobbingAmplitude",
+        "bobbingSpeed",
+        "description",
+        "historicalInfo",
+        "constructionPeriod",
+        "height",
+        "archaeologicalFeatures",
+        "culturalSignificance",
+        "images",
+        "arrivalThresholdMeters",
+        "POILocation.init",
+        "==",
+        "clLocation",
+        "localizedName",
+        "POILocation"
+      ],
+      "totalLines": 125,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Models/POIRegistry.swift",
+      "contentHash": "32c70d26849e61ab59af860574ce4d4488a88fa9863c66d9656ca8d25e229423",
+      "functions": [
+        {
+          "name": "POIRegistry.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "poi",
+          "params": [
+            "id"
+          ],
+          "returnType": "POILocation?",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "POIRegistry",
+          "methods": [
+            "init",
+            "poi"
+          ],
+          "properties": [
+            "shared",
+            "pois",
+            "tourStartCoordinate"
+          ],
+          "exported": true,
+          "lineCount": 71
+        }
+      ],
+      "imports": [
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "shared",
+        "pois",
+        "poi",
+        "tourStartCoordinate",
+        "POIRegistry"
+      ],
+      "totalLines": 79,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/GeoUtils.swift",
+      "contentHash": "089e143b3436de5b33c0595feb00354a55468ce1ab988bfa482ea0eaa86791cd",
+      "functions": [
+        {
+          "name": "distanceInMeters",
+          "params": [
+            "from",
+            "to"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "compensatedDistance",
+          "params": [
+            "distanceMeters",
+            "horizontalAccuracy"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "bearing",
+          "params": [
+            "from",
+            "to"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "normalizeDeg180",
+          "params": [
+            "degrees"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "GeoUtils",
+          "methods": [
+            "distanceInMeters",
+            "compensatedDistance",
+            "bearing",
+            "normalizeDeg180"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 57
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "distanceInMeters",
+        "compensatedDistance",
+        "bearing",
+        "normalizeDeg180",
+        "GeoUtils"
+      ],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/MapViewRepresentable.swift",
+      "contentHash": "8c10a7dfdf3201f924a0a8da51879725699239c1bc11ebf425e3669a94322636",
+      "functions": [
+        {
+          "name": "makeUIView",
+          "params": [
+            "context"
+          ],
+          "returnType": "GMSMapView",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "updateUIView",
+          "params": [
+            "mapView",
+            "context"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "makeCoordinator",
+          "params": [],
+          "returnType": "Coordinator",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "mapView",
+          "params": [
+            "mapView",
+            "gesture"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "mapView",
+          "params": [
+            "mapView",
+            "position"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "updateUserMarker",
+          "params": [
+            "mapView",
+            "coordinator"
+          ],
+          "exported": false,
+          "lineCount": 35
+        },
+        {
+          "name": "addStartMarkerIfNeeded",
+          "params": [
+            "mapView",
+            "coordinator"
+          ],
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "addPOIMarkersIfNeeded",
+          "params": [
+            "mapView",
+            "coordinator"
+          ],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "updateRoutePolyline",
+          "params": [
+            "mapView",
+            "coordinator"
+          ],
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "updateHighlightedMarker",
+          "params": [
+            "coordinator"
+          ],
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "createDirectionArrowIcon",
+          "params": [
+            "color"
+          ],
+          "returnType": "UIImage",
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "createStartMarkerIcon",
+          "params": [
+            "color"
+          ],
+          "returnType": "UIImage",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "createPOIMarkerIcon",
+          "params": [
+            "color",
+            "isMain"
+          ],
+          "returnType": "UIImage",
+          "exported": false,
+          "lineCount": 35
+        }
+      ],
+      "classes": [
+        {
+          "name": "MapViewRepresentable",
+          "methods": [
+            "makeUIView",
+            "updateUIView",
+            "makeCoordinator"
+          ],
+          "properties": [
+            "userLocation",
+            "userHeading",
+            "routeCoordinates",
+            "highlightedPOIId",
+            "pois",
+            "tourStartCoordinate",
+            "userMarkerColor",
+            "poiMarkerColor",
+            "poiHighlightColor",
+            "startMarkerColor",
+            "routeLineColor"
+          ],
+          "exported": true,
+          "lineCount": 105
+        },
+        {
+          "name": "Coordinator",
+          "methods": [
+            "mapView",
+            "mapView"
+          ],
+          "properties": [
+            "userMarker",
+            "poiMarkers",
+            "startMarker",
+            "routePolyline",
+            "lastRouteCoordinates",
+            "currentHighlightedPOIId",
+            "setInitialCameraPosition",
+            "cameraIdle"
+          ],
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "extension MapViewRepresentable",
+          "methods": [
+            "updateUserMarker",
+            "addStartMarkerIfNeeded",
+            "addPOIMarkersIfNeeded",
+            "updateRoutePolyline",
+            "updateHighlightedMarker"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 121
+        },
+        {
+          "name": "extension MapViewRepresentable",
+          "methods": [
+            "createDirectionArrowIcon",
+            "createStartMarkerIcon",
+            "createPOIMarkerIcon"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 86
+        },
+        {
+          "name": "MapViewRepresentable_Previews",
+          "methods": [],
+          "properties": [
+            "location",
+            "heading",
+            "route",
+            "highlighted",
+            "previews"
+          ],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "GoogleMaps",
+          "specifiers": [
+            "GoogleMaps"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "userLocation",
+        "userHeading",
+        "routeCoordinates",
+        "highlightedPOIId",
+        "pois",
+        "tourStartCoordinate",
+        "makeUIView",
+        "updateUIView",
+        "makeCoordinator",
+        "MapViewRepresentable",
+        "userMarker",
+        "poiMarkers",
+        "startMarker",
+        "routePolyline",
+        "lastRouteCoordinates",
+        "currentHighlightedPOIId",
+        "setInitialCameraPosition",
+        "cameraIdle",
+        "mapView",
+        "mapView",
+        "Coordinator",
+        "location",
+        "heading",
+        "route",
+        "highlighted",
+        "previews",
+        "MapViewRepresentable_Previews"
+      ],
+      "totalLines": 354,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteConfig.swift",
+      "contentHash": "fdbe882e72a5db7c5268112e3d0eae4e1160de1c18124e89cd68c075b725327f",
+      "functions": [
+        {
+          "name": "routeKey",
+          "params": [
+            "from",
+            "to"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "routeKeyStart",
+          "params": [
+            "to"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "routeKeyToStart",
+          "params": [
+            "from"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "buildRouteWaypoints",
+          "params": [
+            "pois",
+            "connectors"
+          ],
+          "returnType": "[CLLocationCoordinate2D]",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "buildStartLeg",
+          "params": [
+            "start",
+            "first",
+            "connectors"
+          ],
+          "returnType": "[CLLocationCoordinate2D]",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "buildReturnLeg",
+          "params": [
+            "last",
+            "start",
+            "connectors"
+          ],
+          "returnType": "[CLLocationCoordinate2D]",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "buildFullRouteIncludingStart",
+          "params": [
+            "start",
+            "pois",
+            "connectors"
+          ],
+          "returnType": "[CLLocationCoordinate2D]",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "connectorsForStartLeg",
+          "params": [
+            "first",
+            "connectors"
+          ],
+          "returnType": "[CLLocationCoordinate2D]",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "connectorsForPoiLeg",
+          "params": [
+            "from",
+            "to",
+            "connectors"
+          ],
+          "returnType": "[CLLocationCoordinate2D]",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "connectorsForReturnLeg",
+          "params": [
+            "last",
+            "connectors"
+          ],
+          "returnType": "[CLLocationCoordinate2D]",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "RouteConfig",
+          "methods": [
+            "routeKey",
+            "routeKeyStart",
+            "routeKeyToStart"
+          ],
+          "properties": [
+            "START_ID",
+            "CONNECTORS"
+          ],
+          "exported": true,
+          "lineCount": 136
+        }
+      ],
+      "imports": [
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "START_ID",
+        "routeKey",
+        "routeKeyStart",
+        "routeKeyToStart",
+        "CONNECTORS",
+        "RouteConfig",
+        "buildRouteWaypoints",
+        "buildStartLeg",
+        "buildReturnLeg",
+        "buildFullRouteIncludingStart",
+        "connectorsForStartLeg",
+        "connectorsForPoiLeg",
+        "connectorsForReturnLeg"
+      ],
+      "totalLines": 238,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/RouteNavigator.swift",
+      "contentHash": "2aacc00636497c8eb904424c0d6a9b3b42baee6844b3cbe52299412db8fad9e2",
+      "functions": [
+        {
+          "name": "RouteNavigator.init",
+          "params": [
+            "waypoints",
+            "arrivalThresholdMeters"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "updateAndGetTarget",
+          "params": [
+            "userLocation"
+          ],
+          "returnType": "CLLocationCoordinate2D?",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "reset",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "advance",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "RouteNavigator",
+          "methods": [
+            "init",
+            "updateAndGetTarget",
+            "reset",
+            "advance"
+          ],
+          "properties": [
+            "route",
+            "index",
+            "arrivalThresholdMeters",
+            "lastDistanceMeters",
+            "currentIndex",
+            "isFinished",
+            "currentTarget"
+          ],
+          "exported": true,
+          "lineCount": 50
+        }
+      ],
+      "imports": [
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        }
+      ],
+      "exports": [
+        "lastDistanceMeters",
+        "RouteNavigator.init",
+        "currentIndex",
+        "isFinished",
+        "currentTarget",
+        "updateAndGetTarget",
+        "reset",
+        "advance",
+        "RouteNavigator"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Navigation/TourManager.swift",
+      "contentHash": "23790b0ab0be7f2b68970b2699b9da4fa04db80de64d1a0cccdd74cc8629967c",
+      "functions": [
+        {
+          "name": "TourManager.init",
+          "params": [
+            "pois"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "startTour",
+          "params": [
+            "userLocation"
+          ],
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "advanceToNextPOI",
+          "params": [],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "startReturnPhase",
+          "params": [],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "stopTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "update",
+          "params": [
+            "userLocation"
+          ],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "updateStartLeg",
+          "params": [
+            "userLocation"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "updateGuidedLeg",
+          "params": [
+            "userLocation",
+            "poiIndex"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "updateReturnLeg",
+          "params": [
+            "userLocation"
+          ],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "buildGuidedLegNavigator",
+          "params": [
+            "fromIndex",
+            "toIndex"
+          ],
+          "exported": false,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "TourState",
+          "methods": [],
+          "properties": [
+            "idle",
+            "navigatingToStart",
+            "navigatingToPOI",
+            "atPOI",
+            "returning",
+            "completed"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "TourManager",
+          "methods": [
+            "init",
+            "startTour",
+            "advanceToNextPOI",
+            "startReturnPhase",
+            "stopTour",
+            "update",
+            "updateStartLeg",
+            "updateGuidedLeg",
+            "updateReturnLeg",
+            "buildGuidedLegNavigator"
+          ],
+          "properties": [
+            "state",
+            "currentPOI",
+            "targetCoordinate",
+            "bearingToTarget",
+            "distanceToTarget",
+            "routeCoordinates",
+            "poiArrivedPublisher",
+            "tourCompletedPublisher",
+            "pois",
+            "guidedCurrentIndex",
+            "startLegNavigator",
+            "guidedLegNavigator",
+            "returnLegNavigator"
+          ],
+          "exported": true,
+          "lineCount": 209
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "TourState",
+        "state",
+        "currentPOI",
+        "targetCoordinate",
+        "bearingToTarget",
+        "distanceToTarget",
+        "routeCoordinates",
+        "poiArrivedPublisher",
+        "tourCompletedPublisher",
+        "TourManager.init",
+        "startTour",
+        "advanceToNextPOI",
+        "startReturnPhase",
+        "stopTour",
+        "update",
+        "TourManager"
+      ],
+      "totalLines": 225,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/GeoMath.swift",
+      "contentHash": "63f4da42ff65cf1560671f2beb16914a9af8e242eef15f11db8ff76e3809a027",
+      "functions": [
+        {
+          "name": "distance",
+          "params": [
+            "origin",
+            "destination"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "distance",
+          "params": [
+            "lat1",
+            "lon1",
+            "lat2",
+            "lon2"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "bearing",
+          "params": [
+            "origin",
+            "destination"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "bearing",
+          "params": [
+            "lat1",
+            "lon1",
+            "lat2",
+            "lon2"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "normalizeDeg180",
+          "params": [
+            "degrees"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "normalizeDeg360",
+          "params": [
+            "degrees"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "distance",
+          "params": [
+            "location",
+            "coordinate"
+          ],
+          "returnType": "Double",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "GeoMath",
+          "methods": [
+            "distance",
+            "distance",
+            "bearing",
+            "bearing",
+            "normalizeDeg180",
+            "normalizeDeg360",
+            "distance"
+          ],
+          "properties": [
+            "earthRadius"
+          ],
+          "exported": true,
+          "lineCount": 80
+        },
+        {
+          "name": "extension Double",
+          "methods": [],
+          "properties": [
+            "toRadians",
+            "toDegrees"
+          ],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "distance",
+        "distance",
+        "bearing",
+        "bearing",
+        "normalizeDeg180",
+        "normalizeDeg360",
+        "distance",
+        "GeoMath"
+      ],
+      "totalLines": 91,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationPermissionsHelper.swift",
+      "contentHash": "236d84bfe0e187e82da6189f031ede01019383b664f7cb31670540f43b887c36",
+      "functions": [
+        {
+          "name": "LocationPermissionsHelper.init",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "requestLocationPermission",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "requestAlwaysPermission",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "openAppSettings",
+          "params": [],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "locationManagerDidChangeAuthorization",
+          "params": [
+            "manager"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "LocationPermissionsHelper",
+          "methods": [
+            "init",
+            "requestLocationPermission",
+            "requestAlwaysPermission",
+            "openAppSettings",
+            "locationManagerDidChangeAuthorization"
+          ],
+          "properties": [
+            "locationManager",
+            "onAuthorizationChanged",
+            "hasLocationPermission",
+            "authorizationStatus",
+            "isLocationDenied",
+            "isLocationRestricted",
+            "shouldShowRationale"
+          ],
+          "exported": true,
+          "lineCount": 63
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "UIKit",
+          "specifiers": [
+            "UIKit"
+          ]
+        }
+      ],
+      "exports": [
+        "onAuthorizationChanged",
+        "LocationPermissionsHelper.init",
+        "hasLocationPermission",
+        "authorizationStatus",
+        "isLocationDenied",
+        "isLocationRestricted",
+        "requestLocationPermission",
+        "requestAlwaysPermission",
+        "openAppSettings",
+        "shouldShowRationale",
+        "locationManagerDidChangeAuthorization",
+        "LocationPermissionsHelper"
+      ],
+      "totalLines": 68,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/LocationService.swift",
+      "contentHash": "9dedb9aa2a21f6c7f116c62c251535d778510afed6ad000ead7f6409255ed7d9",
+      "functions": [
+        {
+          "name": "LocationService.init",
+          "params": [],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "startTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "stopTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "enableBackgroundTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "disableBackgroundTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "locationManager",
+          "params": [
+            "manager",
+            "locations"
+          ],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "locationManager",
+          "params": [
+            "manager",
+            "newHeading"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "locationManagerDidChangeAuthorization",
+          "params": [
+            "manager"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "locationManager",
+          "params": [
+            "manager",
+            "error"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "handleAuthorizationChange",
+          "params": [
+            "status"
+          ],
+          "exported": false,
+          "lineCount": 18
+        }
+      ],
+      "classes": [
+        {
+          "name": "LocationService",
+          "methods": [
+            "init",
+            "startTracking",
+            "stopTracking",
+            "enableBackgroundTracking",
+            "disableBackgroundTracking",
+            "locationManager",
+            "locationManager",
+            "locationManagerDidChangeAuthorization",
+            "locationManager",
+            "handleAuthorizationChange"
+          ],
+          "properties": [
+            "currentLocation",
+            "currentHeading",
+            "authorizationStatus",
+            "isLocationReady",
+            "locationManager",
+            "permissionsHelper",
+            "accuracyThresholdMeters",
+            "maxAcceptableHorizontalAccuracy",
+            "latitude",
+            "longitude",
+            "altitude",
+            "horizontalAccuracy",
+            "headingDegrees",
+            "hasPermission"
+          ],
+          "exported": true,
+          "lineCount": 197
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "currentLocation",
+        "currentHeading",
+        "authorizationStatus",
+        "isLocationReady",
+        "LocationService.init",
+        "startTracking",
+        "stopTracking",
+        "enableBackgroundTracking",
+        "disableBackgroundTracking",
+        "latitude",
+        "longitude",
+        "altitude",
+        "horizontalAccuracy",
+        "headingDegrees",
+        "hasPermission",
+        "locationManager",
+        "locationManager",
+        "locationManagerDidChangeAuthorization",
+        "locationManager",
+        "LocationService"
+      ],
+      "totalLines": 205,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/GPSModule/Services/ProximityService.swift",
+      "contentHash": "636dc58d961eabdfd64ec8f89edd5b22d51bf2587111644779d637550e03178c",
+      "functions": [
+        {
+          "name": "ProximityService.init",
+          "params": [
+            "pois"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "update",
+          "params": [
+            "userLocation",
+            "horizontalAccuracy",
+            "focusPOIId"
+          ],
+          "exported": true,
+          "lineCount": 57
+        },
+        {
+          "name": "proximityLevel",
+          "params": [
+            "distance"
+          ],
+          "returnType": "ProximityLevel",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "reset",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProximityLevel",
+          "methods": [],
+          "properties": [
+            "far",
+            "visible",
+            "near",
+            "arrived"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "ProximityResult",
+          "methods": [],
+          "properties": [
+            "poi",
+            "distanceMeters",
+            "horizontalAccuracy",
+            "bearing",
+            "level",
+            "effectiveDistanceMeters",
+            "statusMessage"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "ProximityService",
+          "methods": [
+            "init",
+            "update",
+            "proximityLevel",
+            "reset"
+          ],
+          "properties": [
+            "nearestPOI",
+            "arrivalPublisher",
+            "pois",
+            "lastArrivedPOIId"
+          ],
+          "exported": true,
+          "lineCount": 92
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "ProximityLevel",
+        "poi",
+        "distanceMeters",
+        "horizontalAccuracy",
+        "bearing",
+        "level",
+        "effectiveDistanceMeters",
+        "statusMessage",
+        "ProximityResult",
+        "nearestPOI",
+        "arrivalPublisher",
+        "ProximityService.init",
+        "update",
+        "reset",
+        "ProximityService"
+      ],
+      "totalLines": 134,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Content/LocalizedStrings.swift",
+      "contentHash": "1138b856bd3d36927d212abc936f265cee09c472b336a02c6bacd3d6fd8b1616",
+      "functions": [
+        {
+          "name": "get",
+          "params": [
+            "key",
+            "arguments"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [
+        {
+          "name": "LocalizedStrings",
+          "methods": [
+            "get"
+          ],
+          "properties": [
+            "strings"
+          ],
+          "exported": true,
+          "lineCount": 176
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "get",
+        "LocalizedStrings"
+      ],
+      "totalLines": 186,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/LanguageModule/Services/LanguageService.swift",
+      "contentHash": "fa0dac8b0606aa836ea5e1f17bdd7d2f46c628bbff73535e32412981e20f1557",
+      "functions": [
+        {
+          "name": "LanguageService.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "setLanguage",
+          "params": [
+            "language"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "videoPath",
+          "params": [
+            "poiId"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "string",
+          "params": [
+            "key"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "LanguageService",
+          "methods": [
+            "init",
+            "setLanguage",
+            "videoPath",
+            "string"
+          ],
+          "properties": [
+            "shared",
+            "currentLanguage"
+          ],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "shared",
+        "currentLanguage",
+        "setLanguage",
+        "videoPath",
+        "string",
+        "LanguageService"
+      ],
+      "totalLines": 35,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/API Layer/VirtualGuideModuleInterface.swift",
+      "contentHash": "70ad7f0b3db49e7cf2e335b63ac85b8a0ac350414be7740e8f02fababe6dee5b",
+      "functions": [
+        {
+          "name": "VirtualGuideModuleInterface.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "resolveVideoURL",
+          "params": [
+            "key"
+          ],
+          "returnType": "URL?",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "logVideoCatalogStatus",
+          "params": [],
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "start",
+          "params": [],
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "stop",
+          "params": [],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "toggleView",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "toggleTranscript",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "poiDescription",
+          "params": [
+            "id"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "loadTranscript",
+          "params": [
+            "videoName"
+          ],
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "updateCurrentLine",
+          "params": [
+            "seconds"
+          ],
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "playIntroSequence",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "skipIntros",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "startWalking",
+          "params": [],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "playDespedida",
+          "params": [],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "handleProximityUpdate",
+          "params": [
+            "result"
+          ],
+          "exported": false,
+          "lineCount": 61
+        },
+        {
+          "name": "enqueue",
+          "params": [
+            "videoName",
+            "poiId",
+            "skipIfCloserThan"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "playNextIfIdle",
+          "params": [],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "clearQueueAndStop",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "configureAudioSession",
+          "params": [],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "clearPlayer",
+          "params": [],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "startVideo",
+          "params": [
+            "name"
+          ],
+          "exported": false,
+          "lineCount": 121
+        }
+      ],
+      "classes": [
+        {
+          "name": "VirtualGuideModuleInterface",
+          "methods": [
+            "init",
+            "resolveVideoURL",
+            "logVideoCatalogStatus",
+            "start",
+            "stop",
+            "toggleView",
+            "toggleTranscript",
+            "poiDescription",
+            "loadTranscript",
+            "updateCurrentLine",
+            "playIntroSequence",
+            "skipIntros",
+            "startWalking",
+            "playDespedida",
+            "handleProximityUpdate",
+            "enqueue",
+            "playNextIfIdle",
+            "clearQueueAndStop",
+            "configureAudioSession",
+            "clearPlayer",
+            "startVideo"
+          ],
+          "properties": [
+            "shared",
+            "player",
+            "showsVideo",
+            "hasPlayedIntro",
+            "hasStartedWalking",
+            "introSequenceCompleted",
+            "currentPOIVideoCompleted",
+            "transcriptLines",
+            "currentLineIndex",
+            "showsTranscript",
+            "cancellables",
+            "endObserver",
+            "itemStatusObserver",
+            "timeControlObserver",
+            "periodicTimeObserver",
+            "queue",
+            "currentVideoName",
+            "proximityFired",
+            "interesFired",
+            "specificFired",
+            "proximityTriggerMeters",
+            "interesTriggerMeters",
+            "arrivalTriggerMeters",
+            "resetDistanceMeters",
+            "videoMap",
+            "videoProximity",
+            "videoInteres",
+            "videoFlecha",
+            "videoDatosGen",
+            "videoDatosArq",
+            "videoDespedida",
+            "videoLocalizations",
+            "endingTour"
+          ],
+          "exported": true,
+          "lineCount": 616
+        },
+        {
+          "name": "QueuedVideo",
+          "methods": [],
+          "properties": [
+            "name",
+            "poiId",
+            "skipIfCloserThan"
+          ],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "LocalizedVideoFile",
+          "methods": [],
+          "properties": [
+            "name",
+            "ext"
+          ],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "AVFoundation",
+          "specifiers": [
+            "AVFoundation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "shared",
+        "player",
+        "showsVideo",
+        "hasPlayedIntro",
+        "hasStartedWalking",
+        "introSequenceCompleted",
+        "currentPOIVideoCompleted",
+        "transcriptLines",
+        "currentLineIndex",
+        "showsTranscript",
+        "start",
+        "stop",
+        "toggleView",
+        "toggleTranscript",
+        "poiDescription",
+        "playIntroSequence",
+        "skipIntros",
+        "startWalking",
+        "VirtualGuideModuleInterface"
+      ],
+      "totalLines": 635,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Models/TranscriptLine.swift",
+      "contentHash": "616639aac88a01f8bf01856cf5cd086aaad2b691f39e0f6964eb6fcf65e7abf3",
+      "functions": [],
+      "classes": [
+        {
+          "name": "TranscriptLine",
+          "methods": [],
+          "properties": [
+            "id",
+            "text",
+            "startTime",
+            "endTime"
+          ],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "id",
+        "text",
+        "startTime",
+        "endTime",
+        "TranscriptLine"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VideoTranscripts.swift",
+      "contentHash": "273ae0008108c5d6605ad79a309e9554dfc31eed9c0c4e5ffd10874559e2d7da",
+      "functions": [
+        {
+          "name": "cues",
+          "params": [
+            "videoName",
+            "language"
+          ],
+          "returnType": "[TranscriptCue]?",
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "TranscriptCue",
+          "methods": [],
+          "properties": [
+            "text",
+            "startTime",
+            "endTime"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "VideoTranscripts",
+          "methods": [
+            "cues"
+          ],
+          "properties": [
+            "transcripts",
+            "spanishToEnglishNames"
+          ],
+          "exported": true,
+          "lineCount": 1518
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "text",
+        "startTime",
+        "endTime",
+        "TranscriptCue",
+        "transcripts",
+        "cues",
+        "VideoTranscripts"
+      ],
+      "totalLines": 1532,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/FeatureModules/VirtualGuideModule/Views/VirtualGuideView.swift",
+      "contentHash": "274de256a16d85b9f07531910b41db709f33095ced6fbc2e30338bed57d0cc72",
+      "functions": [],
+      "classes": [
+        {
+          "name": "VirtualGuideView",
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "TranscriptToggleButton",
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "body"
+          ],
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "TranscriptPanel",
+          "methods": [],
+          "properties": [
+            "viewModel",
+            "body"
+          ],
+          "exported": false,
+          "lineCount": 39
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        },
+        {
+          "source": "AVFoundation",
+          "specifiers": [
+            "AVFoundation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "viewModel",
+        "body",
+        "VirtualGuideView",
+        "viewModel",
+        "body",
+        "TranscriptToggleButton"
+      ],
+      "totalLines": 105,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Info.plist",
+      "contentHash": "0c38a3f4b7ef91fcf858495245c0e4ea063a87bc72443167cfbd0b80292e9812",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 18,
+      "hasStructuralAnalysis": false
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/AppStateManager/AppStateManager.swift",
+      "contentHash": "26d73533f48b3eaef4a81777151fb28e94bf1a3d37e54a2f36cd3c0a2b531736",
+      "functions": [
+        {
+          "name": "AppStateManager.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "startTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "setActivePOI",
+          "params": [
+            "poiId"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "completeTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "reset",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppStateManager",
+          "methods": [
+            "init",
+            "startTour",
+            "setActivePOI",
+            "completeTour",
+            "reset"
+          ],
+          "properties": [
+            "shared",
+            "currentState",
+            "activePOIId"
+          ],
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "shared",
+        "currentState",
+        "activePOIId",
+        "startTour",
+        "setActivePOI",
+        "completeTour",
+        "reset",
+        "AppStateManager"
+      ],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/EventBus/EventBus.swift",
+      "contentHash": "040f9de321995f67c61cea9805838399659360984158e9a157e2776164e00b1b",
+      "functions": [
+        {
+          "name": "EventBus.init",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "publish",
+          "params": [
+            "event"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppEvent",
+          "methods": [],
+          "properties": [
+            "languageChanged",
+            "nextPOIRequested",
+            "tourEndRequested",
+            "tourEndCompleted"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "EventBus",
+          "methods": [
+            "init",
+            "publish"
+          ],
+          "properties": [
+            "shared",
+            "subject",
+            "publisher"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        }
+      ],
+      "exports": [
+        "AppEvent",
+        "shared",
+        "publisher",
+        "publish",
+        "EventBus"
+      ],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/AppState.swift",
+      "contentHash": "62bf776720ba99d617b1fde55dea31bebf96f10b6995f8901d42135e27b188b9",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AppState",
+          "methods": [],
+          "properties": [
+            "idle",
+            "inTour",
+            "completed"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "AppState"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ArrayExtension.swift",
+      "contentHash": "bc98a7e214947277dcd2a209ded471a79604a34dee6cf16386713c78d9b7bef8",
+      "functions": [
+        {
+          "name": "subscript",
+          "params": [
+            "index"
+          ],
+          "returnType": "Element?",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "extension Array",
+          "methods": [
+            "subscript"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        }
+      ],
+      "exports": [
+        "subscript"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyu/Shared/Models/ColorExtension.swift",
+      "contentHash": "c37a4b3fe88887c5935d9154f845f3e6e2dfc896df9d251ec3ca09c466d4b94c",
+      "functions": [
+        {
+          "name": "Color.init",
+          "params": [
+            "hex"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [
+        {
+          "name": "extension Color",
+          "methods": [
+            "init"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 19
+        }
+      ],
+      "imports": [
+        {
+          "source": "SwiftUI",
+          "specifiers": [
+            "SwiftUI"
+          ]
+        }
+      ],
+      "exports": [
+        "Color.init"
+      ],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/AppStateManagerTests.swift",
+      "contentHash": "3958c318f02c0e594c7ffd360a5f73c609e3b4387d4259e2358289c2059ca385",
+      "functions": [
+        {
+          "name": "AppStateManagerTests.init",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "initialStateIsIdle",
+          "params": [],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "startTourTransition",
+          "params": [],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "setActivePOIUpdatesState",
+          "params": [],
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "completeTourClearsPOI",
+          "params": [],
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "resetReturnsToIdle",
+          "params": [],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppStateManagerTests",
+          "methods": [
+            "init",
+            "initialStateIsIdle",
+            "startTourTransition",
+            "setActivePOIUpdatesState",
+            "completeTourClearsPOI",
+            "resetReturnsToIdle"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 106
+        }
+      ],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        },
+        {
+          "source": "ArTourKaminaljuyu",
+          "specifiers": [
+            "ArTourKaminaljuyu"
+          ]
+        }
+      ],
+      "exports": [
+        "AppStateManagerTests.init",
+        "initialStateIsIdle",
+        "startTourTransition",
+        "setActivePOIUpdatesState",
+        "completeTourClearsPOI",
+        "resetReturnsToIdle",
+        "AppStateManagerTests"
+      ],
+      "totalLines": 115,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/ArTourKaminaljuyuTests.swift",
+      "contentHash": "6144a616b1b941bbf750d19daadc482147e144a0e1d9123240dc397ff810bc61",
+      "functions": [
+        {
+          "name": "example",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArTourKaminaljuyuTests",
+          "methods": [
+            "example"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        }
+      ],
+      "exports": [
+        "example",
+        "ArTourKaminaljuyuTests"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/EventBusTests.swift",
+      "contentHash": "e465d58d4328144694ebfa5346e78055857bba3ab5f5e3214c16b4b95b7e8267",
+      "functions": [
+        {
+          "name": "publishLanguageChanged",
+          "params": [],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "publishNextPOIRequested",
+          "params": [],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "multipleSubscribersReceiveEvent",
+          "params": [],
+          "exported": true,
+          "lineCount": 38
+        }
+      ],
+      "classes": [
+        {
+          "name": "EventBusTests",
+          "methods": [
+            "publishLanguageChanged",
+            "publishNextPOIRequested",
+            "multipleSubscribersReceiveEvent"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 80
+        }
+      ],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        },
+        {
+          "source": "ArTourKaminaljuyu",
+          "specifiers": [
+            "ArTourKaminaljuyu"
+          ]
+        }
+      ],
+      "exports": [
+        "publishLanguageChanged",
+        "publishNextPOIRequested",
+        "multipleSubscribersReceiveEvent",
+        "EventBusTests"
+      ],
+      "totalLines": 90,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/FinalIntegrationTests.swift",
+      "contentHash": "e9d31df2f6a6f72839dcd9cb4436ffb8937e02bc6088d5a1b540ddf9d775a179",
+      "functions": [
+        {
+          "name": "modulesCommunicateViaInterfaces",
+          "params": [],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "eventBusCoordinatesModules",
+          "params": [],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "appStateManagerIsSingleSourceOfTruth",
+          "params": [],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "dependencyInjectionWorks",
+          "params": [],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "userCompletesFullGuidedTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "userChangesLanguageAndVideosUpdate",
+          "params": [],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "userCancelsTourAndSystemResets",
+          "params": [],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "canReplaceImplementations",
+          "params": [],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "multipleEventSubscribers",
+          "params": [],
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "reactiveStatePropagates",
+          "params": [],
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArchitectureValidationTests",
+          "methods": [
+            "modulesCommunicateViaInterfaces",
+            "eventBusCoordinatesModules",
+            "appStateManagerIsSingleSourceOfTruth",
+            "dependencyInjectionWorks"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 93
+        },
+        {
+          "name": "EndToEndFlowTests",
+          "methods": [
+            "userCompletesFullGuidedTour",
+            "userChangesLanguageAndVideosUpdate",
+            "userCancelsTourAndSystemResets"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 101
+        },
+        {
+          "name": "DecouplingValidationTests",
+          "methods": [
+            "canReplaceImplementations",
+            "multipleEventSubscribers",
+            "reactiveStatePropagates"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 75
+        }
+      ],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        },
+        {
+          "source": "ArTourKaminaljuyu",
+          "specifiers": [
+            "ArTourKaminaljuyu"
+          ]
+        }
+      ],
+      "exports": [
+        "modulesCommunicateViaInterfaces",
+        "eventBusCoordinatesModules",
+        "appStateManagerIsSingleSourceOfTruth",
+        "dependencyInjectionWorks",
+        "ArchitectureValidationTests",
+        "userCompletesFullGuidedTour",
+        "userChangesLanguageAndVideosUpdate",
+        "userCancelsTourAndSystemResets",
+        "EndToEndFlowTests",
+        "canReplaceImplementations",
+        "multipleEventSubscribers",
+        "reactiveStatePropagates",
+        "DecouplingValidationTests"
+      ],
+      "totalLines": 291,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LanguageServiceTests.swift",
+      "contentHash": "f0e3969b09cd4c3e0370e48ad88dfaf6bb0a20cb1c12e5bc88ccf618e918c6e4",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        },
+        {
+          "source": "ArTourKaminaljuyu",
+          "specifiers": [
+            "ArTourKaminaljuyu"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 105,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/LocalizedStringsTests.swift",
+      "contentHash": "8553eeb0ab71911e96f62169bb85caac0e8f767ed5d356145b443aad52909e02",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        },
+        {
+          "source": "ArTourKaminaljuyu",
+          "specifiers": [
+            "ArTourKaminaljuyu"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 73,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/MockServices.swift",
+      "contentHash": "8593d4d67a35f5f8226c70ac4195585c4f59a2e8f15dfb24e418b10b121efe04",
+      "functions": [
+        {
+          "name": "startTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "setActivePOI",
+          "params": [
+            "poiId"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "completeTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "reset",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "setLanguage",
+          "params": [
+            "language"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "videoPath",
+          "params": [
+            "poiId"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "string",
+          "params": [
+            "key"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "publish",
+          "params": [
+            "event"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "reset",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "startTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "stopTour",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "startTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "stopTracking",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "simulateLocation",
+          "params": [
+            "location"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "simulateTourState",
+          "params": [
+            "state"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "navigateTo",
+          "params": [
+            "route"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "goBack",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "mock",
+          "params": [
+            "appState",
+            "language",
+            "gps",
+            "router",
+            "eventBus"
+          ],
+          "returnType": "MockAppContainer",
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [
+        {
+          "name": "MockAppStateManager",
+          "methods": [
+            "startTour",
+            "setActivePOI",
+            "completeTour",
+            "reset"
+          ],
+          "properties": [
+            "currentState",
+            "activePOIId",
+            "startTourCalled",
+            "setActivePOICalled",
+            "completeTourCalled",
+            "resetCalled"
+          ],
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "MockLanguageService",
+          "methods": [
+            "setLanguage",
+            "videoPath",
+            "string"
+          ],
+          "properties": [
+            "currentLanguage",
+            "setLanguageCalled",
+            "lastLanguageSet",
+            "videoPathCalls",
+            "stringCalls"
+          ],
+          "exported": true,
+          "lineCount": 40
+        },
+        {
+          "name": "MockEventBus",
+          "methods": [
+            "publish",
+            "reset"
+          ],
+          "properties": [
+            "subject",
+            "publishedEvents",
+            "publisher"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "MockGPSModuleInterface",
+          "methods": [
+            "startTour",
+            "stopTour",
+            "startTracking",
+            "stopTracking",
+            "simulateLocation",
+            "simulateTourState"
+          ],
+          "properties": [
+            "userLocation",
+            "tourState",
+            "nearestPOI",
+            "startTourCalled",
+            "stopTourCalled",
+            "startTrackingCalled",
+            "stopTrackingCalled"
+          ],
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "MockAppRouter",
+          "methods": [
+            "navigateTo",
+            "goBack"
+          ],
+          "properties": [
+            "currentRoute",
+            "navigateCalls"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "extension AppContainer",
+          "methods": [
+            "mock"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "MockAppContainer",
+          "methods": [],
+          "properties": [
+            "appState",
+            "language",
+            "gps",
+            "router",
+            "eventBus"
+          ],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "imports": [
+        {
+          "source": "Foundation",
+          "specifiers": [
+            "Foundation"
+          ]
+        },
+        {
+          "source": "Combine",
+          "specifiers": [
+            "Combine"
+          ]
+        },
+        {
+          "source": "CoreLocation",
+          "specifiers": [
+            "CoreLocation"
+          ]
+        },
+        {
+          "source": "ArTourKaminaljuyu",
+          "specifiers": [
+            "ArTourKaminaljuyu"
+          ]
+        }
+      ],
+      "exports": [
+        "currentState",
+        "activePOIId",
+        "startTourCalled",
+        "setActivePOICalled",
+        "completeTourCalled",
+        "resetCalled",
+        "startTour",
+        "setActivePOI",
+        "completeTour",
+        "reset",
+        "MockAppStateManager",
+        "currentLanguage",
+        "setLanguageCalled",
+        "lastLanguageSet",
+        "videoPathCalls",
+        "stringCalls",
+        "setLanguage",
+        "videoPath",
+        "string",
+        "MockLanguageService",
+        "publishedEvents",
+        "publisher",
+        "publish",
+        "reset",
+        "MockEventBus",
+        "userLocation",
+        "tourState",
+        "nearestPOI",
+        "startTourCalled",
+        "stopTourCalled",
+        "startTrackingCalled",
+        "stopTrackingCalled",
+        "startTour",
+        "stopTour",
+        "startTracking",
+        "stopTracking",
+        "simulateLocation",
+        "simulateTourState",
+        "MockGPSModuleInterface",
+        "currentRoute",
+        "navigateCalls",
+        "navigateTo",
+        "goBack",
+        "MockAppRouter",
+        "mock",
+        "appState",
+        "language",
+        "gps",
+        "router",
+        "eventBus",
+        "MockAppContainer"
+      ],
+      "totalLines": 201,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/NEW_LOCALIZATION_KEYS.md",
+      "contentHash": "9294807e5e386deda786688892200337a4811c699b550fd73b7ceb9591bacddd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 167,
+      "hasStructuralAnalysis": false
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TESTS_README.md",
+      "contentHash": "4ee0c11e76da4b0e89f0969bba55de2df25c079e073a7abad14ff21b804a3455",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 112,
+      "hasStructuralAnalysis": false
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TestConfiguration.swift",
+      "contentHash": "a2ec99c4f70ffbc640211a326c49ea8386e1edef8a53c727f2659d6d0ffe888c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "extension Tag",
+          "methods": [],
+          "properties": [
+            "usesSharedState"
+          ],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        }
+      ],
+      "exports": [
+        "usesSharedState"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift": {
+      "filePath": "ArTourKaminaljuyu/ArTourKaminaljuyuTests/TourMockTests.swift",
+      "contentHash": "dd19c79118bba414ce3c67031432598448df92499d5effbecf2db2c66aaba7dd",
+      "functions": [
+        {
+          "name": "completeTourFlow",
+          "params": [],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "languageChange",
+          "params": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [
+        {
+          "name": "TourMockTests",
+          "methods": [
+            "completeTourFlow",
+            "languageChange"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 31
+        }
+      ],
+      "imports": [
+        {
+          "source": "Testing",
+          "specifiers": [
+            "Testing"
+          ]
+        },
+        {
+          "source": "ArTourKaminaljuyu",
+          "specifiers": [
+            "ArTourKaminaljuyu"
+          ]
+        }
+      ],
+      "exports": [
+        "completeTourFlow",
+        "languageChange",
+        "TourMockTests"
+      ],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
+    "ArTourKaminaljuyu/Launch Screen.storyboard": {
+      "filePath": "ArTourKaminaljuyu/Launch Screen.storyboard",
+      "contentHash": "c178384b7cac3f12255f1652e0b47e7c68578c6ff7f638395ca0b9896a35ac18",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 47,
+      "hasStructuralAnalysis": false
+    },
+    "ArTourKaminaljuyu/Podfile": {
+      "filePath": "ArTourKaminaljuyu/Podfile",
+      "contentHash": "03d74fe625b050f7c8b0dc31748e717fc4f14b9efa407a556321df2f6b183ef9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": false
+    },
+    "ArTourKaminaljuyu/Secrets.xcconfig.example": {
+      "filePath": "ArTourKaminaljuyu/Secrets.xcconfig.example",
+      "contentHash": "323894b9b6e37ce272319a67d290dee8395a5fe11e7a214cce27332ba93e0a19",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "198fd4e49939b89a6a8cffcd265e57c7a1bd211929bd321174fc63715bb36ace",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": false
+    }
+  }
+}

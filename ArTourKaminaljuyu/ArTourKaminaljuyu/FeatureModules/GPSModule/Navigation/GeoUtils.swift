@@ -25,9 +25,6 @@ enum GeoUtils {
     }
 
     // MARK: - Distancia compensada por precisión GPS
-    // La distancia cruda nunca baja del nivel de ruido del GPS (parado sobre el
-    // objetivo con precisión de 10m lee ~8-12m). Restar la precisión reportada
-    // hace que los umbrales pequeños (5-8m) sean físicamente alcanzables.
     static func compensatedDistance(
         _ distanceMeters: Double,
         horizontalAccuracy: Double
