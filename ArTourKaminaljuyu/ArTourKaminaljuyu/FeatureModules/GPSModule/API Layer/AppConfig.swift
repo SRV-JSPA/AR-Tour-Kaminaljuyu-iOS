@@ -19,20 +19,26 @@ enum AppConfig {
     //
     // false -> navegación en línea recta de POI a POI (recorrido de prueba UVG).
     // true  -> conectores del parque (recorrido real en Kaminaljuyú).
-    static let routeConnectorsEnabled: Bool = false
+    //
+    // Actual: true, porque POIRegistry trae las coordenadas reales del parque.
+    // Si se desplazan los POIs para probar fuera del sitio, volver a false.
+    static let routeConnectorsEnabled: Bool = true
 
     // MARK: - Coordenada de inicio del tour
     //
     // TourManager.startTour() exige estar a menos de `tourStartRadiusMeters` de
-    // este punto, y el tramo de regreso termina aquí. Debe coincidir con el
-    // primer POI del recorrido activo en POIRegistry.
+    // este punto, y el tramo de regreso termina aquí.
     //
-    // Actual: recorrido de prueba de 11 POIs en la UVG (POI 1, informacion_inicial).
-    // Valores anteriores, para restaurar cuando se vuelva al parque:
-    //   Parque Kaminaljuyú -> el POI 1 real del sitio
-    //   Pruebas en casa    -> (14.6748361, -90.5520308)
-    static let tourStartLatitude: Double  = 14.499289498736726
-    static let tourStartLongitude: Double = -90.79169423290863
+    // No coincide con ningún POI: es el punto de partida del recorrido en el
+    // parque (la entrada, donde va el video de bienvenida). Desde aquí los
+    // conectores START->monticulo_6 llevan al primer montículo.
+    //
+    // Actual: Parque Arqueológico Kaminaljuyú (TOUR_START del Android).
+    // Valores anteriores, para restaurar si se vuelve a probar fuera del sitio:
+    //   Prueba UVG      -> (14.6050503, -90.4893902)
+    //   Pruebas en casa -> (14.6748361, -90.5520308)
+    static let tourStartLatitude: Double  = 14.63128471
+    static let tourStartLongitude: Double = -90.54847717
     
     
 

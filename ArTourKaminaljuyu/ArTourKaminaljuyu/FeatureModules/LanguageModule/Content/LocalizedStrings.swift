@@ -71,9 +71,6 @@ struct LocalizedStrings {
             "toggle_to_map": "Mapa",
             "toggle_to_video": "Video",
             
-            // Skip Intros (NUEVA)
-            "skip_intros": "Saltar intros",
-            
             // MapOverlayView - Status Messages (NUEVAS)
             "distance_to_poi": "Estás a unos %@ metros de %@",
             "status_idle": "Acércate a un montículo para ver el modelo AR",
@@ -103,8 +100,17 @@ struct LocalizedStrings {
 
             // Nombres de POI (ficha del montículo, marcador del mapa).
             // Convención: poi_[id]_title, con el id tal como está en POIRegistry.
+            // En el orden del recorrido.
             "poi_monticulo_6_title": "Montículo C-II-6",
             "poi_acropolis_title": "Acrópolis (C-II-4)",
+            "poi_monticulo_3_title": "Montículo C-II-3",
+            "poi_monticulo_5_title": "Montículo C-II-5",
+            "poi_monticulo_7_title": "Montículo C-II-7",
+            "poi_monticulo_8_title": "Montículo C-II-8",
+            "poi_monticulo_12_title": "Montículo C-II-12",
+            "poi_palangana_title": "Estructura E",
+            "poi_monticulo_14_title": "Montículo C-II-14",
+            "poi_monticulo_13_title": "Montículo C-II-13",
         ],
         "EN": [
             // MainMenuView
@@ -147,9 +153,6 @@ struct LocalizedStrings {
             "toggle_to_map": "Map",
             "toggle_to_video": "Video",
             
-            // Skip Intros (NEW)
-            "skip_intros": "Skip intros",
-            
             // MapOverlayView - Status Messages (NEW)
             "distance_to_poi": "You are about %@ meters from %@",
             "status_idle": "Get close to a mound to see the AR model",
@@ -177,9 +180,17 @@ struct LocalizedStrings {
             "terms_disclaimer_body": "Although the greatest possible accuracy has been sought, the representation of certain structures, scenarios, and visual details may contain hypothetical or interpretive elements due to lack of complete evidence or alterations that have occurred over time.",
             "terms_footer": "By using this application, you acknowledge and accept these conditions.",
 
-            // POI names (mound info sheet, map marker).
+            // POI names (mound info sheet, map marker), in tour order.
             "poi_monticulo_6_title": "Mound C-II-6",
             "poi_acropolis_title": "Acropolis (C-II-4)",
+            "poi_monticulo_3_title": "Mound C-II-3",
+            "poi_monticulo_5_title": "Mound C-II-5",
+            "poi_monticulo_7_title": "Mound C-II-7",
+            "poi_monticulo_8_title": "Mound C-II-8",
+            "poi_monticulo_12_title": "Mound C-II-12",
+            "poi_palangana_title": "Structure E",
+            "poi_monticulo_14_title": "Mound C-II-14",
+            "poi_monticulo_13_title": "Mound C-II-13",
         ]
     ]
 }

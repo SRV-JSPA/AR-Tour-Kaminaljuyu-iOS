@@ -72,17 +72,19 @@ final class VirtualGuideModuleInterface: ObservableObject {
     //
     // `informacion_inicial` no lleva video propio: al iniciar el recorrido se
     // reproduce la secuencia de intro (Datos generales + Datos arqueológicos).
+    // Listados en el orden del recorrido (el mismo de POIRegistry.pois), para
+    // que se pueda cotejar de un vistazo que los 10 POIs tienen video.
     private let videoMap: [String: String] = [
-        "monticulo_3":  "M CII 3_final",
-        "monticulo_5":  "M CII 5_final",
-        "monticulo_6":  "M CII 6_final",
-        "monticulo_7":  "M CII 7_final",
-        "monticulo_8":  "M CII 8_final",
-        "monticulo_12": "M CII 12_final",
-        "monticulo_13": "M CII 13_final",
-        "monticulo_14": "M CII 14_final",
-        "acropolis":    "Acrópolis CII 4_final",
-        "palangana":    "Estructura E_final"
+        "monticulo_6":  "M CII 6_final",            //  1
+        "acropolis":    "Acrópolis CII 4_final",    //  2
+        "monticulo_3":  "M CII 3_final",            //  3
+        "monticulo_5":  "M CII 5_final",            //  4
+        "monticulo_7":  "M CII 7_final",            //  5
+        "monticulo_8":  "M CII 8_final",            //  6
+        "monticulo_12": "M CII 12_final",           //  7
+        "palangana":    "Estructura E_final",       //  8
+        "monticulo_14": "M CII 14_final",           //  9
+        "monticulo_13": "M CII 13_final"            // 10
     ]
 
     private let videoProximity = "Indicación de proximidad_final"
@@ -331,20 +333,15 @@ final class VirtualGuideModuleInterface: ObservableObject {
         enqueue(videoDatosArq)
     }
 
-    #if DEBUG
-    // Saltar la secuencia de intro (Datos generales + Datos arqueológicos +
-    // Indicación flecha) para acelerar pruebas de campo. Marca intros como
-    // completados para destrabar proximidad, flecha AR y botón Next.
-    func skipIntros() {
-        guard !introSequenceCompleted else { return }
-        print("[VirtualGuide] skipIntros() — saltando secuencia de intro (debug)")
-        queue.removeAll()
-        clearPlayer()
-        hasPlayedIntro = true
-        hasStartedWalking = true
-        introSequenceCompleted = true
-    }
-    #endif
+    // El atajo para saltar la secuencia de intro (Datos generales + Datos
+    // arqueológicos + Indicación flecha) quedó deshabilitado junto con su
+    // botón en ContentView: la secuencia de intro ahora siempre se reproduce
+    // completa, también en DEBUG.
+    //
+    // Hacía: vaciar la cola, limpiar el player y marcar hasPlayedIntro,
+    // hasStartedWalking e introSequenceCompleted en true, lo cual destrababa
+    // de golpe la proximidad, la flecha AR y el botón Next. Si alguna vez se
+    // necesita de vuelta para pruebas de campo, está en el historial de git.
 
     func startWalking() {
         guard !hasStartedWalking else { return }
